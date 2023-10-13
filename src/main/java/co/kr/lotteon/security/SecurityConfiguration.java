@@ -36,7 +36,8 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 
 				// 인가 권한 설정
 				.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-						.requestMatchers("/").authenticated()
+						.requestMatchers("/").permitAll()
+						.requestMatchers("/admin/**").permitAll()
 						.requestMatchers("/css/**", "/js/**", "/images/**", "/thumb/**", "/upload/**").permitAll());
 
 		return http.build();
