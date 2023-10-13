@@ -5,60 +5,60 @@
 
 <!-- 리스트 페이지 시작 -->
 <section class="list" layout:fragment="content">
-  <!-- 제목, 페이지 네비게이션 -->
-  <nav>
-    <h1>상품목록</h1>
-    <p>HOME > <span>패션·의류·뷰티</span> > <strong>남성의류</strong></p>
-  </nav>
+    <!-- 제목, 페이지 네비게이션 -->
+    <nav>
+        <h1>상품목록</h1>
+        <p>HOME > <span>패션·의류·뷰티</span> > <strong>남성의류</strong></p>
+    </nav>
 
-  <!-- 정렬 메뉴 -->
-  <ul class="sort">
-      <li><a th:href="@{#}" class="on">판매많은순</a></li>
-      <li><a th:href="@{#}">낮은가격순</a></li>
-      <li><a th:href="@{#}">높은가격순</a></li>
-      <li><a th:href="@{#}">평점높은순</a></li>
-      <li><a th:href="@{#}">후기많은순</a></li>
-      <li><a th:href="@{#}">최근등록순</a></li>
-  </ul>
+    <!-- 정렬 메뉴 -->
+    <ul class="sort">
+        <li><a th:href="@{#}" class="on">판매많은순</a></li>
+        <li><a th:href="@{#}">낮은가격순</a></li>
+        <li><a th:href="@{#}">높은가격순</a></li>
+        <li><a th:href="@{#}">평점높은순</a></li>
+        <li><a th:href="@{#}">후기많은순</a></li>
+        <li><a th:href="@{#}">최근등록순</a></li>
+    </ul>
 
-  <!-- 상품목록 -->
-  <table border="0">
-    <tr>
-      <td><a th:href="@{/product/view}" class="thumb"><img th:src="@{https://via.placeholder.com/120x120}" alt="상품이미지"/></a></td>
-      <td>
-        <h3 class="name">상품명</h3>
-        <a href="#" class="desc">상품설명</a>
-      </td>
-      <td>
-        <ul>
-          <li><ins class="dis-price">27,000</ins></li>
-          <li>
-            <del class="org-price">30,000</del>
-            <span class="discount">10%</span>
-          </li>
-          <li><span class="free-delivery">무료배송</span></li>
-        </ul>
-      </td>
-      <td>
-        <h4 class="seller"><i class="fas fa-home"></i>&nbsp;판매자</h4>
-        <h5 class="badge power">판매자등급</h5>
-        <h6 class="rating star1">상품평</h6>
-      </td>
-    </tr>
-  </table>
+    <!-- 상품목록 -->
+    <table border="0">
+        <tr>
+            <td><a th:href="@{/product/view}" class="thumb"><img th:src="@{https://via.placeholder.com/120x120}" alt="상품이미지"/></a></td>
+            <td>
+                <h3 class="name">상품명</h3>
+                <a href="#" class="desc">상품설명</a>
+            </td>
+            <td>
+                <ul>
+                    <li><ins class="dis-price">27,000</ins></li>
+                    <li>
+                        <del class="org-price">30,000</del>
+                        <span class="discount">10%</span>
+                    </li>
+                    <li><span class="free-delivery">무료배송</span></li>
+                </ul>
+            </td>
+            <td>
+                <h4 class="seller"><i class="fas fa-home"></i>&nbsp;판매자</h4>
+                <h5 class="badge power">판매자등급</h5>
+                <h6 class="rating star1">상품평</h6>
+            </td>
+        </tr>
+    </table>
 
-  <!-- 상품목록 페이지번호 -->
-  <div class="paging">
+    <!-- 상품목록 페이지번호 -->
+    <div class="paging">
     <span class="prev">
       <a href="#"><&nbsp;이전</a>
     </span>
-    <span class="num">
+        <span class="num">
       <a href="#" class="on">1</a>
     </span>
-    <span class="next">
+        <span class="next">
       <a href="#">다음&nbsp;></a>
     </span>
-  </div>
+    </div>
 
 </section>
 <!-- 리스트 페이지 끝 -->
