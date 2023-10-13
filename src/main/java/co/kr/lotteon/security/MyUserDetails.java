@@ -1,6 +1,6 @@
 package co.kr.lotteon.security;
 
-import co.kr.lotteon.entity.UserEntity;
+import co.kr.lotteon.entity.LtMemberEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,8 +19,8 @@ import java.util.List;
 @ToString
 public class MyUserDetails implements UserDetails {
 	private static final long serialVersionUID = -5532680704133363159L;
-	
-	private UserEntity user;
+
+	private LtMemberEntity user;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -29,7 +29,7 @@ public class MyUserDetails implements UserDetails {
 		
 		// 반드시 접두어로 ROLE_ 입력해야 됨 그래야 hasRole(), hasAnyRole() 메서드가 처리됨 
 		// 만약 ROLE_ 접두어를 안쓰면 hasAuthority(), hasAnyAuthority() 메서드로 해야됨
-		authorities.add(new SimpleGrantedAuthority("ROLE_"+user.getRole())); 
+		authorities.add(new SimpleGrantedAuthority("ROLE_"+(user.getType()==9?"ADMIN":"USER")));
 		return authorities;
 	}
 

@@ -1,9 +1,9 @@
 package co.kr.lotteon.repository;
 
-import co.kr.lotteon.entity.UserEntity;
+import co.kr.lotteon.entity.LtMemberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<UserEntity, String> {
+public interface LtMemberRepository extends JpaRepository<LtMemberEntity, String> {
 
     int countByUid(String uid);
 }
