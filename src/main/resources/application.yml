@@ -18,9 +18,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password: 1234
-    url: jdbc:mysql://13.124.190.156:3306/Jboard
-    username: chhak
+    password: lotteON3!
+    url: jdbc:mysql://3.106.211.3:3306/LotteON
+    username: lotteON3
   devtools:
     livereload:
       enabled: true
