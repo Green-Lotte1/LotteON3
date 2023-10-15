@@ -1,5 +1,6 @@
 package co.kr.lotteon.dto;
 
+import co.kr.lotteon.entity.LtProductEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -61,7 +62,43 @@ public class LtProductDTO {
     private String c1Name;
     private String c2Name;
 
-
+    public LtProductEntity toEntity() {
+        return LtProductEntity.builder()
+                .prodNo(prodNo)
+                .prodCate1(prodCate1)
+                .prodCate2(prodCate2)
+                .prodName(prodName)
+                .descript(descript)
+                .company(company)
+                .seller(seller)
+                .price(price)
+                .discount(discount)
+                .point(point)
+                .stock(stock)
+                .sold(sold)
+                .delivery(delivery)
+                .hit(hit)
+                .score(score)
+                .review(review)
+                .thumb1(thumb1)
+                .thumb2(thumb2)
+                .thumb3(thumb3)
+                .detail(detail)
+                .status(status)
+                .duty(duty)
+                .receipt(receipt)
+                .bizType(bizType)
+                .origin(origin)
+                .ip(ip)
+                .rDate(rDate)
+                .wDate(wDate)
+                .etc1(etc1)
+                .etc2(etc2)
+                .etc3(etc3)
+                .etc4(etc4)
+                .etc5(etc5)
+                .build();
+    }
 
 }
 

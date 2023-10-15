@@ -38,6 +38,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 				.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
 						.requestMatchers("/member/**").permitAll()
 						.requestMatchers("/").authenticated()
+						.requestMatchers("/product/**").authenticated()
 						.requestMatchers("/css/**", "/js/**", "/images/**", "/thumb/**", "/upload/**").permitAll());
 
 		return http.build();
