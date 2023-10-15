@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+<header  th:fragment="headerFragment">
+    <div>
+        <a th:href="@{/admin/index}" class="logo"><img th:src="@{/admin/images/admin_logo.png}" alt="admin_logo"/></a>
+        <p>
+            <span>님 반갑습니다.</span>
+            <a th:href="@{/admin/index}">HOME |</a>
+            <a th:href="@{/member/logout}">로그아웃 |</a>
+            <a th:href="@{/cs/index}">고객센터</a>
+        </p>
+    </div>
+</header>
+
+
+</html>

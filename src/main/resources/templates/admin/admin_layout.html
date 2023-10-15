@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>롯데ON::관리자 페이지</title>
+    <th:block th:replace="/fragments/admin/config :: configFragment"></th:block>
+</head>
+<body>
+<div id="wrapper">
+    <!-- header -->
+    <th:block th:replace="/fragments/admin/header :: headerFragment"></th:block>
+    <!-- content -->
+    <main id="admin">
+        <!-- aside -->
+        <th:block th:replace="/fragments/admin/aside :: asideFragment"></th:block>
+        <div layout:fragment="content"></div>
+    </main>
+    <!-- footer -->
+    <th:block th:replace="/fragments/admin/footer :: footerFragment"></th:block>
+</div>
+</body>
+</html>
