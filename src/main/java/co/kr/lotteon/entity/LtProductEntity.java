@@ -1,5 +1,6 @@
 package co.kr.lotteon.entity;
 
+import co.kr.lotteon.dto.LtProductDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -50,8 +51,43 @@ public class LtProductEntity {
 
     private String wDate;
 
-
-
+    public LtProductDTO toDTO() {
+        return LtProductDTO.builder()
+                .prodNo(prodNo)
+                .prodCate1(prodCate1)
+                .prodCate2(prodCate2)
+                .prodName(prodName)
+                .descript(descript)
+                .company(company)
+                .seller(seller)
+                .price(price)
+                .discount(discount)
+                .point(point)
+                .stock(stock)
+                .sold(sold)
+                .delivery(delivery)
+                .hit(hit)
+                .score(score)
+                .review(review)
+                .thumb1(thumb1)
+                .thumb2(thumb2)
+                .thumb3(thumb3)
+                .detail(detail)
+                .status(status)
+                .duty(duty)
+                .receipt(receipt)
+                .bizType(bizType)
+                .origin(origin)
+                .ip(ip)
+                .rDate(rDate)
+                .wDate(wDate)
+                .etc1(etc1)
+                .etc2(etc2)
+                .etc3(etc3)
+                .etc4(etc4)
+                .etc5(etc5)
+                .build();
+    }
 
 }
 
