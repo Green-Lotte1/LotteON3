@@ -23,7 +23,6 @@ public class LtCsNoticeEntity {
 	private String regip;
 	private String rdate;
 
-	private int hit;
-	
+
 	
 }
