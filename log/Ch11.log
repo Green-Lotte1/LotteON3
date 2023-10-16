@@ -19030,3 +19030,122 @@ Caused by: java.net.ConnectException: Connection timed out: no further informati
 2023-10-16T19:49:59.401+09:00  WARN 5364 --- [http-nio-8080-exec-4] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-4][/member/_layout.html] Deprecated unwrapped fragment expression "/fragments/header :: headerFragment" found in template /member/_layout.html, line 14, col 13. Please use the complete syntax of fragment expressions instead ("~{/fragments/header :: headerFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
 2023-10-16T19:49:59.402+09:00  WARN 5364 --- [http-nio-8080-exec-4] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-4][/member/_layout.html] Deprecated unwrapped fragment expression "/fragments/footer :: footerFragment" found in template /member/_layout.html, line 18, col 13. Please use the complete syntax of fragment expressions instead ("~{/fragments/footer :: footerFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
 2023-10-16T19:49:59.404+09:00 DEBUG 5364 --- [http-nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2023-10-16T19:50:23.462+09:00 DEBUG 5364 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /admin/index
+2023-10-16T19:50:23.463+09:00 DEBUG 5364 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /admin/index
+2023-10-16T19:50:23.470+09:00  WARN 5364 --- [http-nio-8080-exec-8] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-8][/admin/admin_layout] Deprecated unwrapped fragment expression "/fragments/admin/config :: configFragment" found in template /admin/admin_layout, line 8, col 15. Please use the complete syntax of fragment expressions instead ("~{/fragments/admin/config :: configFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-10-16T19:50:23.470+09:00  WARN 5364 --- [http-nio-8080-exec-8] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-8][/admin/admin_layout] Deprecated unwrapped fragment expression "/fragments/admin/header :: headerFragment" found in template /admin/admin_layout, line 13, col 15. Please use the complete syntax of fragment expressions instead ("~{/fragments/admin/header :: headerFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-10-16T19:50:23.470+09:00  WARN 5364 --- [http-nio-8080-exec-8] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-8][/admin/admin_layout] Deprecated unwrapped fragment expression "/fragments/admin/aside :: asideFragment" found in template /admin/admin_layout, line 17, col 19. Please use the complete syntax of fragment expressions instead ("~{/fragments/admin/aside :: asideFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-10-16T19:50:23.471+09:00  WARN 5364 --- [http-nio-8080-exec-8] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-8][/admin/admin_layout] Deprecated unwrapped fragment expression "/fragments/admin/footer :: footerFragment" found in template /admin/admin_layout, line 21, col 15. Please use the complete syntax of fragment expressions instead ("~{/fragments/admin/footer :: footerFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-10-16T19:50:23.472+09:00 DEBUG 5364 --- [http-nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2023-10-16T19:50:23.478+09:00 DEBUG 5364 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /admin/images/admin_logo.png
+2023-10-16T19:50:23.478+09:00 DEBUG 5364 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /admin/css/admin.css
+2023-10-16T19:50:23.478+09:00 DEBUG 5364 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /admin/js/gnb.js
+2023-10-16T19:50:23.478+09:00 DEBUG 5364 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /admin/images/admin_logo.png
+2023-10-16T19:50:23.478+09:00 DEBUG 5364 --- [http-nio-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /admin/js/gnb.js
+2023-10-16T19:50:23.478+09:00 DEBUG 5364 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /admin/css/admin.css
+2023-10-16T19:50:23.480+09:00 DEBUG 5364 --- [http-nio-8080-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2023-10-16T19:50:23.480+09:00 DEBUG 5364 --- [http-nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2023-10-16T19:50:23.480+09:00 DEBUG 5364 --- [http-nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2023-10-16T19:50:23.494+09:00 DEBUG 5364 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /admin/js/gnb.js
+2023-10-16T19:50:23.495+09:00 DEBUG 5364 --- [http-nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /admin/js/gnb.js
+2023-10-16T19:50:23.496+09:00 DEBUG 5364 --- [http-nio-8080-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2023-10-16T19:50:23.498+09:00 DEBUG 5364 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /admin/css/admin.css
+2023-10-16T19:50:23.498+09:00 DEBUG 5364 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /admin/css/admin.css
+2023-10-16T19:50:23.499+09:00 DEBUG 5364 --- [http-nio-8080-exec-7] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2023-10-16T19:50:23.502+09:00 DEBUG 5364 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /admin/images/admin_bg_header.jpg
+2023-10-16T19:50:23.502+09:00 DEBUG 5364 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /admin/images/admin_bg_aside.jpg
+2023-10-16T19:50:23.502+09:00 DEBUG 5364 --- [http-nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /admin/images/admin_bg_header.jpg
+2023-10-16T19:50:23.502+09:00 DEBUG 5364 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /admin/images/admin_bg_aside.jpg
+2023-10-16T19:50:23.504+09:00 DEBUG 5364 --- [http-nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2023-10-16T19:50:23.504+09:00 DEBUG 5364 --- [http-nio-8080-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2023-10-16T19:50:23.513+09:00 DEBUG 5364 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /favicon.ico
+2023-10-16T19:50:23.513+09:00 DEBUG 5364 --- [http-nio-8080-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2023-10-16T19:50:23.514+09:00 DEBUG 5364 --- [http-nio-8080-exec-5] o.s.s.web.DefaultRedirectStrategy        : Redirecting to http://localhost:8080/member/login
+2023-10-16T19:50:23.515+09:00 DEBUG 5364 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /member/login
+2023-10-16T19:50:23.515+09:00 DEBUG 5364 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /member/login
+2023-10-16T19:50:23.518+09:00  WARN 5364 --- [http-nio-8080-exec-4] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-4][/member/_layout.html] Deprecated unwrapped fragment expression "/fragments/config :: configFragment" found in template /member/_layout.html, line 8, col 13. Please use the complete syntax of fragment expressions instead ("~{/fragments/config :: configFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-10-16T19:50:23.518+09:00  WARN 5364 --- [http-nio-8080-exec-4] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-4][/member/_layout.html] Deprecated unwrapped fragment expression "/fragments/header :: headerFragment" found in template /member/_layout.html, line 14, col 13. Please use the complete syntax of fragment expressions instead ("~{/fragments/header :: headerFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-10-16T19:50:23.519+09:00  WARN 5364 --- [http-nio-8080-exec-4] actStandardFragmentInsertionTagProcessor : [THYMELEAF][http-nio-8080-exec-4][/member/_layout.html] Deprecated unwrapped fragment expression "/fragments/footer :: footerFragment" found in template /member/_layout.html, line 18, col 13. Please use the complete syntax of fragment expressions instead ("~{/fragments/footer :: footerFragment}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+2023-10-16T19:50:23.520+09:00 DEBUG 5364 --- [http-nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2023-10-16T20:17:19.428+09:00  INFO 5364 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-10-16T20:17:19.436+09:00  INFO 5364 --- [Thread-15] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-10-16T20:17:19.436+09:00  INFO 5364 --- [Thread-15] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-10-16T20:17:19.442+09:00  INFO 5364 --- [Thread-15] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-10-16T20:17:19.445+09:00  INFO 5364 --- [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2023-10-16T20:17:20.979+09:00  INFO 5364 --- [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2023-10-16T20:17:21.066+09:00 ERROR 5364 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.yaml.snakeyaml.scanner.ScannerException: while scanning a simple key
+ in 'reader', line 57, column 3:
+      servlet:p
+      ^
+could not find expected ':'
+ in 'reader', line 58, column 14:
+        multipart:
+                 ^
+
+	at org.yaml.snakeyaml.scanner.ScannerImpl.stalePossibleSimpleKeys(ScannerImpl.java:527) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.scanner.ScannerImpl.needMoreTokens(ScannerImpl.java:332) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.scanner.ScannerImpl.checkToken(ScannerImpl.java:262) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.parser.ParserImpl$ParseBlockMappingKey.produce(ParserImpl.java:662) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.parser.ParserImpl.peekEvent(ParserImpl.java:185) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector$1.peek(CommentEventsCollector.java:57) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector$1.peek(CommentEventsCollector.java:43) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector.collectEvents(CommentEventsCollector.java:136) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.comments.CommentEventsCollector.collectEvents(CommentEventsCollector.java:116) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeScalarNode(Composer.java:239) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:208) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:357) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:336) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:311) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:212) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:357) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:336) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:311) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:212) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeValueNode(Composer.java:357) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingChildren(Composer.java:336) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeMappingNode(Composer.java:311) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.composeNode(Composer.java:212) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.composer.Composer.getNode(Composer.java:134) ~[snakeyaml-1.33.jar:na]
+	at org.yaml.snakeyaml.constructor.BaseConstructor.getData(BaseConstructor.java:168) ~[snakeyaml-1.33.jar:na]
+	at org.springframework.boot.env.OriginTrackedYamlLoader$OriginTrackingConstructor.getData(OriginTrackedYamlLoader.java:99) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.yaml.snakeyaml.Yaml$1.next(Yaml.java:499) ~[snakeyaml-1.33.jar:na]
+	at org.springframework.beans.factory.config.YamlProcessor.process(YamlProcessor.java:199) ~[spring-beans-6.0.12.jar:6.0.12]
+	at org.springframework.beans.factory.config.YamlProcessor.process(YamlProcessor.java:166) ~[spring-beans-6.0.12.jar:6.0.12]
+	at org.springframework.boot.env.OriginTrackedYamlLoader.load(OriginTrackedYamlLoader.java:84) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.env.YamlPropertySourceLoader.load(YamlPropertySourceLoader.java:50) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.context.config.StandardConfigDataLoader.load(StandardConfigDataLoader.java:54) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.context.config.StandardConfigDataLoader.load(StandardConfigDataLoader.java:36) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.context.config.ConfigDataLoaders.load(ConfigDataLoaders.java:96) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.context.config.ConfigDataImporter.load(ConfigDataImporter.java:132) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.context.config.ConfigDataImporter.resolveAndLoad(ConfigDataImporter.java:87) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.context.config.ConfigDataEnvironmentContributors.withProcessedImports(ConfigDataEnvironmentContributors.java:115) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.context.config.ConfigDataEnvironment.processInitial(ConfigDataEnvironment.java:242) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.context.config.ConfigDataEnvironment.processAndApply(ConfigDataEnvironment.java:229) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.context.config.ConfigDataEnvironmentPostProcessor.postProcessEnvironment(ConfigDataEnvironmentPostProcessor.java:96) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.context.config.ConfigDataEnvironmentPostProcessor.postProcessEnvironment(ConfigDataEnvironmentPostProcessor.java:89) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.env.EnvironmentPostProcessorApplicationListener.onApplicationEnvironmentPreparedEvent(EnvironmentPostProcessorApplicationListener.java:109) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.env.EnvironmentPostProcessorApplicationListener.onApplicationEvent(EnvironmentPostProcessorApplicationListener.java:94) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:174) ~[spring-context-6.0.12.jar:6.0.12]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:167) ~[spring-context-6.0.12.jar:6.0.12]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:145) ~[spring-context-6.0.12.jar:6.0.12]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:133) ~[spring-context-6.0.12.jar:6.0.12]
+	at org.springframework.boot.context.event.EventPublishingRunListener.multicastInitialEvent(EventPublishingRunListener.java:136) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:81) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:64) ~[spring-boot-3.1.4.jar:3.1.4]
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:63) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:359) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:310) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1309) ~[spring-boot-3.1.4.jar:3.1.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1298) ~[spring-boot-3.1.4.jar:3.1.4]
+	at co.kr.lotteon.LotteOnApplication.main(LotteOnApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.1.4.jar:3.1.4]
+
