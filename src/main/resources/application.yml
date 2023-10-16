@@ -15,11 +15,15 @@ logging:
 server:
   servlet:
     context-path: /
+
+  mybatis :
+    mapper-locations: classpath:mappers/**/*
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: lotteON3!
-    url: jdbc:mysql://3.106.211.3:3306/LotteON
+    url: jdbc:mysql://3.106.187.11:3306/LotteON
     username: lotteON3
   devtools:
     livereload:
