@@ -9,8 +9,10 @@ public class RegisterController {
 
     @GetMapping("/admin/product/register")
     public String ProductRegister(){
+//        service.selectCate1();
         return "/admin/product/register";
     }
+
 
 
 }
