@@ -12,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "lt_cs_cate2")
-public class LtCsCate2DTO {
+public class LtCsCate2Entity {
 
 	@Id
 	private int cate1;
