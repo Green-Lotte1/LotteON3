@@ -239,6 +239,17 @@ input[type=checkbox] {
     width: auto;
     margin-right: 6px;
 }
+input[type=submit] {
+    width: 200px;
+    float: right;
+    padding: 6px;
+    margin-top: 10px;
+    background-color: #a8b2c5;
+    border: 1px solid #959595;
+    font-size: 13px;
+    color: #fff;
+    vertical-align: middle;
+}
 
 select {
     width: 150px;
@@ -268,9 +279,9 @@ textarea {
 button {            
     border: 1px solid #959595;
     font-size: 12px;
-    background: #a8b2c5;
+    background: #dbdbdb;
     padding: 9px 15px;
-    color: #fff;
+    color: #000000;
     vertical-align: top;
 }
 
@@ -285,6 +296,8 @@ button[type=submit] {
     color: #fff;            
     vertical-align: middle;
 }
+
+
 
 
 /* admin-index */
@@ -385,7 +398,190 @@ button[type=submit] {
 #admin-index > div > div > article > p > span:nth-child(2) {
     float: right;
 }
+/* 공지사항 : admin-cs-notice-list */
+#admin-cs-notice-list {}
+#admin-cs-notice-list > section > div  {
+    margin-bottom: 10px;
+}
+#admin-cs-notice-list input[type=submit] {
+    float: right;
+    width: 100px;
+}
 
+#admin-cs-notice-list > section > table  {
+    border-top: 2px solid #8798a3;
+}
+#admin-cs-notice-list > section > table  tr > th{
+    padding: 10px 0;
+    background: #f6f6f6;
+}
+#admin-cs-notice-list > section > table  tr > td {
+    background: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+#admin-cs-notice-list > section > table  tr > td:nth-child(1) {width: 20px;}
+#admin-cs-notice-list > section > table  tr > td:nth-child(2) {width: 80px;}
+#admin-cs-notice-list > section > table  tr > td:nth-child(3) {width: 80px;}
+#admin-cs-notice-list > section > table  tr > td:nth-child(4) {width: auto; text-align: left;}
+#admin-cs-notice-list > section > table  tr > td:nth-child(5) {width: 80px;}
+#admin-cs-notice-list > section > table  tr > td:nth-child(6) {width: 80px;}
+#admin-cs-notice-list > section > table  tr > td:nth-child(7) {width: 80px;}
+#admin-cs-notice-list > section > table  tr > td:nth-child(8) {width: 80px;}
+#admin-cs-notice-list > section > table  tr > td:nth-child(9) {width: 80px;}
+#admin-cs-notice-list > section > table  tr > td:nth-child(10) {width: 80px;}
+#admin-cs-notice-list > section > table  tr > td:nth-child(11) {width: 100px;}
+
+#admin-cs-notice-list > section > table img.thumb {width: 60px;}
+
+#admin-cs-notice-list > section input[type=button] {
+    float: left;
+    width: 100px;
+    margin-top: 10px;
+    background-color: #959595;
+    color: white;
+}
+
+
+#admin-cs-notice-list .paging {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+}
+
+#admin-cs-notice-list .paging > span > a {
+    color: #777;
+    font-family: "돋움", Dotum, Tahoma, sans-serif;
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+
+#admin-cs-notice-list .paging > span > a:hover {
+    text-decoration: underline;
+}
+
+#admin-cs-notice-list .paging > .num > a {
+    display: inline-block;
+    min-width: 14px;
+    margin: 0 2px;
+    padding: 8px 9px;
+    border: 1px solid #c4c4c4;
+    background:  0 0 repeat-x;
+    color: #000;
+    font-family: Tahoma;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+#admin-cs-notice-list .paging > .num > a:hover {
+    border: 1px solid #454c5f;
+    text-decoration: none;
+}
+#admin-cs-notice-list .paging > .num > a.on {
+    color: #fe434c;
+    font-weight: bold;
+}
+/* 공지사항 : admin-cs-notice-view */
+#admin-cs-notice-view  {}
+#admin-cs-notice-view textarea {
+    width: 500px;
+    height: 500px;
+    background-color: white;
+}
+#admin-cs-notice-view input[type=text] {
+    width: 500px;
+}
+#admin-cs-notice-view input[type=submit] {
+    float: right;
+    width: 100px;
+    background-color: #959595;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+#admin-cs-notice-view .btnList {
+    float: right;
+    width: 100px;
+    background-color: #a8b2c5;
+    margin-left: 5px;
+}
+
+.btnList {
+    width: 200px;
+    float: right;
+    padding: 6px;
+    margin-top: 10px;
+    background-color: #959595;
+    border: 1px solid #959595;
+    font-size: 13px;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* 공지사항 : admin-cs-notice-write */
+#admin-cs-notice-write  {}
+#admin-cs-notice-write textarea {
+    width: 500px;
+    height: 500px;
+    background-color: white;
+}
+#admin-cs-notice-write input[type=text] {
+    width: 500px;
+}
+#admin-cs-notice-write input[type=submit] {
+    float: right;
+    width: 100px;
+}
+#admin-cs-notice-write .btnList {
+    float: right;
+    width: 100px;
+}
+
+.btnList {
+    width: 200px;
+    float: right;
+    padding: 6px;
+    margin-right: 10px;
+    margin-top: 10px;
+    background-color: #959595;
+    border: 1px solid #959595;
+    font-size: 13px;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* 공지사항 : admin-cs-notice-modify */
+#admin-cs-notice-modify  {}
+#admin-cs-notice-modify textarea {
+    width: 500px;
+    height: 500px;
+    background-color: white;
+}
+#admin-cs-notice-modify input[type=text] {
+    width: 500px;
+}
+#admin-cs-notice-modify input[type=submit] {
+    float: right;
+    width: 100px;
+}
+#admin-cs-notice-modify .btnList {
+    float: right;
+    width: 100px;
+}
+
+.btnList {
+    width: 200px;
+    float: right;
+    padding: 6px;
+    margin-top: 10px;
+    background-color: #959595;
+    border: 1px solid #959595;
+    font-size: 13px;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+}
 
 
 /* 상품등록 : product-register */
@@ -395,12 +591,14 @@ button[type=submit] {
     width: 100px;
 }
 
-
-
 /* 상품목록 : product-list */
 #admin-product-list {}
 #admin-product-list > section > div  {
     margin-bottom: 10px;
+}
+#admin-product-list input[type=submit] {
+    float: right;
+    width: 100px;
 }
 
 #admin-product-list > section > table  {
@@ -433,6 +631,8 @@ button[type=submit] {
     float: left;
     width: 100px;
     margin-top: 10px;
+    background-color: #959595;
+    color: white;
 }
 
 #admin-product-list .paging {
@@ -458,7 +658,7 @@ button[type=submit] {
     margin: 0 2px;
     padding: 8px 9px;
     border: 1px solid #c4c4c4;
-    background: url() 0 0 repeat-x;
+    background:  0 0 repeat-x;
     color: #000;
     font-family: Tahoma;
     font-size: 12px;
