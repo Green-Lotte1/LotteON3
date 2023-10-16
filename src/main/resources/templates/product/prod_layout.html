@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/html">
+      xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head>
         <meta charset="UTF-8">
@@ -24,10 +25,15 @@
             <header>
                 <div class="top">
                     <div>
-                        <a th:href="@{/member/login}">로그인</a>
-                        <a th:href="@{/member/register}">회원가입</a>
-                        <a th:href="@{#}">마이페이지</a>
-                        <a th:href="@{/product/cart}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+                        <th:block sec:authorize="!isAuthenticated()">
+                            <a th:href="@{/member/login}">로그인</a>
+                            <a th:href="@{/member/join}">회원가입</a>
+                        </th:block>
+                        <th:block sec:authorize="isAuthenticated()">
+                            <a th:href="logout">로그아웃</a>
+                            <a href="#">마이페이지</a>
+                            <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+                        </th:block>
                     </div>
                 </div>
                 <div class="logo">

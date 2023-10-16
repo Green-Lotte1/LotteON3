@@ -1,8 +1,6 @@
 package co.kr.lotteon.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -19,5 +17,4 @@ public class LtMemberTermsEntity {
     private String location;
     private String finance;
     private String tax;
-
 }

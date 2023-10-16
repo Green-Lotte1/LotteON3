@@ -1,90 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">    
-    <title>롯데ON::롯데 온라인 쇼핑몰</title>
-    <link rel="shortcut icon" type="image/x-icon" href="../../static/images/favicon.ico" />
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <link rel="stylesheet" href="../../static/css/common.css"/>
-    <link rel="stylesheet" href="./css/member.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-</head>
-<body>
-    <div id="wrapper">
-        <header>
-            <div class="top">
-                <div>
-                    <a href="./member/login.html">로그인</a>
-                    <a href="#">회원가입</a>
-                    <a href="#">마이페이지</a>
-                    <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
-                </div>
-            </div>
-            <div class="logo">
-                <div>
-                    <a href="../index.html"><img src="../../static/images/header_logo.png" alt="로고"/></a>
-                </div>
-            </div>
-        </header>
-        <main id="member">
-            <div class="signup">
-				<nav>
-					<h1>약관동의</h1>
-				</nav>
-				<section>
-					<h3><span class="essential">(필수)</span>케이마켓 이용약관</h3>
-					<textarea class="terms" readonly></textarea>
-					<label><input type="checkbox" name="agree1" />동의합니다.</label>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.thymeleaf.org"
+       layout:decorate="/member/_layout.html">
 
-					<h3><span class="essential">(필수)</span>전자금융거래 이용약관</h3>
-					<textarea class="financial" readonly></textarea>
-					<label><input type="checkbox" name="agree2" />동의합니다.</label>
+<div class="signup" layout:fragment="content">
+	<script>
+		$(function(){
+			$('.agree').click(function(){
 
-					<h3><span class="essential">(필수)</span>개인정보 수집동의</h3>
-					<textarea class="privacy" readonly></textarea>
-					<label><input type="checkbox" name="agree3" />동의합니다.</label>
-				</section>
+				const chk1 = $('input[name=agree1]').is(':checked');
+				const chk2 = $('input[name=agree2]').is(':checked');
+				const chk3 = $('input[name=agree3]').is(':checked');
+				const isSeller = [[${type eq 'SELLER' ?  true : false}]];
+				let chk5 = true;
+				if(isSeller){
+					chk5 = $('input[name=agree5]').is(':checked');
+				}
+				if(!chk1){
+					alert('사이트 이용약관에 동의체크 하시기 바랍니다.');
+					return false;
+				}
 
-				<section>
-					<h3><span class="optional">(선택)</span>위치정보 이용약관</h3>
-					<textarea class="location" readonly></textarea>
-					<label><input type="checkbox" name="agree4" />동의합니다.</label>
-				</section>
+				if(!chk2){
+					alert('전자금융거래 이용약관에 동의체크 하시기 바랍니다.');
+					return false;
+				}
 
-				<div>
-					<input type="button" class="agree" value="동의하기" />
-				</div>
-            </div>
-        </main>        
-        <footer>
-            <ul>
-              <li><a href="#">회사소개</a></li>
-              <li><a href="#">서비스이용약관</a></li>
-              <li><a href="#">개인정보처리방침</a></li>
-              <li><a href="#">전자금융거래약관</a></li>
-            </ul>
-            <div>
-              <p><img src="../../static/images/footer_logo.png" alt="로고" /></p>
-              <p>
-                <strong>(주)롯데ON</strong><br />
-                서울특별시 송파구 올림픽로 300 롯데월드타워 26층 (역삼동 강남파이낸스센터)<br />
-                대표이사 : 김사무엘상현, 정준호, 강성현<br />
-                사업자등록번호 : 529-85-00774(롯데쇼핑(주) e커머스사업부)<br />
-                통신판매업 신고 : 서울송파 제0158호<br>
-                호스팅 서비스사업자 : 롯데쇼핑(주) e커머스사업부
-              </p>
-              <p>
-                <strong>고객센터</strong><br />
-                Tel : 1899-7000(유료) (평일 09:00~18:00)<br />
-                Fax : 051-123-4567 | E-mail : lotteon@lotte.net<br />
-              </p>
-            </div>
-          </footer>
-    </div>    
-</body>
+				if(!chk3){
+					alert('개인정보 취급방침 약관에 동의체크 하시기 바랍니다.');
+					return false; // .agree click 할 때 false이니까 submit 실행 안됨
+				}
+				if(!chk5){
+					alert('판매세율 이용약관에 동의체크 하시기 바랍니다.');
+					return false; // .agree click 할 때 false이니까 submit 실행 안됨
+				}
+
+				return true; // .agree click 할 때 true이면 submit 기능이 실행된다
+			});
+		});
+	</script>
+
+	<nav>
+		<h1>약관동의</h1>
+	</nav>
+
+	<section>
+		<h3><span class="essential">(필수)</span>케이마켓 이용약관</h3>
+		<textarea class="terms" readonly>
+                [[${terms.terms}]]
+		</textarea>
+		<label><input type="checkbox" name="agree1" />동의합니다.</label>
+
+		<h3><span class="essential">(필수)</span>전자금융거래 이용약관</h3>
+		<textarea class="financial" readonly>
+                [[${terms.finance}]]
+		</textarea>
+		<label><input type="checkbox" name="agree2" />동의합니다.</label>
+
+		<h3><span class="essential">(필수)</span>개인정보 수집동의</h3>
+		<textarea class="privacy" readonly>
+                [[${terms.privacy}]]
+		</textarea>
+		<label><input type="checkbox" name="agree3" />동의합니다.</label>
+	</section>
+
+	<section th:if="${type eq 'SELLER'}">
+		<h3><span class="essential">(필수)</span>판매세율 이용약관</h3>
+		<textarea class="tax" readonly>
+                [[${terms.tax}]]
+		</textarea>
+		<label><input type="checkbox" name="agree5" />동의합니다.</label>
+	</section>
+
+	<section>
+		<h3><span class="optional">(선택)</span>위치정보 이용약관</h3>
+		<textarea class="location" readonly>
+                [[${terms.location}]]
+		</textarea>
+		<label><input type="checkbox" name="agree4" />동의합니다.</label>
+	</section>
+
+	<div>
+		<form th:action="@{/member/register}" th:method="get">
+			<input type="hidden" name="type" th:value="${type}">
+			<input type="submit" class="agree" value="동의하기" />
+		</form>
+	</div>
+</div>
 </html>
