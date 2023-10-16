@@ -1,0 +1,46 @@
+package co.kr.lotteon.controller;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Log4j2
+@Controller
+@RequiredArgsConstructor
+@RequestMapping("/product")
+public class LtProductController {
+
+    @GetMapping("/view")
+    public String view() {
+        return "/product/view";
+    }
+
+    @GetMapping("/complete")
+    public String complete() {
+        return "/product/complete";
+    }
+
+    @GetMapping("/list")
+    public String list() {
+        return "/product/list";
+    }
+
+    @GetMapping("/order")
+    public String order() {
+        return "/product/order";
+    }
+
+    @GetMapping("/search")
+    public String search() {
+        return "/product/search";
+    }
+
+    @GetMapping("/cart")
+    public String cart() {
+        return "/product/cart";
+    }
+
+}
+
