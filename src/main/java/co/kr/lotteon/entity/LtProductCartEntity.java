@@ -1,5 +1,6 @@
 package co.kr.lotteon.entity;
 
+import co.kr.lotteon.dto.LtProductCartDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -30,5 +31,22 @@ public class LtProductCartEntity {
     private String descript;
     private String thumb1;
 
+    public LtProductCartDTO toDTO() {
+        return LtProductCartDTO.builder()
+                .cartNo(cartNo)
+                .uid(uid)
+                .prodNo(prodNo)
+                .count(count)
+                .price(price)
+                .discount(discount)
+                .point(point)
+                .delivery(delivery)
+                .total(total)
+                .rDate(rDate)
+                .prodName(prodName)
+                .descript(descript)
+                .thumb1(thumb1)
+                .build();
+    }
 
 }
