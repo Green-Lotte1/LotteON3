@@ -39,6 +39,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 <<<<<<< HEAD
 						.requestMatchers("/member/**").permitAll()
 						.requestMatchers("/admin/**").permitAll()
+						.requestMatchers("/cs/**").permitAll()
 						.requestMatchers("/admin/product/**").permitAll()
 						.requestMatchers("/product/**").permitAll()
 						.requestMatchers("/").permitAll()

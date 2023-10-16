@@ -14,14 +14,12 @@ import lombok.*;
 @Entity
 @Table(name = "lt_cs_cate2")
 public class LtCsCate2Entity {
-
-	@Id
+  
 	private int cate1;
 	@Id
 	private int cate2;
 	private String c2Name;
-
-
+  
 	public LtCsCate2DTO toDTO(){
 		return LtCsCate2DTO.builder()
 				.cate1(cate1)
@@ -29,5 +27,4 @@ public class LtCsCate2Entity {
 				.c2Name(c2Name)
 				.build();
 	}
-
 }
