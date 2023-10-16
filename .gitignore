@@ -23,7 +23,10 @@ bin/
 *.iws
 *.iml
 *.ipr
+#설정파일
 **/*.yml
+**/*.log
+
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
