@@ -36,12 +36,11 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 
 				// 인가 권한 설정
 				.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-						.requestMatchers("/member/**").permitAll()
-						.requestMatchers("/admin/**").permitAll()
-						.requestMatchers("/admin/product/**").permitAll()
+//						.requestMatchers("/member/**").permitAll()
+//						.requestMatchers("/admin/**").permitAll()
 						.requestMatchers("/product/**").permitAll()
-						.requestMatchers("/").authenticated()
-						.requestMatchers("/product/**").authenticated()
+						.requestMatchers("/").permitAll()
+//						.requestMatchers("/product/**").authenticated()
 						.requestMatchers("/css/**", "/js/**", "/images/**", "/thumb/**", "/upload/**").permitAll());
 
 		return http.build();

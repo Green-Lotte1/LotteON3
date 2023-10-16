@@ -1,5 +1,6 @@
 package co.kr.lotteon.dto;
 
+import co.kr.lotteon.entity.LtProductCartEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +26,24 @@ public class LtProductCartDTO {
     private String prodName;
     private String descript;
     private String thumb1;
+
+    public LtProductCartEntity toEntity() {
+        return LtProductCartEntity.builder()
+                .cartNo(cartNo)
+                .uid(uid)
+                .prodNo(prodNo)
+                .count(count)
+                .price(price)
+                .discount(discount)
+                .point(point)
+                .delivery(delivery)
+                .total(total)
+                .rDate(rDate)
+                .prodName(prodName)
+                .descript(descript)
+                .thumb1(thumb1)
+                .build();
+    }
 
 
 }
