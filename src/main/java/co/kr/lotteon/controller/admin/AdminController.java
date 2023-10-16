@@ -1,4 +1,4 @@
-package co.kr.lotteon.controller;
+package co.kr.lotteon.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +10,5 @@ public class AdminController {
     public String index(){
         return "/admin/index";
     }
-
-
 
 }
