@@ -1,9 +1,91 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html  xmlns:th="http://www.thymeleaf.org"
        xmlns:layout="http://www.thymeleaf.org"
        layout:decorate="/admin/admin_layout">
 
             <section id="admin-index" layout:fragment="content">
+=======
+<html xmlns:th="http://www.thymeleaf.org/" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>롯데ON::관리자 페이지</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
+    <script src="./js/gnb.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body>
+    <div id="admin-wrapper">
+        <header>
+            <div>
+                <a th:href="@{./index.html}" class="logo"><img src="./images/admin_logo.png" alt="admin_logo"/></a>
+                <p>
+                    <span>홍길동님 반갑습니다.</span>
+                    <a href="#">HOME |</a>
+                    <a href="#">로그아웃 |</a>
+                    <a href="#">고객센터</a>
+                </p>
+            </div>
+        </header>
+        <main>
+            <aside>
+                <!-- Global Navigation Bar -->
+                <ul id="gnb">
+                    <li>
+                        <a href="#"><i class="fa fa-cogs" aria-hidden="true"></i>환경설정</a>
+                        <ol>
+                            <li><a href="./config/info.html">기본환경정보</a></li>
+                            <li><a href="./config/banner.html">배너관리</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-store" aria-hidden="true"></i>상점관리</a>
+                        <ol>
+                            <li><a href="#">판매자현황</a></li>
+                            <li><a href="#">재고관리</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-users" aria-hidden="true"></i>회원관리</a>
+                        <ol>
+                            <li><a href="#">회원현황</a></li>
+                            <li><a href="#">포인트관리</a></li>
+                            <li><a href="#">비회원관리</a></li>
+                            <li><a href="#">접속자집계</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
+                        <ol>
+                            <li><a href="./product/list.html">상품현황</a></li>
+                            <li><a href="./product/register.html">상품등록</a></li>
+                            <li><a href="#">재고관리</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>주문관리</a>
+                        <ol>
+                            <li><a href="#">주문현황</a></li>
+                            <li><a href="#">매출현황</a></li>
+                            <li><a href="#">결제관리</a></li>
+                            <li><a href="#">배송관리</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>게시판관리</a>
+                        <ol>
+                            <li><a href="#">게시판현황</a></li>
+                            <li><a href="#">고객문의</a></li>
+                        </ol>
+                    </li>
+                </ul>
+            </aside>
+            <section id="admin-index">
+>>>>>>> e610e1d99ecb7fd1a2ca207cfe6059811d5b6ae1
                 <nav>
                     <h3>관리자 메인</h3>
                     <p>
@@ -13,7 +95,7 @@
 
                 <h4>쇼핑몰 운영현황</h4>
                 <article>
-                    <table>	
+                    <table>
                         <tr>
                             <td>
                                 <strong>주문건수(건)</strong>
@@ -158,7 +240,7 @@
                                     <span>월간</span>
                                     <span>30</span>
                                 </p>
-                            </td>		
+                            </td>
                         </tr>
                     </table>
                 </article>
@@ -188,7 +270,7 @@
                                 <span>100</span>
                             </td>
                         </tr>
-                    </table>                    
+                    </table>
                 </article>
 
                 <div>
@@ -240,10 +322,21 @@
                             <p>
                                 <span>[문의] 상품이 1개 잘못 왔습니다.</span>
                                 <span>20-07-08 12:23</span>
-                            </p>                                                                
+                            </p>
                         </article>
                     </div>
                 </div>
             </section>
+<<<<<<< HEAD
 
+=======
+        </main>
+        <footer>
+            <div>
+                <p>Copyright ©lotteon.com All rights reserved. ADMINISTRATOR Version 5.4.1.2</p>
+            </div>
+        </footer>
+    </div>
+</body>
+>>>>>>> e610e1d99ecb7fd1a2ca207cfe6059811d5b6ae1
 </html>
