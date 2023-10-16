@@ -1,5 +1,6 @@
 package co.kr.lotteon.entity;
 
+import co.kr.lotteon.dto.LtCsCate1DTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -17,4 +18,11 @@ public class LtCsCate1Entity {
 	@Id
 	private int cate1;
 	private String c1Name;
+
+	public LtCsCate1DTO toDTO(){
+		return LtCsCate1DTO.builder()
+				.cate1(cate1)
+				.c1Name(c1Name)
+				.build();
+	}
 }

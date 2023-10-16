@@ -1,5 +1,6 @@
 package co.kr.lotteon.dto;
 
+import co.kr.lotteon.entity.LtCsCate2Entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,4 +16,12 @@ public class LtCsCate2DTO {
 	private int cate2;
 	private String c2Name;
 
+
+	public LtCsCate2Entity toEntity(){
+		return LtCsCate2Entity.builder()
+				.cate1(cate1)
+				.cate2(cate2)
+				.c2Name(c2Name)
+				.build();
+	}
 }
