@@ -14,7 +14,7 @@ logging:
     root: info
 server:
   servlet:
-    context-path: /
+    context-path: /LotteON
 
   mybatis :
     mapper-locations: classpath:mappers/**/*
