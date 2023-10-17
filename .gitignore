@@ -15,7 +15,7 @@ application.yml
 .springBeans
 .sts4-cache
 bin/
-!**/src/main/**/bi
+!**/src/main/**/bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
@@ -23,10 +23,7 @@ bin/
 *.iws
 *.iml
 *.ipr
-#설정파일
-**/*.yml
-**/*.log
-
+*.yml
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/

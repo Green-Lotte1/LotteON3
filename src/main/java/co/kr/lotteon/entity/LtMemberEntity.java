@@ -24,7 +24,7 @@ public class LtMemberEntity {
     private int gender;
     private String hp;
     private String email;
-    private int type;
+    private String type;
     private int point;
     private int level;
     private String zip;
@@ -80,5 +80,5 @@ public class LtMemberEntity {
                 .etc5(etc5)
                 .build();
     }
-    
+
 }
