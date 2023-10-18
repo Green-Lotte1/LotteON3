@@ -1,7 +1,7 @@
 package co.kr.lotteon.controller.cs;
 
 import co.kr.lotteon.dto.LtCsNoticeDTO;
-import co.kr.lotteon.entity.LtCsNoticeEntity;
+import co.kr.lotteon.dto.LtCsQnaDTO;
 import co.kr.lotteon.service.LtCsService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +25,17 @@ public class CsController {
         List<LtCsNoticeDTO> noticelist = ltCsService.selectCsNotices();
         model.addAttribute("noticelist",noticelist);
 
+
+        List<LtCsQnaDTO> qnalist = ltCsService.selectCsQna();
+        model.addAttribute("qnalist",qnalist);
+
         log.info(noticelist.toString());
+        log.info(qnalist.toString());
 
         return "/cs/index";
+    }
+    @GetMapping("/cs/qna/write")
+    public String write(){
+        return "/cs/qna/write";
     }
 }

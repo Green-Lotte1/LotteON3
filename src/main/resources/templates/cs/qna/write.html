@@ -1,11 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8" />
     <title>롯데ON::고객센터</title>
     <link rel="shortcut icon" type="image/x-icon" href="../../../static/images/favicon.ico" />
-    <link rel="stylesheet" href="../../../static/cs/css/style.css" />
+    <link rel="stylesheet" th:href="@{/cs/css/style.css}"/>
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(function(){
+    const jsonData = {};
+
+    // 서버로부터 cate1 데이터 불러오기
+    $.ajax({
+        url: '/cs/cate1',
+        type: 'GET',
+        data: jsonData,
+        success: function(cate1Data) {
+            console.log(cate1Data);
+
+            // 문의유형 select 요소 찾기
+            const typeSelect = $('select[name="type1"]');
+
+            // cate1 데이터를 반복하여 1차 선택 옵션 추가
+            cate1Data.forEach(function(cate1) {
+                typeSelect.append($('<option>', {
+                    value: cate1.cate1,
+                    text: cate1.c1Name
+                        }));
+                    });
+                }
+            });
+        });
+
+</script>
 <body>
 <div id="wrapper">
     <header>
@@ -52,14 +80,18 @@
                             <tr>
                                 <td>문의유형</td>
                                 <td>
-                                    <select name="type">
-                                        <option value="0">선택</option>
+                                    <select name="type1">
+                                        <option selected >1차 선택</option>
+                                    </select>
+                                    <select name="type2">
+                                        <option value="0">2차 선택</option>
                                         <option>가입</option>
                                         <option>탈퇴</option>
                                         <option>회원정보</option>
                                         <option>로그인</option>
                                     </select>
                                 </td>
+
                             </tr>
                             <tr>
                                 <td>문의제목</td>

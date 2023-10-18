@@ -14,7 +14,7 @@ logging:
     root: info
 server:
   servlet:
-    context-path: /LotteON
+    context-path: /
 
 spring:
   mail:

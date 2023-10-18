@@ -1,11 +1,12 @@
 package co.kr.lotteon.service;
 
+import co.kr.lotteon.dto.LtCsCate1DTO;
 import co.kr.lotteon.dto.LtCsNoticeDTO;
-import co.kr.lotteon.mapper.LtCsNoticeMapper;
+import co.kr.lotteon.dto.LtCsQnaDTO;
+import co.kr.lotteon.mapper.cs.LtCsCate1Mapper;
+import co.kr.lotteon.mapper.cs.LtCsIndexMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,13 +17,24 @@ public class LtCsService {
 
 
 
-    private final LtCsNoticeMapper ltCsNoticeMapper;
+    private final LtCsIndexMapper ltCsIndexMapper;
 
-    private final ModelMapper modelMapper;
+    private final LtCsCate1Mapper ltCsCate1Mapper;
+
 
     public List<LtCsNoticeDTO> selectCsNotices(){
-        return ltCsNoticeMapper.selectCsNotices();
+        return ltCsIndexMapper.selectCsNotices();
     }
+
+    public List<LtCsQnaDTO> selectCsQna(){
+        return ltCsIndexMapper.selectCsQna();
+    }
+
+    public List<LtCsCate1DTO> selectCsCate1(){
+        return ltCsCate1Mapper.selectCsCate1();
+    }
+
+
 
 
 }
