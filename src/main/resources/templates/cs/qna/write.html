@@ -11,27 +11,57 @@
     $(function(){
     const jsonData = {};
 
-    // 서버로부터 cate1 데이터 불러오기
-    $.ajax({
-        url: '/cs/cate1',
-        type: 'GET',
-        data: jsonData,
-        success: function(cate1Data) {
-            console.log(cate1Data);
+        // 서버로부터 cate1 데이터 불러오기
+        $.ajax({
+            url: '/cs/cate1',
+            type: 'GET',
+            data: jsonData,
+            success: function(cate1Data) {
+                console.log(cate1Data);
 
-            // 문의유형 select 요소 찾기
-            const typeSelect = $('select[name="type1"]');
+                // 문의유형 select 요소 찾기
+                const typeSelect = $('select[name="type1"]');
 
-            // cate1 데이터를 반복하여 1차 선택 옵션 추가
-            cate1Data.forEach(function(cate1) {
-                typeSelect.append($('<option>', {
-                    value: cate1.cate1,
-                    text: cate1.c1Name
+                // cate1 데이터를 반복하여 1차 선택 옵션 추가
+                cate1Data.forEach(function(cate1) {
+                    typeSelect.append($('<option>', {
+                        value: cate1.cate1,
+                        text: cate1.c1Name
+                    }));
+                });
+            }
+        });
+
+        $('#category1').change(function() {
+            const selectedCategory1 = $(this).val();
+            console.log(selectedCategory1)
+
+            // 1차 카테고리 선택 값(selectedCategory1)을 서버로 전송
+            const jsonData = {
+                cate1: selectedCategory1
+            };
+            $.ajax({
+                url: '/cs/cate2',
+                type: 'GET',
+                data: jsonData,
+                success: function(cate2list){
+                    console.log(cate2list);
+
+                // 문의유형2 select 요소 찾기
+                const typeSelect2 = $('select[name="category2"]');
+                typeSelect2.empty();
+
+                // cate2 데이터를 반복하여 2차 선택 옵션 추가
+                cate2list.forEach(function(cate2) {
+                    typeSelect2.append($('<option>', {
+                        value: cate2.cate2,
+                        text: cate2.c2Name
                         }));
                     });
                 }
             });
         });
+    }); //function
 
 </script>
 <body>
@@ -80,15 +110,12 @@
                             <tr>
                                 <td>문의유형</td>
                                 <td>
-                                    <select name="type1">
+                                    <select name="type1" id="category1">
                                         <option selected >1차 선택</option>
                                     </select>
-                                    <select name="type2">
-                                        <option value="0">2차 선택</option>
-                                        <option>가입</option>
-                                        <option>탈퇴</option>
-                                        <option>회원정보</option>
-                                        <option>로그인</option>
+                                    <select name="category2" id="category2">
+                                        <option selected>2차 선택</option>
+
                                     </select>
                                 </td>
 
