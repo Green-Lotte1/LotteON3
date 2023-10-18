@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -30,7 +33,8 @@ public class LtCsQnaEntity {
 	private int parent;
 	private int answerComplete;
 	private String regip;
-	private String rdate;
+	@CreationTimestamp
+	private LocalDateTime rdate;
 
 
 

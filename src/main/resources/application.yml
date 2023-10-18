@@ -1,6 +1,6 @@
 logging:
   file:
-    name: log/Ch11.log
+    name: log/cs.log
   level:
     jdbc:
       connection: info
@@ -14,16 +14,28 @@ logging:
     root: info
 server:
   servlet:
-    context-path: /LotteON
+    context-path: /
 
-  mybatis :
-    mapper-locations: classpath:mappers/**/*
+mybatis :
+  mapper-locations: classpath:mappers/**/*
 
 spring:
+  mail:
+    host: smtp.gmail.com # 1
+    port: 587 # 2
+    username: extendsabstractclass # 3
+    password: hfrezhsvhiitsckb # 4
+    properties:
+      mail:
+        smtp:
+          auth: true # 5
+          timeout: 5000 # 6
+          starttls:
+            enable: true # 7
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: lotteON3!
-    url: jdbc:mysql://3.106.187.11:3306/LotteON
+    url: jdbc:mysql://3.25.162.104:3306/LotteON
     username: lotteON3
   devtools:
     livereload:
@@ -49,12 +61,11 @@ spring:
       password: 1234
   thymeleaf:
     cache: false
-    # prefix 설정을 안하면 HTML 수정 후 브라우저에서 새로고침 반영안됨
-    # 그리고 반드시 classpaht 경로로 쓰고 templates 마지막에 슬러쉬(/) 붙이면 배포파일 실행안됨
-    # 그런데 마지막에 슬러쉬 붙이고 안붙이고는 본인의 Controller에서 리턴되는 view 경로의 슬러쉬 여부에 따라 달라짐
-    prefix: classpath:/templates
+    prefix: file:src/main/resources/templates
+
 
   servlet:
     multipart:
       location: src/main/resources/static/file/
       max-file-size: 10MB
+

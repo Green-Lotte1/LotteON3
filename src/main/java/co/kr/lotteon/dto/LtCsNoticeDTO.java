@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -17,7 +19,8 @@ public class LtCsNoticeDTO {
 	private String content;
 	private String writer;
 	private String regip;
-	private String rdate;
+
+	private LocalDateTime rdate;
 
 	private int hit;
 	//추가필드

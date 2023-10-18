@@ -5,6 +5,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -25,7 +28,8 @@ public class LtCsNoticeEntity {
 	private String content;
 	private String writer;
 	private String regip;
-	private String rdate;
+	@CreationTimestamp
+	private LocalDateTime rdate;
 
 
 	

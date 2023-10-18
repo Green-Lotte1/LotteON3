@@ -1,15 +1,11 @@
 package co.kr.lotteon.repository;
 
 import co.kr.lotteon.dto.LtCsNoticeDTO;
-import co.kr.lotteon.entity.LtCsNoticeEntity;
-import co.kr.lotteon.mapper.LtCsNoticeMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
