@@ -1,6 +1,7 @@
 package co.kr.lotteon.entity;
 
 import co.kr.lotteon.dto.LtProductDTO;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "lt_product")
 public class LtProductEntity {
+
     @Id
     private int prodNo;
     private int prodCate1;
