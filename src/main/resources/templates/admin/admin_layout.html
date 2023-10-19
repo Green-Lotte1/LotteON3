@@ -6,6 +6,81 @@
     <meta charset="UTF-8">
     <title>롯데ON::관리자 페이지</title>
     <th:block th:replace="/fragments/admin/config :: configFragment"></th:block>
+    <script>
+        //1차, 2차 카테고리
+        function changeSelect() {
+            const selectValue = $('#selectBox').val();
+            console.log("selectValue : "+selectValue);
+            $.ajax({
+                url: '/LotteON/admin/product/cate2/'+selectValue,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log("data : "+data);
+
+                    const cate2Select = $('#cate2');
+                    cate2Select.empty(); // 기존 옵션을 모두 제거합니다.
+
+                    // 새로운 옵션 추가
+                    cate2Select.append($('<option>', {
+                        value: '',
+                        text: '2차 분류 선택',
+                        disabled: 'disabled',
+                        selected: 'selected'
+                    }));
+
+                    // 데이터를 이용하여 옵션을 동적으로 생성
+                    data.forEach(function(item) {
+                        cate2Select.append($('<option>', {
+                            value: item.cate2,
+                            text: item.c2Name
+                        }));
+                    });
+                }
+            });
+        }
+
+        //자동 포인트(가격 입력 시)
+        $(document).ready(function () {
+            $('input[name=price]').focusout(function () {
+                const price = $(this).val();
+                // 소수점을 제거하고 정수 부분만 사용
+                const priceWithoutDecimal = Math.floor(parseFloat(price) * 100) / 100; // 두 자리 소수점까지
+                const point = $('input[name=point]');
+
+                // 최종 포인트 계산 후 정수로 변환
+                const calculatedPoint = Math.floor(priceWithoutDecimal * 0.01);
+
+                point.val(calculatedPoint);
+            });
+        });
+
+        /*//금액 자동 콤마
+        $(document).ready(function () {
+            $('input[name="price"],[name="point"],[name="stock"],[name="delivery"]').focusout(function () {
+                const price = $(this).val();
+                const priceWithoutCommas = price.replace(/,/g, ''); // 입력된 값에서 기존 콤마 제거
+                const numericPrice = parseFloat(priceWithoutCommas); // 문자열을 숫자로 변환
+
+                if (!isNaN(numericPrice)) {
+                    const formattedPrice = numericPrice.toLocaleString(); // 로캘에 따른 형식으로 변환
+                    $(this).val(formattedPrice).bind(int, formattedPrice, );
+                }
+            });
+        });*/
+
+         /*$(function(){
+            $('select[name=prodCate2]').change(function(){
+
+                 let cate1 = $('select[name=prodCate1]').val();
+                 let cate2 = $(this).val();
+
+
+                 let actionUrl = "/LotteON/admin/product/register?cate1="+cate1+"&cate2="+cate2;
+                 $('#formRegister').attr('action', actionUrl);
+            });
+         });*/
+    </script>
 </head>
 <body>
     <div id="wrapper">

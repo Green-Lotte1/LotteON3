@@ -10,4 +10,7 @@ public interface LtProductMapper {
 
     public List<LtProductDTO> selectProducts();
 
+    /* admin 상품 등록 */
+    public void insertLtProduct(LtProductDTO ltProductDTO);
+
 }

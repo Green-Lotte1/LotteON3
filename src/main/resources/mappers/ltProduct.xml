@@ -9,4 +9,14 @@
 		SELECT * FROM `lt_product`
 	</select>
 
+	<insert id="insertLtProduct">
+
+		INSERT INTO `lt_product` VALUES (#{prodNo}, #{prodCate1}, #{prodCate2}, #{prodName}, #{descript}, #{company},
+										#{seller}, #{price}, #{discount}, #{point}, #{stock}, #{sold}, #{delivery},
+										#{hit}, #{score}, #{review}, #{thumb1}, #{thumb2}, #{thumb3}, #{detail},
+										#{status}, #{duty}, #{receipt}, #{bizType}, #{origin}, #{ip}, #{rDate},
+										#{wDate}, #{isRemoved}, #{etc1}, #{etc2}, #{etc3}, #{etc4}, #{etc5}
+		)
+	</insert>
+
 </mapper>
