@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -41,7 +43,9 @@ public class LtProductDTO {
     private String bizType;
     private String origin;
     private String ip;
-    private String rDate;
+
+    private LocalDateTime rDate;
+
     private int etc1;
     private int etc2;
     private String etc3;
@@ -50,9 +54,10 @@ public class LtProductDTO {
 
     private String wDate;
     private int total;
-    private int rating;
+    private int rating; //별점
 
     private int discountPrice;
+    private int isRemoved;
 
     private String path;
     private int level;

@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Log4j2
@@ -30,6 +31,14 @@ public class LtProductService {
     public LtProductDTO getProdDto(int prodNo) {
         LtProductEntity entity = ltProductRepository.findById(prodNo).get();
         return entity.toDTO();
+    }
+
+//    admin - 상품 등록
+    public void insertLtProduct(LtProductDTO ltProductDTO){
+        System.out.println("ltProductDTO : " + ltProductDTO);
+        ltProductDTO.setRDate(LocalDateTime.now());
+        ltProductDTO.setIsRemoved(1);
+        ltProductMapper.insertLtProduct(ltProductDTO);
     }
 
 }
