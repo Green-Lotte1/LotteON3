@@ -11,27 +11,68 @@
     $(function(){
     const jsonData = {};
 
-    // 서버로부터 cate1 데이터 불러오기
-    $.ajax({
-        url: '/cs/cate1',
-        type: 'GET',
-        data: jsonData,
-        success: function(cate1Data) {
-            console.log(cate1Data);
+        // 서버로부터 cate1 데이터 불러오기
+        $.ajax({
+            url: '/cs/cate1',
+            type: 'GET',
+            data: jsonData,
+            success: function(cate1Data) {
+                console.log(cate1Data);
 
-            // 문의유형 select 요소 찾기
-            const typeSelect = $('select[name="type1"]');
+                // 문의유형 select 요소 찾기
+                const typeSelect = $('select[name="type1"]');
 
-            // cate1 데이터를 반복하여 1차 선택 옵션 추가
-            cate1Data.forEach(function(cate1) {
-                typeSelect.append($('<option>', {
-                    value: cate1.cate1,
-                    text: cate1.c1Name
+                // cate1 데이터를 반복하여 1차 선택 옵션 추가
+                cate1Data.forEach(function(cate1) {
+                    typeSelect.append($('<option>', {
+                        value: cate1.cate1,
+                        text: cate1.c1Name
+                    }));
+                });
+            }
+        });
+
+        $('#category1').change(function() {
+            const selectedCategory1 = $(this).val();
+            console.log(selectedCategory1)
+
+            // 1차 카테고리 선택 값을 cate1 input 필드의 값으로 설정
+            $('#cate1').val(selectedCategory1);
+
+            // 1차 카테고리 선택 값(selectedCategory1)을 서버로 전송
+            const jsonData = {
+                cate1: selectedCategory1
+            };
+
+            $.ajax({
+                url: '/cs/cate2',
+                type: 'GET',
+                data: jsonData,
+                success: function(cate2List){
+                    console.log(cate2List);
+
+                // 문의유형2 select 요소 찾기
+                const typeSelect2 = $('select[name="category2"]');
+                typeSelect2.empty();
+
+                // cate2 데이터를 반복하여 2차 선택 옵션 추가
+                cate2List.forEach(function(cate2) {
+                    typeSelect2.append($('<option>', {
+                        value: cate2.cate2,
+                        text: cate2.c2Name
                         }));
                     });
                 }
             });
         });
+        $('#category2').change(function() {
+                        const selectedCategory2 = $(this).val();
+                        console.log(selectedCategory2)
+
+        // 2차 카테고리 선택 값을 cate2 input 필드의 값으로 설정
+        $('#cate2').val(selectedCategory2);
+        });
+    }); //function
 
 </script>
 <body>
@@ -75,23 +116,21 @@
                     </ul>
                 </aside>
                 <article>
-                    <form action="#">
+                    <form th:action="@{/cs/qna/write}" method="post">
                         <table>
                             <tr>
                                 <td>문의유형</td>
+                                <input type="text" name="cate1" id="cate1" value="" />
+                                <input type="text" name="cate2" id="cate2" value="" />
+                                <input type="text" name="writer" th:value="${#authentication.principal.user.uid}">
                                 <td>
-                                    <select name="type1">
+                                    <select name="type1" id="category1">
                                         <option selected >1차 선택</option>
                                     </select>
-                                    <select name="type2">
-                                        <option value="0">2차 선택</option>
-                                        <option>가입</option>
-                                        <option>탈퇴</option>
-                                        <option>회원정보</option>
-                                        <option>로그인</option>
+                                    <select name="category2" id="category2">
+                                        <option selected>2차 선택</option>
                                     </select>
                                 </td>
-
                             </tr>
                             <tr>
                                 <td>문의제목</td>
@@ -107,7 +146,7 @@
                             </tr>
                         </table>
                         <div>
-                            <a href="./list.html" class="btnList">취소하기</a>
+                            <a th:href="@{/cs/qna/list}" class="btnList">취소하기</a>
                             <input type="submit" class="btnSubmit" value="등록하기"/>
                         </div>
                     </form>

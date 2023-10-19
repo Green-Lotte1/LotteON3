@@ -1,19 +1,17 @@
 package co.kr.lotteon.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class LtProductCate2DTO {
     private int cate1;
     private int cate2;
     private String c2Name;
-    private String c1Name;
+
 
 
 

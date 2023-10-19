@@ -6,6 +6,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -44,7 +47,9 @@ public class LtProductEntity {
     private String bizType;
     private String origin;
     private String ip;
-    private String rDate;
+
+    @CreationTimestamp
+    private LocalDateTime rDate;
 
     private int etc1;
     private int etc2;
