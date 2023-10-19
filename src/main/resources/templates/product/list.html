@@ -26,20 +26,20 @@
         <!-- prod_list_test -->
         <th:block th:each="prodlist:${productlist}">
         <tr>
-            <td><a th:href="@{/product/view(prodNo=${prodlist.prodNo})}" class="thumb"><img th:src="@{https://via.placeholder.com/120x120}" alt="상품이미지"/></a></td>
+            <td><a th:href="@{/product/view(prodNo = ${prodlist.prodNo})}" class="thumb"><img th:src="@{https://via.placeholder.com/120x120}" alt="상품이미지"/></a></td>
             <td>
                 <h3 class="name">[[${prodlist.prodName}]]</h3>
-                <a href="#" class="desc">[[${prodlist.descript}]]</a>
+                <a th:href="@{/product/view(prodNo = ${prodlist.prodNo})}" class="desc">[[${prodlist.descript}]]</a>
             </td>
             <td>
                 <ul>
-                    <li><ins class="dis-price">[[${prodlist.price}]]</ins></li>
+                    <li><ins class="dis-price">[[${#numbers.formatInteger(prodlist.price,0,'COMMA')}]]</ins></li>
                     <li>
-                        <del class="org-price">[[${prodlist.price}]]</del>
-                        <span class="discount">[[${prodlist.discount}]]%</span>
+                        <del class="org-price">[[${#numbers.formatInteger(prodlist.price,0,'COMMA')}]]</del>
+                        <span class="discount">[[${#numbers.formatInteger(prodlist.discount,0,'COMMA')}]]%</span>
                     </li>
                     <li>
-                        <span th:if="${prodlist.delivery gt 0}">[[${prodlist.delivery}]]원</span>
+                        <span class="delivery" th:if="${prodlist.delivery gt 0}">[[${#numbers.formatInteger(prodlist.delivery,0,'COMMA')}]]원</span>
                         <span class="free-delivery" th:if="${prodlist.delivery eq 0}">무료배송</span>
                     </li>
                 </ul>
@@ -55,15 +55,19 @@
 
     <!-- 상품목록 페이지번호 -->
     <div class="paging">
-    <span class="prev">
-      <a href="#"><&nbsp;이전</a>
+
+    <span class="prev" th:if="${prodPageResponseDTO.prev}">
+      <a th:href="@{/product/list(cate1=${pageResponseDTO.cate1}, cate2=${pageResponseDTO.cate2}, pg=${pageResponseDTO.start - 1})}"><&nbsp;이전</a>
     </span>
-        <span class="num">
-      <a href="#" class="on">1</a>
+
+    <span th:each="num : ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}" class="num">
+      <a th:href="@{/product/list(cate1=${pageResponseDTO.cate1}, cate2=${pageResponseDTO.cate2}, pg=${num})}" th:class="${pageResponseDTO.pg eq num ? 'on' : 'off'}">[[${num}]]</a>
     </span>
-        <span class="next">
-      <a href="#">다음&nbsp;></a>
+
+    <span class="next" th:if="${pageResponseDTO.next}">
+      <a th:href="@{/product/list(cate1=${pageResponseDTO.cate1}, cate2=${pageResponseDTO.cate2}, pg=${pageResponseDTO.start - 1})}">다음&nbsp;></a>
     </span>
+
     </div>
 
 </section>

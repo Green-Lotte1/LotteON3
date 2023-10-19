@@ -157,6 +157,8 @@
   margin-top: 4px;
 }
 
+
+
 #product > .list > table .seller {  
   font-size: 12px;
   margin-bottom: 6px;
@@ -306,6 +308,12 @@
     font-size: 16px;
     color: #2e8de5;
 }
+
+#product > .view > .info > .summary .delivery-noFree {
+    font-size: 16px;
+    color: #111111;
+}
+
 #product > .view > .info > .summary .arrival {
     font-size: 14px;
     margin-left: 10px;

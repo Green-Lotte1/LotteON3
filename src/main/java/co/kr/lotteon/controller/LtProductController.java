@@ -1,6 +1,8 @@
 package co.kr.lotteon.controller;
 
 import co.kr.lotteon.dto.LtProductDTO;
+import co.kr.lotteon.dto.prodpage.ProdPageRequestDTO;
+import co.kr.lotteon.dto.prodpage.ProdPageResponseDTO;
 import co.kr.lotteon.service.LtProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -22,12 +24,11 @@ public class LtProductController {
 
     private final LtProductService ltProductService;
 
-    @GetMapping("/view/{prodNo}")
-    public String view(@RequestParam(value = "prodNo") Model model, int prodNo) {
+    @GetMapping("/view")
+    public String view(@RequestParam(value = "prodNo")int proNo, Model model) {
 
-        LtProductDTO dto = ltProductService.getProdDto(prodNo);
-
-        model.addAttribute("prodView", dto);
+        LtProductDTO dto = ltProductService.getProdDto(proNo);
+        model.addAttribute("prod",dto);
 
         return "/product/view";
 
@@ -38,9 +39,8 @@ public class LtProductController {
         return "/product/complete";
     }
 
-//todo    프로덕트 리스트 페이지 출력 테스트 완료 - 1018_11:23
     @GetMapping("/list")
-    public String list(Model model) {
+    public String list(Model model, ProdPageRequestDTO pageRequestDTO) {
 
         List<LtProductDTO> productlist = ltProductService.selectProducts();
         model.addAttribute("productlist",productlist);

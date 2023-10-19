@@ -16,4 +16,5 @@ public class LtProductCate2DTO {
     private String c1Name;
 
 
+
 }

@@ -1,6 +1,7 @@
 package co.kr.lotteon.entity;
 
 import co.kr.lotteon.dto.LtProductDTO;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -15,6 +16,7 @@ import lombok.*;
 @Entity
 @Table(name = "lt_product")
 public class LtProductEntity {
+
     @Id
     private int prodNo;
     private int prodCate1;
@@ -43,6 +45,7 @@ public class LtProductEntity {
     private String origin;
     private String ip;
     private String rDate;
+
     private int etc1;
     private int etc2;
     private String etc3;

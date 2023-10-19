@@ -21,13 +21,28 @@ public class ProdPageRequestDTO {
     private int size = 10;
 
     @Builder.Default
-    private int cate1 = 11;
+    private String how = "DESC";
 
     @Builder.Default
-    private int cate2 = 10;
+    private String sort = "sold";
 
-    public Pageable getPageable(String sort) {
-        return PageRequest.of(this.pg-1, this.size, Sort.by(sort).descending());
+    // cate Default 없으면 오류 발생 - Default 값을 지정해줘야함.
+    @Builder.Default
+    private int cate1 = 11;
+    @Builder.Default
+    private int cate2 = 11;
+
+    public Pageable getPageable() {
+        if (how.equals("ASC")) {
+            return PageRequest.of(this.pg - 1, this.size, Sort.by(this.sort).ascending());
+        } else {
+            return PageRequest.of(this.pg - 1, this.size, Sort.by(this.sort).descending());
+        }
     }
+
+
+//    public Pageable getPageable(String sort) {
+//        return PageRequest.of(this.pg-1, this.size, Sort.by(sort).descending());
+//    }
 
 }
