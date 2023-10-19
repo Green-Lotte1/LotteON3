@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.kr.lotteon.mapper.cs.LtCsQnaMapper">
+
+	<insert id="insertQnaWrite">
+		INSERT INTO `lt_cs_qna` (cate1, cate2, title, content, writer, regip, rdate)
+		VALUES (#{cate1}, #{cate2}, #{title}, #{content}, #{writer}, #{regip}, #{rdate});
+	</insert>
+
+
+</mapper>
