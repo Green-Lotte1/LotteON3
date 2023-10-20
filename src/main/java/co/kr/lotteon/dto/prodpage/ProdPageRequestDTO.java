@@ -32,7 +32,7 @@ public class ProdPageRequestDTO {
     @Builder.Default
     private int cate2 = 11;
 
-    public Pageable getPageable() {
+    public Pageable getPageable(String cate1) {
         if (how.equals("ASC")) {
             return PageRequest.of(this.pg - 1, this.size, Sort.by(this.sort).ascending());
         } else {
