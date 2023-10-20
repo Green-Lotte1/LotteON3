@@ -1,15 +1,14 @@
 package co.kr.lotteon.dto;
 
 import co.kr.lotteon.entity.LtProductEntity;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.time.LocalDateTime;
-import java.util.*;
 
 
 @Data
@@ -33,16 +32,35 @@ public class LtProductDTO {
     private int hit;
     private int score;
     private int review;
+
     private String thumb1;
     private String thumb2;
     private String thumb3;
     private String detail;
+
+    private MultipartFile fileThumb1;
+    private MultipartFile fileThumb2;
+    private MultipartFile fileThumb3;
+    private MultipartFile fileDetail;
+
     private String status;
     private String duty;
     private String receipt;
     private String bizType;
     private String origin;
     private String ip;
+
+    @Transient
+    private String priceFromUser;
+
+    @Transient
+    private String pointFromUser;
+
+    @Transient
+    private String stockFromUser;
+
+    @Transient
+    private String deliveryFromUser;
 
     private LocalDateTime rDate;
 
@@ -85,10 +103,10 @@ public class LtProductDTO {
                 .hit(hit)
                 .score(score)
                 .review(review)
-                .thumb1(thumb1)
+/*                .thumb1(thumb1)
                 .thumb2(thumb2)
                 .thumb3(thumb3)
-                .detail(detail)
+                .detail(detail)*/
                 .status(status)
                 .duty(duty)
                 .receipt(receipt)

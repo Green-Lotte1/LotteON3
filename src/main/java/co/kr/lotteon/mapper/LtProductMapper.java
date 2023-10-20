@@ -13,4 +13,5 @@ public interface LtProductMapper {
     /* admin 상품 등록 */
     public void insertLtProduct(LtProductDTO ltProductDTO);
 
+
 }

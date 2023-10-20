@@ -4,16 +4,14 @@
 		"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.kr.lotteon.mapper.cs.LtCsNoticeMapper">
 
-	<select id="selectCsNoticeAll" resultType="co.kr.lotteon.dto.LtCsNoticeDTO">
-		SELECT *, b.c2Name FROM `lt_cs_notice` AS a
+	<select id="selectCsNoticeListAll" parameterType="map" resultType="map">
+		SELECT * FROM `lt_cs_notice` AS a
 		JOIN `lt_cs_cate2` AS b
-		ON a.cate1 = b.cate1 AND a.cate2 = b.cate2
+		ON a.cate1 = b.cate1 AND a.cate2 = b.cate2 ORDER BY `noticeNo` ASC LIMIT #{start}, 10;
 	</select>
 
-	<select id="selectCsNoticeListAll">
-		SELECT *, b.c2Name FROM `lt_cs_notice` AS a
-		JOIN `lt_cs_cate2` AS b
-		ON a.cate1 = b.cate1 LIMIT #{offset}, #{size};
+	<select id="selectCsNoticeTotal">
+		SELECT COUNT(*) FROM `lt_cs_notice`
 	</select>
 
 

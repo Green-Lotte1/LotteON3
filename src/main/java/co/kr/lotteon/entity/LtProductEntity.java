@@ -77,10 +77,10 @@ public class LtProductEntity {
                 .hit(hit)
                 .score(score)
                 .review(review)
-                .thumb1(thumb1)
+/*                .thumb1(thumb1)
                 .thumb2(thumb2)
                 .thumb3(thumb3)
-                .detail(detail)
+                .detail(detail)*/
                 .status(status)
                 .duty(duty)
                 .receipt(receipt)

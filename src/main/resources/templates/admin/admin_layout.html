@@ -42,11 +42,11 @@
 
         //자동 포인트(가격 입력 시)
         $(document).ready(function () {
-            $('input[name=price]').focusout(function () {
+            $('input[name=priceFromUser]').focusout(function () {
                 const price = $(this).val();
                 // 소수점을 제거하고 정수 부분만 사용
                 const priceWithoutDecimal = Math.floor(parseFloat(price) * 100) / 100; // 두 자리 소수점까지
-                const point = $('input[name=point]');
+                const point = $('input[name=pointFromUser]');
 
                 // 최종 포인트 계산 후 정수로 변환
                 const calculatedPoint = Math.floor(priceWithoutDecimal * 0.01);
@@ -55,19 +55,59 @@
             });
         });
 
-        /*//금액 자동 콤마
+        //금액 자동 콤마
         $(document).ready(function () {
-            $('input[name="price"],[name="point"],[name="stock"],[name="delivery"]').focusout(function () {
+            $('input[name="priceFromUser"]').focusout(function () {
                 const price = $(this).val();
                 const priceWithoutCommas = price.replace(/,/g, ''); // 입력된 값에서 기존 콤마 제거
                 const numericPrice = parseFloat(priceWithoutCommas); // 문자열을 숫자로 변환
 
                 if (!isNaN(numericPrice)) {
                     const formattedPrice = numericPrice.toLocaleString(); // 로캘에 따른 형식으로 변환
-                    $(this).val(formattedPrice).bind(int, formattedPrice, );
+                    $(this).val(formattedPrice)
+                    $('.nocommaPR').val(numericPrice)
                 }
             });
-        });*/
+        });
+        $(document).ready(function () {
+            $('input[name="pointFromUser"]').focusout(function () {
+                const point = $(this).val();
+                const pointWithoutCommas = point.replace(/,/g, ''); // 입력된 값에서 기존 콤마 제거
+                const numericPoint = parseFloat(pointWithoutCommas); // 문자열을 숫자로 변환
+
+                if (!isNaN(numericPoint)) {
+                    const formattedPoint = numericPoint.toLocaleString(); // 로캘에 따른 형식으로 변환
+                    $(this).val(formattedPoint)
+                    $('.nocommaP').val(numericPoint)
+                }
+            });
+        });
+        $(document).ready(function () {
+            $('input[name="stockFromUser"]').focusout(function () {
+                const stock = $(this).val();
+                const stockWithoutCommas = stock.replace(/,/g, ''); // 입력된 값에서 기존 콤마 제거
+                const numericStock = parseFloat(stockWithoutCommas); // 문자열을 숫자로 변환
+
+                if (!isNaN(numericStock)) {
+                    const formattedStock = numericStock.toLocaleString(); // 로캘에 따른 형식으로 변환
+                    $(this).val(formattedStock)
+                    $('.nocommaS').val(numericStock)
+                }
+            });
+        });
+        $(document).ready(function () {
+            $('input[name="deliveryFromUser"]').focusout(function () {
+                const delivery = $(this).val();
+                const deliveryWithoutCommas = delivery.replace(/,/g, ''); // 입력된 값에서 기존 콤마 제거
+                const numericDelivery = parseFloat(deliveryWithoutCommas); // 문자열을 숫자로 변환
+
+                if (!isNaN(numericDelivery)) {
+                    const formattedDelivery = numericDelivery.toLocaleString(); // 로캘에 따른 형식으로 변환
+                    $(this).val(formattedDelivery)
+                    $('.nocommaD').val(numericDelivery)
+                }
+            });
+        });
 
          /*$(function(){
             $('select[name=prodCate2]').change(function(){
