@@ -8,7 +8,10 @@ import java.util.List;
 @Mapper
 public interface LtCsNoticeMapper {
 
-    List<LtCsNoticeDTO> selectCsNoticeAll();
 
+
+    List<LtCsNoticeDTO> selectCsNoticeListAll(int start);
+
+    public int selectCsNoticeTotal();
 
 }
