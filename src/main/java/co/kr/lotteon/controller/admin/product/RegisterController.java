@@ -33,7 +33,6 @@ public class RegisterController {
     @Value("${spring.servlet.multipart.location}")
     private String filePath;
 
-
     @GetMapping("/admin/product/register")
     public String ProductRegister(Model model){
         List<LtProductCate1DTO> pCate1List = ltAdminService.selectLtProductCate1s();
