@@ -51,8 +51,8 @@ public class LtProductEntity {
     @CreationTimestamp
     private LocalDateTime rDate;
 
-    private int etc1;
-    private int etc2;
+    private Integer etc1;
+    private Integer etc2;
     private String etc3;
     private String etc4;
     private String etc5;

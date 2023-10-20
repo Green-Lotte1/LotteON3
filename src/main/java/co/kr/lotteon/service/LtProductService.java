@@ -2,6 +2,8 @@ package co.kr.lotteon.service;
 
 import co.kr.lotteon.dto.LtProductCartDTO;
 import co.kr.lotteon.dto.LtProductDTO;
+import co.kr.lotteon.dto.prodpage.ProdPageRequestDTO;
+import co.kr.lotteon.dto.prodpage.ProdPageResponseDTO;
 import co.kr.lotteon.entity.LtProductCartEntity;
 import co.kr.lotteon.entity.LtProductEntity;
 import co.kr.lotteon.mapper.LtProductMapper;
@@ -10,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -94,9 +98,27 @@ public class LtProductService {
 
 
 //    admin - 상품 리스트
-/*    public List<LtProductEntity> list(){
-        return null;
-    }*/
+    public ProdPageResponseDTO findLtProductEntitiesByProdCate1(ProdPageRequestDTO prodPageRequestDTO){
+
+        Pageable pageable = prodPageRequestDTO.getPageable("cate1");
+        Page<LtProductEntity> result = ltProductRepository.findAll(pageable);
+
+        //list의 각 요소들을 for문 돌리는 느낌 -> List<Entity>를 List<DTO>=10개로 변환(엔티티와dto 속성이 동일하니까 변환 가능함)
+        List<LtProductDTO> dtoList = result.getContent().stream().map(entity -> modelMapper.map(entity, LtProductDTO.class)).toList();
+
+        int totalElement = (int) result.getTotalElements(); //엔티티 갯수
+
+        log.info("???? : " + dtoList);
+        log.info("!!!! : " + totalElement);
+        log.info("xxxxx : " + pageable);
+
+
+        return ProdPageResponseDTO.builder()
+                .pageRequestDTO(prodPageRequestDTO)
+                .dtoList(dtoList)
+                .total(totalElement)
+                .build();
+    }
 
 
 }

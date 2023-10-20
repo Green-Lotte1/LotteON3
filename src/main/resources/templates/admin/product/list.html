@@ -37,55 +37,22 @@
                 <th>관리</th>
             </tr>
 
-            <tr>
+            <tr th:each="ltProduct : ${prodPageResponseDTO.dtoList}">
                 <td><input type="checkbox" name="상품코드"/></td>
-                <td><img src="../../../static/admin/images/sample_thumb.jpg" class="thumb"></td>
-                <td>201603292</td>
-                <td>FreeMovement BLUEFORCE</td>
-                <td>36,000</td>
-                <td>10</td>
-                <td>360</td>
-                <td>400</td>
-                <td>홍길동</td>
-                <td>126</td>
+                <td><img src="../thumbs/3e136c0f-b916-4008-8857-867330b1f0e9.jpg" class="thumb"></td>
+                <td>[[${ltProduct.prodNo}]]</td>
+                <td>[[${ltProduct.prodName}]]</td>
+                <td>[[${#numbers.formatInteger(ltProduct.price, 3, 'COMMA')}]]</td>
+                <td>[[${ltProduct.discount}]]%</td>
+                <td>[[${ltProduct.point}]]</td>
+                <td>[[${ltProduct.stock}]]</td>
+                <td>[[${ltProduct.seller}]]</td>
+                <td>[[${ltProduct.hit}]]</td>
                 <td>
                     <a href="#">[삭제]</a>
                     <a href="#">[수정]</a>
                 </td>
             </tr>
-            <tr>
-                <td><input type="checkbox" name="상품코드"/></td>
-                <td><img src="../../../static/admin/images/sample_thumb.jpg" class="thumb"></td>
-                <td>201603292</td>
-                <td>FreeMovement BLUEFORCE</td>
-                <td>36,000</td>
-                <td>10</td>
-                <td>360</td>
-                <td>400</td>
-                <td>홍길동</td>
-                <td>126</td>
-                <td>
-                    <a href="#">[삭제]</a>
-                    <a href="#">[수정]</a>
-                </td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" name="상품코드"/></td>
-                <td><img src="../../../static/admin/images/sample_thumb.jpg" class="thumb"></td>
-                <td>201603292</td>
-                <td>FreeMovement BLUEFORCE</td>
-                <td>36,000</td>
-                <td>10</td>
-                <td>360</td>
-                <td>400</td>
-                <td>홍길동</td>
-                <td>126</td>
-                <td>
-                    <a href="#">[삭제]</a>
-                    <a href="#">[수정]</a>
-                </td>
-            </tr>
-
         </table>
 
         <div>
@@ -94,8 +61,8 @@
         </div>
 
         <div class="paging">
-                        <span class="prev">
-                            <a href="#"><&nbsp;이전</a>
+                        <span th:if="${prodPageResponseDTO.prev}" class="prev">
+                            <a th:href="@{/admin/product/list(cate1=${prodPageResponseDTO})}"><&nbsp;이전</a>
                         </span>
             <span class="num">
                             <a href="#" class="on">1</a>
