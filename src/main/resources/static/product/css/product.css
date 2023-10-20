@@ -578,12 +578,12 @@
     content: "원";
 }
 
-#product > .view > .info > .summary > form > .button {
+#product > .view > .info > .summary > .button {
     overflow: hidden;
     margin-top: 16px;
 }
 
-#product > .view > .info > .summary > form > .button > input {
+#product > .view > .info > .summary > .button > input {
     float: left;
     width: 49%;
     height: 50px;
@@ -593,12 +593,12 @@
     border-radius: 2px;
     cursor: pointer;
 }
-#product > .view > .info > .summary > form > .button > .cart {
+#product > .view > .info > .summary > .button > .cart {
     background: #fff;
     border: 1px solid #d9d9d9;
     color: #233549;
 }
-#product > .view > .info > .summary > form > .button > .order {
+#product > .view > .info > .summary > .button > .order {
     background: #2e8de5;
     border: 1px solid #217fd7;
     color: #fff;

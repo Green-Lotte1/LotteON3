@@ -2,39 +2,7 @@
 <html  xmlns:th="http://www.thymeleaf.org"
        xmlns:layout="http://www.thymeleaf.org"
        layout:decorate="/product/prod_layout">
-<head>
-    <script th:inline="javascript">
-        $(function (){
 
-            let num = parseInt($("input[name='num']").val());
-            let price1 = "[[${prod.price - ((prod.price * prod.discount)/100)}]]";
-
-            let totalprice = 0;
-
-            $('.increase').click(function (){
-               num = num+1;
-               $("input[name='num']").val(num);
-               updatePrice();
-            });
-
-            $('.decrease').click(function (){
-               if (num > 1){
-                   num = num - 1;
-                   $("input[name='num']").val(num);
-                   updatePrice();
-               }
-            });
-
-            function updatePrice(){
-                totalprice =  price1 * num;
-                $('.totalPrice').text(totalprice.toLocaleString());
-                $('.tot').val(totalprice);
-                // console.log("totprice : "+totalprice);
-            }
-
-        });
-    </script>
-</head>
 <!-- 상품 상세페이지 시작 -->
 <section class="view" layout:fragment="content">
 
@@ -93,23 +61,14 @@
             </div>
 
             <div class="total">
-                <span class="totalPrice">[[${#numbers.formatInteger(prod.price - ((prod.price * prod.discount)/100),0,'COMMA')}]]</span>
-                <input type="text" class="tot" name="totalPrice" th:value="${prod.price - ((prod.price * prod.discount)/100)}">
+                <span>35,000</span>
                 <em>총 상품금액</em>
             </div>
-            <form th:action="@{/product/cart}" class="buy" method="post">
+
             <div class="button">
                 <input type="button" class="cart"  value="장바구니"/>
                 <input type="button" class="order" value="구매하기"/>
             </div>
-                <input type="text" name="count" value="1" />
-                <input type="text" name="prodNo" th:value="${prod.prodNo}" />
-                <input type="text" name="discount" th:value="${prod.discount}" />
-                <input type="text" name="point" th:value="${prod.point}" />
-                <input type="text" name="price" th:value="${prod.price}" />
-<!--                <input type="text" class="num" name="num" th:value="${prod.count}" />-->
-                <input type="text" class="tot" name="totalPrice" th:value="${prod.price}" />
-            </form>
         </div>
     </article>
 
@@ -298,9 +257,5 @@
 
 </section>
 <!-- 상품 상세페이지 끝 -->
-<script>
-    $(function (){
 
-    });
-</script>
 </html>
