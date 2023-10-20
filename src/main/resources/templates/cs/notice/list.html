@@ -24,7 +24,7 @@
         </div>
         <div class="logo">
             <div>
-                <a href="#"><img src="../../../static/images/header_logo.png" alt="로고" />고객센터</a>
+                <a th:href="@{/cs/index}"><img th:src="@{/images/header_logo.png}" alt="로고" />고객센터</a>
             </div>
         </div>
     </header>
@@ -57,19 +57,19 @@
                     <table>
                         <tr th:each="noticeListAll:${noticeListAll}">
                             <td><a href="#" class="title" th:text="'[' + ${noticeListAll.c2Name} + ']' + ${noticeListAll.title}"></a></td>
-                            <td th:text="${#temporals.format(noticeListAll.rdate, 'yy-mm-dd')}"></td>
+                            <td th:text="${#temporals.format(noticeListAll.rdate, 'yy-MM-dd')}"></td>
                         </tr>
                     </table>
 
                     <div class="page">
-                        <th:block th:if="${currentPage > 1}">
-                            <a th:href="@{/cs/notice/list(pg=${currentPage - 1})}" class="prev">이전</a>
+                        <th:block th:if="${pageGroupStart > 1}">
+                            <a th:href="@{/cs/notice/list(pg=${pageGroupStart - 1})}" class="prev">이전</a>
                         </th:block>
                         <th:block th:each="num:${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
-                            <a th:href="@{/cs/notice/list(pg=${num})}">[[${num}]]</a>
+                            <a th:href="@{/cs/notice/list(pg=${num})}" th:classappend="${num == currentPage} ? 'current num' : 'num'">[[${num}]]</a>
                         </th:block>
-                        <th:block th:if="${currentPage < lastPageNum}">
-                            <a th:href="@{/cs/notice/list(pg=${currentPage + 1})}" class="next">다음</a>
+                        <th:block th:if="${pageGroupEnd < lastPageNum}">
+                            <a th:href="@{/cs/notice/list(pg=${pageGroupEnd + 1})}" class="next">다음</a>
                         </th:block>
                     </div>
                     <input type="hidden" th:value="${currentPage}">

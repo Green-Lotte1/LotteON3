@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8" />
     <title>롯데ON::고객센터</title>
     <link rel="shortcut icon" type="image/x-icon" href="../../../static/images/favicon.ico" />
-    <link rel="stylesheet" href="../../../static/cs/css/style.css" />
+    <link rel="stylesheet" th:href="@{/cs/css/style.css}">
 </head>
 <body>
 <div id="wrapper">
@@ -24,7 +24,7 @@
         </div>
         <div class="logo">
             <div>
-                <a href="#"><img src="../../../static/images/header_logo.png" alt="로고" />고객센터</a>
+                <a th:href="@{/cs/index}"><img th:src="@{/images/header_logo.png}" alt="로고" />고객센터</a>
             </div>
         </div>
     </header>
@@ -40,7 +40,8 @@
                 <aside>
                     <h2>문의하기</h2>
                     <ul>
-                        <li class="on"><a href="#">회원</a></li>
+                        <li class="on"><a href="#">전체</a></li>
+                        <li><a href="#">회원</a></li>
                         <li><a href="#">쿠폰/이벤트</a></li>
                         <li><a href="#">주문/결제</a></li>
                         <li><a href="#">배송</a></li>
@@ -51,71 +52,34 @@
                 </aside>
                 <article>
                     <nav>
-                        <h1>회원</h1>
-                        <h2>회원관련 문의 내용입니다.</h2>
+                        <h1>전체</h1>
+                        <h2>문의하기 전체 내용입니다.</h2>
                     </nav>
                     <table>
-                        <tr>
-                            <td><a href="./view.html">[가입] 가입 문의내용</a></td>
-                            <td>chh**</td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td><a href="./view.html">[탈퇴] 탈퇴 문의내용</a></td>
-                            <td>chh**</td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">[회원정보] 회원정보 문의내용</a></td>
-                            <td>chh**</td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">[로그인] 회원정보 문의내용</a></td>
-                            <td>chh**</td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">[로그인] 회원정보 문의내용</a></td>
-                            <td>chh**</td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">[로그인] 회원정보 문의내용</a></td>
-                            <td>chh**</td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">[회원정보] 회원정보 문의내용</a></td>
-                            <td>chh**</td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">[회원정보] 회원정보 문의내용</a></td>
-                            <td>chh**</td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">[탈퇴] 회원정보 문의내용</a></td>
-                            <td>chh**</td>
-                            <td>2022.11.21</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">[탈퇴] 회원정보 문의내용</a></td>
-                            <td>chh**</td>
-                            <td>2022.11.21</td>
+                        <tr th:each="qnaListAll:${qnaListAll}">
+                            <td><a href="#" class="title" th:text="'[' + ${qnaListAll.c2Name} + ']' + ${qnaListAll.title}"></a></td>
+                            <td class="uid" th:text="${#strings.substring(qnaListAll.writer, 0, 3) + '***'}"></td>
+                            <th:block class="answerComplete">
+                                <td th:class="blue-text" th:if="${qnaListAll.answerComplete == 2}">답변완료</td>
+                                <td th:class="gray-text" th:if="${qnaListAll.answerComplete == 1}">검토중</td>
+                            </th:block>
+                            <td th:text="${#temporals.format(qnaListAll.rdate, 'yy-MM-dd')}"></td>
                         </tr>
                     </table>
 
                     <div class="page">
-                        <a href="#" class="prev">이전</a>
-                        <a href="#" class="num on">1</a>
-                        <a href="#" class="num">2</a>
-                        <a href="#" class="num">3</a>
-                        <a href="#" class="next">다음</a>
+                        <th:block th:if="${pageGroupStart > 1}">
+                            <a th:href="@{/cs/qna/list(pg=${pageGroupStart - 1})}" class="prev">이전</a>
+                        </th:block>
+                        <th:block th:each="num:${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
+                            <a th:href="@{/cs/qna/list(pg=${num})}" th:classappend="${num == currentPage} ? 'current num' : 'num'">[[${num}]]</a>
+                        </th:block>
+                        <th:block th:if="${pageGroupEnd < lastPageNum}">
+                            <a th:href="@{/cs/qna/list(pg=${pageGroupEnd + 1})}" class="next">다음</a>
+                        </th:block>
                     </div>
 
-                    <a href="./write.html" class="btnWrite">문의하기</a>
+                    <a th:href="@{/cs/qna/write}" class="btnWrite">문의하기</a>
 
                 </article>
             </section>

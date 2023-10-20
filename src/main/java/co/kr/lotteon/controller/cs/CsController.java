@@ -106,4 +106,45 @@ public class CsController {
 
         return "/cs/notice/list";
     }
+
+    @RequestMapping("/cs/qna/list")
+    public String selectCsQnaListAll(@RequestParam(name="pg", defaultValue = "1")String pg, Model model){
+
+        log.info(pg);
+
+        //현재 페이지 번호
+        int currentPage = ltCsService.getCurrentPage(pg);
+
+        log.info("currentPage----------"+currentPage);
+        //전체 게시물 갯수
+        int total = ltCsService.selectCsQnaTotal();
+
+        // 마지막 페이지 번호
+        int lastPageNum = ltCsService.getLastPageNum(total);
+
+        // 페이지 그룹 start, end 번호
+        int[] result = ltCsService.getPageGroupNum(currentPage, lastPageNum);
+
+        // 페이지 시작번호
+        int pageStartNum = ltCsService.getPageStartNum(total, currentPage);
+
+        //시작 인덱스
+        int start = ltCsService.getStartNum(currentPage);
+
+
+        List<LtCsQnaDTO> selectCsQnaListAll = ltCsService.selectCsQnaListAll(start);
+
+        model.addAttribute("qnaListAll",selectCsQnaListAll);
+        model.addAttribute("currentPage",currentPage);
+        model.addAttribute("lastPageNum",lastPageNum);
+        model.addAttribute("pageGroupStart",result[0]);
+        model.addAttribute("pageGroupEnd",result[1]);
+        model.addAttribute("pageStartNum",pageStartNum+1);
+        log.info("QnaListAll------------"+selectCsQnaListAll);
+        log.info(currentPage);
+        log.info(lastPageNum);
+
+
+        return "/cs/qna/list";
+    }
 }
