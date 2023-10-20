@@ -7,9 +7,17 @@ import co.kr.lotteon.repository.LtProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 @Log4j2
 @Service
@@ -33,10 +41,60 @@ public class LtProductService {
 
 //    admin - 상품 등록
     public void insertLtProduct(LtProductDTO ltProductDTO){
+
         System.out.println("ltProductDTO : " + ltProductDTO);
-        ltProductDTO.setRDate(LocalDateTime.now());
+
+        List<String> saveNames = fileUpload(ltProductDTO);
+
+        ltProductDTO.setThumb1(saveNames.get(0));
+        ltProductDTO.setThumb2(saveNames.get(1));
+        ltProductDTO.setThumb3(saveNames.get(2));
+        ltProductDTO.setDetail(saveNames.get(3));
+
         ltProductDTO.setIsRemoved(1);
+
         ltProductMapper.insertLtProduct(ltProductDTO);
+
     }
+
+    // admin - 파일이 저장 될 경로
+    @Value("${spring.servlet.multipart.location}")
+    private String filePath;
+
+
+    // admin - 파일 업로드
+    public List<String> fileUpload(LtProductDTO ltProductDTO) {
+        // 파일 첨부 경로(절대 경로로 변환)
+        String path = new File(filePath).getAbsolutePath();
+        // 첨부파일 리스트화
+        List<MultipartFile> files = Arrays.asList(
+                ltProductDTO.getFileThumb1(),
+                ltProductDTO.getFileThumb2(),
+                ltProductDTO.getFileThumb3(),
+                ltProductDTO.getFileDetail()
+        );
+        //저장된 파일명 리스트 초기화
+        List<String> saveNames = new ArrayList<>();
+        for (MultipartFile file:files) {
+            // 파일명 변경
+            String oName = file.getOriginalFilename(); //업로드할 때 원래 파일 이름
+            String ext = oName.substring(oName.lastIndexOf(".")); //확장자
+            String sName = UUID.randomUUID().toString() + ext; //새로운 파일 이름 생성
+            saveNames.add(sName);
+            try {
+                file.transferTo(new File(path, sName)); // 저장할 폴더 이름, 저장할 파일 이름
+            } catch (IOException e) {
+                log.error(e.getMessage());
+            }
+        }
+        return saveNames;
+    }
+
+
+//    admin - 상품 리스트
+/*    public List<LtProductEntity> list(){
+        return null;
+    }*/
+
 
 }

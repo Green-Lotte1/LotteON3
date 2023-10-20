@@ -48,14 +48,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     // https://mvnrepository.com/artifact/javax.activation/activation
     //implementation group: 'javax.activation', name: 'activation', version: '1.1.1'
-
-
 }
 
-// Java에서 빌드 정보를 가져오기 위해 gradle buildInfo() 실행
 springBoot {        // <- 여기부터
     buildInfo()             //
 }           // <- 여기까지 추가하기
+
 
 
 tasks.named('test') {

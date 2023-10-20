@@ -12,7 +12,7 @@
     </nav>
     <!-- 상품등록 컨텐츠 시작 -->
     <article>
-        <form id="formRegister" th:action="@{/admin/product/register}" method="post">
+        <form id="formRegister" th:action="@{/admin/product/register}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="seller" th:value="seller">
         <!-- 상품분류 -->
         <section>
@@ -24,7 +24,7 @@
                 <tr>
                     <td>1차 분류</td>
                     <td>
-                        <select id="selectBox" required name="prodCate1" onchange="changeSelect()">
+                        <select id="selectBox" required name="prodCate1" onchange="changeSelect()" >
                             <option value="" disabled selected>1차 분류 선택</option>
                             <th:block th:each="pCate1 : ${pCate1List}">
                                 <option th:value="${pCate1.cate1}" th:text="${pCate1.c1Name}"></option>
@@ -67,7 +67,10 @@
                 </tr>
                 <tr>
                     <td>판매가격</td>
-                    <td><input style="text-align: right" type="text" name="price"/>원</td>
+                    <td>
+                        <input style="text-align: right" type="text" name="priceFromUser"/>원
+                        <input class="nocommaPR" style="text-align: right" type="hidden" name="price" th:value="0"/>
+                    </td>
                 </tr>
                 <tr>
                     <td>할인율</td>
@@ -80,38 +83,43 @@
                     <td>포인트</td>
                     <td>
                         <span>0을 입력하면 포인트 없음</span>
-                        <input style="text-align: right" type="text" name="point" th:value="0"/>점
+                        <input style="text-align: right" type="text" name="pointFromUser" th:value="0"/>점
+                        <input class="nocommaP" style="text-align: right" type="hidden" name="point" th:value="0"/>
                     </td>
                 </tr>
                 <tr>
                     <td>재고수량</td>
-                    <td><input style="text-align: right" type="text" name="stock" />개</td>
+                    <td>
+                        <input style="text-align: right" type="text" name="stockFromUser" />개
+                        <input class="nocommaS" style="text-align: right" type="hidden" name="stock" th:value="0"/>
+                    </td>
                 </tr>
                 <tr>
                     <td>배송비</td>
                     <td>
                         <span>0을 입력하면 배송비 무료</span>
-                        <input style="text-align: right" type="text" name="delivery" th:value="0"/>원
+                        <input style="text-align: right" type="text" name="deliveryFromUser" th:value="0"/>원
+                        <input class="nocommaD" style="text-align: right" type="hidden" name="delivery" th:value="0"/>
                     </td>
                 </tr>
                 <tr>
                     <td>상품 썸네일</td>
                     <td>
                         <span>크기 190 x 190, 상품 목록에 출력될 이미지 입니다. </span>
-                        <input type="file" name="thumb1"/>
+                        <input type="file" name="fileThumb1"/>
 
                         <span>크기 230 x 230, 상품 메인에 출력될 이미지 입니다. </span>
-                        <input type="file" name="thumb2"/>
+                        <input type="file" name="fileThumb2"/>
 
                         <span>크기 456 x 456, 상품 상세에 출력될 이미지 입니다. </span>
-                        <input type="file" name="thumb3"/>
+                        <input type="file" name="fileThumb3"/>
                     </td>
                 </tr>
                 <tr>
                     <td>상세 상품정보</td>
                     <td>
                         <span>크기 가로 940px 높이 제약없음, 크기 최대 1MB, 상세페이지 상품정보에 출력될 이미지 입니다.</span>
-                        <input type="file" name="detail"/>
+                        <input type="file" name=" "/>
                     </td>
                 </tr>
             </table>
