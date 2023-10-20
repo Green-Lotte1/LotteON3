@@ -21,8 +21,8 @@ import java.util.List;
 @Log4j2
 public class CsController {
 
-//    @Autowired
-//    private BuildProperties buildProperties;
+/*    @Autowired
+    private BuildProperties buildProperties;*/
 
     @Autowired
     private LtCsService ltCsService;
@@ -30,19 +30,18 @@ public class CsController {
     @GetMapping("/cs/index")
     public String index(Model model){
 
-        // build.gradle 파일 맨 밑에 빌드 정보를 가져오기 위해 buildInfo() 호출 해야됨
-//        String appName = buildProperties.getName(); // settings.gradle 파일에서 앱이름 가져옴
-//        String version = buildProperties.getVersion(); // build.gradle 파일에서 버전값 가져옴
+/*        // build.gradle 파일 맨 밑에 빌드 정보를 가져오기 위해 buildInfo() 호출 해야됨
+        String appName = buildProperties.getName(); // settings.gradle 파일에서 앱이름 가져옴
+        String version = buildProperties.getVersion(); // build.gradle 파일에서 버전값 가져옴
 
 
-//        System.out.println("appName : " + appName);
-//        System.out.println("version : " + version);
-//
-//        model.addAttribute("appInfo", appName+version);
+        System.out.println("appName : " + appName);
+        System.out.println("version : " + version);
+
+        model.addAttribute("appInfo", appName+version);*/
 
         List<LtCsNoticeDTO> noticelist = ltCsService.selectCsNotices();
         model.addAttribute("noticelist",noticelist);
-
 
         List<LtCsQnaDTO> qnalist = ltCsService.selectCsQna();
         model.addAttribute("qnalist",qnalist);
