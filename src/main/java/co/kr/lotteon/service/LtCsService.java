@@ -47,7 +47,9 @@ public class LtCsService {
     }
 
 
-    // noticeList Mybatis 로 페이징 만들기
+
+
+    // notice,qna List Mybatis 로 페이징 만들기
 
     // 현재 페이지 번호
     public int getCurrentPage(String pg) {
@@ -60,9 +62,14 @@ public class LtCsService {
         return currentPage;
     }
 
-    //게시판 총 갯수 카운트
+    // Notice게시판 총 갯수 카운트
     public int selectCsNoticeTotal() {
         return ltCsNoticeMapper.selectCsNoticeTotal();
+    }
+
+    // Qna게시판 총 갯수 카운트
+    public int selectCsQnaTotal() {
+        return ltCsQnaMapper.selectCsQnaTotal();
     }
 
     // 페이지 마지막 번호
@@ -110,7 +117,9 @@ public class LtCsService {
         return ltCsNoticeMapper.selectCsNoticeListAll(start);
     }
 
-
+    public List<LtCsQnaDTO> selectCsQnaListAll(int start){
+        return ltCsQnaMapper.selectCsQnaListAll(start);
+    }
 
 
 
