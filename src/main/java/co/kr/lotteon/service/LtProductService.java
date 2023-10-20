@@ -1,6 +1,8 @@
 package co.kr.lotteon.service;
 
+import co.kr.lotteon.dto.LtProductCartDTO;
 import co.kr.lotteon.dto.LtProductDTO;
+import co.kr.lotteon.entity.LtProductCartEntity;
 import co.kr.lotteon.entity.LtProductEntity;
 import co.kr.lotteon.mapper.LtProductMapper;
 import co.kr.lotteon.repository.LtProductRepository;
