@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -41,7 +43,6 @@ public class CsController {
         List<LtCsNoticeDTO> noticelist = ltCsService.selectCsNotices();
         model.addAttribute("noticelist",noticelist);
 
-
         List<LtCsQnaDTO> qnalist = ltCsService.selectCsQna();
         model.addAttribute("qnalist",qnalist);
 
@@ -64,11 +65,43 @@ public class CsController {
         return "redirect:/cs/index";
 
     }
-    @GetMapping("/cs/notice/list")
-    public String noticeListAll(Model model){
-        List<LtCsNoticeDTO> noticeListAll = ltCsService.selectCsNoticeAll();
-        model.addAttribute("noticeListAll",noticeListAll);
-        log.info("noticelistALl------------"+noticeListAll);
+    @RequestMapping("/cs/notice/list")
+    public String selectCsNoticeListAll(@RequestParam(name="pg", defaultValue = "1")String pg, Model model){
+
+        log.info(pg);
+
+        //현재 페이지 번호
+        int currentPage = ltCsService.getCurrentPage(pg);
+
+        log.info("currentPage----------"+currentPage);
+        //전체 게시물 갯수
+        int total = ltCsService.selectCsNoticeTotal();
+
+        // 마지막 페이지 번호
+        int lastPageNum = ltCsService.getLastPageNum(total);
+
+        // 페이지 그룹 start, end 번호
+        int[] result = ltCsService.getPageGroupNum(currentPage, lastPageNum);
+
+        // 페이지 시작번호
+        int pageStartNum = ltCsService.getPageStartNum(total, currentPage);
+
+        //시작 인덱스
+        int start = ltCsService.getStartNum(currentPage);
+
+
+        List<LtCsNoticeDTO> selectCsNoticeListAll = ltCsService.selectCsNoticeListAll(start);
+
+        model.addAttribute("noticeListAll",selectCsNoticeListAll);
+        model.addAttribute("currentPage",currentPage);
+        model.addAttribute("lastPageNum",lastPageNum);
+        model.addAttribute("pageGroupStart",result[0]);
+        model.addAttribute("pageGroupEnd",result[1]);
+        model.addAttribute("pageStartNum",pageStartNum+1);
+        log.info("noticelistALl------------"+selectCsNoticeListAll);
+        log.info(currentPage);
+        log.info(lastPageNum);
+
 
         return "/cs/notice/list";
     }

@@ -62,12 +62,20 @@
                     </table>
 
                     <div class="page">
-                        <a href="#" class="prev">이전</a>
-                        <a href="#" class="num on">1</a>
-                        <a href="#" class="num">2</a>
-                        <a href="#" class="num">3</a>
-                        <a href="#" class="next">다음</a>
+                        <th:block th:if="${currentPage > 1}">
+                            <a th:href="@{/cs/notice/list(pg=${currentPage - 1})}" class="prev">이전</a>
+                        </th:block>
+                        <th:block th:each="num:${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
+                            <a th:href="@{/cs/notice/list(pg=${num})}">[[${num}]]</a>
+                        </th:block>
+                        <th:block th:if="${currentPage < lastPageNum}">
+                            <a th:href="@{/cs/notice/list(pg=${currentPage + 1})}" class="next">다음</a>
+                        </th:block>
                     </div>
+                    <input type="hidden" th:value="${currentPage}">
+                    <input type="hidden" th:value="${pageGroupStart}">
+                    <input type="hidden" th:value="${pageGroupEnd}">
+                    <input type="hidden" th:value="${pageStartNum}">
                 </article>
 
 
