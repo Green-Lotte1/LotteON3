@@ -2,15 +2,12 @@ package co.kr.lotteon.dto;
 
 import co.kr.lotteon.entity.LtCsCate2Entity;
 import co.kr.lotteon.entity.LtCsCatePK;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class LtCsCate2DTO {
 
 	private int cate1;

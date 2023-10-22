@@ -2,7 +2,39 @@
 <html  xmlns:th="http://www.thymeleaf.org"
        xmlns:layout="http://www.thymeleaf.org"
        layout:decorate="/product/prod_layout">
+<head>
+    <script th:inline="javascript">
+        $(function (){
 
+            let num = parseInt($("input[name='num']").val());
+            let price1 = "[[${prod.price - ((prod.price * prod.discount)/100)}]]";
+
+            let totalprice = 0;
+
+            $('.increase').click(function (){
+               num = num+1;
+               $("input[name='num']").val(num);
+               updatePrice();
+            });
+
+            $('.decrease').click(function (){
+               if (num > 1){
+                   num = num - 1;
+                   $("input[name='num']").val(num);
+                   updatePrice();
+               }
+            });
+
+            function updatePrice(){
+                totalprice =  price1 * num;
+                $('.totalPrice').text(totalprice.toLocaleString());
+                $('.tot').val(totalprice);
+                // console.log("totprice : "+totalprice);
+            }
+
+        });
+    </script>
+</head>
 <!-- 상품 상세페이지 시작 -->
 <section class="view" layout:fragment="content">
 
@@ -21,25 +53,27 @@
         </div>
         <div class="summary">
             <nav>
-                <h1>(주)판매자명</h1>
-                <h2>상품번호&nbsp;:&nbsp;<span>10010118412</span></h2>
+                <h1>[[${prod.seller}]]</h1>
+                <h2>상품번호&nbsp;:&nbsp;<span>[[${prod.prodNo}]]</span></h2>
             </nav>
             <nav>
-                <h3>상품명</h3>
-                <p>상품설명 출력</p>
+                <h3>[[${prod.prodName}]]</h3>
+                <p>[[${prod.descript}]]</p>
                 <h5 class="rating star4"><a href="#">상품평보기</a></h5>
             </nav>
             <nav>
                 <div class="org_price">
-                    <del>30,000</del>
-                    <span>10%</span>
+                    <del>[[${#numbers.formatInteger(prod.price,0,'COMMA')}]]</del>
+                    <span>[[${prod.discount}]]%</span>
                 </div>
                 <div class="dis_price">
-                    <ins>27,000</ins>
+                    <ins>[[${#numbers.formatInteger(prod.price - (prod.price * prod.discount / 100),0,'COMMA')}]]</ins>
                 </div>
             </nav>
             <nav>
-                <span class="delivery">무료배송</span>
+                <span class="delivery-noFree" th:if="${prod.delivery gt 0}">배송비 : [[${prod.delivery}]]원</span>
+                <span class="delivery" th:if="${prod.delivery eq 0}">무료배송</span>
+                <!--                <span class="delivery">무료배송</span>-->
                 <span class="arrival">모레(금) 7/8 도착예정</span>
                 <span class="desc">본 상품은 국내배송만 가능합니다.</span>
             </nav>
@@ -59,14 +93,23 @@
             </div>
 
             <div class="total">
-                <span>35,000</span>
+                <span class="totalPrice">[[${#numbers.formatInteger(prod.price - ((prod.price * prod.discount)/100),0,'COMMA')}]]</span>
+                <input type="text" class="tot" name="totalPrice" th:value="${prod.price - ((prod.price * prod.discount)/100)}">
                 <em>총 상품금액</em>
             </div>
-
+            <form th:action="@{/product/cart}" class="buy" method="post">
             <div class="button">
                 <input type="button" class="cart"  value="장바구니"/>
                 <input type="button" class="order" value="구매하기"/>
             </div>
+                <input type="text" name="count" value="1" />
+                <input type="text" name="prodNo" th:value="${prod.prodNo}" />
+                <input type="text" name="discount" th:value="${prod.discount}" />
+                <input type="text" name="point" th:value="${prod.point}" />
+                <input type="text" name="price" th:value="${prod.price}" />
+<!--                <input type="text" class="num" name="num" th:value="${prod.count}" />-->
+                <input type="text" class="tot" name="totalPrice" th:value="${prod.price}" />
+            </form>
         </div>
     </article>
 
@@ -159,7 +202,7 @@
                 <td>상세정보 직접입력</td>
             </tr>
             <tr>
-            <td colspan="2">구매, 교환, 반품, 배송, 설치 등과 관련하여 추가비용, 제한조건 등의 특이사항이 있는 경우</td>
+                <td colspan="2">구매, 교환, 반품, 배송, 설치 등과 관련하여 추가비용, 제한조건 등의 특이사항이 있는 경우</td>
             </tr>
         </table>
         <p class="notice">
@@ -255,5 +298,9 @@
 
 </section>
 <!-- 상품 상세페이지 끝 -->
+<script>
+    $(function (){
 
+    });
+</script>
 </html>

@@ -9,6 +9,7 @@ import org.springframework.cglib.core.Local;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import java.time.LocalDateTime;
 @Getter
 @Setter
 /*
@@ -87,7 +88,6 @@ public class LtCsNoticeEntity {
 				.rdateSub(this.getRdateSub())
 				.build();
 	}
-
 
 }
 

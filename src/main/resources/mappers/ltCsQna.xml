@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.kr.lotteon.mapper.cs.LtCsQnaMapper">
+
+	<insert id="insertQnaWrite">
+		INSERT INTO `lt_cs_qna` (cate1, cate2, title, content, writer,answerComplete, regip, rdate)
+		VALUES (#{cate1}, #{cate2}, #{title}, #{content}, #{writer},#{answerComplete}, #{regip}, #{rdate});
+	</insert>
+
+	<select id="selectCsQnaListAll" parameterType="map" resultType="map">
+		SELECT * FROM `lt_cs_qna` AS a
+		JOIN `lt_cs_cate2` AS b
+		ON a.cate1 = b.cate1 AND a.cate2 = b.cate2 ORDER BY `qnaNo` DESC LIMIT #{start}, 10;
+	</select>
+
+	<select id="selectCsQnaTotal">
+		SELECT COUNT(*) FROM `lt_cs_qna`
+	</select>
+
+
+</mapper>

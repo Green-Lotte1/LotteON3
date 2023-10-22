@@ -519,15 +519,26 @@ footer p > strong {
   text-align: center;
   margin-top: 26px;
 }
-#cs > .notice > .list > article > .page > a {
+
+#cs > .notice > .list > article > .page > .num {
   display: inline-block;
   width: 34px;
-  height: 34px;        
+  height: 34px;
   box-sizing: border-box;
   text-align: center;
   line-height: 34px;
   font-size: 13px;
-  font-weight: bold;        
+  vertical-align: bottom;
+}
+#cs > .notice > .list > article > .page > .current {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 34px;
+  font-size: 18px;
+  font-weight: bold;
   vertical-align: bottom;
 }
 #cs > .notice > .list > article > .page > .prev {
@@ -894,6 +905,13 @@ footer p > strong {
   background: #006cff;
   border-radius: 17px;
   color: #fff;
+}
+.blue-text {
+    color: blue;
+}
+
+.gray-text {
+    color: gray;
 }
 
 /* qna - 글보기 */

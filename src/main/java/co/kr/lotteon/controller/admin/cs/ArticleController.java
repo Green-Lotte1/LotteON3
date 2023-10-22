@@ -2,7 +2,7 @@ package co.kr.lotteon.controller.admin.cs;
 
 import co.kr.lotteon.dto.LtCsNoticeDTO;
 import co.kr.lotteon.service.AdminCsService;
-import co.kr.lotteon.service.CsService;
+import co.kr.lotteon.service.LtCsService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class ArticleController {
 
 
     @Autowired
-    private CsService csService;
+    private LtCsService csService;
     @Autowired
     private AdminCsService adminCsService;
 

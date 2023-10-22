@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Builder
@@ -31,7 +33,7 @@ public class LtCsQnaEntity {
 	private int answerComplete;
 	private String regip;
 	@CreationTimestamp
-	private String rdate;
+	private LocalDateTime rdate;
 
 
 

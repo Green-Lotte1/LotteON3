@@ -12,59 +12,5 @@
         ORDER BY a.no DESC LIMIT #{start}, 10;
     </select>
 
-    <select id="NoticeList" resultType="co.kr.lotteon.dto.LtCsNoticeDTO">
-        SELECT a.*, c.c2Name
-        FROM lt_cs_notice a
-        INNER JOIN lt_cs_cate2 c ON a.cate2 = c.cate2
-        ORDER BY a.no DESC LIMIT #{start}, 10;
-    </select>
-
-    <select id="NoticeListsafety" resultType="co.kr.lotteon.dto.LtCsNoticeDTO">
-        SELECT a.*, c.c2Name
-        FROM lt_cs_notice a
-        INNER JOIN lt_cs_cate2 c ON a.cate2 = c.cate2
-        WHERE a.parent = 0 AND a.cate2 = "safety" AND a.useyn = "Y"
-        ORDER BY a.no DESC LIMIT #{start}, 10;
-    </select>
-
-    <select id="NoticeListdanger" resultType="co.kr.lotteon.dto.LtCsNoticeDTO">
-        SELECT a.*, c.c2Name
-        FROM lt_cs_notice a
-        INNER JOIN lt_cs_cate2 c ON a.cate2 = c.cate2
-        WHERE a.parent = 0 AND a.cate2 = "danger" AND a.useyn = "Y"
-        ORDER BY a.no DESC LIMIT #{start}, 10;
-    </select>
-
-    <select id="NoticeListeveresult" resultType="co.kr.lotteon.dto.LtCsNoticeDTO">
-        SELECT a.*, c.c2Name
-        FROM lt_cs_notice a
-        INNER JOIN lt_cs_cate2 c ON a.cate2 = c.cate2
-        WHERE a.parent = 0 AND a.cate2 = "everesult" AND a.useyn = "Y"
-        ORDER BY a.no DESC LIMIT #{start}, 10;
-    </select>
-
-    <select id="selectCountTotal" resultType="int">
-        SELECT count(*)
-        FROM lt_cs_notice
-        WHERE parent = 0 AND useyn = "Y";
-    </select>
-
-    <select id="selectCountTotalCate" resultType="int">
-        SELECT count(*)
-        FROM lt_cs_notice
-        WHERE parent = 0 AND useyn = "Y" AND cate2 = #{cate2};
-    </select>
-
-    <!-- notice view -->
-    <select id="NoticeView" resultType="co.kr.lotteon.dto.LtCsNoticeDTO">
-        SELECT *
-        FROM lt_cs_notice
-        WHERE no = #{no};
-    </select>
-
-    <!-- notice Write -->
-    <insert id="NoticeWrite">
-        INSERT INTO `lt_cs_notice`
-    </insert>
 
 </mapper>

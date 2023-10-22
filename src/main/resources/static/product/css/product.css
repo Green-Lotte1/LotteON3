@@ -157,6 +157,8 @@
   margin-top: 4px;
 }
 
+
+
 #product > .list > table .seller {  
   font-size: 12px;
   margin-bottom: 6px;
@@ -306,6 +308,12 @@
     font-size: 16px;
     color: #2e8de5;
 }
+
+#product > .view > .info > .summary .delivery-noFree {
+    font-size: 16px;
+    color: #111111;
+}
+
 #product > .view > .info > .summary .arrival {
     font-size: 14px;
     margin-left: 10px;
@@ -570,12 +578,12 @@
     content: "원";
 }
 
-#product > .view > .info > .summary > .button {
+#product > .view > .info > .summary > form > .button {
     overflow: hidden;
     margin-top: 16px;
 }
 
-#product > .view > .info > .summary > .button > input {
+#product > .view > .info > .summary > form > .button > input {
     float: left;
     width: 49%;
     height: 50px;
@@ -585,12 +593,12 @@
     border-radius: 2px;
     cursor: pointer;
 }
-#product > .view > .info > .summary > .button > .cart {
+#product > .view > .info > .summary > form > .button > .cart {
     background: #fff;
     border: 1px solid #d9d9d9;
     color: #233549;
 }
-#product > .view > .info > .summary > .button > .order {
+#product > .view > .info > .summary > form > .button > .order {
     background: #2e8de5;
     border: 1px solid #217fd7;
     color: #fff;

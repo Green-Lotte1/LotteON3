@@ -1,10 +1,17 @@
 package co.kr.lotteon.controller;
 
+import co.kr.lotteon.dto.LtProductDTO;
+import co.kr.lotteon.dto.prodpage.ProdPageRequestDTO;
+import co.kr.lotteon.dto.prodpage.ProdPageResponseDTO;
+import co.kr.lotteon.service.LtProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Log4j2
 @Controller
@@ -12,9 +19,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/product")
 public class LtProductController {
 
+    private final LtProductService ltProductService;
+
     @GetMapping("/view")
-    public String view() {
+    public String view(@RequestParam(value = "prodNo")int proNo, Model model) {
+
+        LtProductDTO dto = ltProductService.getProdDto(proNo);
+        model.addAttribute("prod",dto);
+
         return "/product/view";
+
     }
 
     @GetMapping("/complete")
@@ -23,7 +37,11 @@ public class LtProductController {
     }
 
     @GetMapping("/list")
-    public String list() {
+    public String list(Model model, ProdPageRequestDTO pageRequestDTO) {
+
+        List<LtProductDTO> productlist = ltProductService.selectProducts();
+        model.addAttribute("productlist",productlist);
+
         return "/product/list";
     }
 

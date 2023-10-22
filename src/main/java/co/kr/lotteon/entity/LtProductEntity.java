@@ -1,8 +1,12 @@
 package co.kr.lotteon.entity;
 
 import co.kr.lotteon.dto.LtProductDTO;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -13,6 +17,7 @@ import lombok.*;
 @Entity
 @Table(name = "lt_product")
 public class LtProductEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int prodNo;
@@ -41,9 +46,12 @@ public class LtProductEntity {
     private String bizType;
     private String origin;
     private String ip;
-    private String rDate;
-    private int etc1;
-    private int etc2;
+
+    @CreationTimestamp
+    private LocalDateTime rDate;
+
+    private Integer etc1;
+    private Integer etc2;
     private String etc3;
     private String etc4;
     private String etc5;
@@ -68,10 +76,10 @@ public class LtProductEntity {
                 .hit(hit)
                 .score(score)
                 .review(review)
-                .thumb1(thumb1)
+/*                .thumb1(thumb1)
                 .thumb2(thumb2)
                 .thumb3(thumb3)
-                .detail(detail)
+                .detail(detail)*/
                 .status(status)
                 .duty(duty)
                 .receipt(receipt)

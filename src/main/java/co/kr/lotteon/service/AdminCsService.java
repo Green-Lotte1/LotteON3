@@ -6,7 +6,7 @@ import co.kr.lotteon.dto.LtMemberDTO;
 import co.kr.lotteon.entity.LtCsNoticeEntity;
 import co.kr.lotteon.entity.LtMemberEntity;
 import co.kr.lotteon.entity.LtProductEntity;
-import co.kr.lotteon.mapper.LtCsNoticeMapper;
+//import co.kr.lotteon.mapper.LtCsNoticeMapper;
 import co.kr.lotteon.repository.LtCsNoticeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
