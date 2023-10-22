@@ -1,9 +1,12 @@
 package co.kr.lotteon.dto;
 
+import co.kr.lotteon.entity.LtCsNoticeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -17,7 +20,8 @@ public class LtCsNoticeDTO {
 	private String content;
 	private String writer;
 	private String regip;
-	private String rdate;
+	private LocalDateTime rdate;
+
 
 	private int hit;
 	//추가필드
@@ -25,6 +29,16 @@ public class LtCsNoticeDTO {
 	private String c2Name;
 	private String rdateSub;
 
-	
-	
+	public LtCsNoticeEntity toEntity(){
+		return LtCsNoticeEntity.builder()
+				.noticeNo(noticeNo)
+				.cate1(cate1)
+				.cate2(cate2)
+				.title(title)
+				.content(content)
+				.writer(writer)
+				.regip(regip)
+				.rdate(rdate)
+				.build();
+	}
 }

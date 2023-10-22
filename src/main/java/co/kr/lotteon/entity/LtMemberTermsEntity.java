@@ -12,9 +12,9 @@ import lombok.*;
 @Table(name = "lt_member_terms")
 public class LtMemberTermsEntity {
     @Id
-    private String terms;
+    private String buyer;
     private String privacy;
     private String location;
     private String finance;
-    private String tax;
+    private String seller;
 }

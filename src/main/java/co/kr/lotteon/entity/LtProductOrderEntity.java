@@ -1,9 +1,8 @@
 package co.kr.lotteon.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Getter
 @Setter
@@ -14,6 +13,7 @@ import lombok.*;
 @Table(name = "lt_product_order")
 public class LtProductOrderEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ordNo;
     private String ordUid;
     private int ordCount;
@@ -30,6 +30,7 @@ public class LtProductOrderEntity {
     private int ordPayment;
     private int ordComplete;
     private int ordTotPrice;
+    @CreationTimestamp
     private String ordDate;
 
 }

@@ -1,10 +1,9 @@
 package co.kr.lotteon.entity;
 
 import co.kr.lotteon.dto.LtProductCartDTO;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Getter
 @Setter
@@ -16,6 +15,7 @@ import lombok.*;
 public class LtProductCartEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cartNo;
     private String  uid;
     private int prodNo;
@@ -25,6 +25,7 @@ public class LtProductCartEntity {
     private int point;
     private int delivery;
     private int total;
+    @CreationTimestamp
     private String rDate;
 
     private String prodName;

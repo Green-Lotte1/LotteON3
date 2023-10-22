@@ -1,9 +1,8 @@
 package co.kr.lotteon.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Getter
 @Setter
@@ -15,6 +14,7 @@ import lombok.*;
 public class LtCsQnaEntity {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int qnaNo;
 	private int cate1;
 	private int cate2;
@@ -30,6 +30,7 @@ public class LtCsQnaEntity {
 	private int parent;
 	private int answerComplete;
 	private String regip;
+	@CreationTimestamp
 	private String rdate;
 
 

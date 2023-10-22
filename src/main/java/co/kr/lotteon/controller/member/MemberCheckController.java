@@ -1,6 +1,6 @@
 package co.kr.lotteon.controller.member;
 
-import co.kr.lotteon.service.LtMemberService;
+import co.kr.lotteon.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberCheckController {
 
     @Autowired
-    LtMemberService ltMemberService;
+    MemberService ltMemberService;
     @GetMapping("/uid/{uid}")
     public int checkUid(@PathVariable("uid") String uid){
         return ltMemberService.countUid(uid);

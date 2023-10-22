@@ -1,7 +1,7 @@
 package co.kr.lotteon.controller.member;
 
 import co.kr.lotteon.dto.EmailMessage;
-import co.kr.lotteon.service.LtMemberService;
+import co.kr.lotteon.service.MemberService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.Map;
 @RequestMapping("/member/find")
 public class MemberFindController {
     @Autowired
-     LtMemberService ltMemberService;
+    MemberService ltMemberService;
 
     @GetMapping("/authEmail")
     public Map<String, Integer> authEmail(@RequestParam Map<String, Object> params){

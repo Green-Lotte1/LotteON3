@@ -1,9 +1,7 @@
 package co.kr.lotteon.entity;
 
 import co.kr.lotteon.dto.LtProductDTO;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 
@@ -16,6 +14,7 @@ import lombok.*;
 @Table(name = "lt_product")
 public class LtProductEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int prodNo;
     private int prodCate1;
     private int prodCate2;
