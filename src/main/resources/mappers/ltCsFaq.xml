@@ -4,7 +4,7 @@
 		"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.kr.lotteon.mapper.cs.LtCsFaqMapper">
 
-	<select id="selectCsFaqList10" resultMap="co.kr.lotteon.dto.LtCsFaqDTO">
+	<select id="selectCsFaqList10" resultType="co.kr.lotteon.dto.LtCsFaqDTO">
 		SELECT * FROM `lt_cs_faq` AS a
 		JOIN `lt_cs_cate2` AS b
 		ON a.cate1 = b.cate1 AND a.cate2 = b.cate2 WHERE a.cate1=#{cate1} ORDER BY `faqNo` DESC LIMIT 10
