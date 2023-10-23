@@ -38,6 +38,7 @@ public class ProdPageResponseDTO {
         int last = (int) (Math.ceil(total / (double) size));
 
         this.end = Math.min(end, last);
+        this.end = end == 0 ? 1 : end;
         this.prev = this.start > 1;
         this.next = total > this.end * this.size;
 

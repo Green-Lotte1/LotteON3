@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org"
        xmlns:layout="http://www.thymeleaf.org"
-       layout:decorate="/product/prod_layout">
-<head>
+       layout:decorate="/product/_prod_layout">
+<!-- 상품 상세페이지 시작 -->
+<section class="view" layout:fragment="content">
     <script th:inline="javascript">
         $(function (){
 
@@ -12,17 +13,17 @@
             let totalprice = 0;
 
             $('.increase').click(function (){
-               num = num+1;
-               $("input[name='num']").val(num);
-               updatePrice();
+                num = num+1;
+                $("input[name='num']").val(num);
+                updatePrice();
             });
 
             $('.decrease').click(function (){
-               if (num > 1){
-                   num = num - 1;
-                   $("input[name='num']").val(num);
-                   updatePrice();
-               }
+                if (num > 1){
+                    num = num - 1;
+                    $("input[name='num']").val(num);
+                    updatePrice();
+                }
             });
 
             function updatePrice(){
@@ -34,9 +35,6 @@
 
         });
     </script>
-</head>
-<!-- 상품 상세페이지 시작 -->
-<section class="view" layout:fragment="content">
 
     <!-- 제목, 페이지 네비게이션 -->
     <nav>
