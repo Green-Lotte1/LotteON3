@@ -65,16 +65,43 @@ public class CsController {
 
     }
     @RequestMapping("/cs/notice/list")
-    public String selectCsNoticeListAll(@RequestParam(name="pg", defaultValue = "1")String pg, Model model){
+    public String selectCsNoticeList(@RequestParam(name="pg", defaultValue = "1")String pg,
+                                     @RequestParam(name= "cate1" ,required = false) String cate1,
+                                     Model model){
 
         log.info(pg);
+        log.info("cate1-----"+cate1);
+
 
         //현재 페이지 번호
         int currentPage = ltCsService.getCurrentPage(pg);
 
         log.info("currentPage----------"+currentPage);
+
+        //시작 인덱스
+        int start = ltCsService.getStartNum(currentPage);
+
         //전체 게시물 갯수
-        int total = ltCsService.selectCsNoticeTotal();
+        int total;
+        List<LtCsNoticeDTO> ltCsNoticeDTOS;
+
+        if(cate1 == null || cate1.isEmpty()){
+            log.info("here1");
+            total = ltCsService.selectCsNoticeTotal();
+            ltCsNoticeDTOS = ltCsService.selectCsNoticeListAll(start);
+        } else {
+            log.info("here2");
+            log.info("here2 cate1------"+cate1);
+            total = ltCsService.selectCsNoticeTotalCate(Integer.parseInt(cate1));
+
+            log.info("here2 total : "+total);
+
+
+            ltCsNoticeDTOS = ltCsService.selectCsNoticeListCate(Integer.parseInt(cate1), start);
+
+
+        }
+
 
         // 마지막 페이지 번호
         int lastPageNum = ltCsService.getLastPageNum(total);
@@ -85,28 +112,26 @@ public class CsController {
         // 페이지 시작번호
         int pageStartNum = ltCsService.getPageStartNum(total, currentPage);
 
-        //시작 인덱스
-        int start = ltCsService.getStartNum(currentPage);
 
-
-        List<LtCsNoticeDTO> selectCsNoticeListAll = ltCsService.selectCsNoticeListAll(start);
-
-        model.addAttribute("noticeListAll",selectCsNoticeListAll);
+        model.addAttribute("ltCsNoticeDTOS",ltCsNoticeDTOS);
         model.addAttribute("currentPage",currentPage);
         model.addAttribute("lastPageNum",lastPageNum);
         model.addAttribute("pageGroupStart",result[0]);
         model.addAttribute("pageGroupEnd",result[1]);
         model.addAttribute("pageStartNum",pageStartNum+1);
-        log.info("noticelistALl------------"+selectCsNoticeListAll);
+        model.addAttribute("cate1",cate1);
         log.info(currentPage);
         log.info(lastPageNum);
+        log.info("cate1last----------------"+cate1);
 
 
         return "/cs/notice/list";
     }
 
     @RequestMapping("/cs/qna/list")
-    public String selectCsQnaListAll(@RequestParam(name="pg", defaultValue = "1")String pg, Model model){
+    public String selectCsQnaListAll(@RequestParam(name="pg", defaultValue = "1")String pg,
+                                     @RequestParam(name= "cate1" ,required = false) String cate1,
+                                     Model model){
 
         log.info(pg);
 
@@ -114,8 +139,31 @@ public class CsController {
         int currentPage = ltCsService.getCurrentPage(pg);
 
         log.info("currentPage----------"+currentPage);
+
+        //시작 인덱스
+        int start = ltCsService.getStartNum(currentPage);
+
         //전체 게시물 갯수
-        int total = ltCsService.selectCsQnaTotal();
+        int total;
+        List<LtCsQnaDTO> ltCsQnaDTOS;
+
+        if(cate1 == null || cate1.isEmpty()){
+            log.info("here1");
+            total = ltCsService.selectCsQnaTotal();
+            ltCsQnaDTOS = ltCsService.selectCsQnaListAll(start);
+        } else {
+            log.info("here2");
+            log.info("here2 cate1------"+cate1);
+            total = ltCsService.selectCsQnaTotalCate(Integer.parseInt(cate1));
+
+            log.info("here2 total : "+total);
+
+
+            ltCsQnaDTOS = ltCsService.selectCsQnaListCate(Integer.parseInt(cate1), start);
+
+
+        }
+
 
         // 마지막 페이지 번호
         int lastPageNum = ltCsService.getLastPageNum(total);
@@ -126,23 +174,44 @@ public class CsController {
         // 페이지 시작번호
         int pageStartNum = ltCsService.getPageStartNum(total, currentPage);
 
-        //시작 인덱스
-        int start = ltCsService.getStartNum(currentPage);
 
 
-        List<LtCsQnaDTO> selectCsQnaListAll = ltCsService.selectCsQnaListAll(start);
-
-        model.addAttribute("qnaListAll",selectCsQnaListAll);
+        model.addAttribute("ltCsQnaDTOS",ltCsQnaDTOS);
         model.addAttribute("currentPage",currentPage);
         model.addAttribute("lastPageNum",lastPageNum);
         model.addAttribute("pageGroupStart",result[0]);
         model.addAttribute("pageGroupEnd",result[1]);
         model.addAttribute("pageStartNum",pageStartNum+1);
-        log.info("QnaListAll------------"+selectCsQnaListAll);
+        model.addAttribute("cate1",cate1);
+
         log.info(currentPage);
         log.info(lastPageNum);
 
 
         return "/cs/qna/list";
     }
+
+    @GetMapping("/cs/notice/view")
+    public String selectCsNoticeView(int noticeNo, Model model){
+        LtCsNoticeDTO notcieBoard = ltCsService.selectCSNoticeView(noticeNo);
+        model.addAttribute("notcieBoard",notcieBoard);
+        log.info("noticeNo------"+noticeNo);
+        log.info("notcieBoard----------"+notcieBoard.toString());
+        return "/cs/notice/view";
+    }
+
+    @GetMapping("/cs/qna/view")
+    public String selectCsQnaView(int qnaNo, Model model){
+        LtCsQnaDTO qnaBoard = ltCsService.selectCsQnaView(qnaNo);
+        model.addAttribute("qnaBoard",qnaBoard);
+        log.info("qnaNo------"+qnaNo);
+        log.info("qnaBoard----------"+qnaBoard.toString());
+        return "/cs/qna/view";
+    }
+
+    @GetMapping("/cs/faq/list")
+    public String faq(){
+        return "/cs/faq/list";
+    }
+
 }

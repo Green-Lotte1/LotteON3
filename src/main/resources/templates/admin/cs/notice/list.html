@@ -4,7 +4,41 @@
        layout:decorate="/admin/admin_layout">
 
       <section id="admin-cs-notice-list" class="admin-cs-list" layout:fragment="content">
+        <script>
+          $(document).ready(function(){
+            const cate1Val = document.getElementsByName("cate1")[0].value;
+            const searchVal = document.getElementsByName("search")[0].value;
 
+            console.log('cate1 : ' + cate1Val + ' / search : ' + searchVal);
+            $(document).on("change","select[name='searchCate1']",function(){
+              $("option:selected", this).each(function(){
+                var selectValue = $(this).val();
+                if(selectValue === "" && selectValue == null){
+                  return false;
+                }
+                if( searchVal == null || searchVal === "" ) {
+                  location.href = "/LotteON/admin/cs/notice/list?cate1=" + selectValue;
+                } else{
+                 location.href = "/LotteON/admin/cs/notice/list?cate1=" + selectValue +"&search="+searchVal;
+                }
+              });
+            });
+
+            $(document).on("focusout","input[name='searchKeyword']",function(){
+                var inputVal = $(this).val();
+              if(inputVal === "" && inputVal == null){
+                return false;
+              }
+                if( cate1Val == null || cate1Val === "" ) {
+                  location.href = "/LotteON/admin/cs/notice/list?search=" + inputVal;
+                } else{
+                  location.href = "/LotteON/admin/cs/notice/list?cate1=" + cate1Val +"&search="+inputVal;
+                }
+            });
+
+
+          });
+        </script>
           <nav>
             <h3>공지사항 목록</h3>
             <p>
@@ -16,10 +50,15 @@
             <form th:action="@{#}" method="post">
             <div>
               <select name="searchCate1" id="searchCate1">
-                <option value="">유형선택</option>
+                <option th:value="0" th:selected="${#strings.equals(param.cate1, '0')}">유형선택</option>
+                <option th:value="10" th:selected="${#strings.equals(param.cate1, '10')}">고객서비스</option>
+                <option th:value="11" th:selected="${#strings.equals(param.cate1, '11')}">안전거래</option>
+                <option th:value="12" th:selected="${#strings.equals(param.cate1, '12')}">위해상품</option>
+                <option th:value="13" th:selected="${#strings.equals(param.cate1, '13')}">이벤트당첨</option>
               </select>
-              <input type="text" name="searchKeyword" id="searchKeyword" value="" placeholder="검색어를 입력하세요." >
-              <input type="hidden" name="searchPg" id="searchPg">
+              <input type="text" name="searchKeyword" id="searchKeyword" th:value="${param.search}" placeholder="검색어를 입력하세요." >
+              <input type="hidden" name="cate1" th:value="${param.cate1}">
+              <input type="hidden" name="search" th:value="${param.search}">
             </div>
             <table class="listTable">
               <thead>
@@ -62,13 +101,13 @@
             </form>
             <div class="paging">
                 <span class="prev" th:if="${pageResponseDTO.prev}">
-                    <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${pageResponseDTO.start - 1})}"><&nbsp;이전</a>
+                    <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${pageResponseDTO.start - 1}, search=${pageResponseDTO.getSearch()})}"><&nbsp;이전</a>
                 </span>
               <span class="num"  th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}">
-                    <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${num})}" th:classappend="${num == pageResponseDTO.pg?'on':''}">[[${num}]]</a>
+                    <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${num}, search=${pageResponseDTO.getSearch()})}" th:classappend="${num == pageResponseDTO.pg?'on':''}">[[${num}]]</a>
                 </span>
               <span class="next" th:if="${pageResponseDTO.next}">
-                    <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${pageResponseDTO.end + 1})}">다음&nbsp;></a>
+                    <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${pageResponseDTO.end + 1}, search=${pageResponseDTO.getSearch()})}">다음&nbsp;></a>
                 </span>
             </div>
 

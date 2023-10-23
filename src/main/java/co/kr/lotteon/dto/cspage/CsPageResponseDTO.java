@@ -19,6 +19,7 @@ public class CsPageResponseDTO {
     private int total;
     private int cate1;
     private int cate2;
+    private String search;
 
     private int start, end;
     private boolean prev, next;
@@ -32,6 +33,7 @@ public class CsPageResponseDTO {
         this.pg = pageRequestDTO.getPg();
         this.size = pageRequestDTO.getSize();
         this.total = total;
+        this.search = pageRequestDTO.getSearch();
 
         this.noticeList = noticeList;
         this.faqList = faqList;

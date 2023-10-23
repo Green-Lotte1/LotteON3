@@ -4,6 +4,13 @@
       layout:decorate="/cs/_cslayout.html">
 
 <section layout:fragment="content">
+    <script>
+        function showAlertLogin() {
+           alert('로그인이 필요한 기능입니다.');
+           window.location.href = '/LotteON/member/login';
+         }
+    </script>
+
 
     <section id="cs">
         <div class="main">
@@ -12,13 +19,13 @@
                 <h1>공지사항<a th:href="@{/cs/notice/list}">전체보기</a></h1>
                 <ul>
                     <li th:each="noticelist:${noticelist}">
-                        <a href="#" class="title" th:text="'[' + ${noticelist.c2Name} + ']' + ${noticelist.title}"></a>
+                        <a th:href="@{/cs/notice/view(noticeNo=${noticelist.noticeNo})}" class="title" th:text="'[' + ${noticelist.c2Name} + ']' + ${noticelist.title}"></a>
                         <span class="date" th:text="${#temporals.format(noticelist.rdate, 'yy-MM-dd')}"></span>
                     </li>
                 </ul>
             </section>
             <section class="faq">
-                <h1>자주 묻는 질문<a href="./faq/list.html">전체보기</a>
+                <h1>자주 묻는 질문<a th:href="@{/cs/faq/list}">전체보기</a>
                 </h1>
                 <ol>
                     <li>
@@ -52,14 +59,21 @@
                 </h1>
                 <ul>
                     <li th:each="qnalist:${qnalist}">
-                        <a href="#" class="title" th:text="'[' + ${qnalist.c1Name} + ']' + ${qnalist.title}"></a>
+                        <a th:href="@{/cs/qna/view(qnaNo=${qnalist.qnaNo})}" class="title" th:text="'[' + ${qnalist.c1Name} + ']' + ${qnalist.title}"></a>
                         <p>
                             <span class="uid" th:text="${#strings.substring(qnalist.writer, 0, 3) + '***'}"></span>
                             <span class="date" th:text="${#temporals.format(qnalist.rdate, 'yy-MM-dd')}"></span>
                         </p>
                     </li>
                 </ul>
-                <a th:href="@{/cs/qna/write}" class="ask">문의글 작성 ></a>
+                <a th:href="@{/cs/qna/write}"
+                   th:unless="${#authorization.expression('isAuthenticated()')}"
+                   onclick="showAlertLogin(); return false;"
+                   class="ask">문의글 작성 ></a>
+
+                <a th:href="@{/cs/qna/write}"
+                   th:if="${#authorization.expression('isAuthenticated()')}"
+                   class="ask">문의글 작성 ></a>
             </section>
             <section class="tel">
                 <h1>

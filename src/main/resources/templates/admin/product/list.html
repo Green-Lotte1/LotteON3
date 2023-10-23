@@ -39,7 +39,9 @@
 
             <tr th:each="ltProduct : ${prodPageResponseDTO.dtoList}">
                 <td><input type="checkbox" name="상품코드"/></td>
+
                 <td><img th:src="@{'/thumbs/'+${ltProduct.Thumb1}}" class="thumb"></td>
+
                 <td>[[${ltProduct.prodNo}]]</td>
                 <td>[[${ltProduct.prodName}]]</td>
                 <td>[[${ltProduct.price != 0 ? #numbers.formatInteger(ltProduct.price, 0, 'COMMA') : '0'}]]</td>

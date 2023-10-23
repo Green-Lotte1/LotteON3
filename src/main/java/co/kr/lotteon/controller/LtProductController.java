@@ -46,7 +46,6 @@ public class LtProductController {
         log.info("pageResponseDTO end : " + pageResponseDTO.getEnd());
         log.info("pageResponseDTO prev : " + pageResponseDTO.isPrev());
         log.info("pageResponseDTO next : " + pageResponseDTO.isNext());
-
         model.addAttribute("pageResponseDTO", pageResponseDTO);
         return "/product/list";
     }
