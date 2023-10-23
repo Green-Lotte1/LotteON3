@@ -3,6 +3,8 @@ package co.kr.lotteon.service;
 
 import co.kr.lotteon.dto.LtCsNoticeDTO;
 import co.kr.lotteon.dto.LtMemberDTO;
+import co.kr.lotteon.dto.cspage.CsPageRequestDTO;
+import co.kr.lotteon.dto.cspage.CsPageResponseDTO;
 import co.kr.lotteon.entity.LtCsNoticeEntity;
 import co.kr.lotteon.entity.LtMemberEntity;
 import co.kr.lotteon.entity.LtProductEntity;
@@ -42,26 +44,36 @@ public class AdminCsService {
                 )
                 .collect(Collectors.toList());
     }
-/*
-    public PageResponseDTO findByParentAndCate(PageRequestDTO pageRequestDTO){
-        Pageable pageable = pageRequestDTO.getPageable("no");
-        // Pageable pageable = PageRequest.of(pageRequestDTO.getPg()-1, pageRequestDTO.getSize(), Sort.Direction.DESC, "no");
-        Page<ArticleEntity> result =  articleRepository.findByParentAndCate(0, pageRequestDTO.getCate(), pageable);
+
+
+    public CsPageResponseDTO noticeList(CsPageRequestDTO pageRequestDTO){
+        Pageable pageable = pageRequestDTO.getPageable("noticeNo");
+        Page<LtCsNoticeEntity> result = null;
+        if(pageRequestDTO.getCate1() == 0){
+           if(pageRequestDTO.getSearch() == ""){
+               result = ltCsNoticeRepository.findAll(pageable);
+           } else {
+               result = ltCsNoticeRepository.findByTitleContains(pageRequestDTO.getSearch(), pageable);
+           }
+        } else{
+            if(pageRequestDTO.getSearch().equals("")) {
+                result = ltCsNoticeRepository.findByCate1(pageRequestDTO.getCate1(), pageable);
+            } else{
+                result = ltCsNoticeRepository.findByCate1AndTitleContains(pageRequestDTO.getCate1(), pageRequestDTO.getSearch(), pageable);
+            }
+        }
         List<LtCsNoticeDTO> dtoList = result.getContent()
                 .stream()
                 .map(
-                        ArticleEntity::toDTO
-                        // entity -> modelMapper.map(entity, LtCsNoticeDTO.class)
+                        LtCsNoticeEntity::toDTO
                 )
                 .toList();
-        //.collect(Collectors.toList());
         int totalElement = (int) result.getTotalElements();
-        return PageResponseDTO.builder()
+        return CsPageResponseDTO.builder()
                 .pageRequestDTO(pageRequestDTO)
-                .dtoList(dtoList)
+                .noticeList(dtoList)
                 .total(totalElement)
                 .build();
     }
 
-*/
 }

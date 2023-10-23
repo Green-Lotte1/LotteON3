@@ -1,9 +1,11 @@
 package co.kr.lotteon.controller;
 
 import co.kr.lotteon.dto.LtProductDTO;
+import co.kr.lotteon.dto.cspage.CsPageResponseDTO;
 import co.kr.lotteon.dto.prodpage.ProdPageRequestDTO;
 import co.kr.lotteon.dto.prodpage.ProdPageResponseDTO;
 import co.kr.lotteon.service.LtProductService;
+import co.kr.lotteon.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -21,13 +23,31 @@ import java.util.List;
 public class LtProductController {
 
     private final LtProductService ltProductService;
+    private final ProductService productService;
     private final ModelMapper modelMapper;
 
     @GetMapping("/list")
     public String list(Model model, ProdPageRequestDTO pageRequestDTO) {
 
-        List<LtProductDTO> productlist = ltProductService.selectProducts();
-        model.addAttribute("productlist",productlist);
+       // List<LtProductDTO> productlist = ltProductService.selectProducts();
+       // model.addAttribute("productlist",productlist);
+
+        ProdPageResponseDTO pageResponseDTO = productService.getProductListByCates(pageRequestDTO);
+        if(pageResponseDTO.getTotal()/10 < pageRequestDTO.getPg()){
+            //return "redirect:/article/list?success=100";
+        }
+
+        log.info("pageResponseDTO cate1 : " + pageResponseDTO.getCate1());
+        log.info("pageResponseDTO cate2 : " + pageResponseDTO.getCate2());
+        log.info("pageResponseDTO pg : " + pageResponseDTO.getPg());
+        log.info("pageResponseDTO size : " + pageResponseDTO.getSize());
+        log.info("pageResponseDTO total : " + pageResponseDTO.getTotal());
+        log.info("pageResponseDTO start : " + pageResponseDTO.getStart());
+        log.info("pageResponseDTO end : " + pageResponseDTO.getEnd());
+        log.info("pageResponseDTO prev : " + pageResponseDTO.isPrev());
+        log.info("pageResponseDTO next : " + pageResponseDTO.isNext());
+
+        model.addAttribute("pageResponseDTO", pageResponseDTO);
         return "/product/list";
     }
 

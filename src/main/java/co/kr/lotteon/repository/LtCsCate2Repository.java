@@ -15,7 +15,7 @@ import java.util.List;
 public interface LtCsCate2Repository extends JpaRepository<LtCsCate2Entity, Integer> {
     //List<LtCsCate2Entity> findAllByCate1(LtCsCate1Entity cate1);
     @Query("SELECT a FROM LtCsCate2Entity a " +
-            "WHERE a.ltCsCatePK.cate1 = : cate1 ")
+            "WHERE a.ltCsCatePK.cate1 = :cate1 ")
     List<LtCsCate2Entity> findAllByCate1(@Param("cate1") int cate1);
 /*
     @Query("SELECT a FROM LtCsCate2Entity a " +

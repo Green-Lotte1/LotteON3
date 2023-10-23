@@ -409,6 +409,7 @@ button[type=submit] {
     width: 100px;
 }
 
+
 #admin-cs-notice-list > section > table  {
     border-top: 2px solid #8798a3;
 }
@@ -593,7 +594,19 @@ button[type=submit] {
 }
 
 /* 상품목록 : product-list */
-#admin-product-list {}
+#admin-product-list #register {
+    float: right;
+    width: 100px;
+    text-align: center;
+    float: right;
+    padding: 6px;
+    margin-top: 10px;
+    background-color: #a8b2c5;
+    border: 1px solid #959595;
+    font-size: 13px;
+    color: #fff;
+
+}
 #admin-product-list > section > div  {
     margin-bottom: 10px;
 }

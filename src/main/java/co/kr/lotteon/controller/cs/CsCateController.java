@@ -27,8 +27,10 @@ public class CsCateController {
         return csCateService.getCsCates();
 
     }
+
     @ResponseBody
     @GetMapping("/cate1")
+
     public List<LtCsCate1DTO> list(){
 
         List<LtCsCate1DTO> cate1list = ltCsService.selectCsCate1();
@@ -37,8 +39,10 @@ public class CsCateController {
         return cate1list;
 
     }
+
     @ResponseBody
     @GetMapping("/cate2")
+
     public List<LtCsCate2DTO> cate2list(@RequestParam("cate1") int cate1) {
         log.info("cate2cate2cate2???" + cate1);
         List<LtCsCate2DTO> cate2list = ltCsService.selectCsCate2(cate1);

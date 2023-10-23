@@ -28,9 +28,9 @@ public class ProdPageRequestDTO {
 
     // cate Default 없으면 오류 발생 - Default 값을 지정해줘야함.
     @Builder.Default
-    private int cate1 = 11;
+    private int cate1 = 10;
     @Builder.Default
-    private int cate2 = 11;
+    private int cate2 = 10;
 
     public Pageable getPageable(String cate1) {
         if (how.equals("ASC")) {
@@ -39,5 +39,6 @@ public class ProdPageRequestDTO {
             return PageRequest.of(this.pg - 1, this.size, Sort.by(this.sort).descending());
         }
     }
+
 
 }
