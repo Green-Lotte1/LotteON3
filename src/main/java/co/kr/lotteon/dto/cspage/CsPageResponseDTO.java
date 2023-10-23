@@ -10,28 +10,30 @@ import java.util.List;
 
 @Data
 public class CsPageResponseDTO {
-    private List<LtCsNoticeDTO> dtoList;
+    private List<LtCsNoticeDTO> noticeList;
     private List<LtCsFaqDTO> faqList;
     private List<LtCsQnaDTO> qnaList;
 
     private int pg;
     private int size;
     private int total;
-    private String cate;
+    private int cate1;
+    private int cate2;
 
     private int start, end;
     private boolean prev, next;
 
     @Builder
     public CsPageResponseDTO(CsPageRequestDTO pageRequestDTO,
-                             List<LtCsNoticeDTO> dtoList, int total,
+                             List<LtCsNoticeDTO> noticeList, int total,
                              List<LtCsFaqDTO> faqList, List<LtCsQnaDTO> qnaList) {
-        this.cate = pageRequestDTO.getCate();
+        this.cate1 = pageRequestDTO.getCate1();
+        this.cate2 = pageRequestDTO.getCate2();
         this.pg = pageRequestDTO.getPg();
         this.size = pageRequestDTO.getSize();
         this.total = total;
 
-        this.dtoList = dtoList;
+        this.noticeList = noticeList;
         this.faqList = faqList;
         this.qnaList = qnaList;
 

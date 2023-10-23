@@ -34,7 +34,7 @@
                 </tr>
               </thead>
               <tbody class="listTbody">
-                <tr th:each="article:${noticeList}">
+                <tr th:each="article:${pageResponseDTO.getNoticeList()}">
                   <td><input type="checkbox" name="chk" th:value="${article.noticeNo}"/></td>
                   <td>[[${article.noticeNo}]]</td>
                   <td>[[${article.c1Name}]]</td>
@@ -47,7 +47,7 @@
                     <a th:href="@{#}" class="noticeUpdate">[수정]</a>
                   </td>
                 </tr>
-                <tr th:if="${noticeList.size() eq 0}">
+                <tr th:if="${pageResponseDTO.getNoticeList().size() eq 0}">
                   <td colspan="7">
                     조회 결과가 없습니다.
                   </td>
@@ -61,20 +61,14 @@
             </div>
             </form>
             <div class="paging">
-                        <span class="prev">
-                            <a href="#"><&nbsp;이전</a>
-                        </span>
-              <span class="num">
-                            <a href="#" class="on">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <a href="#">6</a>
-                            <a href="#">7</a>
-                        </span>
-              <span class="next">
-                            <a href="#">다음&nbsp;></a>
+                <span class="prev" th:if="${pageResponseDTO.prev}">
+                    <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${pageResponseDTO.start - 1})}"><&nbsp;이전</a>
+                </span>
+              <span class="num"  th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}">
+                    <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${num})}" th:classappend="${num == pageResponseDTO.pg?'on':''}">[[${num}]]</a>
+                </span>
+                <span class="prev" th:if="${pageResponseDTO.next}">
+                            <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${pageResponseDTO.end + 1})}">다음&nbsp;></a>
                         </span>
             </div>
 

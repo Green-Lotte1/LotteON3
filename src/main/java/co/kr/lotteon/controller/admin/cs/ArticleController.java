@@ -1,6 +1,8 @@
 package co.kr.lotteon.controller.admin.cs;
 
 import co.kr.lotteon.dto.LtCsNoticeDTO;
+import co.kr.lotteon.dto.cspage.CsPageRequestDTO;
+import co.kr.lotteon.dto.cspage.CsPageResponseDTO;
 import co.kr.lotteon.service.AdminCsService;
 import co.kr.lotteon.service.LtCsService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -49,10 +51,26 @@ public class ArticleController {
     }
 
     @GetMapping(value = {"/admin/cs/notice/list", "/admin/cs/notice/"})
-    public String list(Model model){
-        List<LtCsNoticeDTO> noticeList = adminCsService.noticeList();
-        model.addAttribute("noticeList", noticeList);
-        log.info(noticeList.get(22).getTitle());
+    public String list(Model model, CsPageRequestDTO pageRequestDTO){
+        //List<LtCsNoticeDTO> noticeList = adminCsService.noticeList();
+        // model.addAttribute("noticeList", noticeList);
+        CsPageResponseDTO pageResponseDTO = adminCsService.findAllNotice(pageRequestDTO);
+
+        if(pageResponseDTO.getTotal()/10 < pageRequestDTO.getPg()){
+            //return "redirect:/article/list?success=100";
+        }
+
+        log.info("pageResponseDTO cate1 : " + pageResponseDTO.getCate1());
+        log.info("pageResponseDTO cate2 : " + pageResponseDTO.getCate2());
+        log.info("pageResponseDTO pg : " + pageResponseDTO.getPg());
+        log.info("pageResponseDTO size : " + pageResponseDTO.getSize());
+        log.info("pageResponseDTO total : " + pageResponseDTO.getTotal());
+        log.info("pageResponseDTO start : " + pageResponseDTO.getStart());
+        log.info("pageResponseDTO end : " + pageResponseDTO.getEnd());
+        log.info("pageResponseDTO prev : " + pageResponseDTO.isPrev());
+        log.info("pageResponseDTO next : " + pageResponseDTO.isNext());
+
+        model.addAttribute("pageResponseDTO", pageResponseDTO);
         return "/admin/cs/notice/list";
     }
 }
