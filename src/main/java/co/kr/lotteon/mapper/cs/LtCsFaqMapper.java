@@ -7,9 +7,9 @@ import java.util.List;
 
 
 @Mapper
-public interface LtCsQnaMapper {
+public interface LtCsFaqMapper {
 
-    public void insertQnaWrite(LtCsQnaDTO dto);
+
 
 
     List<LtCsQnaDTO> selectCsQnaListAll(int start);
