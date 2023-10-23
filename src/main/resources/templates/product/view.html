@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org"
        xmlns:layout="http://www.thymeleaf.org"
-       layout:decorate="/product/_prod_layout">
+       layout:decorate="/product/_prod_layout"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <!-- 상품 상세페이지 시작 -->
 <section class="view" layout:fragment="content">
     <script th:inline="javascript">
         $(function (){
-
+            let isLogin = $("input[name='isLogin']").val();
             let num = parseInt($("input[name='num']").val());
             let price1 = "[[${prod.price - ((prod.price * prod.discount)/100)}]]";
-
+            let delivery = parseInt("[[${prod.delivery}]]");
             let totalprice = 0;
 
             $('.increase').click(function (){
                 num = num+1;
                 $("input[name='num']").val(num);
+                $("input[name='count']").val(num);
                 updatePrice();
             });
 
@@ -22,15 +24,23 @@
                 if (num > 1){
                     num = num - 1;
                     $("input[name='num']").val(num);
+                    $("input[name='count']").val(num);
                     updatePrice();
                 }
             });
 
+            $('.cart').click(function(){
+                if(isLogin > 0 ){
+                    document.getElementsByClassName('formCart')[0].submit();
+                } else{
+                    alert('로그인 후 구매가 가능합니다!');
+                    location.href="/LotteON/member/login";
+                }
+            });
             function updatePrice(){
-                totalprice =  price1 * num;
+                totalprice =  (price1 * num) + delivery ;
                 $('.totalPrice').text(totalprice.toLocaleString());
                 $('.tot').val(totalprice);
-                // console.log("totprice : "+totalprice);
             }
 
         });
@@ -92,21 +102,28 @@
 
             <div class="total">
                 <span class="totalPrice">[[${#numbers.formatInteger(prod.price - ((prod.price * prod.discount)/100),0,'COMMA')}]]</span>
-                <input type="text" class="tot" name="totalPrice" th:value="${prod.price - ((prod.price * prod.discount)/100)}">
                 <em>총 상품금액</em>
             </div>
-            <form th:action="@{/product/cart}" class="buy" method="post">
+            <form th:action="@{/product/cart}" class="formCart" method="post">
             <div class="button">
                 <input type="button" class="cart"  value="장바구니"/>
                 <input type="button" class="order" value="구매하기"/>
             </div>
-                <input type="text" name="count" value="1" />
+
+                <th:block sec:authorize="isAnonymous()">
+                    <input type="number" name="isLogin" value="0">
+                </th:block>
+                <th:block sec:authorize="isAuthenticated()">
+                    <input type="number" name="isLogin" value="1">
+                    <input type="text" name="uid" th:value="${#authentication.principal.user.uid}" />
+                </th:block>
                 <input type="text" name="prodNo" th:value="${prod.prodNo}" />
+                <input type="text" name="count" value="1" />
+                <input type="text" name="price" th:value="${prod.price}" />
                 <input type="text" name="discount" th:value="${prod.discount}" />
                 <input type="text" name="point" th:value="${prod.point}" />
-                <input type="text" name="price" th:value="${prod.price}" />
-<!--                <input type="text" class="num" name="num" th:value="${prod.count}" />-->
-                <input type="text" class="tot" name="totalPrice" th:value="${prod.price}" />
+                <input type="text" name="delivery" th:value="${prod.delivery}" />
+                <input type="text" name="total"   class="tot" th:value="${prod.price - ((prod.price * prod.discount)/100) + prod.delivery}" />
             </form>
         </div>
     </article>
