@@ -13,11 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-
 @Log4j2
 @Controller
-public class ArticleController {
+public class AdminCsController {
 
 
     @Autowired
@@ -52,8 +50,6 @@ public class ArticleController {
 
     @GetMapping(value = {"/admin/cs/notice/list", "/admin/cs/notice/"})
     public String list(Model model, CsPageRequestDTO pageRequestDTO){
-        //List<LtCsNoticeDTO> noticeList = adminCsService.noticeList();
-        // model.addAttribute("noticeList", noticeList);
         CsPageResponseDTO pageResponseDTO = adminCsService.noticeList(pageRequestDTO);
 
         if(pageResponseDTO.getTotal()/10 < pageRequestDTO.getPg()){
