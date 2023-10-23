@@ -22,7 +22,6 @@ public interface LtCsNoticeRepository extends JpaRepository<LtCsNoticeEntity, In
 
     public Page<LtCsNoticeEntity> findAllByCate1(int cate1, Pageable pageable);
 
-
     /*
     @Query("SELECT a, b.c1Name, c.c2Name FROM LtCsNoticeEntity a " +
             "JOIN a.ltCsCate1Entity b " +
