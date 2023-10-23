@@ -13,7 +13,6 @@ public class LtCsCate2DTO {
 	private int cate1;
 	private int cate2;
 	private String c2Name;
-	private int cate2No;
 
 	public LtCsCate2Entity toEntity(){
 		return LtCsCate2Entity.builder()
