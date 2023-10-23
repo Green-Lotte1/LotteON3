@@ -41,7 +41,7 @@
                     <h2>공지사항</h2>
                     <input type="hidden" th:value="${cate1}">
                     <ul>
-                        <li th:class="${cate1 == null ? 'on' : ''}">
+                        <li th:class="${cate1 == null or cate1 == '' ? 'on' : ''}">
                             <a th:href="@{/cs/notice/list}" >전체</a>
                         </li>
                         <li th:class="${cate1 == '10' ? 'on' : ''}">
@@ -77,7 +77,7 @@
                             <a th:href="@{/cs/notice/list(pg=${pageGroupStart - 1})}" class="prev">이전</a>
                         </th:block>
                         <th:block th:each="num:${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
-                            <a th:href="@{/cs/notice/list(pg=${num})}" th:classappend="${num == currentPage} ? 'current num' : 'num'">[[${num}]]</a>
+                            <a th:href="@{/cs/notice/list(pg=${num},cate1=${cate1})}" th:classappend="${num == currentPage} ? 'current num' : 'num'">[[${num}]]</a>
                         </th:block>
                         <th:block th:if="${pageGroupEnd < lastPageNum}">
                             <a th:href="@{/cs/notice/list(pg=${pageGroupEnd + 1})}" class="next">다음</a>
