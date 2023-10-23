@@ -27,21 +27,20 @@ public class ProductService {
     private final LtProductRepository ltProductRepository;
 
     public ProdPageResponseDTO getProductListByCates(ProdPageRequestDTO pageRequestDTO) {
-//        Pageable pageable = pageRequestDTO.getPageable("prodNo");
-//        Page<LtProductEntity> result = ltProductRepository.findAll(pageRequestDTO.getCate1(), pageRequestDTO.getCate2(), pageable);
-//        List<LtProductDTO> dtoList = result.getContent()
-//                .stream()
-//                .map(
-//                        LtProductEntity::toDTO
-//                )
-//                .toList();
-//        //.collect(Collectors.toList());
-//        int totalElement = (int) result.getTotalElements();
-//        return ProdPageResponseDTO.builder()
-//                .pageRequestDTO(pageRequestDTO)
-//                .dtoList(dtoList)
-//                .total(totalElement)
-//                .build();
-        return null;
+        Pageable pageable = pageRequestDTO.getPageable("prodNo");
+        Page<LtProductEntity> result = ltProductRepository.findAllByProdCate1AndProdCate2(pageRequestDTO.getCate1(), pageRequestDTO.getCate2(), pageable);
+        List<LtProductDTO> dtoList = result.getContent()
+                .stream()
+                .map(
+                        LtProductEntity::toDTO
+                )
+                .toList();
+        //.collect(Collectors.toList());
+        int totalElement = (int) result.getTotalElements();
+        return ProdPageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total(totalElement)
+                .build();
     }
 }
