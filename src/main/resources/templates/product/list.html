@@ -24,23 +24,23 @@
     <!-- 상품목록 -->
     <table border="0">
         <!-- prod_list_test -->
-        <th:block th:each="prodlist:${productlist}">
+        <th:block th:each="product:${pageResponseDTO.getDtoList()}">
         <tr>
-            <td><a th:href="@{/product/view(prodNo = ${prodlist.prodNo})}" class="thumb"><img th:src="@{https://via.placeholder.com/120x120}" alt="상품이미지"/></a></td>
+            <td><a th:href="@{/product/view(prodNo = ${product.prodNo})}" class="thumb"><img th:src="@{https://via.placeholder.com/120x120}" alt="상품이미지"/></a></td>
             <td>
-                <h3 class="name">[[${prodlist.prodName}]]</h3>
-                <a th:href="@{/product/view(prodNo = ${prodlist.prodNo})}" class="desc">[[${prodlist.descript}]]</a>
+                <h3 class="name">[[${product.prodName}]]</h3>
+                <a th:href="@{/product/view(prodNo = ${product.prodNo})}" class="desc">[[${product.descript}]]</a>
             </td>
             <td>
                 <ul>
-                    <li><ins class="dis-price">[[${#numbers.formatInteger(prodlist.price,0,'COMMA')}]]</ins></li>
+                    <li><ins class="dis-price">[[${#numbers.formatInteger(product.price,0,'COMMA')}]]</ins></li>
                     <li>
-                        <del class="org-price">[[${#numbers.formatInteger(prodlist.price,0,'COMMA')}]]</del>
-                        <span class="discount">[[${#numbers.formatInteger(prodlist.discount,0,'COMMA')}]]%</span>
+                        <del class="org-price">[[${#numbers.formatInteger(product.price,0,'COMMA')}]]</del>
+                        <span class="discount">[[${#numbers.formatInteger(product.discount,0,'COMMA')}]]%</span>
                     </li>
                     <li>
-                        <span class="delivery" th:if="${prodlist.delivery gt 0}">[[${#numbers.formatInteger(prodlist.delivery,0,'COMMA')}]]원</span>
-                        <span class="free-delivery" th:if="${prodlist.delivery eq 0}">무료배송</span>
+                        <span class="delivery" th:if="${product.delivery gt 0}">[[${#numbers.formatInteger(product.delivery,0,'COMMA')}]]원</span>
+                        <span class="free-delivery" th:if="${product.delivery eq 0}">무료배송</span>
                     </li>
                 </ul>
             </td>
@@ -54,21 +54,20 @@
     </table>
 
     <!-- 상품목록 페이지번호 -->
+
+
     <div class="paging">
-
-    <span class="prev">
-      <a th:href="@{/}"><&nbsp;이전</a>
-    </span>
-
-    <span class="num">
-      <a th:href="@{/}">1</a>
-    </span>
-
-    <span class="next">
-      <a th:href="@{/}">다음&nbsp;></a>
-    </span>
-
+        <span class="prev" th:if="${pageResponseDTO.prev}">
+            <a th:href="@{/product/list(cate1=${pageResponseDTO.cate1},pg=${pageResponseDTO.start - 1})}"><&nbsp;이전</a>
+        </span>
+        <span class="num"  th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}">
+            <a th:href="@{/product/list(cate1=${pageResponseDTO.cate1},pg=${num})}" th:classappend="${num == pageResponseDTO.pg?'on':''}">[[${num}]]</a>
+        </span>
+        <span class="next" th:if="${pageResponseDTO.next}">
+            <a th:href="@{/product/list(cate1=${pageResponseDTO.cate1},pg=${pageResponseDTO.end + 1})}">다음&nbsp;></a>
+        </span>
     </div>
+
 
 </section>
 <!-- 리스트 페이지 끝 -->

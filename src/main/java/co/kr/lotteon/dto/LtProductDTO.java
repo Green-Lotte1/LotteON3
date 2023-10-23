@@ -64,8 +64,8 @@ public class LtProductDTO {
 
     private LocalDateTime rDate;
 
-    private int etc1;
-    private int etc2;
+    private String etc1; //null처리 위해 string
+    private String etc2;
     private String etc3;
     private String etc4;
     private String etc5;
@@ -115,8 +115,8 @@ public class LtProductDTO {
                 .ip(ip)
                 .rDate(rDate)
                 .wDate(wDate)
-                .etc1(etc1)
-                .etc2(etc2)
+                .etc1(Integer.parseInt(etc1))
+                .etc2(Integer.parseInt(etc2))
                 .etc3(etc3)
                 .etc4(etc4)
                 .etc5(etc5)

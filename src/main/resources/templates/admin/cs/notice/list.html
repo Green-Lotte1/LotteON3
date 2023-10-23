@@ -67,9 +67,9 @@
               <span class="num"  th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}">
                     <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${num})}" th:classappend="${num == pageResponseDTO.pg?'on':''}">[[${num}]]</a>
                 </span>
-                <span class="prev" th:if="${pageResponseDTO.next}">
-                            <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${pageResponseDTO.end + 1})}">다음&nbsp;></a>
-                        </span>
+              <span class="next" th:if="${pageResponseDTO.next}">
+                    <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${pageResponseDTO.end + 1})}">다음&nbsp;></a>
+                </span>
             </div>
 
           </section>

@@ -54,7 +54,7 @@ public class ArticleController {
     public String list(Model model, CsPageRequestDTO pageRequestDTO){
         //List<LtCsNoticeDTO> noticeList = adminCsService.noticeList();
         // model.addAttribute("noticeList", noticeList);
-        CsPageResponseDTO pageResponseDTO = adminCsService.findAllNotice(pageRequestDTO);
+        CsPageResponseDTO pageResponseDTO = adminCsService.noticeList(pageRequestDTO);
 
         if(pageResponseDTO.getTotal()/10 < pageRequestDTO.getPg()){
             //return "redirect:/article/list?success=100";

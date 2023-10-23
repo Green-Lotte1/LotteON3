@@ -1,6 +1,7 @@
 package co.kr.lotteon.repository;
 
 
+import co.kr.lotteon.entity.LtCsNoticeEntity;
 import co.kr.lotteon.entity.LtProductEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,8 @@ public interface LtProductRepository extends JpaRepository<LtProductEntity, Inte
     List<LtProductEntity> findAll();
 
     public Page<LtProductEntity> findAll(Pageable pageable);
+
+    public Page<LtProductEntity> findAllByProdCate1AndProdCate2(int prodCate1, int prodCate2, Pageable pageable);
 
     /*public Page<LtProductEntity> findLtProductEntitiesByProdCate1(int prodCate1, Pageable pageable);*/
 
