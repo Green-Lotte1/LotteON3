@@ -57,7 +57,7 @@
                     </nav>
                     <table>
                         <tr th:each="qnaListAll:${qnaListAll}">
-                            <td><a href="#" class="title" th:text="'[' + ${qnaListAll.c2Name} + ']' + ${qnaListAll.title}"></a></td>
+                            <td><a th:href="@{/cs/qna/view(qnaNo=${qnaListAll.qnaNo})}" class="title" th:text="'[' + ${qnaListAll.c2Name} + ']' + ${qnaListAll.title}"></a></td>
                             <td class="uid" th:text="${#strings.substring(qnaListAll.writer, 0, 3) + '***'}"></td>
                             <th:block class="answerComplete">
                                 <td th:class="blue-text" th:if="${qnaListAll.answerComplete == 2}">답변완료</td>

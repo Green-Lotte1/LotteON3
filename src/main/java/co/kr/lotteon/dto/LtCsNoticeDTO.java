@@ -1,10 +1,7 @@
 package co.kr.lotteon.dto;
 
 import co.kr.lotteon.entity.LtCsNoticeEntity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +9,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class LtCsNoticeDTO {
 	private int noticeNo;
 	private int cate1;
