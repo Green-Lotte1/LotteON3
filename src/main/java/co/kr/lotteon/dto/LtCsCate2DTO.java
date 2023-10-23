@@ -14,7 +14,6 @@ public class LtCsCate2DTO {
 	private int cate2;
 	private String c2Name;
 
-
 	public LtCsCate2Entity toEntity(){
 		return LtCsCate2Entity.builder()
 				.ltCsCatePK(new LtCsCatePK(cate1, cate2))

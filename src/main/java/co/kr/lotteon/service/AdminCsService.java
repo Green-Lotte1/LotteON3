@@ -50,9 +50,17 @@ public class AdminCsService {
         Pageable pageable = pageRequestDTO.getPageable("noticeNo");
         Page<LtCsNoticeEntity> result = null;
         if(pageRequestDTO.getCate1() == 0){
-           result = ltCsNoticeRepository.findAll(pageable);
+           if(pageRequestDTO.getSearch() == ""){
+               result = ltCsNoticeRepository.findAll(pageable);
+           } else {
+               result = ltCsNoticeRepository.findByTitleContains(pageRequestDTO.getSearch(), pageable);
+           }
         } else{
-           result = ltCsNoticeRepository.findAllByCate1(pageRequestDTO.getCate1(), pageable);
+            if(pageRequestDTO.getSearch().equals("")) {
+                result = ltCsNoticeRepository.findByCate1(pageRequestDTO.getCate1(), pageable);
+            } else{
+                result = ltCsNoticeRepository.findByCate1AndTitleContains(pageRequestDTO.getCate1(), pageRequestDTO.getSearch(), pageable);
+            }
         }
         List<LtCsNoticeDTO> dtoList = result.getContent()
                 .stream()
@@ -60,7 +68,6 @@ public class AdminCsService {
                         LtCsNoticeEntity::toDTO
                 )
                 .toList();
-        //.collect(Collectors.toList());
         int totalElement = (int) result.getTotalElements();
         return CsPageResponseDTO.builder()
                 .pageRequestDTO(pageRequestDTO)
@@ -68,6 +75,5 @@ public class AdminCsService {
                 .total(totalElement)
                 .build();
     }
-
 
 }

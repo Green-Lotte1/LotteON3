@@ -39,12 +39,23 @@
             <section class="list">
                 <aside>
                     <h2>공지사항</h2>
+                    <input type="hidden" th:value="${cate1}">
                     <ul>
-                        <li class="on"><a href="#">전체</a></li>
-                        <li><a href="#">고객서비스</a></li>
-                        <li><a href="#">안전거래</a></li>
-                        <li><a href="#">위해상품</a></li>
-                        <li><a href="#">이벤트당첨</a></li>
+                        <li th:class="${cate1 == null or cate1 == '' ? 'on' : ''}">
+                            <a th:href="@{/cs/notice/list}" >전체</a>
+                        </li>
+                        <li th:class="${cate1 == '10' ? 'on' : ''}">
+                            <a th:href="@{/cs/notice/list(cate1=10)}">고객서비스</a>
+                        </li>
+                        <li th:class="${cate1 == '11' ? 'on' : ''}">
+                            <a th:href="@{/cs/notice/list(cate1=11)}">안전거래</a>
+                        </li>
+                        <li th:class="${cate1 == '12' ? 'on' : ''}">
+                            <a th:href="@{/cs/notice/list(cate1=12)}">위해상품</a>
+                        </li>
+                        <li th:class="${cate1 == '13' ? 'on' : ''}">
+                            <a th:href="@{/cs/notice/list(cate1=13)}">이벤트당첨</a>
+                        </li>
                     </ul>
                 </aside>
 
@@ -55,9 +66,9 @@
                     </nav>
 
                     <table>
-                        <tr th:each="noticeListAll:${noticeListAll}">
-                            <td><a href="#" class="title" th:text="'[' + ${noticeListAll.c2Name} + ']' + ${noticeListAll.title}"></a></td>
-                            <td th:text="${#temporals.format(noticeListAll.rdate, 'yy-MM-dd')}"></td>
+                        <tr th:each="ltCsNoticeDTOS:${ltCsNoticeDTOS}">
+                            <td><a th:href="@{/cs/notice/view(noticeNo=${ltCsNoticeDTOS.noticeNo})}" class="title" th:text="'[' + ${ltCsNoticeDTOS.c2Name} + ']' + ${ltCsNoticeDTOS.title}"></a></td>
+                            <td th:text="${#temporals.format(ltCsNoticeDTOS.rdate, 'yy-MM-dd')}"></td>
                         </tr>
                     </table>
 
@@ -66,13 +77,12 @@
                             <a th:href="@{/cs/notice/list(pg=${pageGroupStart - 1})}" class="prev">이전</a>
                         </th:block>
                         <th:block th:each="num:${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
-                            <a th:href="@{/cs/notice/list(pg=${num})}" th:classappend="${num == currentPage} ? 'current num' : 'num'">[[${num}]]</a>
+                            <a th:href="@{/cs/notice/list(pg=${num},cate1=${cate1})}" th:classappend="${num == currentPage} ? 'current num' : 'num'">[[${num}]]</a>
                         </th:block>
                         <th:block th:if="${pageGroupEnd < lastPageNum}">
                             <a th:href="@{/cs/notice/list(pg=${pageGroupEnd + 1})}" class="next">다음</a>
                         </th:block>
                     </div>
-                    <input type="hidden" th:value="${currentPage}">
                     <input type="hidden" th:value="${pageGroupStart}">
                     <input type="hidden" th:value="${pageGroupEnd}">
                     <input type="hidden" th:value="${pageStartNum}">

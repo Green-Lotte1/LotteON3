@@ -12,7 +12,7 @@
                 <h1>공지사항<a th:href="@{/cs/notice/list}">전체보기</a></h1>
                 <ul>
                     <li th:each="noticelist:${noticelist}">
-                        <a href="#" class="title" th:text="'[' + ${noticelist.c2Name} + ']' + ${noticelist.title}"></a>
+                        <a th:href="@{/cs/notice/view(noticeNo=${noticelist.noticeNo})}" class="title" th:text="'[' + ${noticelist.c2Name} + ']' + ${noticelist.title}"></a>
                         <span class="date" th:text="${#temporals.format(noticelist.rdate, 'yy-MM-dd')}"></span>
                     </li>
                 </ul>
@@ -52,7 +52,7 @@
                 </h1>
                 <ul>
                     <li th:each="qnalist:${qnalist}">
-                        <a href="#" class="title" th:text="'[' + ${qnalist.c1Name} + ']' + ${qnalist.title}"></a>
+                        <a th:href="@{/cs/qna/view(qnaNo=${qnalist.qnaNo})}" class="title" th:text="'[' + ${qnalist.c1Name} + ']' + ${qnalist.title}"></a>
                         <p>
                             <span class="uid" th:text="${#strings.substring(qnalist.writer, 0, 3) + '***'}"></span>
                             <span class="date" th:text="${#temporals.format(qnalist.rdate, 'yy-MM-dd')}"></span>
