@@ -3,7 +3,7 @@
        xmlns:layout="http://www.thymeleaf.org"
        layout:decorate="/admin/admin_layout">
 
-      <section id="admin-cs-notice-list" layout:fragment="content">
+      <section id="admin-cs-notice-list" class="admin-cs-list" layout:fragment="content">
 
           <nav>
             <h3>공지사항 목록</h3>
@@ -13,86 +13,53 @@
           </nav>
           <!-- 공지사항 목록 컨텐츠 시작 -->
           <section>
+            <form th:action="@{#}" method="post">
             <div>
-              <select name="search">
-                <option value="search1">유형선택</option>
-                <option value="search1">상품코드</option>
-                <option value="search1">제조사</option>
-                <option value="search1">판매자</option>
+              <select name="searchCate1" id="searchCate1">
+                <option value="">유형선택</option>
               </select>
-
+              <input type="text" name="searchKeyword" id="searchKeyword" value="" placeholder="검색어를 입력하세요." >
+              <input type="hidden" name="searchPg" id="searchPg">
             </div>
-            <table>
-              <tr>
-                <th><input type="checkbox" name="all"/></th>
-                <th>이미지</th>
-                <th>상품코드</th>
-                <th>상품명</th>
-                <th>판매가격</th>
-                <th>할인율</th>
-                <th>포인트</th>
-                <th>재고</th>
-                <th>판매자</th>
-                <th>조회</th>
-                <th>관리</th>
-              </tr>
-
-              <tr>
-                <td><input type="checkbox" name="상품코드"/></td>
-                <td><img src="../../../static/admin/images/sample_thumb.jpg" class="thumb"></td>
-                <td>201603292</td>
-                <td>FreeMovement BLUEFORCE</td>
-                <td>36,000</td>
-                <td>10</td>
-                <td>360</td>
-                <td>400</td>
-                <td>홍길동</td>
-                <td>126</td>
-                <td>
-                  <a href="#">[삭제]</a>
-                  <a href="#">[수정]</a>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" name="상품코드"/></td>
-                <td><img src="../../../static/admin/images/sample_thumb.jpg" class="thumb"></td>
-                <td>201603292</td>
-                <td>FreeMovement BLUEFORCE</td>
-                <td>36,000</td>
-                <td>10</td>
-                <td>360</td>
-                <td>400</td>
-                <td>홍길동</td>
-                <td>126</td>
-                <td>
-                  <a href="#">[삭제]</a>
-                  <a href="#">[수정]</a>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" name="상품코드"/></td>
-                <td><img src="../../../static/admin/images/sample_thumb.jpg" class="thumb"></td>
-                <td>201603292</td>
-                <td>FreeMovement BLUEFORCE</td>
-                <td>36,000</td>
-                <td>10</td>
-                <td>360</td>
-                <td>400</td>
-                <td>홍길동</td>
-                <td>126</td>
-                <td>
-                  <a href="#">[삭제]</a>
-                  <a href="#">[수정]</a>
-                </td>
-              </tr>
-
+            <table class="listTable">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" name="all"/></th>
+                  <th>번호</th>
+                  <th>유형</th>
+                  <th>제목</th>
+                  <th>조회</th>
+                  <th>날짜</th>
+                  <th>관리</th>
+                </tr>
+              </thead>
+              <tbody class="listTbody">
+                <tr th:each="article:${noticeList}">
+                  <td><input type="checkbox" name="chk" th:value="${article.noticeNo}"/></td>
+                  <td>[[${article.noticeNo}]]</td>
+                  <td>[[${article.c1Name}]]</td>
+                  <td><a th:href="@{/admin/cs/notice/view}">[ [[${article.c2Name}]] ] [[${article.title}]]</a></td>
+                  <td> 0 </td>
+                  <td>[[${article.rdateSub}]]</td>
+                  <td>
+                    <a th:href="@{#}" class="noticeDelete">[삭제]</a>
+                    <br/>
+                    <a th:href="@{#}" class="noticeUpdate">[수정]</a>
+                  </td>
+                </tr>
+                <tr th:if="${noticeList.size() eq 0}">
+                  <td colspan="7">
+                    조회 결과가 없습니다.
+                  </td>
+                </tr>
+              </tbody>
             </table>
 
             <div>
-              <input type="button" value="선택삭제"/>
-              <input type="submit" value="상품등록"/>
+              <input type="submit" value="선택삭제" class="deleteAll" />
+              <a th:href="@{/admin/cs/notice/write}" class="writeBtn">작성하기</a>
             </div>
-
+            </form>
             <div class="paging">
                         <span class="prev">
                             <a href="#"><&nbsp;이전</a>

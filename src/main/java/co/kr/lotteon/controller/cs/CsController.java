@@ -1,12 +1,11 @@
 package co.kr.lotteon.controller.cs;
 
 import co.kr.lotteon.dto.LtCsNoticeDTO;
-import co.kr.lotteon.dto.LtCsQnaDTO;
 import co.kr.lotteon.service.LtCsService;
+import co.kr.lotteon.dto.LtCsQnaDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

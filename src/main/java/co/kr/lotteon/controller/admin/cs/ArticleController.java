@@ -1,15 +1,41 @@
 package co.kr.lotteon.controller.admin.cs;
 
+import co.kr.lotteon.dto.LtCsNoticeDTO;
+import co.kr.lotteon.service.AdminCsService;
+import co.kr.lotteon.service.LtCsService;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
+@Log4j2
 @Controller
 public class ArticleController {
+
+
+    @Autowired
+    private LtCsService csService;
+    @Autowired
+    private AdminCsService adminCsService;
 
     @GetMapping("/admin/cs/notice/write")
     public String write(){
         return "/admin/cs/notice/write";
+    }
+
+    @PostMapping("/admin/cs/notice/write")
+    public String write(LtCsNoticeDTO dto, HttpServletRequest req){
+
+        dto.setRegip(req.getRemoteAddr());
+        log.info("회원가입정보 : " + dto.toString());
+
+        adminCsService.saveNotice(dto);
+        return "redirect:/admin/cs/notice/list";
     }
 
     @GetMapping("/admin/cs/notice/modify")
@@ -22,8 +48,11 @@ public class ArticleController {
         return "/admin/cs/notice/view";
     }
 
-    @GetMapping("/admin/cs/notice/list")
-    public String list(){
+    @GetMapping(value = {"/admin/cs/notice/list", "/admin/cs/notice/"})
+    public String list(Model model){
+        List<LtCsNoticeDTO> noticeList = adminCsService.noticeList();
+        model.addAttribute("noticeList", noticeList);
+        log.info(noticeList.get(22).getTitle());
         return "/admin/cs/notice/list";
     }
 }

@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LtMemberTermsDTO {
-    private String terms;
+    private String buyer;
     private String privacy;
     private String location;
     private String finance;
-    private String tax;
+    private String seller;
 
 }

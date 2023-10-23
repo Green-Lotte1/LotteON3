@@ -1,9 +1,8 @@
 package co.kr.lotteon.controller.member;
 
 import co.kr.lotteon.dto.LtMemberDTO;
-import co.kr.lotteon.entity.LtMemberEntity;
 import co.kr.lotteon.entity.LtMemberTermsEntity;
-import co.kr.lotteon.service.LtMemberService;
+import co.kr.lotteon.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class MemberController {
 
 
     @Autowired
-    private LtMemberService ltMemberService;
+    private MemberService ltMemberService;
 
     @GetMapping("/member/login")
     public String login(){

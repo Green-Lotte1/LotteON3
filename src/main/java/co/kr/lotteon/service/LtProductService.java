@@ -1,10 +1,8 @@
 package co.kr.lotteon.service;
 
-import co.kr.lotteon.dto.LtProductCartDTO;
 import co.kr.lotteon.dto.LtProductDTO;
 import co.kr.lotteon.dto.prodpage.ProdPageRequestDTO;
 import co.kr.lotteon.dto.prodpage.ProdPageResponseDTO;
-import co.kr.lotteon.entity.LtProductCartEntity;
 import co.kr.lotteon.entity.LtProductEntity;
 import co.kr.lotteon.mapper.LtProductMapper;
 import co.kr.lotteon.repository.LtProductRepository;
@@ -19,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

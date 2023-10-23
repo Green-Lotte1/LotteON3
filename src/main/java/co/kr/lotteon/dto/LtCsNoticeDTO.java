@@ -1,5 +1,6 @@
 package co.kr.lotteon.dto;
 
+import co.kr.lotteon.entity.LtCsNoticeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,6 @@ public class LtCsNoticeDTO {
 	private String content;
 	private String writer;
 	private String regip;
-
 	private LocalDateTime rdate;
 
 	private int hit;
@@ -28,6 +28,16 @@ public class LtCsNoticeDTO {
 	private String c2Name;
 	private String rdateSub;
 
-	
-	
+	public LtCsNoticeEntity toEntity(){
+		return LtCsNoticeEntity.builder()
+				.noticeNo(noticeNo)
+				.cate1(cate1)
+				.cate2(cate2)
+				.title(title)
+				.content(content)
+				.writer(writer)
+				.regip(regip)
+				.rdate(rdate)
+				.build();
+	}
 }

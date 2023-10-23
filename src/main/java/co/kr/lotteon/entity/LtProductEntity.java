@@ -2,9 +2,7 @@ package co.kr.lotteon.entity;
 
 import co.kr.lotteon.dto.LtProductDTO;
 import jakarta.annotation.Nullable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -21,6 +19,7 @@ import java.time.LocalDateTime;
 public class LtProductEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int prodNo;
     private int prodCate1;
     private int prodCate2;

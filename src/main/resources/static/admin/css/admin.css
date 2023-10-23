@@ -743,3 +743,207 @@ button[type=submit] {
     box-sizing: border-box;
     cursor: pointer;
 }
+
+
+
+/******* cs **********/
+.writeBtn {
+
+    margin:10px;
+    width: 200px !important;
+    padding: 6px;
+    border: 1px solid #959595;
+    font-size: 13px;
+    background-color: #b2e0fe;
+    color: #333;
+    vertical-align: middle;
+    box-sizing: border-box;
+    float:right;
+    text-align:center;
+}
+.listTable {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.csInputTable input {
+    width:100% !important;
+    height: 100% !important;
+}
+.csInputTable textarea {
+    width:100% !important;
+    height: 400px !important;
+}
+.linkBtn{
+    display:inline-block;
+    width: 150px;
+    padding: 6px;
+    text-align:center;
+    border: 1px solid #959595;
+    font-size: 13px;
+    background-color: #fefefe;
+    color: #333;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+.mainBtn{
+    background-color: #a2c9dd;
+}
+#faqListTable  tr > td:nth-child(3) {
+    width: 120px !important;
+    text-align:center !important;
+}
+#faqListTable  tr > td:nth-child(4) {
+    width: 120px !important;
+    text-align:center !important;
+}
+#faqListTable  tr > td:nth-child(5) {
+    width: auto !important;
+    text-align:left !important;
+}
+.answer0 {
+    color: #aaa !important;
+}
+.answer1 {
+    color: red !important;
+}
+.answer2 {
+    color: blue !important;
+}
+.qnaRadio{
+    display:block;
+    font-size: 9px;
+    line-height: 2rem;
+}
+.qnaRadio > [type="radio"] {
+    vertical-align: middle;
+    appearance: none;
+    border: max(2px, 0.1em) solid gray;
+    border-radius: 50%;
+    width: 1em !important;
+    height: 1em !important;
+}
+[type="radio"]:checked {
+    border: 0.4em solid tomato;
+}
+.file span{
+    display:inline-block;
+}
+
+.file  .fileImg{
+    display:inline-block;
+    line-height:30px;
+    width:30px;
+    height:30px;
+    border: 1px solid #ccc;
+    overflow:hidden;
+}
+.file .fileImg img{
+    width: 100%;
+}
+.fileList{
+    display:block;
+    float:clear;
+    margin-top : 4px;
+}
+
+.fileList * {
+    display:inline-block;
+}
+.fileList .fileImg{
+    margin : 0 3px 0 0;
+    display:block;
+    float:left;
+    border: 1px solid #ccc;
+
+}
+.fileImg img{
+    display:inline-block;
+    line-height:60px;
+    width:60px;
+    height:60px;
+    overflow:hidden;
+}
+
+
+/* cs목록 : admin-cs-list */
+.admin-cs-list {}
+.admin-cs-list  div  {
+    margin-bottom: 10px;
+}
+.admin-cs-list input[type=submit] {
+    float: right;
+    width: 100px;
+}
+
+.admin-cs-list  table  {
+    border-top: 2px solid #8798a3;
+}
+.admin-cs-list  table  tr > th{
+    padding: 10px 0;
+    background: #f6f6f6;
+}
+.admin-cs-list  table  tr > td {
+    background: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+.admin-cs-list  table  tr > td:nth-child(1) {width: 20px;}
+.admin-cs-list  table  tr > td:nth-child(2) {width: 80px;}
+.admin-cs-list  table  tr > td:nth-child(3) {width: 80px;}
+.admin-cs-list  table  tr > td:nth-child(4) {width: auto; text-align: left;}
+.admin-cs-list  table  tr > td:nth-child(5) {width: 80px;}
+.admin-cs-list  table  tr > td:nth-child(6) {width: 80px;}
+.admin-cs-list  table  tr > td:nth-child(7) {width: 80px;}
+.admin-cs-list  table  tr > td:nth-child(8) {width: 80px;}
+.admin-cs-list  table  tr > td:nth-child(9) {width: 80px;}
+.admin-cs-list  table  tr > td:nth-child(10) {width: 80px;}
+.admin-cs-list  table  tr > td:nth-child(11) {width: 100px;}
+
+.admin-cs-list  table img.thumb {width: 60px;}
+
+.admin-cs-list   input[type=button] {
+    float: left;
+    width: 100px;
+    margin-top: 10px;
+    background-color: #959595;
+    color: white;
+}
+
+.admin-cs-list .paging {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.admin-cs-list .paging > span > a {
+    color: #777;
+    font-family: "돋움", Dotum, Tahoma, sans-serif;
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+
+.admin-cs-list .paging > span > a:hover {
+    text-decoration: underline;
+}
+
+.admin-cs-list .paging > .num > a {
+    display: inline-block;
+    min-width: 14px;
+    margin: 0 2px;
+    padding: 8px 9px;
+    border: 1px solid #c4c4c4;
+    background:  0 0 repeat-x;
+    color: #000;
+    font-family: Tahoma;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+.admin-cs-list .paging > .num > a:hover {
+    border: 1px solid #454c5f;
+    text-decoration: none;
+}
+.admin-cs-list .paging > .num > a.on {
+    color: #fe434c;
+    font-weight: bold;
+}

@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @Log4j2
 @Service
-public class LtMemberService {
+public class MemberService {
     @Autowired
     LtMemberRepository ltMemberRepository;
 
