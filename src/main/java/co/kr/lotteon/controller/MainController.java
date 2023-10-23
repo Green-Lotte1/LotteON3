@@ -23,13 +23,24 @@ public class MainController {
 
     @GetMapping(value={"/","/index"})
     public String index(Model model){
-        // index Hit Top 8
-        List<LtProductDTO> hit = ltProductService.selectProductHit();
-        List<LtProductDTO> discount = ltProductService.selectProductDiscount();
+        // index
 
+        // Hit Top 8
+        List<LtProductDTO> hit = ltProductService.selectProductHit();
+        // Discount Top 8
+        List<LtProductDTO> discount = ltProductService.selectProductDiscount();
+        // Score Top 8
+        List<LtProductDTO> score = ltProductService.selectProductScore();
+        // New Top 8
+        List<LtProductDTO> newProd = ltProductService.selectProductNew();
+        // sold Top 5 (Side Best prod)
+        List<LtProductDTO> sold = ltProductService.selectProductSold();
 
         model.addAttribute("hitTop8", hit);
         model.addAttribute("discountTop8", discount);
+        model.addAttribute("scoreTop8", score);
+        model.addAttribute("newTop8", newProd);
+        model.addAttribute("soldTop5", sold);
 
         // 자동업로드시 파일 Version Check
         // build.gradle 파일 맨 밑에 빌드 정보를 가져오기 위해 buildInfo() 호출 해야됨

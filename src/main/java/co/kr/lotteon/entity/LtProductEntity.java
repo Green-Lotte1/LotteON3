@@ -48,8 +48,9 @@ public class LtProductEntity {
     private String origin;
     private String ip;
 
+    @Column(name = "rdate")
     @CreationTimestamp
-    private LocalDateTime rDate;
+    private LocalDateTime regDate;
 
     private Integer etc1;
     private Integer etc2;
@@ -87,7 +88,7 @@ public class LtProductEntity {
                 .bizType(bizType)
                 .origin(origin)
                 .ip(ip)
-                .rDate(rDate)
+                .rDate(regDate)
                 .wDate(wDate)
                 .etc1(etc1+"")
                 .etc2(etc2+"")

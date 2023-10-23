@@ -12,92 +12,20 @@
   <article class="best">
     <h1><i class="fas fa-crown"></i>베스트상품</h1>
     <ol>
-      <li>
-        <a href="#">
+      <li th:each="sold : ${soldTop5}">
+        <a th:href="@{/product/view(prodNo = ${sold.prodNo})}">
           <div class="thumb">
             <i>1</i>
-            <img src="https://via.placeholder.com/230" alt="item1" />
+            <img th:src="@{'/thumbs/'+${sold.Thumb1}}" alt="item1" />
           </div>
-          <h2>상품명</h2>
+          <h2>[[${sold.prodName}]]</h2>
           <div class="org_price">
-            <del>30,000</del>
-            <span>10%</span>
+            <del>[[${#numbers.formatInteger(sold.price,0,'COMMA')}]]</del>
+            <span>[[${#numbers.formatInteger(sold.discount,0,'COMMA')}]]%</span>
           </div>
           <div class="dis_price">
-            <ins>27,000</ins>
+            <ins>[[${#numbers.formatInteger(sold.price - ((sold.price * sold.discount)/100),0,'COMMA')}]]</ins>
           </div>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <div class="thumb">
-            <i>2</i>
-            <img src="https://via.placeholder.com/50" alt="item1" />
-          </div>
-          <article>
-            <h2>상품명</h2>
-            <div class="org_price">
-              <del>30,000</del>
-              <span>10%</span>
-            </div>
-            <div class="dis_price">
-              <ins>27,000</ins>
-            </div>
-          </article>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <div class="thumb">
-            <i>3</i>
-            <img src="https://via.placeholder.com/50" alt="item1" />
-          </div>
-          <article>
-            <h2>상품명</h2>
-            <div class="org_price">
-              <del>30,000</del>
-              <span>10%</span>
-            </div>
-            <div class="dis_price">
-              <ins>27,000</ins>
-            </div>
-          </article>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <div class="thumb">
-            <i>4</i>
-            <img src="https://via.placeholder.com/50" alt="item1" />
-          </div>
-          <article>
-            <h2>상품명</h2>
-            <div class="org_price">
-              <del>30,000</del>
-              <span>10%</span>
-            </div>
-            <div class="dis_price">
-              <ins>27,000</ins>
-            </div>
-          </article>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <div class="thumb">
-            <i>5</i>
-            <img src="https://via.placeholder.com/50" alt="item1" />
-          </div>
-          <article>
-            <h2>상품명</h2>
-            <div class="org_price">
-              <del>30,000</del>
-              <span>10%</span>
-            </div>
-            <div class="dis_price">
-              <ins>27,000</ins>
-            </div>
-          </article>
         </a>
       </li>
     </ol>
