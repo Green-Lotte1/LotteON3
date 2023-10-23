@@ -4,18 +4,17 @@
 
 <aside th:fragment="asideFragment">
     <ul id="gnb">
-        <li>
+        <li th:if="${#authentication.principal.user.type} == 'ADMIN' ">
             <a href="#"><i class="fa fa-cogs" aria-hidden="true"></i>환경설정</a>
             <ol>
                 <li><a href="#">기본환경정보</a></li>
                 <li><a href="#">배너관리</a></li>
             </ol>
         </li>
-        <li>
+        <li th:if="${#authentication.principal.user.type} == 'ADMIN' ">
             <a href="#"><i class="fas fa-store" aria-hidden="true"></i>상점관리</a>
             <ol>
                 <li><a href="#">판매자현황</a></li>
-                <li><a href="#">재고관리</a></li>
             </ol>
         </li>
         <li>
@@ -31,7 +30,11 @@
             <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
             <ol>
                 <li><a th:href="@{/admin/product/list}">상품목록</a></li>
-                <li><a th:href="@{/admin/product/register}">상품등록</a></li>
+
+                <li th:if="${#authentication.principal.user.type} == 'SELLER' "> <!--SELLER 일 때만 등록 가능-->
+                    <a th:href="@{/admin/product/register}">상품등록</a>
+                </li>
+
                 <li><a href="#">재고관리</a></li>
             </ol>
         </li>

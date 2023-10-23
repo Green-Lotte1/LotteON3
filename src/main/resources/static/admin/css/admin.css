@@ -594,6 +594,17 @@ button[type=submit] {
 }
 
 /* 상품목록 : product-list */
+#admin-product-list {
+    position: relative;
+}
+
+#admin-product-list select {
+    padding: 5px;
+}
+#admin-product-list input {
+    margin-bottom: 5px;
+}
+
 #admin-product-list #register {
     float: right;
     width: 100px;
@@ -611,7 +622,9 @@ button[type=submit] {
     margin-bottom: 10px;
 }
 #admin-product-list input[type=submit] {
-    float: right;
+    position: absolute;
+    left: 378px;
+    top : 72px;
     width: 100px;
 }
 
@@ -830,7 +843,7 @@ button[type=submit] {
 .qnaRadio > [type="radio"] {
     vertical-align: middle;
     appearance: none;
-    border: max(2px, 0.1em) solid gray;
+    border: max(2px, 0.1em) solid rgb(128, 128, 128);
     border-radius: 50%;
     width: 1em !important;
     height: 1em !important;

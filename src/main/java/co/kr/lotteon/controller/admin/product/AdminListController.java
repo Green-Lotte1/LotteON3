@@ -17,6 +17,7 @@ public class AdminListController {
     @GetMapping("/admin/product/list")
     public String ProductList(Model model, ProdPageRequestDTO prodPageRequestDTO){
         ProdPageResponseDTO prodPageResponseDTO = ltProductService.findLtProductEntities(prodPageRequestDTO);
+        System.out.println("asdifjlowsej f: "+ prodPageResponseDTO);
         model.addAttribute(prodPageResponseDTO);
 
         return "/admin/product/list";

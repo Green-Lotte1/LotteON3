@@ -15,11 +15,11 @@ public interface LtProductRepository extends JpaRepository<LtProductEntity, Inte
 //    admin 상품 리스트, 조건 검색
 
     public Page<LtProductEntity> findAll(Pageable pageable);
-
+    public Page<LtProductEntity> findAllByProdCate1AndProdCate2(int prodCate1, int prodCate2, Pageable pageable);
     public List<LtProductEntity> findLtProductEntityByProdName(String prodName, Pageable pageable);
     public List<LtProductEntity> findLtProductEntityByProdNo(String prodNo, Pageable pageable);
     public List<LtProductEntity> findLtProductEntityByCompany(String company, Pageable pageable);
-    public List<LtProductEntity> findLtProductEntityByProdSeller(String seller, Pageable pageable);
+    public List<LtProductEntity> findLtProductEntityBySeller(String seller, Pageable pageable);
 
     //    index_prod_list
     // hit_prod
