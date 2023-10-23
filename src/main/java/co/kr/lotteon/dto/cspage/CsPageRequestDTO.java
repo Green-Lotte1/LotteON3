@@ -23,6 +23,8 @@ public class CsPageRequestDTO {
     private int cate2 = 0;
     private int type;
 
+    @Builder.Default
+    private String search = "";
 
     public Pageable getPageable(String sort){
         return PageRequest.of(
