@@ -22,45 +22,13 @@ public class CsCateService {
     private final LtCsCate1Repository ltCsCate1Repository;
     private final LtCsCate2Repository ltCsCate2Repository;
 
-    public LtCsCate1DTO findByCate1(int cate1){
-        return ltCsCate1Repository.findById(cate1).get().toDTO();
-    }
-    public LtCsCate2DTO findByCate2(int cate2){
-        return ltCsCate2Repository.findById(cate2).get().toDTO();
-    }
-
     public List<LtCsCate1DTO> selectCSCate1s(){
         return ltCsCate1Repository.findAll().stream().map(LtCsCate1Entity::toDTO).collect(Collectors.toList());
     }
-    public List<LtCsCate1DTO> selectCSCate1sForNotice(){
-        return ltCsCate1Repository.findCate1sForNotice().stream().map(LtCsCate1Entity::toDTO).collect(Collectors.toList());
-    }
-    public List<LtCsCate1DTO> selectCSCate1sForQna(){
-        return ltCsCate1Repository.findCate1sForQna().stream().map(LtCsCate1Entity::toDTO).collect(Collectors.toList());
-    }
     public List<LtCsCate2DTO> selectCSCate2s(int cate1){
         return ltCsCate2Repository.findAllByCate1(cate1).stream().map(LtCsCate2Entity::toDTO).collect(Collectors.toList());
     }
-/*
-    public List<LtCsCate2DTO> selectCSCate2s(int cate1){
-        return ltCsCate2Repository.findAllByCate1(cate1).stream().map(LtCsCate2Entity::toDTO).collect(Collectors.toList());
-    }
-    public List<LtCsCate2DTO> selectCSCate2sForNotice(){
-        return ltCsCate2Repository.findCate2sForNotice().stream().map(LtCsCate2Entity::toDTO).collect(Collectors.toList());
-    }
-    public List<LtCsCate2DTO> selectCSCate2sForQna(){
-        return ltCsCate2Repository.findCate2sForQna().stream().map(LtCsCate2Entity::toDTO).collect(Collectors.toList());
-    }
 
-     */
-
-    public String selectCsC1Name(int cate1) {
-        return ltCsCate1Repository.findById(cate1).get().getC1Name();
-    }
-
-    public String selectCsC2Name(int cate2) {
-        return ltCsCate2Repository.findById(cate2).get().getC2Name();
-    }
 
 
 

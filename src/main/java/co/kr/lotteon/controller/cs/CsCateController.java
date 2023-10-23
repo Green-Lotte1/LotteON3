@@ -6,10 +6,7 @@ import co.kr.lotteon.service.CsCateService;
 import co.kr.lotteon.service.LtCsService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -31,7 +28,8 @@ public class CsCateController {
 
     }
 
-    @GetMapping("/cs/cate1")
+    @GetMapping("/cate1")
+    @ResponseBody
     public List<LtCsCate1DTO> list(){
 
         List<LtCsCate1DTO> cate1list = ltCsService.selectCsCate1();
@@ -41,7 +39,8 @@ public class CsCateController {
 
     }
 
-    @GetMapping("/cs/cate2")
+    @GetMapping("/cate2")
+    @ResponseBody
     public List<LtCsCate2DTO> cate2list(@RequestParam("cate1") int cate1) {
         log.info("cate2cate2cate2???" + cate1);
         List<LtCsCate2DTO> cate2list = ltCsService.selectCsCate2(cate1);

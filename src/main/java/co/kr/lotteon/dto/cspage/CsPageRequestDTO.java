@@ -17,7 +17,10 @@ public class CsPageRequestDTO {
     @Builder.Default
     private int size=10;
 
-    private String cate;
+    @Builder.Default
+    private int cate1 = 0;
+    @Builder.Default
+    private int cate2 = 0;
     private int type;
 
 
