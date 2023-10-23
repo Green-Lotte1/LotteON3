@@ -46,7 +46,7 @@ public class AdminCsService {
     }
 
 
-    public CsPageResponseDTO findAllNotice(CsPageRequestDTO pageRequestDTO){
+    public CsPageResponseDTO noticeList(CsPageRequestDTO pageRequestDTO){
         Pageable pageable = pageRequestDTO.getPageable("noticeNo");
         Page<LtCsNoticeEntity> result = null;
         if(pageRequestDTO.getCate1() == 0){
