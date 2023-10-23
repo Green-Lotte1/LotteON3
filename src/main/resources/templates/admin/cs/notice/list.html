@@ -17,9 +17,9 @@
                   return false;
                 }
                 if( searchVal == null || searchVal === "" ) {
-                  location.href = "/admin/cs/notice/list?cate1=" + selectValue;
+                  location.href = "/LotteON/admin/cs/notice/list?cate1=" + selectValue;
                 } else{
-                 location.href = "/admin/cs/notice/list?cate1=" + selectValue +"&search="+searchVal;
+                 location.href = "/LotteON/admin/cs/notice/list?cate1=" + selectValue +"&search="+searchVal;
                 }
               });
             });
@@ -30,9 +30,9 @@
                 return false;
               }
                 if( cate1Val == null || cate1Val === "" ) {
-                  location.href = "/admin/cs/notice/list?search=" + inputVal;
+                  location.href = "/LotteON/admin/cs/notice/list?search=" + inputVal;
                 } else{
-                  location.href = "/admin/cs/notice/list?cate1=" + cate1Val +"&search="+inputVal;
+                  location.href = "/LotteON/admin/cs/notice/list?cate1=" + cate1Val +"&search="+inputVal;
                 }
             });
 
