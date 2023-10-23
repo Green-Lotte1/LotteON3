@@ -4,6 +4,13 @@
       layout:decorate="/cs/_cslayout.html">
 
 <section layout:fragment="content">
+    <script>
+        function showAlertLogin() {
+           alert('로그인이 필요한 기능입니다.');
+           window.location.href = '/LotteON/member/login';
+         }
+    </script>
+
 
     <section id="cs">
         <div class="main">
@@ -18,7 +25,7 @@
                 </ul>
             </section>
             <section class="faq">
-                <h1>자주 묻는 질문<a href="./faq/list.html">전체보기</a>
+                <h1>자주 묻는 질문<a th:href="@{/cs/faq/list}">전체보기</a>
                 </h1>
                 <ol>
                     <li>
@@ -59,7 +66,14 @@
                         </p>
                     </li>
                 </ul>
-                <a th:href="@{/cs/qna/write}" class="ask">문의글 작성 ></a>
+                <a th:href="@{/cs/qna/write}"
+                   th:unless="${#authorization.expression('isAuthenticated()')}"
+                   onclick="showAlertLogin(); return false;"
+                   class="ask">문의글 작성 ></a>
+
+                <a th:href="@{/cs/qna/write}"
+                   th:if="${#authorization.expression('isAuthenticated()')}"
+                   class="ask">문의글 작성 ></a>
             </section>
             <section class="tel">
                 <h1>
