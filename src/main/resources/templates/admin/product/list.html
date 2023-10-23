@@ -13,11 +13,11 @@
     <!-- 상품목록 컨텐츠 시작 -->
     <section>
         <div>
-            <select name="search">
-                <option value="search1">상품명</option>
-                <option value="search2">상품번호</option>
-                <option value="search3">제조사</option>
-                <option value="search4">판매자</option>
+            <select name="search" >
+                <option  value="search1">상품명</option>
+                <option  value="search2">상품번호</option>
+                <option  value="search3">제조사</option>
+                <option  value="search4">판매자</option>
             </select>
             <input type="text" name="search" value="키워드 입력">
             <input type="submit" id="btnSearch" th:value="검색"></input>
@@ -51,7 +51,7 @@
                 <td>[[${ltProduct.seller}]]</td>
                 <td>[[${ltProduct.hit != 0 ? #numbers.formatInteger(ltProduct.hit, 0, 'COMMA') : '0'}]]</td>
                 <td>
-                    <a href="#">[삭제]</a>
+                    <a class="ltBtnDelete" href="#">[삭제]</a>
                     <a href="#">[수정]</a>
             </tr>
                 </td>
@@ -64,13 +64,13 @@
 
         <div class="paging">
             <span class="prev" th:if="${prodPageResponseDTO.prev}" >
-                            <a th:href="@{/admin/product/list(pg=${prodPageResponseDTO.start - 1})}"><&nbsp;이전</a>
+                            <a th:href="@{/admin/product/list(pg=${prodPageResponseDTO.start - 1})}">&laquo; <&nbsp;이전</a>
                         </span>
             <span class="num" th:each="num:${#numbers.sequence(prodPageResponseDTO.start, prodPageResponseDTO.end)}">
                             <a th:href="@{/admin/product/list(pg=${num})}"  class="on">[[${num}]]</a>
                         </span>
             <span class="next" th:if="${prodPageResponseDTO.next}">
-                            <a th:href="@{/admin/product/list(pg=${prodPageResponseDTO.end + 1})}">다음&nbsp;></a>
+                            <a th:href="@{/admin/product/list(pg=${prodPageResponseDTO.end + 1})}"> 다음&nbsp;>&laquo;</a>
                         </span>
         </div>
 
