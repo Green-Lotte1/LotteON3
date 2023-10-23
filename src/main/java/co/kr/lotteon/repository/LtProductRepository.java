@@ -23,5 +23,17 @@ public interface LtProductRepository extends JpaRepository<LtProductEntity, Inte
     public List<LtProductEntity> findLtProductEntityBy(String prodName);
     public List<LtProductEntity> findLtProductEntityByprodName(String prodName);*/
 
+//    index_prod_list
+    // hit_prod
+    public List<LtProductEntity> findTop8ByOrderByHitDesc();
+
+    //    // recommend_prod
+//    public List<LtProductEntity> findTop8ByOrderBySoldDesc();
+
+    // new_prod
+//    public List<LtProductEntity> findTop8ByOrderByRDateDesc();
+
+    // discount_prod
+    public List<LtProductEntity> findTop8ByOrderByDiscountDesc();
 
 }

@@ -42,6 +42,24 @@ public class LtProductService {
         return entity.toDTO();
     }
 
+//    Index 출력
+    // Hit 상품 Top8
+    public List<LtProductDTO> selectProductHit() {
+
+        List<LtProductEntity> prodEntity = ltProductRepository.findTop8ByOrderByHitDesc();
+
+        List<LtProductDTO> prodHitDTO = prodEntity.stream().map(entity -> modelMapper.map(entity, LtProductDTO.class)).toList();
+
+        return prodHitDTO;
+    }
+    // discount Top8
+    public List<LtProductDTO> selectProductDiscount() {
+        List<LtProductEntity> prodEntity = ltProductRepository.findTop8ByOrderByDiscountDesc();
+        List<LtProductDTO> prodDisDTO = prodEntity.stream().map(entity -> modelMapper.map(entity, LtProductDTO.class)).toList();
+
+        return prodDisDTO;
+    }
+
 //    admin - 상품 등록
     public void insertLtProduct(LtProductDTO ltProductDTO){
 
