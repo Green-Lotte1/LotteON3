@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.text.DecimalFormat;
+
 @Getter
 @Setter
 @Builder
@@ -17,8 +19,20 @@ public class LtProductCartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cartNo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "uid", insertable = false, updatable = false)
+    private LtMemberEntity ltMemberEntity;
+
+    @Column(name = "uid")
     private String  uid;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "prodNo", insertable = false, updatable = false)
+    private LtProductEntity ltProductEntity;
+    @Column(name="prodNo")
     private int prodNo;
+
     private int count;
     private int price;
     private int discount;
@@ -28,9 +42,11 @@ public class LtProductCartEntity {
     @CreationTimestamp
     private String rDate;
 
-    private String prodName;
-    private String descript;
-    private String thumb1;
+    private String getDeciFormat(int number){
+
+        DecimalFormat deciFormat = new DecimalFormat("###,###");
+        return deciFormat.format(number);
+    }
 
     public LtProductCartDTO toDTO() {
         return LtProductCartDTO.builder()
@@ -44,9 +60,12 @@ public class LtProductCartEntity {
                 .delivery(delivery)
                 .total(total)
                 .rDate(rDate)
-                .prodName(prodName)
-                .descript(descript)
-                .thumb1(thumb1)
+                .priceSub(getDeciFormat(price))
+                .deliverySub(getDeciFormat(delivery))
+                .totalSub(getDeciFormat(total))
+                .prodName(ltProductEntity.getProdName())
+                .descript(ltProductEntity.getDescript())
+                .thumb1(ltProductEntity.getThumb1())
                 .build();
     }
 

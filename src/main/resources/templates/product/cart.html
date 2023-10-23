@@ -28,62 +28,30 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="empty">
+            <tr th:if="${dtoList.size() eq 0}" class="empty">
                 <td colspan="7">장바구니에 상품이 없습니다.</td>
             </tr>
-            <tr>
+
+            <tr th:each="cartItem:${dtoList}">
                 <td><input type="checkbox" name=""></td>
                 <td>
                     <article>
                         <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
                         <div>
-                            <h2><a href="#">상품명</a></h2>
-                            <p>상품설명</p>
+                            <h2><a href="#">[[${cartItem.prodName}]]</a></h2>
+                            <p>[[${cartItem.descript}]]</p>
                         </div>
                     </article>
                 </td>
-                <td>1</td>
-                <td>27,000</td>
-                <td>5%</td>
-                <td>270</td>
-                <td>무료배송</td>
-                <td>27,000</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" name=""></td>
+                <td>[[${cartItem.count}]]</td>
+                <td>[[${cartItem.priceSub}]]</td>
+                <td>[[${cartItem.discount}]]%</td>
+                <td>[[${cartItem.point}]]</td>
                 <td>
-                    <article>
-                        <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                        <div>
-                            <h2><a href="#">상품명</a></h2>
-                            <p>상품설명</p>
-                        </div>
-                    </article>
+                    <span th:if="${cartItem.delivery eq 0}">[무료배송]</span>
+                    <span th:if="${cartItem.delivery ne 0}">[[${cartItem.deliverySub}]]</span>
                 </td>
-                <td>1</td>
-                <td>27,000</td>
-                <td>5%</td>
-                <td>270</td>
-                <td>무료배송</td>
-                <td>27,000</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" name=""></td>
-                <td>
-                    <article>
-                        <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                        <div>
-                            <h2><a href="#">상품명</a></h2>
-                            <p>상품설명</p>
-                        </div>
-                    </article>
-                </td>
-                <td>1</td>
-                <td>27,000</td>
-                <td>5%</td>
-                <td>270</td>
-                <td>무료배송</td>
-                <td>27,000</td>
+                <td>[[${cartItem.totalSub}]]</td>
             </tr>
 
             </tbody>

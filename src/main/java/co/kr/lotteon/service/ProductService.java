@@ -35,7 +35,6 @@ public class ProductService {
                         LtProductEntity::toDTO
                 )
                 .toList();
-        //.collect(Collectors.toList());
         int totalElement = (int) result.getTotalElements();
         return ProdPageResponseDTO.builder()
                 .pageRequestDTO(pageRequestDTO)
