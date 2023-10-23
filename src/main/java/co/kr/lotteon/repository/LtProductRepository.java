@@ -37,4 +37,6 @@ public interface LtProductRepository extends JpaRepository<LtProductEntity, Inte
     // discount_prod
     public List<LtProductEntity> findTop8ByOrderByDiscountDesc();
 
+
+
 }
