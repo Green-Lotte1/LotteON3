@@ -15,6 +15,6 @@ public interface LtCsQnaMapper {
 
     public int selectCsQnaTotal();
 
-
+    public LtCsQnaDTO selectCsQnaView(int qnaNo);
 
 }

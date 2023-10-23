@@ -42,8 +42,8 @@ public class LtCsService {
         return ltCsCateMapper.selectCsCate2(cate1);
     }
 
-    public void insertQnaWrite(LtCsQnaDTO dto){
-        ltCsQnaMapper.insertQnaWrite(dto);
+        public void insertQnaWrite(LtCsQnaDTO dto){
+            ltCsQnaMapper.insertQnaWrite(dto);
     }
 
 
@@ -65,6 +65,10 @@ public class LtCsService {
     // Notice게시판 총 갯수 카운트
     public int selectCsNoticeTotal() {
         return ltCsNoticeMapper.selectCsNoticeTotal();
+    }
+    // Notice게시판 cate 참고한 총 갯수 카운트
+    public int selectCsNoticeTotalCate(int cate1){
+        return ltCsNoticeMapper.selectCsNoticeTotalCate(cate1);
     }
 
     // Qna게시판 총 갯수 카운트
@@ -113,12 +117,27 @@ public class LtCsService {
         return (currentPage - 1) * 10;
     }
 
+    //noticeList 전체
     public List<LtCsNoticeDTO> selectCsNoticeListAll(int start){
         return ltCsNoticeMapper.selectCsNoticeListAll(start);
+    }
+    //noticeList cate 참조
+    public List<LtCsNoticeDTO> selectCsNoticeListCate(int cate1, int start){
+        return ltCsNoticeMapper.selectCsNoticeListCate(cate1, start);
     }
 
     public List<LtCsQnaDTO> selectCsQnaListAll(int start){
         return ltCsQnaMapper.selectCsQnaListAll(start);
+    }
+
+    // 게시판 view
+
+    public LtCsNoticeDTO selectCSNoticeView(int noticeNo){
+        return ltCsNoticeMapper.selectCSNoticeView(noticeNo);
+    }
+
+    public LtCsQnaDTO selectCsQnaView(int qnaNo){
+        return ltCsQnaMapper.selectCsQnaView(qnaNo);
     }
 
 

@@ -1,30 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>롯데ON::고객센터</title>
-    <link rel="shortcut icon" type="image/x-icon" href="../../../static/images/favicon.ico" />
-    <link rel="stylesheet" href="../../../static/cs/css/style.css" />
-</head>
-<body>
-<div id="wrapper">
-    <header>
-        <div class="top">
-            <div>
-                <p>
-                    <a href="./member/login.html">로그인</a>
-                    <a href="#">회원가입</a>
-                    <a href="#">마이페이지</a>
-                    <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
-                </p>
-            </div>
-        </div>
-        <div class="logo">
-            <div>
-                <a href="#"><img src="../../../static/images/header_logo.png" alt="로고" />고객센터</a>
-            </div>
-        </div>
-    </header>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:layout="http://www.thymeleaf.org"
+      layout:decorate="/cs/_cslayout.html">
+
+<div layout:fragment="content">
 
     <section id="cs">
         <div class="qna">
@@ -48,17 +27,17 @@
                 </aside>
                 <article>
                     <nav>
-                        <h2 class="title">[가입] 가입 문의내용</h2>
+                        <h2 class="title" th:text="'[' + ${qnaBoard.c2Name} + ']' + ${qnaBoard.title}"></h2>
                         <p>
-                            <span>chh***</span>
-                            <span>2022-11-21</span>
+                            <span th:text="${#strings.substring(qnaBoard.writer, 0, 3) + '***'}"></span>
+                            <span th:text="${#temporals.format(qnaBoard.rdate, 'yyyy-MM-dd')}"></span>
                         </p>
                     </nav>
 
                     <div class="content">
                         <p>
-                            개인회원에서 법인회원(사업자 회원)으로 전환은 불가하므로 법인회원(사업자 회원) 전환은 신규 가입으로 진행을 해야 합니다.
-                        </p>
+                            [[${qnaBoard.content}]]
+                        </p><br><br>
                         <p>
                             ※ 피싱 관련 피해신고<br /><br />
                             ▶ 경찰청 사이버수사국 (국번없이)182 :
@@ -68,36 +47,12 @@
                             감사합니다.<br />
                         </p>
                     </div>
-                    <a href="./list.html" class="btnList">목록보기</a>
+                    <a th:href="@{/cs/qna/list}" class="btnList">목록보기</a>
                 </article>
             </section>
         </div>
     </section>
-
-    <footer>
-        <ul>
-            <li><a href="#">회사소개</a></li>
-            <li><a href="#">서비스이용약관</a></li>
-            <li><a href="#">개인정보처리방침</a></li>
-            <li><a href="#">전자금융거래약관</a></li>
-        </ul>
-        <div>
-            <p><img src="../../../static/images/footer_logo.png" alt="로고" /></p>
-            <p>
-                <strong>(주)롯데ON</strong><br />
-                서울특별시 송파구 올림픽로 300 롯데월드타워 26층 (역삼동 강남파이낸스센터)<br />
-                대표이사 : 김사무엘상현, 정준호, 강성현<br />
-                사업자등록번호 : 529-85-00774(롯데쇼핑(주) e커머스사업부)<br />
-                통신판매업 신고 : 서울송파 제0158호<br>
-                호스팅 서비스사업자 : 롯데쇼핑(주) e커머스사업부
-            </p>
-            <p>
-                <strong>고객센터</strong><br />
-                Tel : 1899-7000(유료) (평일 09:00~18:00)<br />
-                Fax : 051-123-4567 | E-mail : lotteon@lotte.net<br />
-            </p>
-        </div>
-    </footer>
+</div>
 </div>
 </body>
 </html>
