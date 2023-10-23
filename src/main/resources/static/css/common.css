@@ -563,3 +563,8 @@ footer p > strong {
   font-size: 0;
   cursor: pointer;
 }
+
+#mainbanner > li > a > img{
+  height: 425px;
+}
+
