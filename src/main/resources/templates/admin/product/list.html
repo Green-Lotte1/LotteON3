@@ -17,10 +17,10 @@
                 <option value="search1">상품명</option>
                 <option value="search1">상품번호</option>
                 <option value="search1">제조사</option>
-                <option value="search1">판매자</option> <!--담당자명-->
+                <option value="search1">판매자</option>
             </select>
             <input type="text" name="search" value="키워드 입력">
-            <button id="btnSearch">검색</button>
+            <input type="submit" id="btnSearch">검색</input>
         </div>
         <table>
             <tr>
@@ -39,15 +39,15 @@
 
             <tr th:each="ltProduct : ${prodPageResponseDTO.dtoList}">
                 <td><input type="checkbox" name="상품코드"/></td>
-                <td><img src="../thumbs/3e136c0f-b916-4008-8857-867330b1f0e9.jpg" class="thumb"></td>
+                <!--<td><img th:src="@{/thumbs/}+'/'+${ltProduct.thumb1}" class="thumb"></td>-->
                 <td>[[${ltProduct.prodNo}]]</td>
                 <td>[[${ltProduct.prodName}]]</td>
-                <td>[[${#numbers.formatInteger(ltProduct.price, 3, 'COMMA')}]]</td>
+                <td>[[${ltProduct.price != 0 ? #numbers.formatInteger(ltProduct.price, 0, 'COMMA') : '0'}]]</td>
                 <td>[[${ltProduct.discount}]]%</td>
-                <td>[[${ltProduct.point}]]</td>
-                <td>[[${ltProduct.stock}]]</td>
+                <td>[[${ltProduct.point != 0 ? #numbers.formatInteger(ltProduct.point, 0, 'COMMA') : '0'}]]</td>
+                <td>[[${ltProduct.stock != 0 ? #numbers.formatInteger(ltProduct.stock, 0, 'COMMA') : '0'}]]</td>
                 <td>[[${ltProduct.seller}]]</td>
-                <td>[[${ltProduct.hit}]]</td>
+                <td>[[${ltProduct.hit != 0 ? #numbers.formatInteger(ltProduct.hit, 0, 'COMMA') : '0'}]]</td>
                 <td>
                     <a href="#">[삭제]</a>
                     <a href="#">[수정]</a>
@@ -57,24 +57,18 @@
 
         <div>
             <input type="button" value="선택삭제"/>
-            <input type="submit" value="상품등록"/>
+            <a th:href="@{/admin/product/register}" id="register">상품등록</a>
         </div>
 
         <div class="paging">
-                        <span th:if="${prodPageResponseDTO.prev}" class="prev">
-                            <a th:href="@{/admin/product/list(cate1=${prodPageResponseDTO})}"><&nbsp;이전</a>
+            <span class="prev" th:if="${prodPageResponseDTO.prev}" >
+                            <a th:href="@{/admin/product/list(pg=${prodPageResponseDTO.start})}"><&nbsp;이전</a>
                         </span>
-            <span class="num">
-                            <a href="#" class="on">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <a href="#">6</a>
-                            <a href="#">7</a>
+            <span class="num" th:each="num:${#numbers.sequence(prodPageResponseDTO.start, prodPageResponseDTO.end)}">
+                            <a th:href="@{/admin/product/list(pg=${num})}"  class="on">[[${num}]]</a>
                         </span>
-            <span class="next">
-                            <a href="#">다음&nbsp;></a>
+            <span class="next" th:if="${prodPageResponseDTO.next}">
+                            <a th:href="@{/admin/product/list(pg=${prodPageResponseDTO.end})}">다음&nbsp;></a>
                         </span>
         </div>
 

@@ -12,16 +12,14 @@ import java.util.List;
 @Repository
 public interface LtProductRepository extends JpaRepository<LtProductEntity, Integer> {
 
-    List<LtProductEntity> findAll();
+//    admin 상품 리스트, 조건 검색
 
     public Page<LtProductEntity> findAll(Pageable pageable);
 
-    /*public Page<LtProductEntity> findLtProductEntitiesByProdCate1(int prodCate1, Pageable pageable);*/
-
-/*    public List<LtProductEntity> findLtProductEntityByProdName(String prodName);
-    public List<LtProductEntity> findLtProductEntityByProdNo(String prodNo);
-    public List<LtProductEntity> findLtProductEntityBy(String prodName);
-    public List<LtProductEntity> findLtProductEntityByprodName(String prodName);*/
+    public List<LtProductEntity> findLtProductEntityByProdName(String prodName, Pageable pageable);
+    public List<LtProductEntity> findLtProductEntityByProdNo(String prodNo, Pageable pageable);
+    public List<LtProductEntity> findLtProductEntityByCompany(String company, Pageable pageable);
+    public List<LtProductEntity> findLtProductEntityByProdSeller(String seller, Pageable pageable);
 
 //    index_prod_list
     // hit_prod
