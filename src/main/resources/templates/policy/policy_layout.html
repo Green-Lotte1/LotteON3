@@ -24,10 +24,18 @@
         <header>
             <div class="top">
                 <div>
-                    <a href="#">로그인</a>
-                    <a href="#">회원가입</a>
-                    <a href="#">마이페이지</a>
-                    <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+                    <th:block sec:authorize="isAnonymous()">
+                        <a th:href="@{/member/login}">로그인</a>
+                        <a th:href="@{/member/join}">회원가입</a>
+                    </th:block>
+                    <th:block sec:authorize="isAuthenticated()">
+                        <th:block sec:authorize="hasAnyRole('ADMIN', 'MANAGER','SELLER')">
+                            <a th:href="@{/admin/index}">관리자</a>
+                        </th:block>
+                        <a th:href="@{/member/logout}">로그아웃</a>
+                        <a href="#">마이페이지</a>
+                        <a th:href="@{/product/cart}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+                    </th:block>
                 </div>
             </div>
             <div class="logo">
@@ -75,28 +83,43 @@
                     <li>
                         <a th:href="@{/product/list(cate1=15,cate2=10)}"><i class="fas fa-laptop"></i>가전·디지털<i class="fas fa-angle-right"></i></a>
                         <ol>
-                            <li><a href="#">노트북/PC</a></li>
-                            <li><a href="#">가전</a></li>
-                            <li><a href="#">휴대폰</a></li>
-                            <li><a href="#">기타</a></li>
+                            <li><a th:href="@{/product/list(cate1=15,cate2=10)}">노트북/PC</a></li>
+                            <li><a th:href="@{/product/list(cate1=15,cate2=11)}">모니터/프린터</a></li>
+                            <li><a th:href="@{/product/list(cate1=15,cate2=12)}">PC주변기기</a></li>
+                            <li><a th:href="@{/product/list(cate1=15,cate2=13)}">모바일/태블릿</a></li>
+                            <li><a th:href="@{/product/list(cate1=15,cate2=14)}">카메라</a></li>
+                            <li><a th:href="@{/product/list(cate1=15,cate2=15)}">게임</a></li>
+                            <li><a th:href="@{/product/list(cate1=15,cate2=16)}">영상가전</a></li>
+                            <li><a th:href="@{/product/list(cate1=15,cate2=17)}">주방가전</a></li>
+                            <li><a th:href="@{/product/list(cate1=15,cate2=18)}">계절가전</a></li>
+                            <li><a th:href="@{/product/list(cate1=15,cate2=19)}">생활/미용가전</a></li>
+                            <li><a th:href="@{/product/list(cate1=15,cate2=20)}">음향가전</a></li>
+                            <li><a th:href="@{/product/list(cate1=15,cate2=21)}">건강가전</a></li>
                         </ol>
                     </li>
                     <li>
                         <a th:href="@{/product/list(cate1=13,cate2=10)}"><i class="fas fa-utensils"></i>식품·생필품<i class="fas fa-angle-right"></i></a>
                         <ol>
-                            <li><a href="#">신선식품</a></li>
-                            <li><a href="#">가공식품</a></li>
-                            <li><a href="#">건강식품</a></li>
-                            <li><a href="#">생필품</a></li>
+                            <li><a th:href="@{/product/list(cate1=13,cate2=10)}">신선식품</a></li>
+                            <li><a th:href="@{/product/list(cate1=13,cate2=11)}">가공식품</a></li>
+                            <li><a th:href="@{/product/list(cate1=13,cate2=12)}">건강식품</a></li>
+                            <li><a th:href="@{/product/list(cate1=13,cate2=13)}">커피/음료</a></li>
+                            <li><a th:href="@{/product/list(cate1=13,cate2=14)}">생필품</a></li>
+                            <li><a th:href="@{/product/list(cate1=13,cate2=15)}">바디/헤어</a></li>
                         </ol>
                     </li>
                     <li>
                         <a th:href="@{/product/list(cate1=14,cate2=10)}"><i class="fas fa-home"></i>홈·문구·취미<i class="fas fa-angle-right"></i></a>
                         <ol>
-                            <li><a href="#">가구/DIY</a></li>
-                            <li><a href="#">침구·커튼</a></li>
-                            <li><a href="#">생활용품</a></li>
-                            <li><a href="#">사무용품</a></li>
+                            <li><a th:href="@{/product/list(cate1=14,cate2=10)}">가구/DIY</a></li>
+                            <li><a th:href="@{/product/list(cate1=14,cate2=11)}">침구/커튼</a></li>
+                            <li><a th:href="@{/product/list(cate1=14,cate2=12)}">조명/인테리어</a></li>
+                            <li><a th:href="@{/product/list(cate1=14,cate2=13)}">생활용품</a></li>
+                            <li><a th:href="@{/product/list(cate1=14,cate2=14)}">주방용품</a></li>
+                            <li><a th:href="@{/product/list(cate1=14,cate2=15)}">문구/사무용품</a></li>
+                            <li><a th:href="@{/product/list(cate1=14,cate2=16)}">사무기기</a></li>
+                            <li><a th:href="@{/product/list(cate1=14,cate2=17)}">악기/취미</a></li>
+                            <li><a th:href="@{/product/list(cate1=14,cate2=18)}">반려동물용품</a></li>
                         </ol>
                     </li>
                 </ul>
