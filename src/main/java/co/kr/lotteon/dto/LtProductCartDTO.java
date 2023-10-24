@@ -36,7 +36,6 @@ public class LtProductCartDTO {
     private String prodName;
     private String descript;
     private String thumb1;
-    private String totalSub;
     private String deliverySub;
     private String priceSub;
 

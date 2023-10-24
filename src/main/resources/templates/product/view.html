@@ -123,19 +123,19 @@
             </div>
 
                 <th:block sec:authorize="isAnonymous()">
-                    <input type="number" name="isLogin" value="0">
+                    <input type="hidden" name="isLogin" value="0">
                 </th:block>
                 <th:block sec:authorize="isAuthenticated()">
-                    <input type="number" name="isLogin" value="1">
-                    <input type="text" name="uid" th:value="${#authentication.principal.user.uid}" />
+                    <input type="hidden" name="isLogin" value="1">
+                    <input type="hidden" name="uid" th:value="${#authentication.principal.user.uid}" />
                 </th:block>
-                <input type="text" name="prodNo" th:value="${prod.prodNo}" />
-                <input type="text" name="count" value="1" />
-                <input type="text" name="price" th:value="${prod.price}" />
-                <input type="text" name="discount" th:value="${prod.discount}" />
-                <input type="text" name="point" th:value="${prod.point}" />
-                <input type="text" name="delivery" th:value="${prod.delivery}" />
-                <input type="text" name="total"   class="tot" th:value="${prod.price - ((prod.price * prod.discount)/100) + prod.delivery}" />
+                <input type="hidden" name="prodNo" th:value="${prod.prodNo}" />
+                <input type="hidden" name="count" value="1" />
+                <input type="hidden" name="price" th:value="${prod.price}" />
+                <input type="hidden" name="discount" th:value="${prod.discount}" />
+                <input type="hidden" name="point" th:value="${prod.point}" />
+                <input type="hidden" name="delivery" th:value="${prod.delivery}" />
+                <input type="hidden" name="total"   class="tot" th:value="${prod.price - ((prod.price * prod.discount)/100) + prod.delivery}" />
             </form>
         </div>
     </article>

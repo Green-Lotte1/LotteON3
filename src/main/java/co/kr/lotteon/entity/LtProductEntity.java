@@ -107,7 +107,7 @@ public class LtProductEntity {
                 .etc5(etc5)
                 .priceSub(getDeciFormat(price))
                 .deliverySub(getDeciFormat(delivery))
-                .discountPrice(((price*discount)/100))
+                .discountPrice((price*discount)/100)
                 .discountPriceSub(getDeciFormat((price*discount)/100))
                 .finalPriceSub(getDeciFormat(price - (price*discount)/100 ))
                 .build();
