@@ -1,10 +1,7 @@
 package co.kr.lotteon.service;
 
 import co.kr.lotteon.dto.*;
-import co.kr.lotteon.mapper.cs.LtCsCateMapper;
-import co.kr.lotteon.mapper.cs.LtCsIndexMapper;
-import co.kr.lotteon.mapper.cs.LtCsNoticeMapper;
-import co.kr.lotteon.mapper.cs.LtCsQnaMapper;
+import co.kr.lotteon.mapper.cs.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -24,6 +21,8 @@ public class LtCsService {
     private final LtCsQnaMapper ltCsQnaMapper;
 
     private final LtCsNoticeMapper ltCsNoticeMapper;
+
+    private final LtCsFaqMapper ltCsFaqMapper;
 
 
     public List<LtCsNoticeDTO> selectCsNotices(){
@@ -150,6 +149,11 @@ public class LtCsService {
     }
 
 
+    //FAQ list
+
+    public List<LtCsFaqDTO> selectCsFaqList10(int cate1){
+        return  ltCsFaqMapper.selectCsFaqList10(cate1);
+    }
 
 
 }
