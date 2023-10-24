@@ -730,7 +730,7 @@ footer p > strong {
 }
 
 #cs > .faq > .list > article > div > ul > .simple {
-  display: block !important;
+  display: none;
   border-bottom: none;
   text-align: center;
 }
