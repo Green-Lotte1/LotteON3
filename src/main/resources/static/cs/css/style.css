@@ -728,6 +728,12 @@ footer p > strong {
   border-bottom: none;
   text-align: center;
 }
+
+#cs > .faq > .list > article > div > ul > .simple {
+  display: block !important;
+  border-bottom: none;
+  text-align: center;
+}
             
 /* faq - 글보기 */
 #cs > .faq > .view {}
