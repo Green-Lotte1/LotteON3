@@ -694,13 +694,15 @@ footer p > strong {
   width: 100%;
   height: auto;
   border-bottom: 1px solid #ccc;
-}    
+}
 
-#cs > .faq > .list > article > div > ul > li:nth-child(n+4) {
+#cs > .faq > .list > article > div > ul > .faqItem:nth-child(n+4) {
   display: none;
 }
 
-
+.hidden{
+  display: block;
+}
 #cs > .faq > .list > article > div > ul a {
   display: block;
   width: 100%;
@@ -724,7 +726,7 @@ footer p > strong {
 }
 
 #cs > .faq > .list > article > div > ul > .more {
-  display: block !important;
+  display: block;
   border-bottom: none;
   text-align: center;
 }

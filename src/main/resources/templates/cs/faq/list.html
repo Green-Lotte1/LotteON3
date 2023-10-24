@@ -10,10 +10,8 @@
         $('.more').click(function(e){
           e.preventDefault();
 
-          let item = $(this).parent().find('> li');
-          item.show();
-         // $(this).parent().find('.simple').show();
-          $(this).parent().find('.more').hide();
+          $(this).parents('.faqBlock').find('> li').show();
+          $(this).hide();
         });
         $('.simple').click(function(e){
           e.preventDefault();
@@ -21,12 +19,11 @@
           // 모든 li 요소를 숨기고
           $(this).parent().find('> li').hide();
           // 처음 3개 li 요소를 다시 보이게 하고
-          $(this).parent().find('> li:nth-child(1)').show();
-          $('li:nth-child(2)').show();
-          $('li:nth-child(3)').show();
+          $(this).parent().find('> .faqItem:nth-child(1)').show();
+          $(this).parent().find('> .faqItem:nth-child(2)').show();
+          $(this).parent().find('> .faqItem:nth-child(3)').show();
           // "더 보기" 버튼을 표시
-          //$(this).parent().find('.more').show();
-          //$(this).parent().find('#showMore').show();
+          $(this).parent().find('> .more').show();
 
         });
       });
@@ -84,9 +81,9 @@
               <th:block th:each="cate2list:${cate2list}">
               <div>
                 <h3 th:text="${cate2list.c2Name}"></h3>
-                <ul>
-                  <th:block th:each="faqDTO:${faqDTOList}">
-                      <li th:if="${faqDTO.cate2 eq cate2list.cate2}">
+                <ul class="faqBlock">
+                    <th:block th:each="faqDTO:${faqDTOList}">
+                      <li th:if="${faqDTO.cate2 eq cate2list.cate2}" class="faqItem">
                         <a href="#"><span>Q.</span>[[${faqDTO.title}]]</a>
                       </li>
                     </th:block>
