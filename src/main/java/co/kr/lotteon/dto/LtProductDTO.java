@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
 
@@ -74,7 +75,6 @@ public class LtProductDTO {
     private int total;
     private int rating; //별점
 
-    private int discountPrice;
     private int isRemoved;
 
     private String path;
@@ -84,6 +84,17 @@ public class LtProductDTO {
 
     private String c1Name;
     private String c2Name;
+
+
+    //추가필드
+    private String totalSub;
+    private String deliverySub;
+    private String priceSub;
+    private int discountPrice;
+    private String discountPriceSub;
+    private String finalPriceSub;
+
+
 
     public LtProductEntity toEntity() {
         return LtProductEntity.builder()

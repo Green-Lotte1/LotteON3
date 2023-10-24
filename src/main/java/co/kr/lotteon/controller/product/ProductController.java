@@ -76,21 +76,9 @@ public class ProductController {
         return "/product/search";
     }
 
-
-    @PostMapping("/cart")
-    public String cart(LtProductCartDTO dto){
-        productCartSerivce.saveCart(dto);
-        return "redirect:/product/cart";
-    }
-    @GetMapping("/cart")
-    public String cart(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails){
-        if(myUserDetails == null){
-            return "/index";
-        } else {
-            List<LtProductCartDTO> dtoList = productCartSerivce.showCart(myUserDetails.getUser().getUid());
-            model.addAttribute("dtoList", dtoList);
-            return "/product/cart";
-        }
+    @PostMapping("/order")
+    public String cart(){
+        return "redirect:/product/order";
     }
 }
 
