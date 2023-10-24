@@ -1,33 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8" />
-    <title>롯데ON::고객센터</title>
-    <link rel="shortcut icon" type="image/x-icon" href="../../../static/images/favicon.ico" />
-    <link rel="stylesheet" th:href="@{/cs/css/style.css}">
-</head>
-<body>
-<div id="wrapper">
-    <header>
-        <div class="top">
-            <div>
-                <p>
-                    <a href="./member/login.html">로그인</a>
-                    <a href="#">회원가입</a>
-                    <a href="#">마이페이지</a>
-                    <a href="#"
-                    ><i class="fa fa-shopping-cart" aria-hidden="true"></i
-                    >&nbsp;장바구니</a
-                    >
-                </p>
-            </div>
-        </div>
-        <div class="logo">
-            <div>
-                <a th:href="@{/cs/index}"><img th:src="@{/images/header_logo.png}" alt="로고" />고객센터</a>
-            </div>
-        </div>
-    </header>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:layout="http://www.thymeleaf.org"
+      layout:decorate="/cs/_cslayout.html">
+
+<div layout:fragment="content">
 
     <section id="cs">
         <div class="qna">
@@ -40,14 +16,30 @@
                 <aside>
                     <h2>문의하기</h2>
                     <ul>
-                        <li class="on"><a href="#">전체</a></li>
-                        <li><a href="#">회원</a></li>
-                        <li><a href="#">쿠폰/이벤트</a></li>
-                        <li><a href="#">주문/결제</a></li>
-                        <li><a href="#">배송</a></li>
-                        <li><a href="#">취소/반품/교환</a></li>
-                        <li><a href="#">여행/숙박/항공</a></li>
-                        <li><a href="#">안전거래</a></li>
+                        <li th:class="${cate1 == null or cate1 == '' ? 'on' : ''}">
+                            <a th:href="@{/cs/qna/list}" >전체</a>
+                        </li>
+                        <li th:class="${cate1 == '20' ? 'on' : ''}">
+                            <a th:href="@{/cs/qna/list(cate1=20)}">회원</a>
+                        </li>
+                        <li th:class="${cate1 == '21' ? 'on' : ''}">
+                            <a th:href="@{/cs/qna/list(cate1=21)}">쿠폰/혜택/이벤트</a>
+                        </li>
+                        <li th:class="${cate1 == '22' ? 'on' : ''}">
+                            <a th:href="@{/cs/qna/list(cate1=22)}">주문/결제</a>
+                        </li>
+                        <li th:class="${cate1 == '23' ? 'on' : ''}">
+                            <a th:href="@{/cs/qna/list(cate1=23)}">배송</a>
+                        </li>
+                        <li th:class="${cate1 == '24' ? 'on' : ''}">
+                            <a th:href="@{/cs/qna/list(cate1=24)}">취소/반품/교환</a>
+                        </li>
+                        <li th:class="${cate1 == '25' ? 'on' : ''}">
+                            <a th:href="@{/cs/qna/list(cate1=25)}">여행/숙박/항공</a>
+                        </li>
+                        <li th:class="${cate1 == '26' ? 'on' : ''}">
+                            <a th:href="@{/cs/qna/list(cate1=26)}">기타</a>
+                        </li>
                     </ul>
                 </aside>
                 <article>
@@ -56,14 +48,16 @@
                         <h2>문의하기 전체 내용입니다.</h2>
                     </nav>
                     <table>
-                        <tr th:each="qnaListAll:${qnaListAll}">
-                            <td><a th:href="@{/cs/qna/view(qnaNo=${qnaListAll.qnaNo})}" class="title" th:text="'[' + ${qnaListAll.c2Name} + ']' + ${qnaListAll.title}"></a></td>
-                            <td class="uid" th:text="${#strings.substring(qnaListAll.writer, 0, 3) + '***'}"></td>
+
+                        <tr th:each="ltCsQnaDTOS:${ltCsQnaDTOS}">
+                            <td><a th:href="@{/cs/qna/view(qnaNo=${ltCsQnaDTOS.qnaNo})}" class="title" th:text="'[' + ${ltCsQnaDTOS.c2Name} + ']' + ${ltCsQnaDTOS.title}"></a></td>
+                            <td class="uid" th:text="${#strings.substring(ltCsQnaDTOS.writer, 0, 3) + '***'}"></td>
+
                             <th:block class="answerComplete">
-                                <td th:class="blue-text" th:if="${qnaListAll.answerComplete == 2}">답변완료</td>
-                                <td th:class="gray-text" th:if="${qnaListAll.answerComplete == 1}">검토중</td>
+                                <td th:class="blue-text" th:if="${ltCsQnaDTOS.answerComplete == 2}">답변완료</td>
+                                <td th:class="gray-text" th:if="${ltCsQnaDTOS.answerComplete == 1}">검토중</td>
                             </th:block>
-                            <td th:text="${#temporals.format(qnaListAll.rdate, 'yy-MM-dd')}"></td>
+                            <td th:text="${#temporals.format(ltCsQnaDTOS.rdate, 'yy-MM-dd')}"></td>
                         </tr>
                     </table>
 
@@ -72,7 +66,7 @@
                             <a th:href="@{/cs/qna/list(pg=${pageGroupStart - 1})}" class="prev">이전</a>
                         </th:block>
                         <th:block th:each="num:${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
-                            <a th:href="@{/cs/qna/list(pg=${num})}" th:classappend="${num == currentPage} ? 'current num' : 'num'">[[${num}]]</a>
+                            <a th:href="@{/cs/qna/list(pg=${num},cate1=${cate1})}" th:classappend="${num == currentPage} ? 'current num' : 'num'">[[${num}]]</a>
                         </th:block>
                         <th:block th:if="${pageGroupEnd < lastPageNum}">
                             <a th:href="@{/cs/qna/list(pg=${pageGroupEnd + 1})}" class="next">다음</a>
@@ -85,31 +79,7 @@
             </section>
         </div>
     </section>
-
-    <footer>
-        <ul>
-            <li><a href="#">회사소개</a></li>
-            <li><a href="#">서비스이용약관</a></li>
-            <li><a href="#">개인정보처리방침</a></li>
-            <li><a href="#">전자금융거래약관</a></li>
-        </ul>
-        <div>
-            <p><img src="../../../static/images/footer_logo.png" alt="로고" /></p>
-            <p>
-                <strong>(주)롯데ON</strong><br />
-                서울특별시 송파구 올림픽로 300 롯데월드타워 26층 (역삼동 강남파이낸스센터)<br />
-                대표이사 : 김사무엘상현, 정준호, 강성현<br />
-                사업자등록번호 : 529-85-00774(롯데쇼핑(주) e커머스사업부)<br />
-                통신판매업 신고 : 서울송파 제0158호<br>
-                호스팅 서비스사업자 : 롯데쇼핑(주) e커머스사업부
-            </p>
-            <p>
-                <strong>고객센터</strong><br />
-                Tel : 1899-7000(유료) (평일 09:00~18:00)<br />
-                Fax : 051-123-4567 | E-mail : lotteon@lotte.net<br />
-            </p>
-        </div>
-    </footer>
+</div>
 </div>
 </body>
 </html>

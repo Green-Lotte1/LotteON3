@@ -5,6 +5,36 @@
 
       <section id="admin-cs-notice-list" class="admin-cs-list" layout:fragment="content">
 
+            console.log('cate1 : ' + cate1Val + ' / search : ' + searchVal);
+            $(document).on("change","select[name='searchCate1']",function(){
+              $("option:selected", this).each(function(){
+                var selectValue = $(this).val();
+                if(selectValue === "" && selectValue == null){
+                  return false;
+                }
+                if( searchVal == null || searchVal === "" ) {
+                  location.href = "/LotteON/admin/cs/notice/list?cate1=" + selectValue;
+                } else{
+                 location.href = "/LotteON/admin/cs/notice/list?cate1=" + selectValue +"&search="+searchVal;
+                }
+              });
+            });
+
+            $(document).on("focusout","input[name='searchKeyword']",function(){
+                var inputVal = $(this).val();
+              if(inputVal === "" && inputVal == null){
+                return false;
+              }
+                if( cate1Val == null || cate1Val === "" ) {
+                  location.href = "/LotteON/admin/cs/notice/list?search=" + inputVal;
+                } else{
+                  location.href = "/LotteON/admin/cs/notice/list?cate1=" + cate1Val +"&search="+inputVal;
+                }
+            });
+
+
+          });
+        </script>
           <nav>
             <h3>공지사항 목록</h3>
             <p>

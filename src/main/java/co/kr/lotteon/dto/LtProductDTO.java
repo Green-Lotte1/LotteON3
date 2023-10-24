@@ -124,7 +124,7 @@ public class LtProductDTO {
                 .bizType(bizType)
                 .origin(origin)
                 .ip(ip)
-                .rDate(rDate)
+                .regDate(rDate)
                 .wDate(wDate)
                 .etc1(Integer.parseInt(etc1))
                 .etc2(Integer.parseInt(etc2))

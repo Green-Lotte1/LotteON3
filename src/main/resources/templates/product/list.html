@@ -26,15 +26,13 @@
         <!-- prod_list_test -->
         <th:block th:each="product:${pageResponseDTO.getDtoList()}">
         <tr>
-<<<<<<< HEAD
-            <td><a th:href="@{/product/view(prodNo = ${product.prodNo})}" class="thumb"><img th:src="@{''+${product.getThumb1()}}" alt="상품이미지"/></a></td>
-=======
+            <td><a th:href="@{/product/view(prodNo = ${product.prodNo})}" class="thumb"><img th:src="@{'/thumbs/'+${product.getThumb1()}}" alt="상품이미지"/></a></td>
+
             <td>
                 <a th:href="@{/product/view(prodNo = ${product.prodNo})}" class="thumb">
-                    <img th:src="@{'/thumbs/'+${product.Thumb1}}" alt="상품이미지"/>
+                    <img th:src="@{'/thumbs/'+${product.thumb1}}" alt="상품이미지"/>
                 </a>
             </td>
->>>>>>> b7c4f96 (cart 담고 삭제까지 완료, member 링크오류 수정)
             <td>
                 <h3 class="name">[[${product.prodName}]]</h3>
                 <a th:href="@{/product/view(prodNo = ${product.prodNo})}" class="desc">[[${product.descript}]]</a>

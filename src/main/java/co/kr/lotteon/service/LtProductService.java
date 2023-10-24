@@ -52,12 +52,34 @@ public class LtProductService {
 
         return prodHitDTO;
     }
+
     // discount Top8
     public List<LtProductDTO> selectProductDiscount() {
         List<LtProductEntity> prodEntity = ltProductRepository.findTop8ByOrderByDiscountDesc();
         List<LtProductDTO> prodDisDTO = prodEntity.stream().map(entity -> modelMapper.map(entity, LtProductDTO.class)).toList();
 
         return prodDisDTO;
+    }
+
+    // Sold Top5 (Side Best prod)
+    public List<LtProductDTO> selectProductSold() {
+        List<LtProductEntity> prodEntity = ltProductRepository.findTop5ByOrderBySoldDesc();
+        List<LtProductDTO> prodSoldDTO = prodEntity.stream().map(entity -> modelMapper.map(entity, LtProductDTO.class)).toList();
+        return prodSoldDTO;
+    }
+
+    // Score Top 8
+    public List<LtProductDTO> selectProductScore() {
+        List<LtProductEntity> prodEntity = ltProductRepository.findTop8ByOrderByScoreDesc();
+        List<LtProductDTO> prodScoreDTO = prodEntity.stream().map(entity -> modelMapper.map(entity, LtProductDTO.class)).toList();
+        return prodScoreDTO;
+    }
+
+    // New Top8
+    public List<LtProductDTO> selectProductNew() {
+        List<LtProductEntity> prodEntity = ltProductRepository.findTop8ByOrderByRegDateDesc();
+        List<LtProductDTO> prodNewDTO = prodEntity.stream().map(entity -> modelMapper.map(entity, LtProductDTO.class)).toList();
+        return prodNewDTO;
     }
 
 //    admin - 상품 등록

@@ -26,6 +26,7 @@ public class ProductCartSerivce {
         } else{
 
             log.info("새 장바구니 생성");
+
             // 아니라면 새 장바구니
             ltProductCartRepository.save(dto.toEntity());
         }

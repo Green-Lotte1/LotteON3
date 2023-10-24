@@ -17,25 +17,27 @@ public interface LtProductRepository extends JpaRepository<LtProductEntity, Inte
     public Page<LtProductEntity> findAll(Pageable pageable);
 
     public Page<LtProductEntity> findAllByProdCate1AndProdCate2(int prodCate1, int prodCate2, Pageable pageable);
+    public List<LtProductEntity> findLtProductEntityByProdName(String prodName, Pageable pageable);
+    public List<LtProductEntity> findLtProductEntityByProdNo(String prodNo, Pageable pageable);
+    public List<LtProductEntity> findLtProductEntityByCompany(String company, Pageable pageable);
+    public List<LtProductEntity> findLtProductEntityBySeller(String seller, Pageable pageable);
 
-//    public List<LtProductEntity> findLtProductEntityByProdName(String prodName, Pageable pageable);
-//    public List<LtProductEntity> findLtProductEntityByProdNo(String prodNo, Pageable pageable);
-//    public List<LtProductEntity> findLtProductEntityByCompany(String company, Pageable pageable);
-//    public List<LtProductEntity> findLtProductEntityByProdSeller(String seller, Pageable pageable);
+
 
     //    index_prod_list
     // hit_prod
     public List<LtProductEntity> findTop8ByOrderByHitDesc();
 
-    //    // recommend_prod
-//    public List<LtProductEntity> findTop8ByOrderBySoldDesc();
+    // recommend_prod
+    public List<LtProductEntity> findTop8ByOrderByScoreDesc();
 
     // new_prod
-//    public List<LtProductEntity> findTop8ByOrderByRDateDesc();
+    public List<LtProductEntity> findTop8ByOrderByRegDateDesc();
 
     // discount_prod
     public List<LtProductEntity> findTop8ByOrderByDiscountDesc();
 
-
+    // Best_prod(sold)
+    public  List<LtProductEntity> findTop5ByOrderBySoldDesc();
 
 }

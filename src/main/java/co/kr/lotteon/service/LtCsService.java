@@ -76,6 +76,10 @@ public class LtCsService {
         return ltCsQnaMapper.selectCsQnaTotal();
     }
 
+    public int selectCsQnaTotalCate(int cate1){
+        return ltCsQnaMapper.selectCsQnaTotalCate(cate1);
+    }
+
     // 페이지 마지막 번호
     public int getLastPageNum(int total) {
 
@@ -129,6 +133,11 @@ public class LtCsService {
     public List<LtCsQnaDTO> selectCsQnaListAll(int start){
         return ltCsQnaMapper.selectCsQnaListAll(start);
     }
+
+    public List<LtCsQnaDTO> selectCsQnaListCate(int cate1, int start){
+        return ltCsQnaMapper.selectCsQnaListCate(cate1,start);
+    }
+
 
     // 게시판 view
 

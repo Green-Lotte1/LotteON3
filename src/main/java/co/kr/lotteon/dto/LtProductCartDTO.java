@@ -32,6 +32,13 @@ public class LtProductCartDTO {
     private LtMemberDTO user;
     private String totalSub;
 
+    //추가필드
+    private String prodName;
+    private String descript;
+    private String thumb1;
+    private String totalSub;
+    private String deliverySub;
+    private String priceSub;
 
     public LtProductCartEntity toEntity() {
         return LtProductCartEntity.builder()

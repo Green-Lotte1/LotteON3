@@ -11,7 +11,12 @@ public interface LtCsQnaMapper {
 
     public void insertQnaWrite(LtCsQnaDTO dto);
 
+
     List<LtCsQnaDTO> selectCsQnaListAll(int start);
+
+    List<LtCsQnaDTO> selectCsQnaListCate(int cate1 , int start);
+
+    public int selectCsQnaTotalCate(int cate1);
 
     public int selectCsQnaTotal();
 

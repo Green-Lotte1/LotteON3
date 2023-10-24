@@ -186,7 +186,7 @@ header > .logo a {
 #cs > .main > .faq > ol > li span {
   position: relative;
   top: 100px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 #cs > .main > .faq > ol > li:nth-child(1) > a {
@@ -879,17 +879,30 @@ footer p > strong {
   text-align: center;
   margin-top: 26px;
 }
-#cs > .qna > .list > article > .page > a {
+
+#cs > .qna > .list > article > .page > .num {
   display: inline-block;
   width: 34px;
-  height: 34px;        
+  height: 34px;
   box-sizing: border-box;
   text-align: center;
   line-height: 34px;
   font-size: 13px;
-  font-weight: bold;        
   vertical-align: bottom;
 }
+
+#cs > .qna > .list > article > .page > .current {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 34px;
+  font-size: 18px;
+  font-weight: bold;
+  vertical-align: bottom;
+}
+
 #cs > .qna > .list > article > .page > .prev {
   font-size: 0;
   background-image: url('../images/cs_sprites.png');
