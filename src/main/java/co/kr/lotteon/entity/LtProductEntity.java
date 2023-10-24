@@ -68,6 +68,9 @@ public class LtProductEntity {
         return deciFormat.format(number);
     }
 
+    private int getDiscountPrice(){
+        return (price*discount/100/10)*10;
+    }
 
 
     public LtProductDTO toDTO() {
@@ -107,9 +110,9 @@ public class LtProductEntity {
                 .etc5(etc5)
                 .priceSub(getDeciFormat(price))
                 .deliverySub(getDeciFormat(delivery))
-                .discountPrice((price*discount)/100)
-                .discountPriceSub(getDeciFormat((price*discount)/100))
-                .finalPriceSub(getDeciFormat(price - (price*discount)/100 ))
+                .discountPrice(getDiscountPrice())
+                .discountPriceSub(getDeciFormat(getDiscountPrice()))
+                .finalPriceSub(getDeciFormat(price - getDiscountPrice() ))
                 .build();
     }
 

@@ -39,7 +39,7 @@
                     <span>[[${#numbers.formatInteger(hit.discount,0,'COMMA')}]]%</span>
                 </div>
                 <div class="dis_price">
-                    <ins>[[${#numbers.formatInteger(hit.price - ((hit.price * hit.discount)/100),0,'COMMA')}]]</ins>
+                    <ins>[[${#numbers.formatInteger(hit.price - ((hit.price * hit.discount)/1000*10),0,'COMMA')}]]</ins>
                     <span class="noFree" th:if="${hit.delivery gt 0}">[[${#numbers.formatInteger(hit.delivery,0,'COMMA')}]]</span>
                     <span class="free" th:if="${hit.delivery eq 0}">무료배송</span>
                 </div>
@@ -61,7 +61,7 @@
                     <span>[[${#numbers.formatInteger(score.discount,0,'COMMA')}]]%</span>
                 </div>
                 <div class="dis_price">
-                    <ins>[[${#numbers.formatInteger(score.price - ((score.price * score.discount)/100),0,'COMMA')}]]</ins>
+                    <ins>[[${#numbers.formatInteger(score.price - ((score.price * score.discount)/1000*10),0,'COMMA')}]]</ins>
                     <span class="noFree" th:if="${score.delivery gt 0}">[[${#numbers.formatInteger(score.delivery,0,'COMMA')}]]</span>
                     <span class="free" th:if="${score.delivery eq 0}">무료배송</span>
                 </div>
@@ -83,7 +83,7 @@
                     <span>[[${#numbers.formatInteger(newTop.discount,0,'COMMA')}]]%</span>
                 </div>
                 <div class="dis_price">
-                    <ins>[[${#numbers.formatInteger(newTop.price - ((newTop.price * newTop.discount)/100),0,'COMMA')}]]</ins>
+                    <ins>[[${#numbers.formatInteger(newTop.price - ((newTop.price * newTop.discount)/1000*10),0,'COMMA')}]]</ins>
                     <span class="noFree" th:if="${newTop.delivery gt 0}">[[${#numbers.formatInteger(newTop.delivery,0,'COMMA')}]]</span>
                     <span class="free" th:if="${newTop.delivery eq 0}">무료배송</span>
                 </div>
@@ -105,7 +105,7 @@
                     <span>[[${#numbers.formatInteger(discount.discount,0,'COMMA')}]]%</span>
                 </div>
                 <div class="dis_price">
-                    <ins>[[${#numbers.formatInteger(discount.price - ((discount.price * discount.discount)/100),0,'COMMA')}]]</ins>
+                    <ins>[[${#numbers.formatInteger(discount.price - ((discount.price * discount.discount)/1000*10),0,'COMMA')}]]</ins>
                     <span class="noFree" th:if="${discount.delivery gt 0}">[[${#numbers.formatInteger(discount.delivery,0,'COMMA')}]]</span>
                     <span class="free" th:if="${discount.delivery eq 0}">무료배송</span>
                 </div>
