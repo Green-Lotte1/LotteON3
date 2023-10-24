@@ -26,11 +26,13 @@
         <!-- prod_list_test -->
         <th:block th:each="product:${pageResponseDTO.getDtoList()}">
         <tr>
-<<<<<<< HEAD
-            <td><a th:href="@{/product/view(prodNo = ${product.prodNo})}" class="thumb"><img th:src="@{'/thumbs/'+${product.Thumb1}}" alt="상품이미지"/></a></td>
-=======
-            <td><a th:href="@{/product/view(prodNo = ${product.prodNo})}" class="thumb"><img th:src="@{''+${product.getThumb1()}}" alt="상품이미지"/></a></td>
->>>>>>> 5d2516d (장바구니 처리)
+            <td><a th:href="@{/product/view(prodNo = ${product.prodNo})}" class="thumb"><img th:src="@{'/thumbs/'+${product.getThumb1()}}" alt="상품이미지"/></a></td>
+
+            <td>
+                <a th:href="@{/product/view(prodNo = ${product.prodNo})}" class="thumb">
+                    <img th:src="@{'/thumbs/'+${product.thumb1}}" alt="상품이미지"/>
+                </a>
+            </td>
             <td>
                 <h3 class="name">[[${product.prodName}]]</h3>
                 <a th:href="@{/product/view(prodNo = ${product.prodNo})}" class="desc">[[${product.descript}]]</a>

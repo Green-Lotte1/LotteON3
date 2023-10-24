@@ -11,13 +11,18 @@
             let num = parseInt($("input[name='num']").val());
             let price1 = "[[${prod.price - ((prod.price * prod.discount)/100)}]]";
             let delivery = parseInt("[[${prod.delivery}]]");
+            const origPoint = "[[${prod.point}]]";
             let totalprice = 0;
+            let totalPoint = origPoint;
+
+            console.log("origPoint / " + origPoint + "/ totalPoint / " + totalPoint);
 
             $('.increase').click(function (){
                 num = num+1;
                 $("input[name='num']").val(num);
                 $("input[name='count']").val(num);
                 updatePrice();
+                //updatePoint();
             });
 
             $('.decrease').click(function (){
@@ -26,6 +31,7 @@
                     $("input[name='num']").val(num);
                     $("input[name='count']").val(num);
                     updatePrice();
+                   // updatePoint();
                 }
             });
 
@@ -42,6 +48,12 @@
                 $('.totalPrice').text(totalprice.toLocaleString());
                 $('.tot').val(totalprice);
             }
+            /*
+            function updatePoint(){
+                totalPoint = origPoint * num;
+                $("input[name='point']").val(totalPoint);
+            }
+            */
 
         });
     </script>
