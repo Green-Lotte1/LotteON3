@@ -14,9 +14,12 @@ public interface LtProductRepository extends JpaRepository<LtProductEntity, Inte
 
 //    admin 상품 리스트, 조건 검색
 
+    //전체 출력(isRemoved = 0 판매 중 상품)
     public Page<LtProductEntity> findAll(Pageable pageable);
 
     public Page<LtProductEntity> findAllByProdCate1AndProdCate2(int prodCate1, int prodCate2, Pageable pageable);
+
+    //조건 검색(제품명, 제품코드, 제조사)
     public Page<LtProductEntity> findLtProductEntityByProdNameContains(String prodName, Pageable pageable);
     public Page<LtProductEntity> findLtProductEntityByProdNoContains(String prodNo, Pageable pageable);
     public Page<LtProductEntity> findLtProductEntityByCompanyContains(String company, Pageable pageable);
