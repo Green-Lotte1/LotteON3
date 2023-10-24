@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org"
-       xmlns:layout="http://www.thymeleaf.org"
-       layout:decorate="/admin/admin_layout">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="/admin/admin_layout">
 <!-- list -->
 <section id="admin-product-list" layout:fragment="content">
     <nav>
@@ -12,16 +12,21 @@
     </nav>
     <!-- 상품목록 컨텐츠 시작 -->
     <section>
+
         <div>
-            <select name="search" >
-                <option  value="search1">상품명</option>
-                <option  value="search2">상품번호</option>
-                <option  value="search3">제조사</option>
-                <option  value="search4">판매자</option>
+            <form id="formSearch" th:action="@{/admin/product/list}" method="get">
+            <input type="hidden" name="seller" th:value="${#authentication.principal.user.manager}">
+            <select name="searchType">
+                <option value="prodName">상품명</option>
+                <option value="prodNo">상품코드</option>
+                <option value="company">제조사</option>
             </select>
-            <input type="text" name="search" value="키워드 입력">
-            <input type="submit" id="btnSearch" th:value="검색"></input>
+            <input type="text" name="searchKeyword">
+            <button id="btnSearch">검색</button>
+            </form>
         </div>
+
+        <form id="formCheck" th:action="@{/admin/product/delete}" method="post">
         <table>
             <tr>
                 <th><input type="checkbox" name="all"/></th>
@@ -38,7 +43,7 @@
             </tr>
 
             <tr th:each="ltProduct : ${prodPageResponseDTO.dtoList}">
-                <td><input type="checkbox" name="상품코드"/></td>
+                <td><input type="checkbox" name="chk" th:value="${ltProduct.prodNo}"/></td>
 
                 <td><img th:src="@{'/thumbs/'+${ltProduct.Thumb1}}" class="thumb"></td>
 
@@ -51,26 +56,27 @@
                 <td>[[${ltProduct.seller}]]</td>
                 <td>[[${ltProduct.hit != 0 ? #numbers.formatInteger(ltProduct.hit, 0, 'COMMA') : '0'}]]</td>
                 <td>
-                    <a class="ltBtnDelete" href="#">[삭제]</a>
-                    <a href="#">[수정]</a>
+                    <a class="ltBtnDelete" th:href="@{/admin/product/delete(prodNo=${ltProduct.prodNo})}">[삭제]</a>
+                    <a th:href="@{/admin/product/modify(prodNo=${ltProduct.prodNo})}">[수정]</a>
             </tr>
                 </td>
         </table>
+        </form>
 
         <div>
-            <input type="button" value="선택삭제"/>
+            <input type="button" class="ltBtnChkDelete" value="선택삭제"/>
             <a th:href="@{/admin/product/register}" id="register">상품등록</a>
         </div>
 
         <div class="paging">
             <span class="prev" th:if="${prodPageResponseDTO.prev}" >
-                            <a th:href="@{/admin/product/list(pg=${prodPageResponseDTO.start - 1})}">&laquo; <&nbsp;이전</a>
+                            <a th:href="@{/admin/product/list(pg=${prodPageResponseDTO.start - 1})}"><&nbsp;이전</a>
                         </span>
             <span class="num" th:each="num:${#numbers.sequence(prodPageResponseDTO.start, prodPageResponseDTO.end)}">
                             <a th:href="@{/admin/product/list(pg=${num})}"  class="on">[[${num}]]</a>
                         </span>
             <span class="next" th:if="${prodPageResponseDTO.next}">
-                            <a th:href="@{/admin/product/list(pg=${prodPageResponseDTO.end + 1})}"> 다음&nbsp;>&laquo;</a>
+                            <a th:href="@{/admin/product/list(pg=${prodPageResponseDTO.end + 1})}">다음&nbsp;></a>
                         </span>
         </div>
 

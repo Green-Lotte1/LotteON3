@@ -32,6 +32,12 @@ public class ProdPageRequestDTO {
     @Builder.Default
     private int cate2 = 10;
 
+    //admin list 조건 검색
+    @Builder.Default
+    private String searchType = "";
+    @Builder.Default
+    private String searchKeyword = "";
+
     public Pageable getPageable(String cate1) {
         if (how.equals("ASC")) {
             return PageRequest.of(this.pg - 1, this.size, Sort.by(this.sort).ascending());
