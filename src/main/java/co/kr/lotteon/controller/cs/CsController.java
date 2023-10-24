@@ -1,5 +1,7 @@
 package co.kr.lotteon.controller.cs;
 
+import co.kr.lotteon.dto.LtCsCate2DTO;
+import co.kr.lotteon.dto.LtCsFaqDTO;
 import co.kr.lotteon.dto.LtCsNoticeDTO;
 import co.kr.lotteon.service.LtCsService;
 import co.kr.lotteon.dto.LtCsQnaDTO;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @Log4j2
@@ -209,8 +213,17 @@ public class CsController {
         return "/cs/qna/view";
     }
 
-    @GetMapping("/cs/faq/list")
-    public String faq(){
+    @RequestMapping("/cs/faq/list")
+    public String faq(@RequestParam(name= "cate1" ,required = false) int cate1,
+                      Model model){
+        log.info("faqcate1-----------------"+cate1);
+        List<LtCsFaqDTO> faqDTOList = ltCsService.selectCsFaqList10(cate1);
+
+        List<LtCsCate2DTO> cate2list = ltCsService.selectCsCate2(cate1);
+        model.addAttribute("cate2list",cate2list);
+        model.addAttribute("faqDTOList",faqDTOList);
+        model.addAttribute("cate1",cate1);
+        log.info("faqDTOList==============="+faqDTOList);
         return "/cs/faq/list";
     }
 
