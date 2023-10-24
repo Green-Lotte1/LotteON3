@@ -87,7 +87,7 @@
                     <span>[[${prod.discount}]]%</span>
                 </div>
                 <div class="dis_price">
-                    <ins>[[${#numbers.formatInteger(prod.price - (prod.price * prod.discount / 100),0,'COMMA')}]]</ins>
+                    <ins>[[${#numbers.formatInteger(prod.price - (prod.discountPrice),0,'COMMA')}]]</ins>
                 </div>
             </nav>
             <nav>
