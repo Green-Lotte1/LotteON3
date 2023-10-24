@@ -19,6 +19,8 @@ public class ProdPageResponseDTO {
     private boolean prev, next;
     private String sort;
     private String how;
+    private String searchType;
+    private String searchKeyword;
 
 
     @Builder
