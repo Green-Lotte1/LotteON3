@@ -9,20 +9,9 @@
       $(function(){
         $('.more').click(function(e){
           e.preventDefault();
-          
-          /*
-          let item = $(this).parent().find('> li:nth-child(n+4)');
-          let isVisible = item.is(':visible');
 
-          console.log('isVisible : ' + isVisible);
-
-          if(isVisible){
-            item.slideUp(100);
-          }else{
-            item.slideDown(100);
-          }
-          */
-
+          let item = $(this).parent().find('> li');
+          item.show();
         });
       });
     </script>
@@ -39,85 +28,61 @@
             <aside>
               <h2>자주묻는 질문</h2>
               <ul>
-                <li th:class="${cate1 == '20' ? 'on' : ''}">
-                  <a th:href="@{/cs/qna/list(cate1=20)}">회원</a>
+                <li th:class="${cate1 == 20 ? 'on' : ''}">
+                  <a th:href="@{/cs/faq/list(cate1=20)}">회원</a>
                 </li>
-                <li th:class="${cate1 == '21' ? 'on' : ''}">
-                  <a th:href="@{/cs/qna/list(cate1=21)}">쿠폰/혜택/이벤트</a>
+                <li th:class="${cate1 == 21 ? 'on' : ''}">
+                  <a th:href="@{/cs/faq/list(cate1=21)}">쿠폰/혜택/이벤트</a>
                 </li>
-                <li th:class="${cate1 == '22' ? 'on' : ''}">
-                  <a th:href="@{/cs/qna/list(cate1=22)}">주문/결제</a>
+                <li th:class="${cate1 == 22 ? 'on' : ''}">
+                  <a th:href="@{/cs/faq/list(cate1=22)}">주문/결제</a>
                 </li>
-                <li th:class="${cate1 == '23' ? 'on' : ''}">
-                  <a th:href="@{/cs/qna/list(cate1=23)}">배송</a>
+                <li th:class="${cate1 == 23 ? 'on' : ''}">
+                  <a th:href="@{/cs/faq/list(cate1=23)}">배송</a>
                 </li>
-                <li th:class="${cate1 == '24' ? 'on' : ''}">
-                  <a th:href="@{/cs/qna/list(cate1=24)}">취소/반품/교환</a>
+                <li th:class="${cate1 == 24 ? 'on' : ''}">
+                  <a th:href="@{/cs/faq/list(cate1=24)}">취소/반품/교환</a>
                 </li>
-                <li th:class="${cate1 == '25' ? 'on' : ''}">
-                  <a th:href="@{/cs/qna/list(cate1=25)}">여행/숙박/항공</a>
+                <li th:class="${cate1 == 25 ? 'on' : ''}">
+                  <a th:href="@{/cs/faq/list(cate1=25)}">여행/숙박/항공</a>
                 </li>
-                <li th:class="${cate1 == '26' ? 'on' : ''}">
-                  <a th:href="@{/cs/qna/list(cate1=26)}">기타</a>
+                <li th:class="${cate1 == 26 ? 'on' : ''}">
+                  <a th:href="@{/cs/faq/list(cate1=26)}">기타</a>
                 </li>
               </ul>
             </aside>
             <article>              
               <nav>
-                <h1>회원</h1>
+                <h1 th:switch="${cate1}">
+                  <h1 th:case="20">회원</h1>
+                  <h1 th:case="21">쿠폰/혜택/이벤트</h1>
+                  <h1 th:case="22">주문/결제</h1>
+                  <h1 th:case="23">배송</h1>
+                  <h1 th:case="24">취소/반품/교환</h1>
+                  <h1 th:case="25">여행/숙박/항공</h1>
+                  <h1 th:case="26">기타</h1>
+                  <h1 th:case="*">다른 카테고리</h1>
+                </h1>
                 <h2>가장 자주 묻는 질문입니다.</h2>
               </nav>
-
+              <th:block th:each="cate2list:${cate2list}">
               <div>
-                <h3>가입</h3>
+                <h3 th:text="${cate2list.c2Name}"></h3>
                 <ul>
-                  <li><a href="./view.html"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li class="more"><a href="#">더보기</a></li>
+                  <th:block th:each="faqDTO, iterStat : ${faqDTOList}">
+                      <li th:if="${faqDTO.cate2 eq cate2list.cate2}">
+                        <a href="#"><span>Q.</span>[[${faqDTO.title}]]</a>
+                      </li>
+                    </th:block>
+                  <li class="more"><a href="#" id="showMore">더보기</a></li>
+                  <li class="simple" style="display: none;"><a href="#" id="showLess">간단히보기</a></li>
                 </ul>
               </div>
-              <div>
-                <h3>탈퇴</h3>
-                <ul>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li class="more"><a href="#">더보기</a></li>
-                </ul>
-              </div>
-              <div>
-                <h3>회원정보</h3>
-                <ul>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li class="more"><a href="#">더보기</a></li>
-                </ul>
-              </div>
-              <div>
-                <h3>로그인</h3>
-                <ul>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li class="more"><a href="#">더보기</a></li>
-                </ul>
-              </div>
-
+              </th:block>
             </article>
           </section>
         </div>
       </section>
-
 </div>
     </div>
   </body>

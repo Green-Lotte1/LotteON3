@@ -17,18 +17,25 @@ public class LtProductCartDTO {
     private String  uid;
     private int prodNo;
     private int count;
+
+    /** 나중에 컬럼 삭제하자 **/
     private int price;
     private int discount;
     private int point;
     private int delivery;
+    /** 나중에 컬럼 삭제하자 **/
     private int total;
     private String rDate;
+
+
+    private LtProductDTO product;
+    private LtMemberDTO user;
+    private String totalSub;
 
     //추가필드
     private String prodName;
     private String descript;
     private String thumb1;
-    private String totalSub;
     private String deliverySub;
     private String priceSub;
 

@@ -60,12 +60,9 @@ public class LtProductCartEntity {
                 .delivery(delivery)
                 .total(total)
                 .rDate(rDate)
-                .priceSub(getDeciFormat(price))
-                .deliverySub(getDeciFormat(delivery))
                 .totalSub(getDeciFormat(total))
-                .prodName(ltProductEntity.getProdName())
-                .descript(ltProductEntity.getDescript())
-                .thumb1(ltProductEntity.getThumb1())
+                .product(ltProductEntity.toDTO())
+                .user(ltMemberEntity.toDTO())
                 .build();
     }
 

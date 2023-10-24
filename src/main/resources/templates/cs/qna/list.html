@@ -48,9 +48,11 @@
                         <h2>문의하기 전체 내용입니다.</h2>
                     </nav>
                     <table>
+
                         <tr th:each="ltCsQnaDTOS:${ltCsQnaDTOS}">
                             <td><a th:href="@{/cs/qna/view(qnaNo=${ltCsQnaDTOS.qnaNo})}" class="title" th:text="'[' + ${ltCsQnaDTOS.c2Name} + ']' + ${ltCsQnaDTOS.title}"></a></td>
                             <td class="uid" th:text="${#strings.substring(ltCsQnaDTOS.writer, 0, 3) + '***'}"></td>
+
                             <th:block class="answerComplete">
                                 <td th:class="blue-text" th:if="${ltCsQnaDTOS.answerComplete == 2}">답변완료</td>
                                 <td th:class="gray-text" th:if="${ltCsQnaDTOS.answerComplete == 1}">검토중</td>

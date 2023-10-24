@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
 
@@ -60,6 +61,15 @@ public class LtProductEntity {
 
     private String wDate;
 
+
+    private String getDeciFormat(int number){
+
+        DecimalFormat deciFormat = new DecimalFormat("###,###");
+        return deciFormat.format(number);
+    }
+
+
+
     public LtProductDTO toDTO() {
         return LtProductDTO.builder()
                 .prodNo(prodNo)
@@ -95,6 +105,11 @@ public class LtProductEntity {
                 .etc3(etc3)
                 .etc4(etc4)
                 .etc5(etc5)
+                .priceSub(getDeciFormat(price))
+                .deliverySub(getDeciFormat(delivery))
+                .discountPrice((price*discount)/100)
+                .discountPriceSub(getDeciFormat((price*discount)/100))
+                .finalPriceSub(getDeciFormat(price - (price*discount)/100 ))
                 .build();
     }
 

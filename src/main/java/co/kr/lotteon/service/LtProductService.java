@@ -8,9 +8,11 @@ import co.kr.lotteon.mapper.LtProductMapper;
 import co.kr.lotteon.repository.LtProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.hibernate.action.internal.EntityIncrementVersionProcess;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -101,7 +103,7 @@ public class LtProductService {
     }
 
     // admin - 파일이 저장 될 경로
-    @Value("${spring.servlet.multipart.location}")
+    @Value("${upload.path.thumbs}")
     private String filePath;
 
 
@@ -156,6 +158,49 @@ public class LtProductService {
                 .total(totalElement)
                 .build();
     }
+
+    //조건 검색
+    public ProdPageResponseDTO search(ProdPageRequestDTO prodPageRequestDTO){
+
+        Pageable pageable = prodPageRequestDTO.getPageable("cate1");
+        String searchType = prodPageRequestDTO.getSearchType(); // searchType 값을 가져와야 함
+
+        // 검색 결과를 저장할 변수
+        Page<LtProductEntity> searchResult = null;
+        log.info("서치 키워드 : " + prodPageRequestDTO.getSearchKeyword());
+        log.info("서치 타입 : " + prodPageRequestDTO.getSearchType());
+
+        switch(searchType){
+            case "prodName":
+                searchResult = ltProductRepository.findLtProductEntityByProdNameContains(prodPageRequestDTO.getSearchKeyword(), pageable);
+                break;
+            case "prodNo":
+                searchResult = ltProductRepository.findLtProductEntityByProdNoContains(prodPageRequestDTO.getSearchKeyword(), pageable);
+                break;
+            case "company":
+                searchResult = ltProductRepository.findLtProductEntityByCompanyContains(prodPageRequestDTO.getSearchKeyword(), pageable);
+                break;
+            default:
+                searchResult = ltProductRepository.findAll(pageable);
+                break;
+        }
+
+        // entity page -> dto list 로 변환
+        List<LtProductDTO> dtoList = searchResult.getContent().stream().map(LtProductEntity::toDTO).toList();
+
+       // ProdPageResponseDTO searchResult1 = (ProdPageResponseDTO) searchResult;
+        //System.out.println("asdjkflkasd : " + searchResult1);
+
+        return ProdPageResponseDTO
+                .builder()
+                .pageRequestDTO(prodPageRequestDTO)
+                .dtoList(dtoList)
+                .total((int)searchResult.getTotalElements())
+                .build();
+    }
+
+
+
 
 
 }

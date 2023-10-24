@@ -30,7 +30,7 @@ public class RegisterController {
     private LtProductService ltProductService;
 
     //파일 저장 경로
-    @Value("${spring.servlet.multipart.location}")
+    @Value("${upload.path.thumbs}")
     private String filePath;
 
     @GetMapping("/admin/product/register")

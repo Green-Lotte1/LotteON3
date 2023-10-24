@@ -20,6 +20,7 @@ public interface LtProductCartRepository extends JpaRepository<LtProductCartEnti
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE lt_product_cart m SET m.count = m.count + :count where m.uid = :uid and m.prodNo = :prodNo", nativeQuery = true)
-    public void updateCountByUidAndProdNo(@Param("uid") String uid, @Param("count")int count, @Param("prodNo") int prodNo);
+    @Query(value = "UPDATE lt_product_cart m SET m.count = m.count + :count, m.total = m.total + :sumPrice where m.uid = :uid and m.prodNo = :prodNo", nativeQuery = true)
+    public void updateCountByUidAndProdNo(@Param("uid") String uid, @Param("count")int count, @Param("sumPrice") int sumPrice, @Param("prodNo") int prodNo);
+
 }

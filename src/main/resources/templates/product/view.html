@@ -11,13 +11,18 @@
             let num = parseInt($("input[name='num']").val());
             let price1 = "[[${prod.price - ((prod.price * prod.discount)/100)}]]";
             let delivery = parseInt("[[${prod.delivery}]]");
+            const origPoint = "[[${prod.point}]]";
             let totalprice = 0;
+            let totalPoint = origPoint;
+
+            console.log("origPoint / " + origPoint + "/ totalPoint / " + totalPoint);
 
             $('.increase').click(function (){
                 num = num+1;
                 $("input[name='num']").val(num);
                 $("input[name='count']").val(num);
                 updatePrice();
+                //updatePoint();
             });
 
             $('.decrease').click(function (){
@@ -26,6 +31,7 @@
                     $("input[name='num']").val(num);
                     $("input[name='count']").val(num);
                     updatePrice();
+                   // updatePoint();
                 }
             });
 
@@ -42,6 +48,12 @@
                 $('.totalPrice').text(totalprice.toLocaleString());
                 $('.tot').val(totalprice);
             }
+            /*
+            function updatePoint(){
+                totalPoint = origPoint * num;
+                $("input[name='point']").val(totalPoint);
+            }
+            */
 
         });
     </script>
@@ -57,7 +69,7 @@
     <!-- 상품 전체 정보 내용 -->
     <article class="info">
         <div class="image">
-            <img src="https://via.placeholder.com/460x460" alt="상품이미지"/>
+            <img th:src="@{'/thumbs/' + ${prod.thumb2}}" alt="상품이미지3" width="460px"/>
         </div>
         <div class="summary">
             <nav>
@@ -111,19 +123,19 @@
             </div>
 
                 <th:block sec:authorize="isAnonymous()">
-                    <input type="number" readonly name="isLogin" value="0">
+                    <input type="hidden" name="isLogin" value="0">
                 </th:block>
                 <th:block sec:authorize="isAuthenticated()">
-                    <input type="number" readonly name="isLogin" value="1">
-                    <input type="text" name="uid" readonly th:value="${#authentication.principal.user.uid}" />
+                    <input type="hidden" name="isLogin" value="1">
+                    <input type="hidden" name="uid" th:value="${#authentication.principal.user.uid}" />
                 </th:block>
-                <input type="text" name="prodNo" readonly th:value="${prod.prodNo}" />
-                <input type="text" name="count" readonly value="1" />
-                <input type="text" name="price" readonly th:value="${prod.price}" />
-                <input type="text" name="discount" readonly th:value="${prod.discount}" />
-                <input type="text" name="point" readonly th:value="${prod.point}" />
-                <input type="text" name="delivery" readonly th:value="${prod.delivery}" />
-                <input type="text" name="total" readonly class="tot" th:value="${prod.price - ((prod.price * prod.discount)/100) + prod.delivery}" />
+                <input type="hidden" name="prodNo" th:value="${prod.prodNo}" />
+                <input type="hidden" name="count" value="1" />
+                <input type="hidden" name="price" th:value="${prod.price}" />
+                <input type="hidden" name="discount" th:value="${prod.discount}" />
+                <input type="hidden" name="point" th:value="${prod.point}" />
+                <input type="hidden" name="delivery" th:value="${prod.delivery}" />
+                <input type="hidden" name="total"   class="tot" th:value="${prod.price - ((prod.price * prod.discount)/100) + prod.delivery}" />
             </form>
         </div>
     </article>
@@ -134,9 +146,8 @@
             <h1>상품정보</h1>
         </nav>
         <!-- 상품상세페이지 이미지 -->
-        <img src="https://via.placeholder.com/860x460" alt="상세페이지1">
-        <img src="https://via.placeholder.com/860x460" alt="상세페이지2">
-        <img src="https://via.placeholder.com/860x460" alt="상세페이지3">
+        <img th:src="@{'/thumbs/' + ${prod.thumb3}}" alt="상품이미지3"/>
+        <img th:src="@{'/thumbs/' + ${prod.detail}}" alt="상세이미지"/>
     </article>
 
     <!-- 상품 정보 제공 고시 내용 -->
