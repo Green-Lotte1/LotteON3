@@ -8,11 +8,9 @@ import co.kr.lotteon.mapper.LtProductMapper;
 import co.kr.lotteon.repository.LtProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.hibernate.action.internal.EntityIncrementVersionProcess;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -84,7 +82,7 @@ public class LtProductService {
         return prodNewDTO;
     }
 
-//    admin - 상품 등록
+// admin - 상품 등록
     public void insertLtProduct(LtProductDTO ltProductDTO){
 
         System.out.println("ltProductDTO : " + ltProductDTO);
@@ -136,35 +134,14 @@ public class LtProductService {
     }
 
 
-//    admin - 상품 리스트
-    public ProdPageResponseDTO findLtProductEntities(ProdPageRequestDTO prodPageRequestDTO){
+// admin - 상품 리스트
 
-        Pageable pageable = prodPageRequestDTO.getPageable("cate1"); //prodNo출력이나 cate1출력이나 똑같아서 그냥 썼음
-        Page<LtProductEntity> result = ltProductRepository.findAll(pageable);
-
-        //list의 각 요소들을 for문 돌리는 느낌 -> List<Entity>를 List<DTO>=10개로 변환(엔티티와dto 속성이 동일하니까 변환 가능함)
-        List<LtProductDTO> dtoList = result.getContent().stream().map(entity -> modelMapper.map(entity, LtProductDTO.class)).toList();
-
-        int totalElement = (int) result.getTotalElements(); //엔티티 갯수
-
-        log.info("dtoList : " + dtoList);
-        log.info("totalElement : " + totalElement);
-        log.info("pageable : " + pageable);
-
-
-        return ProdPageResponseDTO.builder()
-                .pageRequestDTO(prodPageRequestDTO)
-                .dtoList(dtoList)
-                .total(totalElement)
-                .build();
-    }
-
-    //조건 검색
+    //상품 전체 출력, 조건 검색
     public ProdPageResponseDTO search(ProdPageRequestDTO prodPageRequestDTO){
 
         Pageable pageable = prodPageRequestDTO.getPageable("cate1");
         String searchType = prodPageRequestDTO.getSearchType(); // searchType 값을 가져와야 함
-
+        int count = 0;
         // 검색 결과를 저장할 변수
         Page<LtProductEntity> searchResult = null;
         log.info("서치 키워드 : " + prodPageRequestDTO.getSearchKeyword());
@@ -172,32 +149,38 @@ public class LtProductService {
 
         switch(searchType){
             case "prodName":
-                searchResult = ltProductRepository.findLtProductEntityByProdNameContains(prodPageRequestDTO.getSearchKeyword(), pageable);
+                searchResult = ltProductRepository.findALLByIsRemovedAndProdNameContains(0, prodPageRequestDTO.getSearchKeyword(), pageable);
+                count = (int) ltProductRepository.countByIsRemovedAndProdNameContains(0, prodPageRequestDTO.getSearchKeyword());
                 break;
             case "prodNo":
-                searchResult = ltProductRepository.findLtProductEntityByProdNoContains(prodPageRequestDTO.getSearchKeyword(), pageable);
+                int searchProdNo = prodPageRequestDTO.getSearchProdNo();
+                String searchProdNoStr = String.valueOf(searchProdNo); //와일드카드 사용을 위한 String 변환
+                searchResult = ltProductRepository.productNoList(0, searchProdNoStr, pageable);
+                count = (int) ltProductRepository.countByproductNoList(0, searchProdNoStr);
                 break;
             case "company":
-                searchResult = ltProductRepository.findLtProductEntityByCompanyContains(prodPageRequestDTO.getSearchKeyword(), pageable);
+                searchResult = ltProductRepository.findAllByIsRemovedAndCompanyContains(0, prodPageRequestDTO.getSearchKeyword(), pageable);
+                count = (int)ltProductRepository.countByIsRemovedAndCompanyContains(0, prodPageRequestDTO.getSearchKeyword());
                 break;
             default:
-                searchResult = ltProductRepository.findAll(pageable);
+                searchResult = ltProductRepository.findAllByIsRemoved(0, pageable);
+                count = (int)searchResult.getTotalElements();
                 break;
         }
 
         // entity page -> dto list 로 변환
         List<LtProductDTO> dtoList = searchResult.getContent().stream().map(LtProductEntity::toDTO).toList();
 
-       // ProdPageResponseDTO searchResult1 = (ProdPageResponseDTO) searchResult;
-        //System.out.println("asdjkflkasd : " + searchResult1);
-
         return ProdPageResponseDTO
                 .builder()
                 .pageRequestDTO(prodPageRequestDTO)
                 .dtoList(dtoList)
-                .total((int)searchResult.getTotalElements())
+                .total(count)
                 .build();
     }
+
+// admin - 상품 삭제
+
 
 
 
