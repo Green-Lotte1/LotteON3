@@ -6,8 +6,11 @@ import co.kr.lotteon.dto.LtCsNoticeDTO;
 import co.kr.lotteon.service.LtCsService;
 import co.kr.lotteon.dto.LtCsQnaDTO;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +74,32 @@ public class CsController {
         return "redirect:/cs/index";
 
     }
+
+    //파일 다운로드
+    @GetMapping("/cs/qna/download")
+    public void filedownload(int qnaNo,HttpServletResponse response) throws IOException {
+        // dto 객체로부터 파일 경로를 가져온다.
+        LtCsQnaDTO dto = ltCsService.selectCsQnaView(qnaNo);
+        log.info("qnadownload----------"+dto);
+        String filePath = dto.getFile1();
+        String oName = dto.getFile2();
+
+
+        String path ="files/"+filePath;
+        byte[] fileByte = FileUtils.readFileToByteArray(new File(path));
+
+
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(oName, "UTF-8")+"\";");
+        response.setHeader("Content-Transfer-Encoding", "binary");
+
+        response.getOutputStream().write(fileByte);
+        response.getOutputStream().flush();
+        response.getOutputStream().close();
+    }
+
+
+
     @RequestMapping("/cs/notice/list")
     public String selectCsNoticeList(@RequestParam(name="pg", defaultValue = "1")String pg,
                                      @RequestParam(name= "cate1" ,required = false) String cate1,
@@ -225,6 +257,14 @@ public class CsController {
         model.addAttribute("cate1",cate1);
         log.info("faqDTOList==============="+faqDTOList);
         return "/cs/faq/list";
+    }
+
+    @GetMapping("/cs/faq/view")
+    public String selectCsFaqView(int faqNo, Model model){
+        LtCsFaqDTO faqBoard = ltCsService.selectCsFaqView(faqNo);
+        model.addAttribute("faqBoard",faqBoard);
+        log.info("faqNo--------"+faqNo);
+        return "/cs/faq/view";
     }
 
 }

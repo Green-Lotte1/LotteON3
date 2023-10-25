@@ -84,7 +84,7 @@
                 <ul class="faqBlock">
                     <th:block th:each="faqDTO:${faqDTOList}">
                       <li th:if="${faqDTO.cate2 eq cate2list.cate2}" class="faqItem">
-                        <a href="#"><span>Q.</span>[[${faqDTO.title}]]</a>
+                        <a th:href="@{/cs/faq/view(faqNo=${faqDTO.faqNo})}"><span>Q.</span>[[${faqDTO.title}]]</a>
                       </li>
                     </th:block>
                   <li class="more"><a href="#" id="showMore">더보기</a></li>

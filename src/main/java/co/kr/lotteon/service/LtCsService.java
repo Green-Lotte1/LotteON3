@@ -2,11 +2,22 @@ package co.kr.lotteon.service;
 
 import co.kr.lotteon.dto.*;
 import co.kr.lotteon.mapper.cs.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
+
 @RequiredArgsConstructor
 @Service
 @Log4j2
@@ -41,11 +52,54 @@ public class LtCsService {
         return ltCsCateMapper.selectCsCate2(cate1);
     }
 
-        public void insertQnaWrite(LtCsQnaDTO dto){
-            ltCsQnaMapper.insertQnaWrite(dto);
+    //파일 등록
+    public void insertQnaWrite(LtCsQnaDTO dto){
+
+        log.info("insertQnaWrite-----------"+dto);
+
+        List<String> saveNames = fileUpload(dto);
+
+        dto.setFile1(saveNames.get(0));
+        dto.setFile2(saveNames.get(1));
+
+
+        ltCsQnaMapper.insertQnaWrite(dto);
+
+
+}
+    //파일이 저장 될 경로
+    @Value("${upload.path.files}")
+    private String filePath;
+
+    //파일 업로드
+    public List<String> fileUpload(LtCsQnaDTO dto){
+
+        //파일 첨부 경로(절대 경로로 변환)
+        String path = new File(filePath).getAbsolutePath();
+        //첨부파일 리스트화
+        List<MultipartFile> files = Arrays.asList(
+                dto.getMFile1()
+
+        );
+
+        //저장된 파일명 리스트 초기화
+        List<String> saveNames =new ArrayList<>();
+        for (MultipartFile file:files){
+            //파일명 변경
+            String oName = file.getOriginalFilename(); //업로드할 때 원래 파일 이름
+            String ext = oName.substring(oName.lastIndexOf(".")); //확장자
+            String sName = UUID.randomUUID().toString() + ext; //새로운 파일 이름 생성
+            saveNames.add(sName);
+            saveNames.add(oName);
+            try {
+                file.transferTo(new File(path, sName)); // 저장할 폴더 이름, 저장할 파일 이름
+
+            } catch (IOException e) {
+                log.error(e.getMessage());
+            }
+        }
+        return saveNames;
     }
-
-
 
 
     // notice,qna List Mybatis 로 페이징 만들기
@@ -146,6 +200,10 @@ public class LtCsService {
 
     public LtCsQnaDTO selectCsQnaView(int qnaNo){
         return ltCsQnaMapper.selectCsQnaView(qnaNo);
+    }
+
+    public LtCsFaqDTO selectCsFaqView(int faqNo){
+        return ltCsFaqMapper.selectCsFaqView(faqNo);
     }
 
 

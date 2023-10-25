@@ -5,8 +5,8 @@
 <mapper namespace="co.kr.lotteon.mapper.cs.LtCsQnaMapper">
 
 	<insert id="insertQnaWrite">
-		INSERT INTO `lt_cs_qna` (cate1, cate2, title, content, writer,answerComplete, regip, rdate)
-		VALUES (#{cate1}, #{cate2}, #{title}, #{content}, #{writer},#{answerComplete}, #{regip}, #{rdate});
+		INSERT INTO `lt_cs_qna` (cate1, cate2, title, content, file1, file2, writer,answerComplete, regip, rdate)
+		VALUES (#{cate1}, #{cate2}, #{title}, #{content}, #{file1}, #{file2}, #{writer},#{answerComplete}, #{regip}, #{rdate});
 	</insert>
 
 	<select id="selectCsQnaListAll" parameterType="map" resultType="map">
