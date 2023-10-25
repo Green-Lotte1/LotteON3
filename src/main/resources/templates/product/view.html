@@ -9,7 +9,7 @@
         $(function (){
             let isLogin = $("input[name='isLogin']").val();
             let num = parseInt($("input[name='num']").val());
-            let price1 = "[[${prod.price - ((prod.price * prod.discount)/100)}]]";
+            let price1 = "[[${prod.price - prod.discountPrice}]]";
             let delivery = parseInt("[[${prod.delivery}]]");
             const origPoint = "[[${prod.point}]]";
             let totalprice = 0;
@@ -113,7 +113,7 @@
             </div>
 
             <div class="total">
-                <span class="totalPrice">[[${#numbers.formatInteger(prod.price - ((prod.price * prod.discount)/100),0,'COMMA')}]]</span>
+                <span class="totalPrice">[[${#numbers.formatInteger(prod.price - prod.discountPrice + prod.delivery,0,'COMMA')}]]</span>
                 <em>총 상품금액</em>
             </div>
             <form th:action="@{/product/cart}" class="formCart" method="post">
@@ -135,7 +135,7 @@
                 <input type="hidden" name="discount" th:value="${prod.discount}" />
                 <input type="hidden" name="point" th:value="${prod.point}" />
                 <input type="hidden" name="delivery" th:value="${prod.delivery}" />
-                <input type="hidden" name="total"   class="tot" th:value="${prod.price - ((prod.price * prod.discount)/100) + prod.delivery}" />
+                <input type="hidden" name="total"   class="tot" th:value="${prod.price - prod.discountPrice + prod.delivery}" />
             </form>
         </div>
     </article>

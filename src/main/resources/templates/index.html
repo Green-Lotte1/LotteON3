@@ -29,8 +29,8 @@
         <h3><span>히트상품</span></h3>
         <article th:each="hit : ${hitTop8}">
             <a th:href="@{/product/view(prodNo = ${hit.prodNo})}">
-                <div class="thumb">
-                    <img th:src="@{'/thumbs/'+${hit.thumb1}}" alt="t1"/>
+                <div>
+                    <img class="thumb" th:src="@{'/thumbs/'+${hit.thumb1}}" alt="t1"/>
                 </div>
                 <h2>[[${hit.prodName}]]</h2>
                 <p>[[${hit.descript}]]</p>
@@ -51,8 +51,8 @@
         <h3><span>추천상품</span></h3>
         <article th:each="score : ${scoreTop8}">
             <a th:href="@{/product/view(prodNo = ${score.prodNo})}">
-                <div class="thumb">
-                    <img th:src="@{'/thumbs/'+${score.Thumb1}}" alt="t1"/>
+                <div>
+                    <img class="thumb" th:src="@{'/thumbs/'+${score.Thumb1}}" alt="t1"/>
                 </div>
                 <h2>[[${score.prodName}]]</h2>
                 <p>[[${score.descript}]]</p>
@@ -73,8 +73,8 @@
         <h3><span>최신상품</span></h3>
         <article th:each="newTop : ${newTop8}">
             <a th:href="@{/product/view(prodNo = ${newTop.prodNo})}">
-                <div class="thumb">
-                    <img th:src="@{'/thumbs/'+${newTop.Thumb1}}" alt="t1"/>
+                <div>
+                    <img class="thumb" th:src="@{'/thumbs/'+${newTop.Thumb1}}" alt="t1"/>
                 </div>
                 <h2>[[${newTop.prodName}]]</h2>
                 <p>[[${newTop.descript}]]</p>
@@ -95,8 +95,8 @@
         <h3><span>할인상품</span></h3>
         <article th:each="discount : ${discountTop8}">
             <a th:href="@{/product/view(prodNo = ${discount.prodNo})}">
-                <div class="thumb">
-                    <img th:src="@{'/thumbs/'+${discount.Thumb1}}" alt="t1"/>
+                <div>
+                    <img class="thumb" th:src="@{'/thumbs/'+${discount.Thumb1}}" alt="t1"/>
                 </div>
                 <h2>[[${discount.prodName}]]</h2>
                 <p>[[${discount.descript}]]</p>

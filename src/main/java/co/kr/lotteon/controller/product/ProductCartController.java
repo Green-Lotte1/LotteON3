@@ -45,7 +45,7 @@ public class ProductCartController {
     @GetMapping("/cart")
     public String cart(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails){
         if(myUserDetails == null){
-            return "/index";
+            return "redirect:/index";
         } else {
             List<LtProductCartDTO> dtoList = productCartSerivce.showCart(myUserDetails.getUser().getUid());
             model.addAttribute("dtoList", dtoList);
@@ -65,10 +65,5 @@ public class ProductCartController {
         return "redirect:/product/cart?success=200";
     }
 
-    @GetMapping("/cartDelete/{cartNos}")
-    @ResponseBody
-    public void deleteCart(@PathVariable("cartNos") List<Integer> cartNos) {
-        log.info("DeleteCart = " + cartNos);
-    }
 }
 
