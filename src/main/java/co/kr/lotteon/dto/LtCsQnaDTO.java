@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -29,7 +30,9 @@ public class LtCsQnaDTO {
 	private int answerComplete;
 	private String regip;
 	private LocalDateTime rdate;
-	
+
+	private MultipartFile mFile1;
+
 	//추가 필드
 	private String writerName;
 	private String c1Name;

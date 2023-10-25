@@ -4,6 +4,20 @@
       layout:decorate="/cs/_cslayout.html">
 
 <div layout:fragment="content">
+    <script>
+        function showAlertLogin() {
+           alert('로그인이 필요한 기능입니다.');
+           window.location.href = '/LotteON/member/login';
+
+           //일단 대기
+           // 현재 페이지 URL 가져오기
+           //var currentURL = window.location.href;
+           //var loginURL = '/LotteON/member/login';
+           // 로그인 페이지로 이동할 때 현재 페이지 URL을 쿼리 문자열로 전달
+           //window.location.href = loginURL + '?returnUrl=' + encodeURIComponent(currentURL);
+
+         }
+    </script>
 
     <section id="cs">
         <div class="qna">
@@ -72,8 +86,15 @@
                             <a th:href="@{/cs/qna/list(pg=${pageGroupEnd + 1})}" class="next">다음</a>
                         </th:block>
                     </div>
+                    <a th:href="@{/cs/qna/write}"
+                       th:unless="${#authorization.expression('isAuthenticated()')}"
+                       onclick="showAlertLogin(); return false;"
+                       class="btnWrite">문의글 작성</a>
 
-                    <a th:href="@{/cs/qna/write}" class="btnWrite">문의하기</a>
+                    <a th:href="@{/cs/qna/write}"
+                       th:if="${#authorization.expression('isAuthenticated()')}"
+                       class="btnWrite">문의글 작성</a>
+
 
                 </article>
             </section>

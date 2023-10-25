@@ -953,6 +953,14 @@ footer p > strong {
   font-weight: bold;
 }
 
+#cs > .qna > .view > article > nav > .filedown {
+    margin-top: 6px;
+    display:block;
+    font-size: 14px;
+    font-weight: bold;
+
+}
+
 #cs > .qna > .view > article > nav > .date {        
   font-size: 14px;
   color: #777;        

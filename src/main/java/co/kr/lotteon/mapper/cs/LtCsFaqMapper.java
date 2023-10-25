@@ -11,4 +11,6 @@ public interface LtCsFaqMapper {
 
     List<LtCsFaqDTO> selectCsFaqList10(int cate1);
 
+    public LtCsFaqDTO selectCsFaqView(int faqNo);
+
 }

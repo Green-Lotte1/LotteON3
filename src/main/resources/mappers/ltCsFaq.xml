@@ -10,4 +10,8 @@
 		ON a.cate1 = b.cate1 AND a.cate2 = b.cate2 WHERE a.cate1=#{cate1} ORDER BY `faqNo` DESC LIMIT 10
 	</select>
 
+	<select id="selectCsFaqView" resultType="co.kr.lotteon.dto.LtCsFaqDTO">
+		SELECT * FROM `lt_cs_faq` WHERE `faqNo`=#{faqNo}
+	</select>
+
 </mapper>

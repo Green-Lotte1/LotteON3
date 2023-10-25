@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
       xmlns:layout="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       layout:decorate="/cs/_cslayout.html">
+<script th:inline="javascript">
+    var uid = '';
+    uid = [[${#authentication.principal.user.uid}]];
+    console.log(uid);
+</script>
 
 <section layout:fragment="content">
+
     <script>
+        function showAlert(id) {
+        const flag = '[[${#authentication.principal}]]'
+            if(flag == 'anonymousUser'){
+              alert('해당글은 작성자만 접근 가능합니다.');
+              return false;
+            }
+            console.log(id);
+            console.log(uid);
+            if(uid != write){
+              alert("해당 글 작성자만 접근 가능합니다.");
+              return false;
+            }
+            return true;
+        }
+
         function showAlertLogin() {
            alert('로그인이 필요한 기능입니다.');
            window.location.href = '/LotteON/member/login';
@@ -29,25 +51,25 @@
                 </h1>
                 <ol>
                     <li>
-                        <a href="#"><span>회원</span></a>
+                        <a th:href="@{/cs/faq/list(cate1=20)}"><span>회원</span></a>
                     </li>
                     <li>
-                        <a href="#"><span>쿠폰/이벤트</span></a>
+                        <a th:href="@{/cs/faq/list(cate1=21)}"><span>쿠폰/이벤트</span></a>
                     </li>
                     <li>
-                        <a href="#"><span>주문/결제</span></a>
+                        <a th:href="@{/cs/faq/list(cate1=22)}"><span>주문/결제</span></a>
                     </li>
                     <li>
-                        <a href="#"><span>배송</span></a>
+                        <a th:href="@{/cs/faq/list(cate1=23)}"><span>배송</span></a>
                     </li>
                     <li>
-                        <a href="#"><span>취소/반품/교환</span></a>
+                        <a th:href="@{/cs/faq/list(cate1=24)}"><span>취소/반품/교환</span></a>
                     </li>
                     <li>
-                        <a href="#"><span>여행/숙박/항공</span></a>
+                        <a th:href="@{/cs/faq/list(cate1=25)}"><span>여행/숙박/항공</span></a>
                     </li>
                     <li>
-                        <a href="#"><span>안전거래</span></a>
+                        <a th:href="@{/cs/faq/list(cate1=26)}"><span>기타</span></a>
                     </li>
                 </ol>
             </section>
@@ -59,7 +81,8 @@
                 </h1>
                 <ul>
                     <li th:each="qnalist:${qnalist}">
-                        <a th:href="@{/cs/qna/view(qnaNo=${qnalist.qnaNo})}" class="title" th:text="'[' + ${qnalist.c1Name} + ']' + ${qnalist.title}"></a>
+                        <a th:href="@{/cs/qna/view(qnaNo=${qnalist.qnaNo})}" th:onclick="return showAlert([[${qnalist.writer}]]);"
+                           class="title" th:text="'[' + ${qnalist.c1Name} + ']' + ${qnalist.title}"></a>
                         <p>
                             <span class="uid" th:text="${#strings.substring(qnalist.writer, 0, 3) + '***'}"></span>
                             <span class="date" th:text="${#temporals.format(qnalist.rdate, 'yy-MM-dd')}"></span>
