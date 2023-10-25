@@ -1,6 +1,7 @@
 package co.kr.lotteon.entity;
 
 import co.kr.lotteon.dto.LtProductDTO;
+import co.kr.lotteon.repository.LtProductOrderItemRepository;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
@@ -113,6 +114,18 @@ public class LtProductEntity {
                 .discountPrice(getDiscountPrice())
                 .discountPriceSub(getDeciFormat(getDiscountPrice()))
                 .finalPriceSub(getDeciFormat(price - getDiscountPrice() ))
+                .build();
+    }
+
+    public LtProductOrderItemEntity toOrderItemEntity(int ordNo, int prodNo, int count, int total){
+        return LtProductOrderItemEntity.builder()
+                .ltProductOrderItemPK(new LtProductOrderItemPK(ordNo, prodNo))
+                .count(count)
+                .price(price)
+                .discount(discount)
+                .point(point)
+                .delivery(delivery)
+                .total(total)
                 .build();
     }
 

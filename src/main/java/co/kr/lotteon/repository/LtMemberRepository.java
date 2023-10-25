@@ -1,10 +1,11 @@
 package co.kr.lotteon.repository;
 
 import co.kr.lotteon.entity.LtMemberEntity;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface LtMemberRepository extends JpaRepository<LtMemberEntity, String> {
 
@@ -21,4 +22,18 @@ public interface LtMemberRepository extends JpaRepository<LtMemberEntity, String
     int countByEmail(String email);
     int countByNameAndEmail(String name, String email);
     int countByUidAndEmail(String uid, String email);
+
+    MemberPointInterface findPointByUid(String uid);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE lt_member m SET m.point = m.point + :point where m.uid = :uid", nativeQuery = true)
+    public void updateMemberPointPlus(@Param("uid") String uid, @Param("point") int point);
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE lt_member m SET m.point = m.point - :point where m.uid = :uid", nativeQuery = true)
+    public void updateMemberPointMinus(@Param("uid") String uid, @Param("point") int point);
+
 }

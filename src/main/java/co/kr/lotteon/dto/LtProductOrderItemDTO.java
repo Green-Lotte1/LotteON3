@@ -12,8 +12,6 @@ import java.text.DecimalFormat;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LtProductOrderItemDTO {
-    private String descript;
-    private String ProdName;
     private int ordNo;
     private int prodNo;
     private int count;
@@ -25,9 +23,13 @@ public class LtProductOrderItemDTO {
 
     private String thumb1;
 
+    //추가
     private int discountPrice;
 
     private int discountPriceTotal;
+
+    private String descript;
+    private String prodName;
 
     public String getDiscountPriceTotalWithComma() {
         DecimalFormat df = new DecimalFormat("###,###");

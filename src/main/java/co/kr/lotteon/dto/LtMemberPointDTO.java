@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class LtMemberPointDTO {
     private int pointNo;
     private String uid;
-    private int orderNo;
+    private int ordNo;
     private int point;
     private String pointDate;
 
