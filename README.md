@@ -40,7 +40,7 @@
 
 -cs 
 
--admin 상품목록 기능 2차 완료(상품검색, 삭제/수정)
+-admin 상품목록 기능 2차 완료(상품검색), 상품등록 기능 3차 완료(thumb 상품 카테별 이미지 저장)
 
 -product cart, order 구현
 
@@ -48,6 +48,6 @@
 
 -cs 
 
--admin 공지사항 list, write, view, modify, delete 기능 구현
+-admin 
 
 -product 
