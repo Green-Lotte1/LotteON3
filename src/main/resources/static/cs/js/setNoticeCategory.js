@@ -11,7 +11,7 @@ $(document).ready(function() {
     var isSelected = false;
 
     //메인 카테고리 셋팅
-    var mainCategorySelectBox = document.getElementById("cate1");;
+    var mainCategorySelectBox = document.getElementById("cate1");
     $.ajax({
         url: ctx + '/LotteON/cs/getCsCates',
         type: 'GET',

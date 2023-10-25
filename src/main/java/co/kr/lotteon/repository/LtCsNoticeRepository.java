@@ -19,7 +19,6 @@ public interface LtCsNoticeRepository extends JpaRepository<LtCsNoticeEntity, In
     public Page<LtCsNoticeEntity> findByCate1AndTitleContains(int cate1, String keyword, Pageable pageable);
     public Page<LtCsNoticeEntity> findByCate1(int cate1, Pageable pageable);
 
-
 }
 
 

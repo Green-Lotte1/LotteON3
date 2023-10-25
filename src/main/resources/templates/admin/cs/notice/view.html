@@ -13,37 +13,36 @@
           </nav>
           <section class="write">
             <article>
-              <form action="#">
+              <form th:action="@{/}">
                 <table>
                   <tr>
                     <td>유형</td>
                     <td>
-                      <input type="text" name="option" th:value="고객서비스">
+                      <input type="text" name="option" th:value="${noticeDTO.c2Name}" readonly>
                     </td>
                   </tr>
                   <tr>
                     <td>제목</td>
                     <td>
-                      <input type="text" name="title" th:value="안내">
+                      <input type="text" name="title" th:value="${noticeDTO.title}" readonly>
                     </td>
-                  </tr>                
+                  </tr>
                   <tr>
                     <td>내용</td>
                     <td>
-                      <textarea name="content" th:value="안녕하세요"></textarea>
+                      <textarea name="content" readonly>[[${noticeDTO.title}]]</textarea>
                     </td>
                   </tr>
                 </table>
                 <div>
-                  <a href="./list.html" class="btnList">목록</a>
-                  <input type="submit" class="btnSubmit" value="수정"/>
-                  <input type="submit" class="btnSubmit" value="삭제"/>
+                  <a th:href="@{/admin/cs/notice/}" class="btnList">목록</a>
+                  <a th:href="@{/admin/cs/notice/modify(noticeNo=${noticeDTO.noticeNo})}" class="btnSubmit">수정</a>
+                  <a th:href="@{/admin/cs/notice/delete(noticeNo=${noticeDTO.noticeNo})}" class="btnSubmit">삭제</a>
                 </div>
               </form>
             </article>
           </section>
 
       </section>
-
 
 </html>

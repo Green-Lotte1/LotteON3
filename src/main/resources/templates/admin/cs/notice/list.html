@@ -5,6 +5,7 @@
 
 <section id="admin-cs-notice-list" class="admin-cs-list" layout:fragment="content">
   <script>
+
     $(document).ready(function(){
       const cate1Val = document.getElementsByName("cate1")[0].value;
       const searchVal = document.getElementsByName("search")[0].value;
@@ -36,8 +37,18 @@
         }
       });
 
+      // 게시글 하나만 삭제
+      $('.noticeDelete').click(function (e){
+        e.preventDefault();
+        var confirmDelete = confirm('삭제 ? ');
+        if(confirmDelete) {
+          var deleteUrl = $(this).attr('href');
+          window.location.href = deleteUrl;
+        }
+      });
 
     });
+
   </script>
   <nav>
     <h3>공지사항 목록</h3>
@@ -73,24 +84,24 @@
         </tr>
         </thead>
         <tbody class="listTbody">
-        <tr th:each="article:${pageResponseDTO.getNoticeList()}">
-          <td><input type="checkbox" name="chk" th:value="${article.noticeNo}"/></td>
-          <td>[[${article.noticeNo}]]</td>
-          <td>[[${article.c1Name}]]</td>
-          <td><a th:href="@{/admin/cs/notice/view}">[ [[${article.c2Name}]] ] [[${article.title}]]</a></td>
-          <td> 0 </td>
-          <td>[[${article.rdateSub}]]</td>
-          <td>
-            <a th:href="@{#}" class="noticeDelete">[삭제]</a>
-            <br/>
-            <a th:href="@{#}" class="noticeUpdate">[수정]</a>
-          </td>
-        </tr>
-        <tr th:if="${pageResponseDTO.getNoticeList().size() eq 0}">
-          <td colspan="7">
-            조회 결과가 없습니다.
-          </td>
-        </tr>
+          <tr th:each="article:${pageResponseDTO.getNoticeList()}">
+            <td><input type="checkbox" name="chk" th:value="${article.noticeNo}"/></td>
+            <td>[[${article.noticeNo}]]</td>
+            <td>[[${article.c1Name}]]</td>
+            <td><a th:href="@{/admin/cs/notice/view(noticeNo=${article.noticeNo})}">[ [[${article.c2Name}]] ] [[${article.title}]]</a></td>
+            <td> [[${article.hit}]] </td>
+            <td>[[${article.rdateSub}]]</td>
+            <td>
+              <a th:href="@{/admin/cs/notice/delete(noticeNo=${article.noticeNo})}" class="noticeDelete">[삭제]</a>
+              <br/>
+              <a th:href="@{/admin/cs/notice/modify(noticeNo=${article.noticeNo})}" class="noticeUpdate">[수정]</a>
+            </td>
+          </tr>
+          <tr th:if="${pageResponseDTO.getNoticeList().size() eq 0}">
+            <td colspan="7">
+              조회 결과가 없습니다.
+            </td>
+          </tr>
         </tbody>
       </table>
 

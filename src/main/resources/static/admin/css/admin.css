@@ -248,6 +248,7 @@ input[type=checkbox] {
     width: auto;
     margin-right: 6px;
 }
+
 input[type=submit] {
     width: 200px;
     float: right;
@@ -510,6 +511,20 @@ button[type=submit] {
     margin-right: 5px;
     margin-left: 5px;
 }
+/* notice - view - modi, dele */
+#admin-cs-notice-view .btnSubmit {
+    width: 100px;
+    float: right;
+    padding: 6px;
+    margin-top: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ef2a23;
+    font-size: 13px;
+    color: #ef2a23;
+    vertical-align: middle;
+    text-align: center;
+}
+
 #admin-cs-notice-view .btnList {
     float: right;
     width: 100px;
