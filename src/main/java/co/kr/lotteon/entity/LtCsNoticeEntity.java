@@ -40,9 +40,6 @@ public class LtCsNoticeEntity {
 	private int cate1;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-/*	@JoinColumn(name = "cate2", insertable = false, updatable = false)
-	private LtCsCate2Entity ltCsCate2Entity;
-*/
 	@JoinColumns({@JoinColumn( name = "cate1",  referencedColumnName = "cate1", insertable = false, updatable = false),
 			@JoinColumn(name="cate2", referencedColumnName = "cate2", insertable = false, updatable = false)}
 			)

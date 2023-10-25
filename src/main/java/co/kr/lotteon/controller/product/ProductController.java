@@ -60,13 +60,6 @@ public class ProductController {
 
     }
 
-    @GetMapping("/complete")
-    public String complete() {
-        return "/product/complete";
-    }
-
-
-
     @GetMapping("/search")
     public String search() {
         return "/product/search";

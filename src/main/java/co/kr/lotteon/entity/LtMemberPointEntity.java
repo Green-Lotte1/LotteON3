@@ -18,7 +18,7 @@ public class LtMemberPointEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pointNo;
     private String uid;
-    private int orderNo;
+    private int ordNo;
     private int point;
     @CreationTimestamp
     private LocalDateTime pointDate;
