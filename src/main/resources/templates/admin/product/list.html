@@ -21,7 +21,8 @@
                 <option value="prodNo">상품코드</option>
                 <option value="company">제조사</option>
             </select>
-            <input type="text" name="searchKeyword">
+                <input th:if="${searchType == prodNo}" type="text" name="searchKeyword">
+                <input th:unless="${searchType == prodNo}" type="text" name="searchProdNo">
             <button id="btnSearch">검색</button>
             </form>
         </div>
@@ -70,13 +71,13 @@
 
         <div class="paging">
             <span class="prev" th:if="${prodPageResponseDTO.prev}" >
-                            <a th:href="@{/admin/product/list(pg=${prodPageResponseDTO.start - 1})}"><&nbsp;이전</a>
+                            <a th:href="@{/admin/product/list(pg=${prodPageResponseDTO.start - 1},searchType=${prodPageResponseDTO.getSearchType()},searchKeyword=${prodPageResponseDTO.getSearchKeyword()},searchProdNo=${prodPageResponseDTO.getSearchProdNo()})}"><&nbsp;이전</a>
                         </span>
             <span class="num" th:each="num:${#numbers.sequence(prodPageResponseDTO.start, prodPageResponseDTO.end)}">
-                            <a th:href="@{/admin/product/list(pg=${num})}"  class="on">[[${num}]]</a>
+                            <a th:href="@{/admin/product/list(pg=${num},searchType=${prodPageResponseDTO.getSearchType()},searchKeyword=${prodPageResponseDTO.getSearchKeyword()},searchProdNo=${prodPageResponseDTO.getSearchProdNo()})}"  class="on">[[${num}]]</a>
                         </span>
             <span class="next" th:if="${prodPageResponseDTO.next}">
-                            <a th:href="@{/admin/product/list(pg=${prodPageResponseDTO.end + 1})}">다음&nbsp;></a>
+                            <a th:href="@{/admin/product/list(pg=${prodPageResponseDTO.end + 1},searchType=${prodPageResponseDTO.getSearchType()},searchKeyword=${prodPageResponseDTO.getSearchKeyword()},searchProdNo=${prodPageResponseDTO.getSearchProdNo()})}">다음&nbsp;></a>
                         </span>
         </div>
 

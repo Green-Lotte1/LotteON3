@@ -52,7 +52,7 @@ public class LtProductEntity {
     @Column(name = "rdate")
     @CreationTimestamp
     private LocalDateTime regDate;
-
+    private int isRemoved;
     private Integer etc1;
     private Integer etc2;
     private String etc3;
@@ -100,6 +100,7 @@ public class LtProductEntity {
                 .ip(ip)
                 .rDate(regDate)
                 .wDate(wDate)
+                .isRemoved(isRemoved)
                 .etc1(etc1+"")
                 .etc2(etc2+"")
                 .etc3(etc3)

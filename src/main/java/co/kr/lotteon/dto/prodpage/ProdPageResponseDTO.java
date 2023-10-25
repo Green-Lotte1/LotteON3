@@ -21,6 +21,7 @@ public class ProdPageResponseDTO {
     private String how;
     private String searchType;
     private String searchKeyword;
+    private int searchProdNo;
 
 
     @Builder
@@ -43,7 +44,9 @@ public class ProdPageResponseDTO {
         this.end = end == 0 ? 1 : end;
         this.prev = this.start > 1;
         this.next = total > this.end * this.size;
-
+        this.searchType=pageRequestDTO.getSearchType();
+        this.searchKeyword=pageRequestDTO.getSearchKeyword();
+        this.searchProdNo=pageRequestDTO.getSearchProdNo();
 
     }
 

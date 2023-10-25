@@ -64,7 +64,7 @@ public class LtProductDTO {
     private String deliveryFromUser;
 
     private LocalDateTime rDate;
-
+    private int isRemoved;
     private String etc1; //null처리 위해 string
     private String etc2;
     private String etc3;
@@ -74,8 +74,6 @@ public class LtProductDTO {
     private String wDate;
     private int total;
     private int rating; //별점
-
-    private int isRemoved;
 
     private String path;
     private int level;
@@ -126,6 +124,7 @@ public class LtProductDTO {
                 .ip(ip)
                 .regDate(rDate)
                 .wDate(wDate)
+                .isRemoved(isRemoved)
                 .etc1(Integer.parseInt(etc1))
                 .etc2(Integer.parseInt(etc2))
                 .etc3(etc3)

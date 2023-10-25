@@ -1,9 +1,6 @@
 package co.kr.lotteon.dto.prodpage;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -11,6 +8,7 @@ import org.springframework.data.domain.Sort;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
 @Builder
 public class ProdPageRequestDTO {
 
@@ -37,6 +35,8 @@ public class ProdPageRequestDTO {
     private String searchType = "";
     @Builder.Default
     private String searchKeyword = "";
+    @Builder.Default
+    private int searchProdNo = 0;
 
     public Pageable getPageable(String cate1) {
         if (how.equals("ASC")) {
