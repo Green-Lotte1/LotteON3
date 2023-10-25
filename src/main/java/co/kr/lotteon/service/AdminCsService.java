@@ -76,4 +76,10 @@ public class AdminCsService {
                 .build();
     }
 
+    public void deleteNotice(int noticeNo) {
+        // 공지사항 삭제
+        ltCsNoticeRepository.deleteById(noticeNo);
+
+    }
+
 }

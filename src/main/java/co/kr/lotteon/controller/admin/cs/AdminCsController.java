@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Log4j2
 @Controller
@@ -39,12 +40,31 @@ public class AdminCsController {
     }
 
     @GetMapping("/admin/cs/notice/modify")
-    public String modify(){
+    public String modify(@RequestParam(value = "noticeNo")int noticeNo , Model model){
+
+        LtCsNoticeDTO noticeDTO = csService.selectCSNoticeView(noticeNo);
+
+        model.addAttribute("noticeDTO", noticeDTO) ;
+
         return "/admin/cs/notice/modify";
     }
 
+    @PostMapping("/admin/cs/notice/modify")
+    public String modify(LtCsNoticeDTO dto) {
+
+        // update
+        adminCsService.saveNotice(dto);
+
+        return "redirect:/admin/cs/notice/list";
+    }
+
     @GetMapping("/admin/cs/notice/view")
-    public String view(){
+    public String view(@RequestParam(value = "noticeNo")int noticeNo, Model model){
+
+        LtCsNoticeDTO noticeDTO = csService.selectCSNoticeView(noticeNo);
+
+        model.addAttribute("noticeDTO", noticeDTO) ;
+
         return "/admin/cs/notice/view";
     }
 
@@ -69,4 +89,11 @@ public class AdminCsController {
         model.addAttribute("pageResponseDTO", pageResponseDTO);
         return "/admin/cs/notice/list";
     }
+
+    @GetMapping("/admin/cs/notice/delete")
+    public String delete(@RequestParam(value = "noticeNo")int noticeNo) {
+        adminCsService.deleteNotice(noticeNo);
+        return "redirect:/admin/cs/notice/list";
+    }
+
 }
