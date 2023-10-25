@@ -69,7 +69,7 @@ $(function() {
                 let cartPrice = parseInt($('input[name=price' + cartNo + ']').val()) * cartCnt;
                 let cartDisPrice = parseInt($('input[name=disPrice' + cartNo + ']').val()) * cartCnt;
                 let cartDelivery = parseInt($('input[name=delivery' + cartNo + ']').val());
-                let cartPoint = parseInt($('input[name=point' + cartNo + ']').val());
+                let cartPoint = parseInt($('input[name=point' + cartNo + ']').val()) * cartCnt;
                 let cartTotal = cartPrice - cartDisPrice + cartDelivery;
                 console.log(cartPrice + "- " + cartDisPrice + " +  " + cartDelivery);
 
@@ -84,10 +84,18 @@ $(function() {
         }
         $('#count').text(count.toLocaleString());
         $('#price').text(price.toLocaleString());
-        $('#disPrice').text((price - disPrice).toLocaleString());
+        $('#disPrice').text(disPrice.toLocaleString());
         $('#delivery').text(delivery.toLocaleString());
         $('#point').text(point.toLocaleString());
         $('#total').text(total.toLocaleString());
+
+        $('input[name=totalCount]').val(count);
+        $('input[name=totalPrice]').val(price);
+        $('input[name=totalDiscount]').val(disPrice);
+        $('input[name=totalDelivery]').val(delivery);
+        $('input[name=totalPoint]').val(point);
+        $('input[name=totalSumPrice]').val(total);
+
         if (!$(this).is(':checked')) {
             $('input[name=all]').prop('checked', false);
         } else if (cnt == chk.length) {

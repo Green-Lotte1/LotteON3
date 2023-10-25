@@ -1426,3 +1426,8 @@
   color: #fe434c;
   font-weight: bold;
 }
+
+.cartTable  .cartEmpty {
+    height: 100px;
+    color: #4d4d4d;
+}

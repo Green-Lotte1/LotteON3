@@ -26,6 +26,8 @@ public class ProductService {
 
     private final LtProductRepository ltProductRepository;
 
+
+    // 카테고리별 리스트
     public ProdPageResponseDTO getProductListByCates(ProdPageRequestDTO pageRequestDTO) {
         Pageable pageable = pageRequestDTO.getPageable("prodNo");
         Page<LtProductEntity> result = ltProductRepository.findAllByProdCate1AndProdCate2(pageRequestDTO.getCate1(), pageRequestDTO.getCate2(), pageable);

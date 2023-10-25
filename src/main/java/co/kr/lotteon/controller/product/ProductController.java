@@ -66,19 +66,11 @@ public class ProductController {
     }
 
 
-    @GetMapping("/order")
-    public String order() {
-        return "/product/order";
-    }
 
     @GetMapping("/search")
     public String search() {
         return "/product/search";
     }
 
-    @PostMapping("/order")
-    public String cart(){
-        return "redirect:/product/order";
-    }
 }
 
