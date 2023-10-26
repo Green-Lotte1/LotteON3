@@ -32,8 +32,8 @@ public class LtMemberPointEntity {
                 .ordNo(ordNo)
                 .point(point)
                 .pointDate(pointDate)
-                .subPointDate(pointDate.format(DateTimeFormatter.ofPattern("yy-MM-dd")))
-                .subExpiredDate(pointDate.plusMonths(6).format(DateTimeFormatter.ofPattern("yy.MM.dd")))
+                .subPointDate(pointDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+                .subExpiredDate(pointDate.plusMonths(6).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
                 .build();
     }
 

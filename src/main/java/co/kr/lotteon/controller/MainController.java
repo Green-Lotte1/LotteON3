@@ -21,6 +21,11 @@ public class MainController {
     @Autowired
     private LtProductService ltProductService;
 
+    @GetMapping("/test")
+    public String test(Model model){
+        return "redirect:/my/home?test=success";
+    }
+
     @GetMapping(value={"/","/index"})
     public String index(Model model){
         // index
