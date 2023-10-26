@@ -144,7 +144,8 @@
             $('.ltBtnDelete').click(function(e){
                 e.preventDefault();
                 if (confirm('정말 삭제하시겠습니까?')) {
-                    $('#formCheck').submit();
+                    var deleteUrl = $(this).attr('href');
+                    window.location.href = deleteUrl;
                 }
             });
         });

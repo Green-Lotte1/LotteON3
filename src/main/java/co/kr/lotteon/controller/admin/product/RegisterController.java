@@ -46,11 +46,11 @@ public class RegisterController {
     }
 
     @PostMapping("/admin/product/register")
-    public String ProductRegister(LtProductDTO ltProductDTO, HttpServletRequest request){
+    public String ProductRegister(LtProductDTO ltProductDTO, HttpServletRequest request, String cate1, String cate2){
 
         ltProductDTO.setIp(request.getRemoteAddr());
 
-        System.out.println("Prod 해줘. : " + ltProductDTO );
+        System.out.println("Prod 해줘. : " + ltProductDTO);
 
         ltProductService.insertLtProduct(ltProductDTO);
         return "redirect:/admin/product/list";

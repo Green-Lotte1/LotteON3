@@ -6,6 +6,8 @@ import co.kr.lotteon.dto.prodpage.ProdPageResponseDTO;
 import co.kr.lotteon.entity.LtProductEntity;
 import co.kr.lotteon.mapper.LtProductMapper;
 import co.kr.lotteon.repository.LtProductRepository;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -31,18 +33,18 @@ public class LtProductService {
     private final LtProductMapper ltProductMapper;
     private final ModelMapper modelMapper;
 
-//    상품 리스트 출력(list)
+    //    상품 리스트 출력(list)
     public List<LtProductDTO> selectProducts() {
         return ltProductMapper.selectProducts();
     }
 
-//    상품 선택 상세페이지 (view)
+    //    상품 선택 상세페이지 (view)
     public LtProductDTO getProdDto(int prodNo) {
         LtProductEntity entity = ltProductRepository.findById(prodNo).get();
         return entity.toDTO();
     }
 
-//    Index 출력
+    //    Index 출력
     // Hit 상품 Top8
     public List<LtProductDTO> selectProductHit() {
 
@@ -104,11 +106,21 @@ public class LtProductService {
     @Value("${upload.path.thumbs}")
     private String filePath;
 
+    // admin - 파일 업로드 경로 구하기
+    public String getFilePath(LtProductDTO ltProductDTO){
+        String path = filePath+ltProductDTO.getProdCate1()+"/"+ltProductDTO.getProdCate2();
+        return path;
+    }
 
     // admin - 파일 업로드
     public List<String> fileUpload(LtProductDTO ltProductDTO) {
+
+        //카테고리 파일 저장 경로 설정
+        filePath += ltProductDTO.getProdCate1() +"/"+ ltProductDTO.getProdCate2() + "/";
+
         // 파일 첨부 경로(절대 경로로 변환)
         String path = new File(filePath).getAbsolutePath();
+
         // 첨부파일 리스트화
         List<MultipartFile> files = Arrays.asList(
                 ltProductDTO.getFileThumb1(),
@@ -180,10 +192,46 @@ public class LtProductService {
     }
 
 // admin - 상품 삭제
+    public void deleteLtProduct(LtProductDTO ltProductDTO){
+
+        log.info("deleteLtProduct...1");
+        ltProductMapper.deleteLtProduct(ltProductDTO.getProdNo());
+
+        //디렉토리안의 파일 삭제
+        String path = getFilePath(ltProductDTO);
+        log.info("path : " + path);
+
+        File thumb1 = new File(path+"/"+ltProductDTO.getThumb1());
+        File thumb2 = new File(path+"/"+ltProductDTO.getThumb2());
+        File thumb3 = new File(path+"/"+ltProductDTO.getThumb3());
+        File detail = new File(path+"/"+ltProductDTO.getDetail());
+        log.info("deleteLtProduct...2");
+
+        if (thumb1.exists()) {
+            log.info("deleteLtProduct...3");
+            thumb1.delete();
+        }
+
+        if (thumb2.exists()) {
+            thumb2.delete();
+        }
+
+        if (thumb3.exists()) {
+            thumb3.delete();
+        }
+
+        if (detail.exists()) {
+            detail.delete();
+        }
 
 
+    }
 
 
+// admin - 상품 조회 1개
+    public LtProductDTO selectProduct(int prodNo){
+       return ltProductMapper.selectProduct(prodNo);
+    }
 
 
 }

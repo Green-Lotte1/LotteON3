@@ -32,9 +32,6 @@ public interface LtProductRepository extends JpaRepository<LtProductEntity, Inte
     public long countByproductNoList(int isRemoved, String prodNo);
     public long countByIsRemovedAndCompanyContains(int isRemoved, String company);
 
-// admin 상품 리스트 삭제
-    public List<LtProductEntity> deleteLtProductEntityByProdNo(int prodNo);
-
 // index_prod_list
 
     // hit_prod
