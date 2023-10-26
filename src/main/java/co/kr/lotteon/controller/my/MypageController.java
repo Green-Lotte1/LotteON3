@@ -1,5 +1,6 @@
 package co.kr.lotteon.controller.my;
 
+import co.kr.lotteon.dto.mypage.PointPageRequestDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +35,7 @@ public class MypageController {
     }
 
     @GetMapping(value = "/point")
-    public String point(Model model) {
+    public String point(Model model, PointPageRequestDTO pageRequestDTO) {
 
         return "/my/point";
     }
