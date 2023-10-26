@@ -1,26 +1,21 @@
 package co.kr.lotteon.dto.mypage;
 
 
-import co.kr.lotteon.dto.LtCsFaqDTO;
-import co.kr.lotteon.dto.LtCsNoticeDTO;
-import co.kr.lotteon.dto.LtCsQnaDTO;
 import co.kr.lotteon.dto.LtMemberPointDTO;
-import co.kr.lotteon.dto.cspage.CsPageRequestDTO;
-import lombok.AllArgsConstructor;
+import co.kr.lotteon.dto.LtProductOrderDTO;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class PointPageResponseDTO {
+public class MyPageResponseDTO {
 
     private List<LtMemberPointDTO> pointList;
+    //private List<LtProductOrderDTO> orderList;
+    //private MyOrdersDTO myOrdersDTO;
+    private List<MyOrdersDTO> myOrdersDTOList;
 
     private int pg;
     private int size;
@@ -37,8 +32,9 @@ public class PointPageResponseDTO {
     private LocalDate endDate;
 
     @Builder
-    public PointPageResponseDTO(PointPageRequestDTO pageRequestDTO,
-                             List<LtMemberPointDTO> pointList, int total) {
+    public MyPageResponseDTO(MyPageRequestDTO pageRequestDTO,
+                             List<LtMemberPointDTO> pointList, int total
+                                ,List<MyOrdersDTO> myOrdersDTOList ){
         this.pg = pageRequestDTO.getPg();
         this.size = pageRequestDTO.getSize();
         this.total = total;
@@ -50,6 +46,7 @@ public class PointPageResponseDTO {
         this.endDate = pageRequestDTO.getEndDate();
 
         this.pointList = pointList;
+        this.myOrdersDTOList = myOrdersDTOList;
 
         this.end = (int) (Math.ceil(this.pg / 10.0)) * 10;
         this.start = this.end - 9;
