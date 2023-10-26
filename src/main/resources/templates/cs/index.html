@@ -3,13 +3,15 @@
       xmlns:layout="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
       layout:decorate="/cs/_cslayout.html">
-<script th:inline="javascript">
-    var uid = '';
-    uid = [[${#authentication.principal.user.uid}]];
-    console.log(uid);
-</script>
 
 <section layout:fragment="content">
+
+    <script th:inline="javascript">
+        var uid = '';
+        /*[# th:if="${#authorization.expression('isAuthenticated()')}"]*/
+       uid = [[${#authentication.principal.user.uid}]];
+        /*[/]*/
+    </script>
 
     <script>
         function showAlert(id) {
@@ -20,7 +22,7 @@
             }
             console.log(id);
             console.log(uid);
-            if(uid != write){
+            if(uid != id){
               alert("해당 글 작성자만 접근 가능합니다.");
               return false;
             }

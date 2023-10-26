@@ -22,4 +22,7 @@ public interface LtCsQnaMapper {
 
     public LtCsQnaDTO selectCsQnaView(int qnaNo);
 
+    public LtCsQnaDTO selectCsQnaBoard(int qnaNO);
+
+    public void updateQnaBoard(LtCsQnaDTO dto);
 }
