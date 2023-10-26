@@ -70,8 +70,20 @@
                             감사합니다.<br />
                         </p>
                     </div>
+                    <th:block th:if="${qnaBoard.answerComplete != 1}">
+                        <nav>
+                            <h2 class="title" th:text="'☞[답변]' + ${qnaChildBoard.title}"></h2>
+                        </nav>
+                        <div class="content">
+                            <p>
+                                [[${qnaChildBoard.content}]]
+                            </p>
+                        </div>
+                    </th:block>
+
                     <a th:href="@{/cs/qna/list}" class="btnList">목록보기</a>
                     <a th:href="@{/cs/qna/modify(qnaNo=${qnaBoard.qnaNo})}" class="btnList">수정하기</a>
+                    <a th:href="@{/cs/qna/delete(qnaNo=${qnaBoard.qnaNo})}" class="btnList">삭제하기</a>
                 </article>
             </section>
         </div>
