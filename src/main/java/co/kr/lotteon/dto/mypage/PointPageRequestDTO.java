@@ -29,7 +29,7 @@ public class PointPageRequestDTO {
     private String how = "DESC";
 
     @Builder.Default
-    private String sort = "sold";
+    private String sort = "pointNo";
     // list 조건 검색
     @Builder.Default
     private String searchType = "";

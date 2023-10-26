@@ -14,7 +14,7 @@ window.onload = () => {
     const discountPoint = document.getElementsByClassName('discountPoint')[0]
     const discountPointBut = document.getElementsByClassName('discountPointBut')[0]
     let usePoint = 0;
-    const newTotal = document.gpetElementsByClassName('total')[0]
+    const newTotal = document.getElementsByClassName('total')[0]
     discountPointBut.addEventListener('click', (e) => {
         usePoint = parseInt($('input[name=usedPoint]').val());
         //포인트 체크

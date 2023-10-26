@@ -35,7 +35,7 @@ public class MyService {
         List<LtMemberPointDTO> dtoList = result.getContent()
                 .stream().
                 map(
-                        entity -> modelMapper.map(entity, LtMemberPointDTO.class)
+                        LtMemberPointEntity::toDTO
                 )
                 .toList();
         int totalElement = (int) result.getTotalElements();
