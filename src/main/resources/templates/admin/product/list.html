@@ -21,13 +21,13 @@
                 <option value="prodNo">상품코드</option>
                 <option value="company">제조사</option>
             </select>
-                <input th:if="${searchType == prodNo}" type="text" name="searchKeyword">
-                <input th:unless="${searchType == prodNo}" type="text" name="searchProdNo">
+                <input th:if="${searchType == prodNo}" type="text" name="searchProdNo">
+                <input th:unless="${searchType == prodNo}" type="text" name="searchKeyword">
             <button id="btnSearch">검색</button>
             </form>
         </div>
 
-        <form id="formCheck" th:action="@{/admin/product/delete}" method="post">
+        <form id="formCheck" th:action="@{/admin/product/delete}" method="get">
         <table>
             <tr>
                 <th><input type="checkbox" name="all"/></th>
@@ -42,7 +42,6 @@
                 <th>조회</th>
                 <th>관리</th>
             </tr>
-
             <tr th:each="ltProduct : ${prodPageResponseDTO.dtoList}">
                 <td><input type="checkbox" name="chk" th:value="${ltProduct.prodNo}"/></td>
 
