@@ -537,6 +537,9 @@ footer p > strong {
     box-sizing: border-box;
     overflow: hidden;            
 }
+#my .ordered > section > article  table .ordNo {
+    background: #e7e7e7;
+}
 #my > .ordered > section > article > .byDate > * {
     float: left;
 }

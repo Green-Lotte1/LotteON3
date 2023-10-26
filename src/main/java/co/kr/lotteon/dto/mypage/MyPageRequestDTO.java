@@ -11,13 +11,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PointPageRequestDTO {
+public class MyPageRequestDTO {
 
     @Builder.Default
     private int pg=1;
@@ -29,7 +28,7 @@ public class PointPageRequestDTO {
     private String how = "DESC";
 
     @Builder.Default
-    private String sort = "pointNo";
+    private String sort = "";
     // list 조건 검색
     @Builder.Default
     private String searchType = "";
@@ -40,11 +39,11 @@ public class PointPageRequestDTO {
     private LocalDate beginDate = LocalDate.of(1,1,1);
     private LocalDate endDate = LocalDate.of(9999,9,9);
 
-    public Pageable getPageable(String sort){
+    public Pageable getPageable(String sort, int size){
         if (how.equals("ASC")) {
-            return PageRequest.of(this.pg - 1, this.size, Sort.by(this.sort).ascending());
+            return PageRequest.of(this.pg - 1, size, Sort.by(sort).ascending());
         } else {
-            return PageRequest.of(this.pg - 1, this.size, Sort.by(this.sort).descending());
+            return PageRequest.of(this.pg - 1, size, Sort.by(sort).descending());
         }
     }
 }

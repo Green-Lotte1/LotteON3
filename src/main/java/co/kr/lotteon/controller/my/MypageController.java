@@ -1,7 +1,7 @@
 package co.kr.lotteon.controller.my;
 
-import co.kr.lotteon.dto.mypage.PointPageRequestDTO;
-import co.kr.lotteon.dto.mypage.PointPageResponseDTO;
+import co.kr.lotteon.dto.mypage.MyPageRequestDTO;
+import co.kr.lotteon.dto.mypage.MyPageResponseDTO;
 import co.kr.lotteon.security.MyUserDetails;
 import co.kr.lotteon.service.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +36,18 @@ public class MypageController {
         return "/my/coupon";
     }
 
-    @GetMapping(value = "/order")
-    public String order(Model model) {
-
-        return "/my/order";
+    @GetMapping(value = "/ordered")
+    public String order(Model model, MyPageRequestDTO pageRequestDTO, @AuthenticationPrincipal MyUserDetails myUserDetails) {
+        if(myUserDetails == null) return "redirect:/index";
+        MyPageResponseDTO pageResponseDTO = myService.showOrder(pageRequestDTO, myUserDetails.getUser().getUid());
+        model.addAttribute("pageResponseDTO", pageResponseDTO);
+        return "/my/ordered";
     }
 
     @GetMapping(value = "/point")
-    public String point(Model model, PointPageRequestDTO pageRequestDTO, @AuthenticationPrincipal MyUserDetails myUserDetails) {
+    public String point(Model model, MyPageRequestDTO pageRequestDTO, @AuthenticationPrincipal MyUserDetails myUserDetails) {
         if(myUserDetails == null) return "redirect:/index";
-        PointPageResponseDTO pageResponseDTO = myService.showPoint(pageRequestDTO, myUserDetails.getUser().getUid());
+        MyPageResponseDTO pageResponseDTO = myService.showPoint(pageRequestDTO, myUserDetails.getUser().getUid());
         model.addAttribute("pageResponseDTO", pageResponseDTO);
         return "/my/point";
     }
