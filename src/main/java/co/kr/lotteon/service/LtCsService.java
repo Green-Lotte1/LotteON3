@@ -57,16 +57,22 @@ public class LtCsService {
 
         log.info("insertQnaWrite-----------"+dto);
 
-        List<String> saveNames = fileUpload(dto);
 
-        dto.setFile1(saveNames.get(0));
-        dto.setFile2(saveNames.get(1));
+
+
+        if (dto.getMFile1() != null && !dto.getMFile1().isEmpty()) {
+            List<String> saveNames = fileUpload(dto);
+            // 파일을 선택한 경우에만 처리
+            dto.setFile1(saveNames.get(0));
+            dto.setFile2(saveNames.get(1));
+        }
+
 
 
         ltCsQnaMapper.insertQnaWrite(dto);
 
 
-}
+    }
     //파일이 저장 될 경로
     @Value("${upload.path.files}")
     private String filePath;
@@ -221,5 +227,15 @@ public class LtCsService {
 
     public void updateQnaBoard(LtCsQnaDTO dto){
         ltCsQnaMapper.updateQnaBoard(dto);
+    }
+
+    //delete
+    public void deleteQnaBoard(int qnaNo){
+        ltCsQnaMapper.deleteQnaBoard(qnaNo);
+    }
+
+    //qna 답변
+    public LtCsQnaDTO selectCsQnaChildBoard(int qnaNo){
+        return ltCsQnaMapper.selectCsQnaChildBoard(qnaNo);
     }
 }

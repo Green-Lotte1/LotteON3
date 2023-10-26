@@ -238,6 +238,11 @@ public class CsController {
     public String selectCsQnaView(int qnaNo, Model model){
         LtCsQnaDTO qnaBoard = ltCsService.selectCsQnaView(qnaNo);
         model.addAttribute("qnaBoard",qnaBoard);
+
+        LtCsQnaDTO qnaChildBoard = ltCsService.selectCsQnaChildBoard(qnaNo);
+        model.addAttribute("qnaChildBoard", qnaChildBoard);
+
+
         log.info("qnaNo------"+qnaNo);
         log.info("qnaBoard----------"+qnaBoard.toString());
         return "/cs/qna/view";
@@ -261,6 +266,7 @@ public class CsController {
     public String selectCsFaqView(int faqNo, Model model){
         LtCsFaqDTO faqBoard = ltCsService.selectCsFaqView(faqNo);
         model.addAttribute("faqBoard",faqBoard);
+
         log.info("faqNo--------"+faqNo);
         return "/cs/faq/view";
     }
@@ -269,8 +275,10 @@ public class CsController {
     public String selectCsQnaBoard(int qnaNo, Model model){
         LtCsQnaDTO qnaBoard = ltCsService.selectCsQnaBoard(qnaNo);
         model.addAttribute("qnaBoard",qnaBoard);
+
         log.info("qnaNo------"+qnaNo);
         log.info("qnaBoard----------"+qnaBoard.toString());
+
         return "/cs/qna/modify";
     }
     @PostMapping("/cs/qna/modify")
@@ -282,4 +290,34 @@ public class CsController {
         return "redirect:/cs/qna/view?qnaNo="+qnaNo;
     }
 
+    @GetMapping("/cs/qna/delete")
+    public String deleteQnaBoard(int qnaNo) {
+
+        //게시물 삭제하기 전 파일 정보 가져오기
+        LtCsQnaDTO dto = ltCsService.selectCsQnaBoard(qnaNo);
+        //파일 경로
+        String filePath = dto.getFile1();
+
+        //파일 삭제
+        boolean isFileDeleted = deleteFile(filePath);
+        ltCsService.deleteQnaBoard(qnaNo);
+
+        // 만약 파일이 정상적으로 삭제되었다면 게시물을 삭제한다.
+        if (isFileDeleted) {
+            ltCsService.deleteQnaBoard(qnaNo);
+        }
+
+        return "redirect:/cs/qna/list";
+    }
+    //파일삭제 구현
+    private boolean deleteFile(String filePath){
+        try{
+            File fileToDelete = new File("files/" + filePath);
+            return fileToDelete.delete();
+
+        }catch (Exception e){
+            log.error("파일 삭제 중 오류 발생: "+ e.getMessage());
+            return false;
+        }
+    }
 }
