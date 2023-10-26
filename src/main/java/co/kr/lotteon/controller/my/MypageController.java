@@ -1,6 +1,11 @@
 package co.kr.lotteon.controller.my;
 
 import co.kr.lotteon.dto.mypage.PointPageRequestDTO;
+import co.kr.lotteon.dto.mypage.PointPageResponseDTO;
+import co.kr.lotteon.security.MyUserDetails;
+import co.kr.lotteon.service.MyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/my")
 public class MypageController {
+
+    @Autowired
+    private MyService myService;
 
     @GetMapping(value = "/home")
     public String myIndex(Model model) {
@@ -35,8 +43,10 @@ public class MypageController {
     }
 
     @GetMapping(value = "/point")
-    public String point(Model model, PointPageRequestDTO pageRequestDTO) {
-
+    public String point(Model model, PointPageRequestDTO pageRequestDTO, @AuthenticationPrincipal MyUserDetails myUserDetails) {
+        if(myUserDetails == null) return "redirect:/index";
+        PointPageResponseDTO pageResponseDTO = myService.showPoint(pageRequestDTO, myUserDetails.getUser().getUid());
+        model.addAttribute("pageResponseDTO", pageResponseDTO);
         return "/my/point";
     }
 
