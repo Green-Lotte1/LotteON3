@@ -213,5 +213,13 @@ public class LtCsService {
         return  ltCsFaqMapper.selectCsFaqList10(cate1);
     }
 
+    //Qna modify
 
+    public LtCsQnaDTO selectCsQnaBoard (int qnaNo) {
+        return ltCsQnaMapper.selectCsQnaBoard(qnaNo);
+    }
+
+    public void updateQnaBoard(LtCsQnaDTO dto){
+        ltCsQnaMapper.updateQnaBoard(dto);
+    }
 }

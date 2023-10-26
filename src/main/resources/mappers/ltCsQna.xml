@@ -35,4 +35,15 @@
 		ON a.cate1 = b.cate1 AND a.cate2 = b.cate2 WHERE `qnaNo`= #{qnaNo}
 	</select>
 
+	<select id="selectCsQnaBoard" resultType="co.kr.lotteon.dto.LtCsQnaDTO">
+		SELECT * FROM `lt_cs_qna` AS a
+		JOIN `lt_cs_cate2` AS b
+		ON a.cate1 = b.cate1 AND a.cate2 = b.cate2 WHERE `qnaNo`=#{qnaNo}
+	</select>
+
+	<update id="updateQnaBoard">
+		UPDATE `lt_cs_qna` SET `content`=#{content} WHERE `qnaNo`=#{qnaNo}
+	</update>
+
+
 </mapper>

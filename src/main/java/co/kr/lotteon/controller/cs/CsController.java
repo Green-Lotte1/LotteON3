@@ -13,10 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
@@ -265,6 +263,23 @@ public class CsController {
         model.addAttribute("faqBoard",faqBoard);
         log.info("faqNo--------"+faqNo);
         return "/cs/faq/view";
+    }
+
+    @GetMapping("/cs/qna/modify")
+    public String selectCsQnaBoard(int qnaNo, Model model){
+        LtCsQnaDTO qnaBoard = ltCsService.selectCsQnaBoard(qnaNo);
+        model.addAttribute("qnaBoard",qnaBoard);
+        log.info("qnaNo------"+qnaNo);
+        log.info("qnaBoard----------"+qnaBoard.toString());
+        return "/cs/qna/modify";
+    }
+    @PostMapping("/cs/qna/modify")
+    public String updateQnaBoard(@ModelAttribute LtCsQnaDTO dto){
+        ltCsService.updateQnaBoard(dto);
+        log.info("updateQnaBoardDTO------"+dto.toString());
+        int qnaNo= dto.getQnaNo();
+        log.info("updateQnaBoardQnaNo----------"+qnaNo);
+        return "redirect:/cs/qna/view?qnaNo="+qnaNo;
     }
 
 }
