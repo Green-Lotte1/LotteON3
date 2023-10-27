@@ -131,19 +131,31 @@
                 }
             });
 
-            $('.ltBtnChkDelete').click(function(e){
+            $('.ltBtnChkDelete').click(function(e) {
                 e.preventDefault();
-                const isChecked = $('input[name=chk]').is(':checked');
-                if(isChecked){
-                    if(confirm('정말 삭제하시겠습니까?')) {
+                const selectedChks = $('input[name=chk]:checked');
+                console.log(selectedChks)
+                const selectedChksCnt = selectedChks.length;
+
+                var chkList = [];
+                $.each(selectedChks, function (k, v){
+                    chkList.push($(this).val());
+                });
+                console.log(chkList);
+                console.log(chkList.join(','));
+
+                if (selectedChksCnt > 0) {
+                    if (confirm('정말 삭제하시겠습니까?')) {
+                        alert('delete');
                         $('#formCheck').submit();
                     }
+
                 }
             });
 
             $('.ltBtnDelete').click(function(e){
                 e.preventDefault();
-                if (confirm('정말 삭제하시겠습니까?')) {
+                if (confirm('삭제하시겠습니까?')) {
                     var deleteUrl = $(this).attr('href');
                     window.location.href = deleteUrl;
                 }

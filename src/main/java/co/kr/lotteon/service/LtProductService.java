@@ -6,8 +6,6 @@ import co.kr.lotteon.dto.prodpage.ProdPageResponseDTO;
 import co.kr.lotteon.entity.LtProductEntity;
 import co.kr.lotteon.mapper.LtProductMapper;
 import co.kr.lotteon.repository.LtProductRepository;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -115,11 +113,8 @@ public class LtProductService {
     // admin - 파일 업로드
     public List<String> fileUpload(LtProductDTO ltProductDTO) {
 
-        //카테고리 파일 저장 경로 설정
-        filePath += ltProductDTO.getProdCate1() +"/"+ ltProductDTO.getProdCate2() + "/";
-
         // 파일 첨부 경로(절대 경로로 변환)
-        String path = new File(filePath).getAbsolutePath();
+        String path = new File(getFilePath(ltProductDTO)).getAbsolutePath();
 
         // 첨부파일 리스트화
         List<MultipartFile> files = Arrays.asList(
@@ -145,6 +140,49 @@ public class LtProductService {
         return saveNames;
     }
 
+// admin - 상품 조회 1개
+    public LtProductDTO selectProduct(int prodNo){
+        return ltProductMapper.selectLtProduct(prodNo);
+    }
+
+// admin - 상품 삭제
+    public void deleteLtProduct(LtProductDTO ltProductDTO){
+
+        log.info("삭제할 ltProductDTO : " + ltProductDTO);
+        //디렉토리안의 파일 삭제
+        String path = getFilePath(ltProductDTO);
+        log.info("path : " + path);
+
+        File thumb1 = new File(path+"/"+ltProductDTO.getThumb1());
+        File thumb2 = new File(path+"/"+ltProductDTO.getThumb2());
+        File thumb3 = new File(path+"/"+ltProductDTO.getThumb3());
+        File detail = new File(path+"/"+ltProductDTO.getDetail());
+        log.info("deleteLtProduct...1");
+
+        if (thumb1.exists()) {
+            log.info("deleteLtProduct...2");
+            thumb1.delete();
+        }
+
+        if (thumb2.exists()) {
+            thumb2.delete();
+        }
+
+        if (thumb3.exists()) {
+            thumb3.delete();
+        }
+
+        if (detail.exists()) {
+            detail.delete();
+        }
+
+        log.info("deleteLtProduct...3");
+        ltProductMapper.updateLtProductDeleteColumn(ltProductDTO.getProdNo());
+
+    }
+// admin - 상품 다중 삭제
+
+
 
 // admin - 상품 리스트
 
@@ -156,8 +194,9 @@ public class LtProductService {
         int count = 0;
         // 검색 결과를 저장할 변수
         Page<LtProductEntity> searchResult = null;
-        log.info("서치 키워드 : " + prodPageRequestDTO.getSearchKeyword());
-        log.info("서치 타입 : " + prodPageRequestDTO.getSearchType());
+        log.info("SearchKeyword : " + prodPageRequestDTO.getSearchKeyword());
+        log.info("SearchProdNo : " + prodPageRequestDTO.getSearchProdNo());
+        log.info("SearchType : " + prodPageRequestDTO.getSearchType());
 
         switch(searchType){
             case "prodName":
@@ -165,8 +204,8 @@ public class LtProductService {
                 count = (int) ltProductRepository.countByIsRemovedAndProdNameContains(0, prodPageRequestDTO.getSearchKeyword());
                 break;
             case "prodNo":
-                int searchProdNo = prodPageRequestDTO.getSearchProdNo();
-                String searchProdNoStr = String.valueOf(searchProdNo); //와일드카드 사용을 위한 String 변환
+                String searchKeyword = prodPageRequestDTO.getSearchKeyword();
+                String searchProdNoStr = String.valueOf(searchKeyword); //와일드카드 사용을 위한 String 변환
                 searchResult = ltProductRepository.productNoList(0, searchProdNoStr, pageable);
                 count = (int) ltProductRepository.countByproductNoList(0, searchProdNoStr);
                 break;
@@ -191,47 +230,8 @@ public class LtProductService {
                 .build();
     }
 
-// admin - 상품 삭제
-    public void deleteLtProduct(LtProductDTO ltProductDTO){
-
-        log.info("deleteLtProduct...1");
-        ltProductMapper.deleteLtProduct(ltProductDTO.getProdNo());
-
-        //디렉토리안의 파일 삭제
-        String path = getFilePath(ltProductDTO);
-        log.info("path : " + path);
-
-        File thumb1 = new File(path+"/"+ltProductDTO.getThumb1());
-        File thumb2 = new File(path+"/"+ltProductDTO.getThumb2());
-        File thumb3 = new File(path+"/"+ltProductDTO.getThumb3());
-        File detail = new File(path+"/"+ltProductDTO.getDetail());
-        log.info("deleteLtProduct...2");
-
-        if (thumb1.exists()) {
-            log.info("deleteLtProduct...3");
-            thumb1.delete();
-        }
-
-        if (thumb2.exists()) {
-            thumb2.delete();
-        }
-
-        if (thumb3.exists()) {
-            thumb3.delete();
-        }
-
-        if (detail.exists()) {
-            detail.delete();
-        }
 
 
-    }
-
-
-// admin - 상품 조회 1개
-    public LtProductDTO selectProduct(int prodNo){
-       return ltProductMapper.selectProduct(prodNo);
-    }
 
 
 }

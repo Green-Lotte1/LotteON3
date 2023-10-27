@@ -9,10 +9,12 @@
 		SELECT * FROM `lt_product`
 	</select>
 
-	<select id="selectProduct" resultType="co.kr.lotteon.dto.LtProductDTO">
+	<!--admin 상품 조회-->
+	<select id="selectLtProduct" resultType="co.kr.lotteon.dto.LtProductDTO">
 		SELECT * FROM `lt_product` WHERE `prodNo` = #{prodNo}
 	</select>
 
+	<!--admin 상품 등록-->
 	<insert id="insertLtProduct">
 		INSERT INTO `lt_product` SET
 		`prodCate1`= #{prodCate1},
@@ -39,8 +41,10 @@
 		`rdate`=NOW();
 	</insert>
 
-	<delete id="deleteLtProduct" parameterType="co.kr.lotteon.dto.LtProductDTO">
-		DELETE FROM `lt_product` WHERE prodNo=#{prodNo}
+	<!--admin 상품 삭제-->
+	<delete id="updateLtProductDeleteColumn" parameterType="co.kr.lotteon.dto.LtProductDTO">
+		UPDATE `lt_product` SET isRemoved = 1, wdate = NOW() WHERE prodNo=#{prodNo}
 	</delete>
+
 
 </mapper>

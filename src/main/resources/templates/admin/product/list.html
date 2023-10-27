@@ -21,13 +21,13 @@
                 <option value="prodNo">상품코드</option>
                 <option value="company">제조사</option>
             </select>
-                <input th:if="${searchType == prodNo}" type="text" name="searchProdNo">
-                <input th:unless="${searchType == prodNo}" type="text" name="searchKeyword">
+                <input type="text" name="searchKeyword" />
             <button id="btnSearch">검색</button>
             </form>
         </div>
 
-        <form id="formCheck" th:action="@{/admin/product/delete}" method="get">
+        <form id="formCheck" th:action="@{/admin/product/delete}" method="post">
+        <input type="hidden" name="chkList" />
         <table>
             <tr>
                 <th><input type="checkbox" name="all"/></th>
