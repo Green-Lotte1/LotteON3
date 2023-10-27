@@ -22,6 +22,8 @@ public interface LtCsQnaMapper {
 
     public LtCsQnaDTO selectCsQnaView(int qnaNo);
 
+    public LtCsQnaDTO selectCsAdminQnaView(int qnaNo);
+
     public LtCsQnaDTO selectCsQnaBoard(int qnaNO);
 
     public void updateQnaBoard(LtCsQnaDTO dto);
@@ -29,4 +31,5 @@ public interface LtCsQnaMapper {
     public void deleteQnaBoard(int qnaNo);
 
     public LtCsQnaDTO selectCsQnaChildBoard(int qnaNo);
+
 }

@@ -1,103 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>롯데ON::고객센터</title>
-    <link rel="shortcut icon" type="image/x-icon" href="../../../static/images/favicon.ico" />
-    <link rel="stylesheet" href="../../../static/cs/css/style.css" />
-  </head>
-  <body>
-    <div id="wrapper">
-      <header>
-        <div class="top">
-          <div>
-            <p>
-              <a href="./member/login.html">로그인</a>
-              <a href="#">회원가입</a>
-              <a href="#">마이페이지</a>
-              <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
-            </p>
-          </div>
-        </div>
-        <div class="logo">
-          <div>
-            <a href="#"><img src="../../../static/images/header_logo.png" alt="로고" />고객센터</a>
-          </div>
-        </div>
-      </header>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.thymeleaf.org"
+       layout:decorate="/admin/admin_layout">
 
-      <section id="cs">
-        <div class="qna">
-          <nav>
-            <div>
-              <p>홈<span>></span>문의하기</p>
-            </div>
-          </nav>
-          <section class="view">
-            <aside>
-              <h2>문의하기</h2>
-              <ul>
-                <li class="on"><a href="#">회원</a></li>
-                <li><a href="#">쿠폰/이벤트</a></li>
-                <li><a href="#">주문/결제</a></li>
-                <li><a href="#">배송</a></li>
-                <li><a href="#">취소/반품/교환</a></li>
-                <li><a href="#">여행/숙박/항공</a></li>
-                <li><a href="#">안전거래</a></li>
-              </ul>
-            </aside>
-            <article>
-              <nav>
-                <h2 class="title">[가입] 가입 문의내용</h2>                
-                <p>
-                  <span>chh***</span>
-                  <span>2022-11-21</span>
-                </p>
-              </nav>
+<section id="admin-cs-notice-list" class="admin-cs-list" layout:fragment="content">
+  <script>
 
-              <div class="content">
-                <p>
-                  개인회원에서 법인회원(사업자 회원)으로 전환은 불가하므로 법인회원(사업자 회원) 전환은 신규 가입으로 진행을 해야 합니다.
-                </p>
-                <p>
-                  ※ 피싱 관련 피해신고<br /><br />
-                  ▶ 경찰청 사이버수사국 (국번없이)182 :
-                  http://cyberbureau.police.go.kr<br />
-                  ▶ KISA 인터넷침해대응센터 (국번없이)118 :
-                  http://www.krcert.or.kr<br />
-                  감사합니다.<br />
-                </p>
-              </div>
-              <a href="./list.html" class="btnList">목록보기</a>
-            </article>
-          </section>
-        </div>
-      </section>
+    $(document).ready(function(){
 
-      <footer>
-        <ul>
-          <li><a href="#">회사소개</a></li>
-          <li><a href="#">서비스이용약관</a></li>
-          <li><a href="#">개인정보처리방침</a></li>
-          <li><a href="#">전자금융거래약관</a></li>
-        </ul>
-        <div>
-          <p><img src="../../../static/images/footer_logo.png" alt="로고" /></p>
-          <p>
-            <strong>(주)롯데ON</strong><br />
-            서울특별시 송파구 올림픽로 300 롯데월드타워 26층 (역삼동 강남파이낸스센터)<br />
-            대표이사 : 김사무엘상현, 정준호, 강성현<br />
-            사업자등록번호 : 529-85-00774(롯데쇼핑(주) e커머스사업부)<br />
-            통신판매업 신고 : 서울송파 제0158호<br>
-            호스팅 서비스사업자 : 롯데쇼핑(주) e커머스사업부
-          </p>
-          <p>
-            <strong>고객센터</strong><br />
-            Tel : 1899-7000(유료) (평일 09:00~18:00)<br />
-            Fax : 051-123-4567 | E-mail : lotteon@lotte.net<br />
-          </p>
-        </div>
-      </footer>
-    </div>
-  </body>
+      const cate1Val = document.getElementsByName("cate1")[0].value;
+      const searchVal = document.getElementsByName("search")[0].value;
+
+      console.log('cate1 : ' + cate1Val + ' / search : ' + searchVal);
+      $(document).on("change","select[name='searchCate1']",function(){
+        $("option:selected", this).each(function(){
+          var selectValue = $(this).val();
+          if(selectValue === "" && selectValue == null){
+            return false;
+          }
+          if( searchVal == null || searchVal === "" ) {
+            location.href = "/LotteON/admin/cs/qna/list?cate1=" + selectValue;
+          } else{
+            location.href = "/LotteON/admin/cs/qna/list?cate1=" + selectValue +"&search="+searchVal;
+          }
+        });
+      });
+
+      $(document).on("focusout","input[name='searchKeyword']",function(){
+        var inputVal = $(this).val();
+        if(inputVal === "" && inputVal == null){
+          return false;
+        }
+        if( cate1Val == null || cate1Val === "" ) {
+          location.href = "/LotteON/admin/cs/qna/list?search=" + inputVal;
+        } else{
+          location.href = "/LotteON/admin/cs/qna/list?cate1=" + cate1Val +"&search="+inputVal;
+        }
+      });
+
+      $('.rjaxhwnd').equals()
+
+
+    });
+
+  </script>
+  <nav>
+    <h3>QnA</h3>
+    <p>
+      HOME > 고객센터 > <strong>QnA</strong>
+    </p>
+  </nav>
+
+  <!-- 공지사항 목록 컨텐츠 시작 -->
+
+<section>
+  <article>
+    <form action="#" method="">
+      <input type="text" name="writer" th:value="${qnaDTO.writer}">
+      <input type="text" name="qnaNo" th:value="${qnaDTO.qnaNo}">
+      <table>
+        <tr>
+          <td>문의유형</td>
+          <td>[[${qnaDTO.c1Name}]] - [[${qnaDTO.c2Name}]]</td>
+        </tr>
+        <tr>
+          <td>제목</td>
+          <td>
+            <input type="text" name="title" readonly th:value="${qnaDTO.title}"/>
+          </td>
+        </tr>
+        <tr>
+          <td>내용</td>
+          <td>
+            <textarea name="content" readonly >[[${qnaDTO.content}]]</textarea>
+          </td>
+        </tr>
+        <tr>
+          <th:block th:if="${qnaDTO.qnaNo == comment.parent}">
+          <td>답변</td>
+          <td>
+            <textarea name="reply" readonly >[[${comment.content}]]</textarea>
+          </td>
+          </th:block>
+          <th:block>
+
+          </th:block>
+        </tr>
+      </table>
+      <div>
+        <a th:href="@{/admin/cs/qna/}" class="btnList">삭제</a>
+        <input id="btnmodify" type="submit" class="btnSubmit" value="답변등록"/>
+        <a th:href="@{/admin/cs/qna/}" class="btnSubmit">목록</a>
+      </div>
+    </form>
+  </article>
+</section>
+  <!-- 상품목록 컨텐츠 끝 -->
+</section>
 </html>

@@ -50,7 +50,7 @@ public class LtCsNoticeEntity {
 
 	private String title;
 	private String content;
-	//private String writer;
+//	private String writer;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "writer", insertable = false, updatable = false)

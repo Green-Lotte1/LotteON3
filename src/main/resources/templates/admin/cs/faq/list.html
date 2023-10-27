@@ -1,163 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>롯데ON::고객센터</title>
-    <link rel="shortcut icon" type="image/x-icon" href="../../../static/images/favicon.ico" />
-    <link rel="stylesheet" href="../../../static/cs/css/style.css" />
-    <style>
-      
-      
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-      $(function(){
-        $('.more').click(function(e){
-          e.preventDefault();
-          
-          /*
-          let item = $(this).parent().find('> li:nth-child(n+4)');
-          let isVisible = item.is(':visible');
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.thymeleaf.org"
+       layout:decorate="/admin/admin_layout">
 
-          console.log('isVisible : ' + isVisible);
+<section id="admin-cs-faq-list" class="admin-cs-list" layout:fragment="content">
+  <script>
 
-          if(isVisible){
-            item.slideUp(100);
-          }else{
-            item.slideDown(100);
+    $(document).ready(function(){
+      const cate1Val = document.getElementsByName("cate1")[0].value;
+      const searchVal = document.getElementsByName("search")[0].value;
+
+      console.log('cate1 : ' + cate1Val + ' / search : ' + searchVal);
+      $(document).on("change","select[name='searchCate1']",function(){
+        $("option:selected", this).each(function(){
+          var selectValue = $(this).val();
+          if(selectValue === "" && selectValue == null){
+            return false;
           }
-          */
-
+          if( searchVal == null || searchVal === "" ) {
+            location.href = "/LotteON/admin/cs/faq/list?cate1=" + selectValue;
+          } else{
+            location.href = "/LotteON/admin/cs/faq/list?cate1=" + selectValue +"&search="+searchVal;
+          }
         });
       });
 
+      $(document).on("focusout","input[name='searchKeyword']",function(){
+        var inputVal = $(this).val();
+        if(inputVal === "" && inputVal == null){
+          return false;
+        }
+        if( cate1Val == null || cate1Val === "" ) {
+          location.href = "/LotteON/admin/cs/faq/list?search=" + inputVal;
+        } else{
+          location.href = "/LotteON/admin/cs/faq/list?cate1=" + cate1Val +"&search="+inputVal;
+        }
+      });
 
-    </script>
+      // 게시글 하나만 삭제
+      $('.noticeDelete').click(function (e){
+        e.preventDefault();
+        var confirmDelete = confirm('삭제 ? ');
+        if(confirmDelete) {
+          var deleteUrl = $(this).attr('href');
+          window.location.href = deleteUrl;
+        }
+      });
 
-  </head>
-  <body>
-    <div id="wrapper">
-      <header>
-        <div class="top">
-          <div>
-            <p>
-              <a href="./member/login.html">로그인</a>
-              <a href="#">회원가입</a>
-              <a href="#">마이페이지</a>
-              <a href="#"
-                ><i class="fa fa-shopping-cart" aria-hidden="true"></i
-                >&nbsp;장바구니</a
-              >
-            </p>
-          </div>
-        </div>
-        <div class="logo">
-          <div>
-            <a href="../index.html"><img src="../../../static/images/header_logo.png" alt="로고" />고객센터</a>
-          </div>
-        </div>
-      </header>
+    });
 
-      <section id="cs">
-        <div class="faq">
-          <nav>
-            <div>
-              <p>홈<span>></span>자주묻는 질문</p>
-            </div>
-          </nav>
-          <section class="list">
-            <aside>
-              <h2>자주묻는 질문</h2>
-              <ul>
-                <li class="on"><a href="#">회원</a></li>
-                <li><a href="#">쿠폰/이벤트</a></li>
-                <li><a href="#">주문/결제</a></li>
-                <li><a href="#">배송</a></li>
-                <li><a href="#">취소/반품/교환</a></li>
-                <li><a href="#">여행/숙박/항공</a></li>
-                <li><a href="#">안전거래</a></li>
-              </ul>
-            </aside>
-            <article>              
-              <nav>
-                <h1>회원</h1>
-                <h2>가장 자주 묻는 질문입니다.</h2>
-              </nav>
+  </script>
+  <nav>
+    <h3>공지사항 목록</h3>
+    <p>
+      HOME > 고객센터 > <strong>공지사항</strong>
+    </p>
+  </nav>
+  <!-- 공지사항 목록 컨텐츠 시작 -->
+  <section>
+    <form th:action="@{#}" method="post">
+      <div>
+        <select name="searchCate1" id="searchCate1">
+          <option th:value="0" th:selected="${#strings.equals(param.cate1, '0')}">유형선택</option>
+          <option th:value="10" th:selected="${#strings.equals(param.cate1, '10')}">고객서비스</option>
+          <option th:value="11" th:selected="${#strings.equals(param.cate1, '11')}">안전거래</option>
+          <option th:value="12" th:selected="${#strings.equals(param.cate1, '12')}">위해상품</option>
+          <option th:value="13" th:selected="${#strings.equals(param.cate1, '13')}">이벤트당첨</option>
+        </select>
+        <input type="text" name="searchKeyword" id="searchKeyword" th:value="${param.search}" placeholder="검색어를 입력하세요." >
+        <input type="hidden" name="cate1" th:value="${param.cate1}">
+        <input type="hidden" name="search" th:value="${param.search}">
+      </div>
+      <table class="listTable">
+        <thead>
+        <tr>
+          <th><input type="checkbox" name="all"/></th>
+          <th>번호</th>
+          <th>유형</th>
+          <th>제목</th>
+          <th>조회</th>
+          <th>날짜</th>
+          <th>관리</th>
+        </tr>
+        </thead>
+        <tbody class="listTbody">
+        <tr th:each="article:${pageResponseDTO.getNoticeList()}">
+          <td><input type="checkbox" name="chk" th:value="${article.noticeNo}"/></td>
+          <td>[[${article.noticeNo}]]</td>
+          <td>[[${article.c1Name}]]</td>
+          <td><a th:href="@{/admin/cs/faq/view(noticeNo=${article.noticeNo})}">[ [[${article.c2Name}]] ] [[${article.title}]]</a></td>
+          <td> [[${article.hit}]] </td>
+          <td>[[${article.rdateSub}]]</td>
+          <td>
+            <a th:href="@{/admin/cs/faq/delete(noticeNo=${article.noticeNo})}" class="noticeDelete">[삭제]</a>
+            <br/>
+            <a th:href="@{/admin/cs/faq/modify(noticeNo=${article.noticeNo})}" class="noticeUpdate">[수정]</a>
+          </td>
+        </tr>
+        <tr th:if="${pageResponseDTO.getNoticeList().size() eq 0}">
+          <td colspan="7">
+            조회 결과가 없습니다.
+          </td>
+        </tr>
+        </tbody>
+      </table>
 
-              <div>
-                <h3>가입</h3>
-                <ul>
-                  <li><a href="./view.html"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li class="more"><a href="#">더보기</a></li>
-                </ul>
-              </div>
-              <div>
-                <h3>탈퇴</h3>
-                <ul>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li class="more"><a href="#">더보기</a></li>
-                </ul>
-              </div>
-              <div>
-                <h3>회원정보</h3>
-                <ul>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li class="more"><a href="#">더보기</a></li>
-                </ul>
-              </div>
-              <div>
-                <h3>로그인</h3>
-                <ul>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li class="more"><a href="#">더보기</a></li>
-                </ul>
-              </div>
-
-            </article>
-          </section>
-        </div>
-      </section>
-
-      <footer>
-        <ul>
-          <li><a href="#">회사소개</a></li>
-          <li><a href="#">서비스이용약관</a></li>
-          <li><a href="#">개인정보처리방침</a></li>
-          <li><a href="#">전자금융거래약관</a></li>
-        </ul>
-        <div>
-          <p><img src="../../../static/images/footer_logo.png" alt="로고" /></p>
-          <p>
-            <strong>(주)롯데ON</strong><br />
-            서울특별시 송파구 올림픽로 300 롯데월드타워 26층 (역삼동 강남파이낸스센터)<br />
-            대표이사 : 김사무엘상현, 정준호, 강성현<br />
-            사업자등록번호 : 529-85-00774(롯데쇼핑(주) e커머스사업부)<br />
-            통신판매업 신고 : 서울송파 제0158호<br>
-            호스팅 서비스사업자 : 롯데쇼핑(주) e커머스사업부
-          </p>
-          <p>
-            <strong>고객센터</strong><br />
-            Tel : 1899-7000(유료) (평일 09:00~18:00)<br />
-            Fax : 051-123-4567 | E-mail : lotteon@lotte.net<br />
-          </p>
-        </div>
-      </footer>
+      <div>
+        <input type="submit" value="선택삭제" class="deleteAll" />
+        <a th:href="@{/admin/cs/faq/write}" class="writeBtn">작성하기</a>
+      </div>
+    </form>
+    <div class="paging">
+                <span class="prev" th:if="${pageResponseDTO.prev}">
+                    <a th:href="@{/admin/cs/faq/list(cate1=${pageResponseDTO.cate1},pg=${pageResponseDTO.start - 1}, search=${pageResponseDTO.getSearch()})}"><&nbsp;이전</a>
+                </span>
+      <span class="num"  th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}">
+                    <a th:href="@{/admin/cs/faq/list(cate1=${pageResponseDTO.cate1},pg=${num}, search=${pageResponseDTO.getSearch()})}" th:classappend="${num == pageResponseDTO.pg?'on':''}">[[${num}]]</a>
+                </span>
+      <span class="next" th:if="${pageResponseDTO.next}">
+                    <a th:href="@{/admin/cs/faq/list(cate1=${pageResponseDTO.cate1},pg=${pageResponseDTO.end + 1}, search=${pageResponseDTO.getSearch()})}">다음&nbsp;></a>
+                </span>
     </div>
-  </body>
+
+  </section>
+  <!-- 상품목록 컨텐츠 끝 -->
+</section>
 </html>
