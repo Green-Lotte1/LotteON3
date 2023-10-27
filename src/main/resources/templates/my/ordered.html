@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org"
        xmlns:layout="http://www.thymeleaf.org"
-       layout:decorate="/my/_my_layout">
+       layout:decorate="/my/_my_layout"
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <!-- order -->
 <section layout:fragment="content">
     <a href="#"><img th:src="@{/images/my/my_banner2.png}" alt="패션, 타운 하나로 끝" class="banner"></a>
@@ -38,7 +39,20 @@
             <th:block th:each="myOrder : ${pageResponseDTO.myOrdersDTOList}">
                 <tr  class="orderInfo">
                     <td  colspan="4" class="orderNo">
-                        <a href="#">주문번호 [[${myOrder.orderDTO.ordNo}]]</a>
+                        <a href="#" class="ordNo">주문번호 [[${myOrder.orderDTO.ordNo}]]</a>
+                        <span class="hidden date" th:text="${myOrder.orderDTO.ordDate}"></span>
+                        <th:block th:switch="${myOrder.orderDTO.ordComplete}">
+                            <span class="hidden status" th:case="1">결제완료</span>
+                            <span class="hidden status" th:case="2">결제중</span>
+                            <span class="hidden status" th:case="3">주문취소</span>
+                            <span class="hidden status" th:case="4">배송완료</span>
+                            <span class="hidden status" th:case="5">수취확인</span>
+                        </th:block>
+                        <span class="hidden ordName" th:text="${#authentication.principal.user.name}"></span>
+                        <span class="hidden recipName" th:text="${myOrder.orderDTO.recipName}"></span>
+                        <span class="hidden recipHp" th:text="${myOrder.orderDTO.recipHp}"></span>
+                        <span class="hidden recipAddress" th:text="${'[' + myOrder.orderDTO.recipZip + '] '
+                                        + myOrder.orderDTO.recipAddr1 + ' ' + myOrder.orderDTO.recipAddr2 }"></span>
                     </td>
                 </tr>
                 <tr th:each="item : ${myOrder.itemList}" class="orderItem">

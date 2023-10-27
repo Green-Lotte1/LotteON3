@@ -16,7 +16,45 @@ $(function(){
     // 주문상세 팝업 띄우기
     $('.orderInfo .orderNo > a').click(function(e){
         e.preventDefault();
-        $('#popOrder').addClass('on');
+
+        const tr 		             = $(this).parent().parent(); // .orderInfo
+        const ordNo	         = tr.find('.orderNo').find('.ordNo').text();
+        const date 		     = tr.find('.date').text();
+        const status 		 = tr.find('.status').text();
+        const ordName 		 = tr.find('.ordName').text();
+        const recipName 		 = tr.find('.recipName').text();
+        const recipHp 		 = tr.find('.recipHp').text();
+        const recipAddress 		 = tr.find('.recipAddress').text();
+
+        let selectedTR = tr.next(); //.orderItem
+        let isItem = true;
+        while(isItem){
+
+            alert('dd');
+            if(selectedTR.className !== 'orderItem'){
+                isItem = false;
+            }
+            selectedTR = selectedTR.next();
+        }
+
+        const popup = $('#popOrder');
+        popup.find('.ordNo').text(ordNo);
+        popup.find('.date').text(date);
+        popup.find('.status').text(status);
+        popup.find('.ordName').text(ordName);
+        popup.find('.recipName').text(recipName);
+        popup.find('.recipHp').text(recipHp);
+        popup.find('.recipAddress').text(recipAddress);
+        /*
+        if(thumb1 == 'soldOut'){
+            popup.find('.thumb > img').attr("src", "/Farmstory2/admin/images/soldOut.png");
+        } else {
+            popup.find('.thumb > img').attr("src", "/Farmstory2/thumb/"+thumb1);
+        }
+        popup.find('.thumb > img').attr("alt", pName);
+        */
+
+        popup.addClass('on');
     });
 
     // 수취확인 팝업 띄우기

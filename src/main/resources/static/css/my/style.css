@@ -453,8 +453,8 @@ footer p > strong {
     background-position: -500px -399px;
 }
 
-#my > .home > section > article .hidden {
-    display: none;
+#my > .ordered > section > article .hidden {
+    display: none !important;
 }
 #my > .home > section > article > table .rating {
     display: block;
