@@ -27,4 +27,5 @@ public class MemberCheckController {
     public int checkHp(@PathVariable("hp") String hp){
         return ltMemberService.countHp(hp);
     }
+
 }
