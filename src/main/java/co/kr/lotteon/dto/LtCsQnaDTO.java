@@ -40,6 +40,8 @@ public class LtCsQnaDTO {
 	private String writerMarking;
 	private String rdateSub;
 
+	private LtCsQnaDTO comment;
+
 
 	
 	

@@ -1135,6 +1135,16 @@ footer p > strong {
     box-sizing: border-box;
     overflow: hidden;
 }
+/* qna list 추가*/
+#my > .qna > section > article > table .blue-text {
+    padding: 10px;
+    border-left: 1px solid #f1f1f1;
+    border-bottom: 1px solid #aaa;
+    font-weight: bold;
+    color: red;
+    box-sizing: border-box;
+    overflow: hidden;
+}
 #my > .qna > section > article > table td:first-child {border-left: none;}
 #my > .qna > section > article > table td.tit a:hover {
     text-decoration: underline;
@@ -1155,14 +1165,7 @@ footer p > strong {
     display: none;
     background-color: #fafafa;            
 }
-/* my - qna(추가) */
-.blue-text {
-    color: blue;
-}
 
-.gray-text {
-    color: gray;
-}
 #my > .qna > section > article > table .answerRow td {}
 #my > .qna > section > article > table .answerRow div {
     padding-left: 26px;

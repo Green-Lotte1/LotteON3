@@ -3,12 +3,9 @@ package co.kr.lotteon.service;
 import co.kr.lotteon.dto.*;
 import co.kr.lotteon.mapper.cs.*;
 import co.kr.lotteon.mapper.my.LtMyMapper;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -255,4 +252,10 @@ public class LtCsService {
     public LtCsQnaDTO selectCsQnaChildBoard(int qnaNo){
         return ltCsQnaMapper.selectCsQnaChildBoard(qnaNo);
     }
+
+    //myqna 답변 board
+    public List<LtCsQnaDTO> selectCsQnaComment(int qnaNo){
+        return ltMyMapper.selectCsQnaComment(qnaNo);
+    }
+
 }

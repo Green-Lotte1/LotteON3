@@ -26,6 +26,7 @@ public class LtCsNoticeEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int noticeNo;
+	
 
 	//private int cate1;
 	//private int cate2;
