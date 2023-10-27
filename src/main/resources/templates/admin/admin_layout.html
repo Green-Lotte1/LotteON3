@@ -131,6 +131,7 @@
                 }
             });
 
+            //선택 삭제
             $('.ltBtnChkDelete').click(function(e) {
                 e.preventDefault();
                 const selectedChks = $('input[name=chk]:checked');
@@ -153,6 +154,7 @@
                 }
             });
 
+            //삭제
             $('.ltBtnDelete').click(function(e){
                 e.preventDefault();
                 if (confirm('삭제하시겠습니까?')) {
@@ -162,6 +164,7 @@
             });
         });
 
+        //검색
         $('#btnSearch').click(function(){
             $('#formSearch').submit();
         });
