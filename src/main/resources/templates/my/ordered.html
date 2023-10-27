@@ -28,7 +28,7 @@
             </p>
             <button class="btnConfirm">조회하기</button>
         </div>
-
+        <input type="hidden" name="userID" th:value="${#authentication.principal.user.uid}">
         <table border="0">
             <tr>
                 <th>날짜</th>
@@ -37,6 +37,7 @@
                 <th>확인/신청</th>
             </tr>
             <th:block th:each="myOrder : ${pageResponseDTO.myOrdersDTOList}">
+                <tbody>
                 <tr  class="orderInfo">
                     <td  colspan="4" class="orderNo">
                         <a href="#" class="ordNo">주문번호 [[${myOrder.orderDTO.ordNo}]]</a>
@@ -58,6 +59,7 @@
                 <tr th:each="item : ${myOrder.itemList}" class="orderItem">
                     <td class="date">
                         [[${myOrder.orderDTO.ordDate}]]
+
                     </td>
                     <td>
                         <a th:href="@{/product/view(prodNo=${item.prodNo})}" class="thumb"><img th:src="@{'/thumbs/' + ${item.thumb1}}" alt=""></a>
@@ -65,26 +67,30 @@
                             <li class="company">[[${item.company}]]</li>
                             <li class="prodName"><a th:href="@{/product/view(prodNo=${item.prodNo})}">[[${item.prodName}]]</a></li>
                             <li>수량 : <span class="prodCount">[[${item.count}]]</span>개 <!--/ 주문번호 : <span class="ordNo">[[${item.ordNo}]]</span></li>-->
-                            <li class="prodPrice">총 [[${#numbers.formatInteger(item.total,0,'COMMA')}]]</li>
-                            <li class="prodPriceIndiv" th:if="${item.count ge 1}">(개당 [[${#numbers.formatInteger(item.price,0,'COMMA')}]]원)</li>
+                            <li class="prodPrice">총 <span class="total">[[${#numbers.formatInteger(item.total,0,'COMMA')}]]</span></li>
+                            <li th:if="${item.count ge 1}">(개당 <span class="prodPriceIndiv">[[${#numbers.formatInteger(item.price,0,'COMMA')}]]</span>원)</li>
+                            <span class="hidden discount">[[${item.price - item.discountPrice}]]</span>
+                            <span class="hidden priceNum">[[#{item.price}]]</span>
                         </ul>
                     </td>
-                    <td class="status">
+                    <td class="status" th:attr="data-ordno=${myOrder.orderDTO.ordNo}">
                         <th:block th:switch="${myOrder.orderDTO.ordComplete}">
-                            <span th:case="1">결제완료</span>
-                            <span th:case="2">결제중</span>
-                            <span th:case="3">주문취소</span>
-                            <span th:case="4">배송완료</span>
-                            <span th:case="5">수취확인</span>
+                            <span th:case="1" class="ordCompelete-t1">결제완료</span>
+                            <span th:case="2" class="ordCompelete-t2">결제중</span>
+                            <span th:case="3" class="ordCompelete-t3">주문취소</span>
+                            <span th:case="4" class="ordCompelete-t4">배송완료</span>
+                            <span th:case="5" class="ordCompelete-t5">수취확인</span>
                         </th:block>
                     </td>
                     <td class="confirm">
-                        <a href="#" class="receive">수취확인</a>
+                        <span class="hidden ordNo">[[${myOrder.orderDTO.ordNo}]]</span>
+                        <a href="#" class="receive" th:if="${myOrder.orderDTO.ordComplete != 2 && myOrder.orderDTO.ordComplete != 3 && myOrder.orderDTO.ordComplete !=5}">수취확인</a>
                         <a href="#" class="review">상품평</a>
                         <a href="#" class="refund">반품신청</a>
                         <a href="#" class="exchange">교환신청</a>
                     </td>
                 </tr>
+            </tbody>
             </th:block>
         </table>
 

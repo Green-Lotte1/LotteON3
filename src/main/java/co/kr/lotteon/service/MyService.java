@@ -81,4 +81,9 @@ public class MyService {
                 .build();
     }
 
+    public int deliveryComplete(int ordNo){
+        ltProductOrderRepository.updateOrdComplete(ordNo, 5);
+        return 1;
+    }
+
 }
