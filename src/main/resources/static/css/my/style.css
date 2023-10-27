@@ -456,6 +456,9 @@ footer p > strong {
 #my > .ordered > section > article .hidden {
     display: none !important;
 }
+.popup .hidden {
+    display: none !important;
+}
 #my > .home > section > article > table .rating {
     display: block;
     width: 84px;
@@ -544,7 +547,12 @@ footer p > strong {
 }
 
 /* my - ordered(전체주문내역) */
-#my > .ordered {}        
+#my > .ordered .ordCompelete-t1 { color : #0e9d05; }
+#my > .ordered .ordCompelete-t2 { color : #01c1c4; }
+#my > .ordered .ordCompelete-t3 { color : #888888; }
+#my > .ordered .ordCompelete-t4 { color : #01c1c4; }
+#my > .ordered .ordCompelete-t5 { color : #9e1212; font-weight: bold;}
+#my > .ordered {}
 #my > .ordered > section > article > .byDate {
     width: 100%;
     height: auto;
@@ -1375,7 +1383,28 @@ footer p > strong {
 .popup > div > section > article > table td:first-child {
     border-left: none;
 }
+#popOrder .thumb{
+    width:100px;
+    height:100px;
+}
+#popOrder #orderList{
+    display: block;
+    overflow-y: scroll;
+    height: 150px;
+}
 
+#popOrder #orderList::-webkit-scrollbar {
+    width: 5px;
+}
+#popOrder #orderList::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 5px;
+}
+#popOrder #orderList::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 5px;
+    box-shadow: inset 0px 0px 1px white;
+}
 .popup > div > section > article:nth-child(1) > table td:nth-child(1) {width: 150px;}
 .popup > div > section > article:nth-child(1) > table td:nth-child(2) {width: 300px;}
 .popup > div > section > article:nth-child(1) > table td:nth-child(3) {width: 160px;}

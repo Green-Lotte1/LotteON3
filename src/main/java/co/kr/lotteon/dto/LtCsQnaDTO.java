@@ -1,5 +1,6 @@
 package co.kr.lotteon.dto;
 
+import co.kr.lotteon.entity.LtCsQnaEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 @Builder
@@ -40,7 +42,34 @@ public class LtCsQnaDTO {
 	private String writerMarking;
 	private String rdateSub;
 
+
 	private LtCsQnaDTO comment;
+
+	public String getRdateSub() {
+		String formatDate = rdate.format(DateTimeFormatter.ofPattern("yy.MM.dd"));
+		//return LocalDateTime.parse(formatDate);
+		return formatDate;
+	}
+
+	public LtCsQnaEntity toEntity() {
+		return LtCsQnaEntity.builder()
+				.qnaNo(qnaNo)
+				.cate1(cate1)
+				.cate2(cate2)
+				.title(title)
+				.content(content)
+				.file1(file1)
+				.file2(file2)
+				.writer(writer)
+				.ordNo(ordNo)
+				.prodNo(prodNo)
+				.parent(parent)
+				.answerComplete(answerComplete)
+				.regip(regip)
+				.rdate(rdate)
+				.build();
+	}
+
 
 
 	

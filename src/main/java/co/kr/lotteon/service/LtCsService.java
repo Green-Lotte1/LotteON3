@@ -1,7 +1,9 @@
 package co.kr.lotteon.service;
 
 import co.kr.lotteon.dto.*;
+import co.kr.lotteon.entity.LtCsQnaEntity;
 import co.kr.lotteon.mapper.cs.*;
+import co.kr.lotteon.repository.LtCsQnaRepository;
 import co.kr.lotteon.mapper.my.LtMyMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -17,8 +19,8 @@ import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
-@Service
 @Log4j2
+@Service
 public class LtCsService {
 
 
@@ -33,9 +35,9 @@ public class LtCsService {
 
     private final LtCsFaqMapper ltCsFaqMapper;
 
+    private final LtCsQnaRepository qnaRepository;
+
     private final LtMyMapper ltMyMapper;
-
-
 
 
     public List<LtCsNoticeDTO> selectCsNotices(){
@@ -108,7 +110,6 @@ public class LtCsService {
         }
         return saveNames;
     }
-
 
     // notice,qna List Mybatis 로 페이징 만들기
 
@@ -233,10 +234,20 @@ public class LtCsService {
         return  ltCsFaqMapper.selectCsFaqList10(cate1);
     }
 
+    // Admin Qna View
+    public LtCsQnaDTO selectCsAdminQnaView(int qnaNo) {
+        return ltCsQnaMapper.selectCsAdminQnaView(qnaNo);
+    }
+
+    // Admin Qna View Comment
+    public List<LtCsQnaEntity> selectComments(int parent) {
+        return qnaRepository.findByParent(parent);
+    }
     //Qna modify
 
     public LtCsQnaDTO selectCsQnaBoard (int qnaNo) {
         return ltCsQnaMapper.selectCsQnaBoard(qnaNo);
+
     }
 
     public void updateQnaBoard(LtCsQnaDTO dto){
@@ -259,3 +270,4 @@ public class LtCsService {
     }
 
 }
+

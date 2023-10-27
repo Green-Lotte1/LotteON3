@@ -35,6 +35,20 @@
 		ON a.cate1 = b.cate1 AND a.cate2 = b.cate2 WHERE `qnaNo`= #{qnaNo}
 	</select>
 
+
+	<select id="selectCsAdminQnaView" resultType="co.kr.lotteon.dto.LtCsQnaDTO">
+		SELECT * FROM `lt_cs_qna` AS a
+				JOIN `lt_cs_cate1` as b
+				JOIN `lt_cs_cate2` as c
+				ON a.cate1 = c.cate1 AND a.cate2 = c.cate2 AND a.cate1 = b.cate1
+		WHERE `qnaNo` = #{qnaNo}
+	</select>
+
+	<select id="selectComment" resultType="co.kr.lotteon.dto.LtCsQnaDTO">
+		SELECT * FROM `lt_cs_qna` WHERE `parent` = #{qnaNo}
+	</select>
+
+
 	<select id="selectCsQnaBoard" resultType="co.kr.lotteon.dto.LtCsQnaDTO">
 		SELECT * FROM `lt_cs_qna` AS a
 		JOIN `lt_cs_cate2` AS b

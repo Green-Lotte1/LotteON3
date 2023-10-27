@@ -9,7 +9,6 @@ $(document).ready(function() {
     var subCategoryObject = new Object();
 
     var isSelected = false;
-
     //메인 카테고리 셋팅
     var mainCategorySelectBox = document.getElementById("cate1");
     $.ajax({
