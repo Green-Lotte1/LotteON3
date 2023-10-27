@@ -15,9 +15,9 @@ public interface LtProductMapper {
 
 
     /* admin 상품 삭제 */
-    public void deleteLtProduct(int prodNo);
+    public void updateLtProductDeleteColumn(int prodNo);
 
     /* admin 상품 조회 1개 */
-    public LtProductDTO selectProduct(int prodNo);
+    public LtProductDTO selectLtProduct(int prodNo);
 
 }
