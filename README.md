@@ -41,6 +41,7 @@
 -cs 
 
 -admin 상품목록 기능 2차 완료(상품검색, 삭제/수정)
+-admin cs notice 삭제,수정 완료, 글쓰기 작업 진행중
 
 -product cart, order 구현
 

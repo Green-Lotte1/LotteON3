@@ -14,7 +14,7 @@
       $(document).on("change","select[name='searchCate1']",function(){
         $("option:selected", this).each(function(){
           var selectValue = $(this).val();
-          if(selectValue === "" && selectValue == null){
+          if(selectValue === "" && selectValue == null) {
             return false;
           }
           if( searchVal == null || searchVal === "" ) {
@@ -111,15 +111,15 @@
       </div>
     </form>
     <div class="paging">
-                <span class="prev" th:if="${pageResponseDTO.prev}">
-                    <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${pageResponseDTO.start - 1}, search=${pageResponseDTO.getSearch()})}"><&nbsp;이전</a>
-                </span>
+      <span class="prev" th:if="${pageResponseDTO.prev}">
+        <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${pageResponseDTO.start - 1}, search=${pageResponseDTO.getSearch()})}"><&nbsp;이전</a>
+      </span>
       <span class="num"  th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}">
-                    <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${num}, search=${pageResponseDTO.getSearch()})}" th:classappend="${num == pageResponseDTO.pg?'on':''}">[[${num}]]</a>
-                </span>
+        <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${num}, search=${pageResponseDTO.getSearch()})}" th:classappend="${num == pageResponseDTO.pg?'on':''}">[[${num}]]</a>
+      </span>
       <span class="next" th:if="${pageResponseDTO.next}">
-                    <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${pageResponseDTO.end + 1}, search=${pageResponseDTO.getSearch()})}">다음&nbsp;></a>
-                </span>
+        <a th:href="@{/admin/cs/notice/list(cate1=${pageResponseDTO.cate1},pg=${pageResponseDTO.end + 1}, search=${pageResponseDTO.getSearch()})}">다음&nbsp;></a>
+      </span>
     </div>
 
   </section>

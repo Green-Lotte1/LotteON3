@@ -410,6 +410,7 @@ button[type=submit] {
 #admin-index > div > div > article > p > span:nth-child(2) {
     float: right;
 }
+
 /* 공지사항 : admin-cs-notice-list */
 #admin-cs-notice-list {}
 #admin-cs-notice-list > section > div  {
