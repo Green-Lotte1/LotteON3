@@ -1,7 +1,10 @@
 package co.kr.lotteon.service;
 
 import co.kr.lotteon.dto.*;
+import co.kr.lotteon.entity.LtCsQnaEntity;
 import co.kr.lotteon.mapper.cs.*;
+import co.kr.lotteon.repository.LtCsQnaRepository;
+import co.kr.lotteon.mapper.my.LtMyMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +22,8 @@ import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
-@Service
 @Log4j2
+@Service
 public class LtCsService {
 
 
@@ -34,6 +37,10 @@ public class LtCsService {
     private final LtCsNoticeMapper ltCsNoticeMapper;
 
     private final LtCsFaqMapper ltCsFaqMapper;
+
+    private final LtCsQnaRepository qnaRepository;
+
+    private final LtMyMapper ltMyMapper;
 
 
     public List<LtCsNoticeDTO> selectCsNotices(){
@@ -107,7 +114,6 @@ public class LtCsService {
         return saveNames;
     }
 
-
     // notice,qna List Mybatis 로 페이징 만들기
 
     // 현재 페이지 번호
@@ -128,6 +134,12 @@ public class LtCsService {
     // Notice게시판 cate 참고한 총 갯수 카운트
     public int selectCsNoticeTotalCate(int cate1){
         return ltCsNoticeMapper.selectCsNoticeTotalCate(cate1);
+    }
+
+    //myqna 게시판 총 갯수 카운트
+
+    public String selectMyQnaTotal(String writer) {
+        return ltMyMapper.selectMyQnaTotal(writer);
     }
 
     // Qna게시판 총 갯수 카운트
@@ -197,6 +209,12 @@ public class LtCsService {
         return ltCsQnaMapper.selectCsQnaListCate(cate1,start);
     }
 
+    //myqna writer 참조
+
+    public List<LtCsQnaDTO> selectMyQnaBoard(String writer , int start) {
+        return ltMyMapper.selectMyQnaBoard(writer, start);
+    }
+
 
     // 게시판 view
 
@@ -219,10 +237,20 @@ public class LtCsService {
         return  ltCsFaqMapper.selectCsFaqList10(cate1);
     }
 
+    // Admin Qna View
+    public LtCsQnaDTO selectCsAdminQnaView(int qnaNo) {
+        return ltCsQnaMapper.selectCsAdminQnaView(qnaNo);
+    }
+
+    // Admin Qna View Comment
+    public List<LtCsQnaEntity> selectComments(int parent) {
+        return qnaRepository.findByParent(parent);
+    }
     //Qna modify
 
     public LtCsQnaDTO selectCsQnaBoard (int qnaNo) {
         return ltCsQnaMapper.selectCsQnaBoard(qnaNo);
+
     }
 
     public void updateQnaBoard(LtCsQnaDTO dto){
@@ -239,3 +267,4 @@ public class LtCsService {
         return ltCsQnaMapper.selectCsQnaChildBoard(qnaNo);
     }
 }
+
