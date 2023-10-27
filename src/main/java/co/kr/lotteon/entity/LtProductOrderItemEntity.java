@@ -24,15 +24,23 @@ public class LtProductOrderItemEntity {
     private int delivery;
     private int total;
 
+
+
     public LtProductOrderItemDTO toDTO(){
         return LtProductOrderItemDTO.builder()
                 .ordNo(ltProductOrderItemPK.getOrdNo())
-                .prodNo(ltProductOrderItemPK.getProdNo())
+                .prodNo(ltProductOrderItemPK.getLtProductEntity().getProdNo())
                 .count(count)
                 .price(price)
                 .discount(discount)
                 .point(point)
                 .delivery(delivery)
+                .discountPrice(price-((price*discount/100/10)*10))
+                .discountPriceTotal((price-((price*discount/100/10)*10))*count+delivery)
+                .thumb1(ltProductOrderItemPK.getLtProductEntity().getThumb1())
+                .descript(ltProductOrderItemPK.getLtProductEntity().getDescript())
+                .prodName(ltProductOrderItemPK.getLtProductEntity().getProdName())
+                .company(ltProductOrderItemPK.getLtProductEntity().getCompany())
                 .total(total)
         .build();
     }

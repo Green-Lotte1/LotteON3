@@ -13,10 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
@@ -240,6 +238,11 @@ public class CsController {
     public String selectCsQnaView(int qnaNo, Model model){
         LtCsQnaDTO qnaBoard = ltCsService.selectCsQnaView(qnaNo);
         model.addAttribute("qnaBoard",qnaBoard);
+
+        LtCsQnaDTO qnaChildBoard = ltCsService.selectCsQnaChildBoard(qnaNo);
+        model.addAttribute("qnaChildBoard", qnaChildBoard);
+
+
         log.info("qnaNo------"+qnaNo);
         log.info("qnaBoard----------"+qnaBoard.toString());
         return "/cs/qna/view";
@@ -263,8 +266,58 @@ public class CsController {
     public String selectCsFaqView(int faqNo, Model model){
         LtCsFaqDTO faqBoard = ltCsService.selectCsFaqView(faqNo);
         model.addAttribute("faqBoard",faqBoard);
+
         log.info("faqNo--------"+faqNo);
         return "/cs/faq/view";
     }
 
+    @GetMapping("/cs/qna/modify")
+    public String selectCsQnaBoard(int qnaNo, Model model){
+        LtCsQnaDTO qnaBoard = ltCsService.selectCsQnaBoard(qnaNo);
+        model.addAttribute("qnaBoard",qnaBoard);
+
+        log.info("qnaNo------"+qnaNo);
+        log.info("qnaBoard----------"+qnaBoard.toString());
+
+        return "/cs/qna/modify";
+    }
+    @PostMapping("/cs/qna/modify")
+    public String updateQnaBoard(@ModelAttribute LtCsQnaDTO dto){
+        ltCsService.updateQnaBoard(dto);
+        log.info("updateQnaBoardDTO------"+dto.toString());
+        int qnaNo= dto.getQnaNo();
+        log.info("updateQnaBoardQnaNo----------"+qnaNo);
+        return "redirect:/cs/qna/view?qnaNo="+qnaNo;
+    }
+
+    @GetMapping("/cs/qna/delete")
+    public String deleteQnaBoard(int qnaNo) {
+
+        //게시물 삭제하기 전 파일 정보 가져오기
+        LtCsQnaDTO dto = ltCsService.selectCsQnaBoard(qnaNo);
+        //파일 경로
+        String filePath = dto.getFile1();
+
+        //파일 삭제
+        boolean isFileDeleted = deleteFile(filePath);
+        ltCsService.deleteQnaBoard(qnaNo);
+
+        // 만약 파일이 정상적으로 삭제되었다면 게시물을 삭제한다.
+        if (isFileDeleted) {
+            ltCsService.deleteQnaBoard(qnaNo);
+        }
+
+        return "redirect:/cs/qna/list";
+    }
+    //파일삭제 구현
+    private boolean deleteFile(String filePath){
+        try{
+            File fileToDelete = new File("files/" + filePath);
+            return fileToDelete.delete();
+
+        }catch (Exception e){
+            log.error("파일 삭제 중 오류 발생: "+ e.getMessage());
+            return false;
+        }
+    }
 }

@@ -1,10 +1,12 @@
 package co.kr.lotteon.entity;
 
+import co.kr.lotteon.dto.LtMemberPointDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -22,5 +24,17 @@ public class LtMemberPointEntity {
     private int point;
     @CreationTimestamp
     private LocalDateTime pointDate;
+
+    public LtMemberPointDTO toDTO(){
+        return  LtMemberPointDTO.builder()
+                .pointNo(pointNo)
+                .uid(uid)
+                .ordNo(ordNo)
+                .point(point)
+                .pointDate(pointDate)
+                .subPointDate(pointDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+                .subExpiredDate(pointDate.plusMonths(6).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+                .build();
+    }
 
 }

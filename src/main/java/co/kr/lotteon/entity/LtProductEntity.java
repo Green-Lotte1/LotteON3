@@ -62,7 +62,11 @@ public class LtProductEntity {
 
     private String wDate;
 
-
+    /*
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="prodNo", insertable=false, updatable=false)
+    private LtProductOrderItemEntity ltProductOrderItemEntity;
+*/
     private String getDeciFormat(int number){
 
         DecimalFormat deciFormat = new DecimalFormat("###,###");
@@ -120,7 +124,7 @@ public class LtProductEntity {
 
     public LtProductOrderItemEntity toOrderItemEntity(int ordNo, int prodNo, int count, int total){
         return LtProductOrderItemEntity.builder()
-                .ltProductOrderItemPK(new LtProductOrderItemPK(ordNo, prodNo))
+                .ltProductOrderItemPK(new LtProductOrderItemPK(ordNo, this))
                 .count(count)
                 .price(price)
                 .discount(discount)

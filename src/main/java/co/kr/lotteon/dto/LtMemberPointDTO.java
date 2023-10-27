@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -14,6 +16,8 @@ public class LtMemberPointDTO {
     private String uid;
     private int ordNo;
     private int point;
-    private String pointDate;
+    private LocalDateTime pointDate;
+    private String subPointDate;
+    private String subExpiredDate;
 
 }

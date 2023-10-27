@@ -43,47 +43,32 @@
                     </ul>
                 </aside>
                 <article>
-                    <nav>
-                        <h2 class="title" th:text="'[' + ${qnaBoard.c2Name} + ']' + ${qnaBoard.title}"></h2>
-                        <p>
-                            <span th:text="${#strings.substring(qnaBoard.writer, 0, 3) + '***'}"></span>
-                            <span th:text="${#temporals.format(qnaBoard.rdate, 'yyyy-MM-dd')}"></span>
-                        </p>
-
-                            <th:block th:if="${qnaBoard.file1 != null}">
-                               <a class="filedown" th:href="@{/cs/qna/download(qnaNo=${qnaBoard.qnaNo})}">첨부된 파일 : [[${qnaBoard.file2}]]</a>
-                            </th:block>
-
-
-                    </nav>
-
-                    <div class="content">
-                        <p>
-                            [[${qnaBoard.content}]]
-                        </p><br><br>
-                        <p>
-                            ※ 피싱 관련 피해신고<br /><br />
-                            ▶ 경찰청 사이버수사국 (국번없이)182 :
-                            http://cyberbureau.police.go.kr<br />
-                            ▶ KISA 인터넷침해대응센터 (국번없이)118 :
-                            http://www.krcert.or.kr<br />
-                            감사합니다.<br />
-                        </p>
-                    </div>
-                    <th:block th:if="${qnaBoard.answerComplete != 1}">
+                    <form th:action="@{/cs/qna/modify}" method="post">
                         <nav>
-                            <h2 class="title" th:text="'☞[답변]' + ${qnaChildBoard.title}"></h2>
+                            <input type="hidden" name="qnaNo" th:value="${qnaBoard.qnaNo}"/>
+                            <h2 class="title" th:text="'[' + ${qnaBoard.c2Name} + ']' + ${qnaBoard.title}"></h2>
+                            <p>
+                                <span th:text="${#strings.substring(qnaBoard.writer, 0, 3) + '***'}"></span>
+                                <span th:text="${#temporals.format(qnaBoard.rdate, 'yy-MM-dd')}"></span>
+                            </p>
                         </nav>
                         <div class="content">
+                            <textarea id="mc" name="content">[[${qnaBoard.content}]]</textarea>
+                            <br><br>
                             <p>
-                                [[${qnaChildBoard.content}]]
+                                ※ 피싱 관련 피해신고<br /><br />
+                                ▶ 경찰청 사이버수사국 (국번없이)182 :
+                                http://cyberbureau.police.go.kr<br />
+                                ▶ KISA 인터넷침해대응센터 (국번없이)118 :
+                                http://www.krcert.or.kr<br />
+                                감사합니다.<br />
                             </p>
                         </div>
-                    </th:block>
-
-                    <a th:href="@{/cs/qna/list}" class="btnList">목록보기</a>
-                    <a th:href="@{/cs/qna/modify(qnaNo=${qnaBoard.qnaNo})}" class="btnList">수정하기</a>
-                    <a th:href="@{/cs/qna/delete(qnaNo=${qnaBoard.qnaNo})}" class="btnList">삭제하기</a>
+                        <div>
+                            <a th:href="@{/cs/qna/view(qnaNo=${qnaBoard.qnaNo})}" class="btnList">취소하기</a>
+                            <input type="submit" class="btnSubmit" value="수정완료"/>
+                        </div>
+                    </form>
                 </article>
             </section>
         </div>

@@ -1,5 +1,6 @@
 package co.kr.lotteon.entity;
 
+import co.kr.lotteon.dto.LtProductOrderDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -33,4 +34,10 @@ public class LtProductOrderEntity {
     @CreationTimestamp
     private String ordDate;
 
+
+
+    /*public LtProductOrderDTO toDTO(){
+        return LtProductOrderDTO.builder().build();
+    }
+*/
 }

@@ -405,6 +405,21 @@ footer p > strong {
     content: '원';
     font-size: 12px;            
 }
+/*
+#my > .home > section > article > table .prodPriceIndiv{
+    margin-top: 6px;
+    font-family: '고딕';
+    font-size: 16px;
+    font-weight: bold;
+    color: #222;
+
+}
+#my > .home > section > article > table .prodPriceIndiv::after{
+    content: '원';
+    font-size: 12px;
+
+}
+*/
 #my > .home > section > article > table .confirm > a {
     display: block;
     width: 90px;
@@ -438,6 +453,9 @@ footer p > strong {
     background-position: -500px -399px;
 }
 
+#my > .ordered > section > article .hidden {
+    display: none !important;
+}
 #my > .home > section > article > table .rating {
     display: block;
     width: 84px;
@@ -536,6 +554,9 @@ footer p > strong {
     border: 1px solid #c7c7c7;
     box-sizing: border-box;
     overflow: hidden;            
+}
+#my .ordered > section > article  table .ordNo {
+    background: #e7e7e7;
 }
 #my > .ordered > section > article > .byDate > * {
     float: left;
@@ -652,6 +673,11 @@ footer p > strong {
 
 #my > .ordered > section > article > table .thumb {
     float:left;
+}
+
+#my > .ordered > section > article > table .thumb >img{
+    width:100px;
+    height:100px;
 }
 #my > .ordered > section > article > table ul {
     float:left;
@@ -1128,6 +1154,14 @@ footer p > strong {
 #my > .qna > section > article > table .answerRow {
     display: none;
     background-color: #fafafa;            
+}
+/* my - qna(추가) */
+.blue-text {
+    color: blue;
+}
+
+.gray-text {
+    color: gray;
 }
 #my > .qna > section > article > table .answerRow td {}
 #my > .qna > section > article > table .answerRow div {

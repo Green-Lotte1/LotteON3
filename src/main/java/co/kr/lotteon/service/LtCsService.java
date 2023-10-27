@@ -4,6 +4,7 @@ import co.kr.lotteon.dto.*;
 import co.kr.lotteon.entity.LtCsQnaEntity;
 import co.kr.lotteon.mapper.cs.*;
 import co.kr.lotteon.repository.LtCsQnaRepository;
+import co.kr.lotteon.mapper.my.LtMyMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +40,9 @@ public class LtCsService {
 
     private final LtCsQnaRepository qnaRepository;
 
+    private final LtMyMapper ltMyMapper;
+
+
     public List<LtCsNoticeDTO> selectCsNotices(){
         return ltCsIndexMapper.selectCsNotices();
     }
@@ -60,10 +64,16 @@ public class LtCsService {
 
         log.info("insertQnaWrite-----------"+dto);
 
-        List<String> saveNames = fileUpload(dto);
 
-        dto.setFile1(saveNames.get(0));
-        dto.setFile2(saveNames.get(1));
+
+
+        if (dto.getMFile1() != null && !dto.getMFile1().isEmpty()) {
+            List<String> saveNames = fileUpload(dto);
+            // 파일을 선택한 경우에만 처리
+            dto.setFile1(saveNames.get(0));
+            dto.setFile2(saveNames.get(1));
+        }
+
 
 
         ltCsQnaMapper.insertQnaWrite(dto);
@@ -124,6 +134,12 @@ public class LtCsService {
     // Notice게시판 cate 참고한 총 갯수 카운트
     public int selectCsNoticeTotalCate(int cate1){
         return ltCsNoticeMapper.selectCsNoticeTotalCate(cate1);
+    }
+
+    //myqna 게시판 총 갯수 카운트
+
+    public String selectMyQnaTotal(String writer) {
+        return ltMyMapper.selectMyQnaTotal(writer);
     }
 
     // Qna게시판 총 갯수 카운트
@@ -193,6 +209,12 @@ public class LtCsService {
         return ltCsQnaMapper.selectCsQnaListCate(cate1,start);
     }
 
+    //myqna writer 참조
+
+    public List<LtCsQnaDTO> selectMyQnaBoard(String writer , int start) {
+        return ltMyMapper.selectMyQnaBoard(writer, start);
+    }
+
 
     // 게시판 view
 
@@ -224,6 +246,25 @@ public class LtCsService {
     public List<LtCsQnaEntity> selectComments(int parent) {
         return qnaRepository.findByParent(parent);
     }
+    //Qna modify
 
+    public LtCsQnaDTO selectCsQnaBoard (int qnaNo) {
+        return ltCsQnaMapper.selectCsQnaBoard(qnaNo);
+
+    }
+
+    public void updateQnaBoard(LtCsQnaDTO dto){
+        ltCsQnaMapper.updateQnaBoard(dto);
+    }
+
+    //delete
+    public void deleteQnaBoard(int qnaNo){
+        ltCsQnaMapper.deleteQnaBoard(qnaNo);
+    }
+
+    //qna 답변
+    public LtCsQnaDTO selectCsQnaChildBoard(int qnaNo){
+        return ltCsQnaMapper.selectCsQnaChildBoard(qnaNo);
+    }
 }
 

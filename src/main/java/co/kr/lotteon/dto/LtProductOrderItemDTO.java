@@ -30,6 +30,7 @@ public class LtProductOrderItemDTO {
 
     private String descript;
     private String prodName;
+    private String company;
 
     public String getDiscountPriceTotalWithComma() {
         DecimalFormat df = new DecimalFormat("###,###");
