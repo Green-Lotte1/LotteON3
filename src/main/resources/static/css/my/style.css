@@ -1132,6 +1132,14 @@ footer p > strong {
     display: none;
     background-color: #fafafa;            
 }
+/* my - qna(추가) */
+.blue-text {
+    color: blue;
+}
+
+.gray-text {
+    color: gray;
+}
 #my > .qna > section > article > table .answerRow td {}
 #my > .qna > section > article > table .answerRow div {
     padding-left: 26px;
