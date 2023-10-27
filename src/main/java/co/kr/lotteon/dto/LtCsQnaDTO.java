@@ -42,6 +42,9 @@ public class LtCsQnaDTO {
 	private String writerMarking;
 	private String rdateSub;
 
+
+	private LtCsQnaDTO comment;
+
 	public String getRdateSub() {
 		String formatDate = rdate.format(DateTimeFormatter.ofPattern("yy.MM.dd"));
 		//return LocalDateTime.parse(formatDate);
@@ -66,6 +69,7 @@ public class LtCsQnaDTO {
 				.rdate(rdate)
 				.build();
 	}
+
 
 
 	

@@ -6,7 +6,6 @@ import co.kr.lotteon.dto.mypage.MyPageResponseDTO;
 import co.kr.lotteon.security.MyUserDetails;
 import co.kr.lotteon.service.LtCsService;
 import co.kr.lotteon.service.MyService;
-import lombok.Builder;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -87,9 +87,34 @@ public class MypageController {
         total = Integer.parseInt((ltCsService.selectMyQnaTotal(writer)));
         log.info("qnaBoardTotal------"+total);
 
-        List<LtCsQnaDTO> ltCsQnaDTO =  ltCsService.selectMyQnaBoard(writer,start);
+        List<LtCsQnaDTO> ltCsQnaDTOList =  ltCsService.selectMyQnaBoard(writer,start);
 
-        log.info("ltCsQnaDTO-------"+ltCsQnaDTO.toString());
+        /*
+
+        for(int i = 0; i<ltCsQnaDTOList.size(); i++){
+            LtCsQnaDTO question = (LtCsQnaDTO) ((List) ltCsQnaDTOList).get(i);
+            if(question.getAnswerComplete() != 1){
+                question.setComment(ltCsService.selectCsQnaComment(question.getQnaNo()));
+            }
+        }
+
+         */
+        /*
+        List<LtCsQnaDTO> commentList = new ArrayList<>();
+        for(int i = 0; i<ltCsQnaDTOList.size(); i++){
+            int answerComplete = ltCsQnaDTOList.get(i).getAnswerComplete();
+            int parentNo = ltCsQnaDTOList.get(i).getQnaNo();
+            if(answerComplete != 1){
+                commentList.add(ltCsService.selectCsQnaComment(parentNo));
+            }else{
+                commentList.add(new LtCsQnaDTO());
+            }
+        }
+
+         */
+
+
+        log.info("ltCsQnaDTO-------"+ltCsQnaDTOList.toString());
         // 마지막 페이지 번호
         int lastPageNum = ltCsService.getLastPageNum(total);
 
@@ -99,7 +124,7 @@ public class MypageController {
         // 페이지 시작번호
         int pageStartNum = ltCsService.getPageStartNum(total, currentPage);
 
-        model.addAttribute("ltCsQnaDTO",ltCsQnaDTO);
+        model.addAttribute("ltCsQnaDTO",ltCsQnaDTOList);
         model.addAttribute("currentPage",currentPage);
         model.addAttribute("lastPageNum",lastPageNum);
         model.addAttribute("pageGroupStart",result[0]);
@@ -111,7 +136,17 @@ public class MypageController {
         log.info("pageStartNum-----="+pageStartNum);
 
 
+
         return "/my/qna";
+    }
+    @ResponseBody
+    @GetMapping("/qna/comment")
+    public List<LtCsQnaDTO> commentBoard(@RequestParam("qnaNo") int qnaNo){
+        log.info("commentBoard qnaNo-------"+qnaNo);
+        List<LtCsQnaDTO> commentBoard = ltCsService.selectCsQnaComment(qnaNo);
+
+        log.info("commentBoard0----"+commentBoard.toString());
+        return commentBoard;
     }
 
     @GetMapping(value = "/review")
