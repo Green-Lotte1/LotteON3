@@ -67,7 +67,7 @@ public class MyService {
             log.info("myOrder DTO : " + dto);
             List<LtProductOrderItemDTO> itemList = ltProductOrderItemRepository.findAllByLtProductOrderItemPK_OrdNo(dto.getOrdNo())
                     .stream()
-                    .map(entity -> modelMapper.map(entity, LtProductOrderItemDTO.class))
+                    .map(LtProductOrderItemEntity::toDTO)
                     .toList();
             MyOrdersDTO myOrders = new MyOrdersDTO(dto, itemList);
             myOrdersDTOList.add(myOrders);

@@ -36,22 +36,23 @@
                 <th>확인/신청</th>
             </tr>
             <th:block th:each="myOrder : ${pageResponseDTO.myOrdersDTOList}">
-                <tr>
-                    <td  colspan="4" class="ordNo">
-                        주문번호 [[${myOrder.orderDTO.ordNo}]]
+                <tr  class="orderInfo">
+                    <td  colspan="4" class="orderNo">
+                        <a href="#">주문번호 [[${myOrder.orderDTO.ordNo}]]</a>
                     </td>
                 </tr>
-                <tr th:each="item : ${myOrder.itemList}">
+                <tr th:each="item : ${myOrder.itemList}" class="orderItem">
                     <td class="date">
                         [[${myOrder.orderDTO.ordDate}]]
                     </td>
                     <td>
-                        <a th:href="@{/product/view(prodNo=item.prodNo)}" class="thumb"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                        <ul>
-                            <li class="company">상호명</li>
-                            <li class="prodName"><a href="#">상품명</a></li>
-                            <li>수량 : <span class="prodCount">[[${item.count}]]</span>개 / 주문번호 : <span class="ordNo">[[${item.ordNo}]]</span></li>
-                            <li class="prodPrice">[[${item.total}]]</li>
+                        <a th:href="@{/product/view(prodNo=${item.prodNo})}" class="thumb"><img th:src="@{'/thumbs/' + ${item.thumb1}}" alt=""></a>
+                        <ul class="info">
+                            <li class="company">[[${item.company}]]</li>
+                            <li class="prodName"><a th:href="@{/product/view(prodNo=${item.prodNo})}">[[${item.prodName}]]</a></li>
+                            <li>수량 : <span class="prodCount">[[${item.count}]]</span>개 <!--/ 주문번호 : <span class="ordNo">[[${item.ordNo}]]</span></li>-->
+                            <li class="prodPrice">총 [[${#numbers.formatInteger(item.total,0,'COMMA')}]]</li>
+                            <li class="prodPriceIndiv" th:if="${item.count ge 1}">(개당 [[${#numbers.formatInteger(item.price,0,'COMMA')}]]원)</li>
                         </ul>
                     </td>
                     <td class="status">
@@ -75,18 +76,18 @@
 
         <p class="page">
             <th:block th:if="${pageResponseDTO.prev}">
-                <a class="prev" th:href="@{/my/point(pg=${pageResponseDTO.start - 1})}">이전</a>
+                <a class="prev" th:href="@{/my/ordered(pg=${pageResponseDTO.start - 1})}">이전</a>
             </th:block>
             <th:block th:unless="${pageResponseDTO.prev}">
                 <a class="prev" href="#">이전</a>
             </th:block>
 
             <th:block  th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}">
-                <a th:href="@{/my/point(pg=${num} )}" th:classappend="${num == pageResponseDTO.pg?'on':''}">[[${num}]]</a>
+                <a th:href="@{/my/ordered(pg=${num} )}" th:classappend="${num == pageResponseDTO.pg?'on':''}">[[${num}]]</a>
             </th:block>
 
             <th:block  th:if="${pageResponseDTO.next}">
-                <a class="next" th:href="@{/my/point(pg=${pageResponseDTO.end + 1})}">다음</a>
+                <a class="next" th:href="@{/my/ordered(pg=${pageResponseDTO.end + 1})}">다음</a>
             </th:block>
             <th:block  th:unless="${pageResponseDTO.next}">
                 <a class="next" href="#">다음&nbsp;></a>

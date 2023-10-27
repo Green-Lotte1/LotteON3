@@ -1,7 +1,7 @@
 $(function(){
 
     // 판매자 정보 팝업 띄우기
-    $('.latest .info .company > a').click(function(e){
+    $('.orderItem .company > a').click(function(e){
         e.preventDefault();
         $('#popSeller').addClass('on');
     });
@@ -14,19 +14,19 @@ $(function(){
     });
 
     // 주문상세 팝업 띄우기
-    $('.latest .info .orderNo > a').click(function(e){
+    $('.orderInfo .orderNo > a').click(function(e){
         e.preventDefault();
         $('#popOrder').addClass('on');
     });
 
     // 수취확인 팝업 띄우기
-    $('.latest .confirm > .receive').click(function(e){
+    $('.orderItem .confirm > .receive').click(function(e){
         e.preventDefault();
         $('#popReceive').addClass('on');
     });
 
     // 상품평 작성 팝업 띄우기
-    $('.latest .confirm > .review').click(function(e){
+    $('.orderItem .confirm > .review').click(function(e){
         e.preventDefault();
         $('#popReview').addClass('on');
     });
