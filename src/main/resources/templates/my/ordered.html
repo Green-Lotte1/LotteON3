@@ -75,19 +75,23 @@
                     </td>
                     <td class="status" th:attr="data-ordno=${myOrder.orderDTO.ordNo}">
                         <th:block th:switch="${myOrder.orderDTO.ordComplete}">
-                            <span th:case="1" class="ordCompelete-t1">결제완료</span>
-                            <span th:case="2" class="ordCompelete-t2">결제중</span>
-                            <span th:case="3" class="ordCompelete-t3">주문취소</span>
-                            <span th:case="4" class="ordCompelete-t4">배송완료</span>
-                            <span th:case="5" class="ordCompelete-t5">수취확인</span>
+                            <span th:case="1" class="ordComplete-t1">결제완료</span>
+                            <span th:case="2" class="ordComplete-t2">결제중</span>
+                            <span th:case="3" class="ordComplete-t3">주문취소</span>
+                            <span th:case="4" class="ordComplete-t4">배송완료</span>
+                            <span th:case="5" class="ordComplete-t5">수취확인</span>
                         </th:block>
                     </td>
                     <td class="confirm">
                         <span class="hidden ordNo">[[${myOrder.orderDTO.ordNo}]]</span>
+                        <span class="hidden prodNo">[[${item.prodNo}]]</span>
+                        <span class="hidden prodName">[[${item.prodName}]]</span>
                         <a href="#" class="receive" th:if="${myOrder.orderDTO.ordComplete != 2 && myOrder.orderDTO.ordComplete != 3 && myOrder.orderDTO.ordComplete !=5}">수취확인</a>
-                        <a href="#" class="review">상품평</a>
+                        <a href="#" class="review" th:if="${item.hasReview eq 0}">상품평</a>
+                        <!--
                         <a href="#" class="refund">반품신청</a>
                         <a href="#" class="exchange">교환신청</a>
+                        -->
                     </td>
                 </tr>
             </tbody>
@@ -112,7 +116,7 @@
             <th:block  th:unless="${pageResponseDTO.next}">
                 <a class="next" href="#">다음&nbsp;></a>
             </th:block>
-
+        </p>
     </article>
 </section>
 <!-- order END -->

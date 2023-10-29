@@ -21,6 +21,7 @@ public class LtMemberPointEntity {
     private int pointNo;
     private String uid;
     private int ordNo;
+    private int revNo;
     private int point;
     @CreationTimestamp
     private LocalDateTime pointDate;
@@ -30,6 +31,7 @@ public class LtMemberPointEntity {
                 .pointNo(pointNo)
                 .uid(uid)
                 .ordNo(ordNo)
+                .revNo(revNo)
                 .point(point)
                 .pointDate(pointDate)
                 .subPointDate(pointDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))

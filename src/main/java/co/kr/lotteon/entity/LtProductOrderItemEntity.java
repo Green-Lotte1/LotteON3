@@ -23,6 +23,7 @@ public class LtProductOrderItemEntity {
     private int point;
     private int delivery;
     private int total;
+    private int hasReview;
 
 
 
@@ -35,6 +36,7 @@ public class LtProductOrderItemEntity {
                 .discount(discount)
                 .point(point)
                 .delivery(delivery)
+                .hasReview(hasReview)
                 .discountPrice(price-((price*discount/100/10)*10))
                 .discountPriceTotal((price-((price*discount/100/10)*10))*count+delivery)
                 .thumb1(ltProductOrderItemPK.getLtProductEntity().getThumb1())

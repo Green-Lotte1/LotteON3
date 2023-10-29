@@ -1,5 +1,11 @@
-$(function(){
+$(function() {
+
     let selectedA;
+    let success =  new URL(location.href).searchParams.get('success');
+
+    if(success ==200){
+        alert('성공적으로 리뷰가 작성되었습니다.');
+    }
 
     // 판매자 정보 팝업 띄우기
     $('.orderItem .company > a').click(function(e){
@@ -135,10 +141,10 @@ $(function(){
                 selectedA.parent().parent().parent().find('.status').each(
                     function(){
                         $(this).find('span').text('수취확인');
-                        $(this).find('span').attr('class','ordComplete-t3');
-                        alert('dd');
+                        $(this).find('span').attr('class','ordComplete-t5');
                     }
                 );
+                selectedA.hide();
 
             }
         });
@@ -151,7 +157,26 @@ $(function(){
     // 상품평 작성 팝업 띄우기
     $('.orderItem .confirm > .review').click(function(e){
         e.preventDefault();
+
+        selectedA = $(this);
+        const ordNo 		     = $(this).parent().find('.ordNo').text();
+        const prodNo 		     = $(this).parent().find('.prodNo').text();
+        const prodName 		     = $(this).parent().find('.prodName').text();
+
+        $('#popReview').find('input[name=ordNo]').val(ordNo);
+        $('#popReview').find('input[name=prodNo]').val(prodNo);
+        $('#popReview').find('.productName').text(prodName);
+
         $('#popReview').addClass('on');
+    });
+
+    // 상품평 작성 submit
+    $('#popReview .btnPositive').click(function(e){
+        e.preventDefault();
+
+        $('#popReview').removeClass('on');
+        $('#popReview #reviewForm').submit();
+
     });
                
     // 팝업 닫기
@@ -168,8 +193,39 @@ $(function(){
         minRating: 1,
         ratedColors: ['#ffa400', '#ffa400', '#ffa400', '#ffa400', '#ffa400'],
         callback: function(currentRating, $el){
-            alert('rated ' + currentRating);
-            console.log('DOM element ', $el);
+
+            $('#popReview').find('input[name=rating]').val(currentRating);
+            //alert('rated ' + currentRating);
+            //console.log('DOM element ', $el);
+
+            /*
+
+            $.ajax({
+                url: '/LotteON/my/api/review/',
+                data : {
+                  ordNo: ,
+                  rating  : currentRating
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+
+                    alert('성공적으로 수취확인 처리 되었습니다.')
+                    document.getElementById('popReceive').className = 'popup';
+
+                    selectedA.parent().parent().parent().find('.status').each(
+                        function(){
+                            $(this).find('span').text('수취확인');
+                            $(this).find('span').attr('class','ordComplete-t5');
+                        }
+                    );
+                    selectedA.hide();
+
+                }
+            });
+            */
+
         }
     });
 

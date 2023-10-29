@@ -1,11 +1,13 @@
 package co.kr.lotteon.controller.my;
 
 import co.kr.lotteon.dto.LtCsQnaDTO;
+import co.kr.lotteon.dto.LtProductReviewDTO;
 import co.kr.lotteon.dto.mypage.MyPageRequestDTO;
 import co.kr.lotteon.dto.mypage.MyPageResponseDTO;
 import co.kr.lotteon.security.MyUserDetails;
 import co.kr.lotteon.service.LtCsService;
 import co.kr.lotteon.service.MyService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Log4j2
@@ -150,9 +153,21 @@ public class MypageController {
     }
 
     @GetMapping(value = "/review")
-    public String review(Model model) {
+    public String review(Model model, MyPageRequestDTO myPageRequestDTO, @AuthenticationPrincipal MyUserDetails myUserDetails) {
 
+        MyPageResponseDTO pageResponseDTO  = myService.showReview(myPageRequestDTO, myUserDetails.getUser().getUid());
+        model.addAttribute("pageResponseDTO", pageResponseDTO);
         return "/my/review";
+    }
+
+    @GetMapping(value="/writeReview")
+    public String writeReview(HttpServletRequest request, LtProductReviewDTO dto,  @AuthenticationPrincipal MyUserDetails myUserDetails){
+        dto.setRegIp(request.getRemoteAddr());
+        dto.setRDate(LocalDateTime.now());
+        dto.setUid(myUserDetails.getUser().getUid());
+        log.info("ReviewDTO : " + dto);
+        myService.writeReview(dto, myUserDetails.getUser().getUid());
+        return "redirect:/my/ordered?success=200";
     }
 
 }
