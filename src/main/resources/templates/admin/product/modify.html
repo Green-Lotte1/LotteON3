@@ -12,7 +12,7 @@
     </nav>
     <!-- 상품수정 컨텐츠 시작 -->
     <article>
-        <form id="formRegister" th:action="@{/admin/product/modify}" method="post" enctype="multipart/form-data">
+        <form id="formModify" th:action="@{/admin/product/modify}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="seller" th:value="seller">
         <!-- 상품분류 -->
         <section>
@@ -52,53 +52,53 @@
             <table>
                 <tr>
                     <td>상품명</td>
-                    <td><input type="text" name="prodName"/></td>
+                    <td><input type="text" name="prodName" th:value="${ltProductDTO.prodName}"/></td>
                 </tr>
                 <tr>
                     <td>기본설명</td>
                     <td>
                         <span>상품명 하단에 상품에 대한 추가적인 설명이 필요한 경우에 입력</span>
-                        <input type="text" name="descript"/>
+                        <input type="text" name="descript" th:value="${ltProductDTO.descript}"/>
                     </td>
                 </tr>
                 <tr>
                     <td>제조사</td>
-                    <td><input type="text" name="company"/></td>
+                    <td><input type="text" name="company" th:value="${ltProductDTO.company}"/></td>
                 </tr>
                 <tr>
                     <td>판매가격</td>
                     <td>
-                        <input style="text-align: right" type="text" name="priceFromUser"/>원
-                        <input class="nocommaPR" style="text-align: right" type="hidden" name="price" th:value="0"/>
+                        <input style="text-align: right" type="text" name="priceFromUser" th:value="${ltProductDTO.price}"/>원
+                        <input class="nocommaPR" style="text-align: right" type="text" name="price" th:value="0"/>
                     </td>
                 </tr>
                 <tr>
                     <td>할인율</td>
                     <td>
                         <span>0을 입력하면 할인율 없음</span>
-                        <input style="text-align: right" type="text" name="discount" th:value="0"/>%
+                        <input style="text-align: right" type="text" name="discount" th:value="${ltProductDTO.discount}"/>%
                     </td>
                 </tr>
                 <tr>
                     <td>포인트</td>
                     <td>
                         <span>0을 입력하면 포인트 없음</span>
-                        <input style="text-align: right" type="text" name="pointFromUser" th:value="0"/>점
-                        <input class="nocommaP" style="text-align: right" type="hidden" name="point" th:value="0"/>
+                        <input style="text-align: right" type="text" name="pointFromUser" th:value="${ltProductDTO.point}"/>점
+                        <input class="nocommaP" style="text-align: right" type="text" name="point" th:value="0"/>
                     </td>
                 </tr>
                 <tr>
                     <td>재고수량</td>
                     <td>
-                        <input style="text-align: right" type="text" name="stockFromUser" />개
-                        <input class="nocommaS" style="text-align: right" type="hidden" name="stock" th:value="0"/>
+                        <input style="text-align: right" type="text" name="stockFromUser" th:value="${ltProductDTO.stock}"/>개
+                        <input class="nocommaS" style="text-align: right" type="text" name="stock" th:value="0"/>
                     </td>
                 </tr>
                 <tr>
                     <td>배송비</td>
                     <td>
                         <span>0을 입력하면 배송비 무료</span>
-                        <input style="text-align: right" type="text" name="deliveryFromUser" th:value="0"/>원
+                        <input style="text-align: right" type="text" name="deliveryFromUser" th:value="${ltProductDTO.delivery}"/>원
                         <input class="nocommaD" style="text-align: right" type="hidden" name="delivery" th:value="0"/>
                     </td>
                 </tr>
@@ -106,12 +106,15 @@
                     <td>상품 썸네일</td>
                     <td>
                         <span>크기 190 x 190, 상품 목록에 출력될 이미지 입니다. </span>
+                        <input type="text" th:value="${ltProductDTO.thumb1}" readonly>
                         <input type="file" name="fileThumb1"/>
 
                         <span>크기 230 x 230, 상품 메인에 출력될 이미지 입니다. </span>
+                        <input type="text" th:value="${ltProductDTO.thumb2}" readonly>
                         <input type="file" name="fileThumb2"/>
 
                         <span>크기 456 x 456, 상품 상세에 출력될 이미지 입니다. </span>
+                        <input type="text" th:value="${ltProductDTO.thumb3}" readonly>
                         <input type="file" name="fileThumb3"/>
                         <input type="hidden" name="oName" class="oName"/> <!--수정 시 원래 이름-->
                     </td>
@@ -120,6 +123,7 @@
                     <td>상세 상품정보</td>
                     <td>
                         <span>크기 가로 940px 높이 제약없음, 크기 최대 1MB, 상세페이지 상품정보에 출력될 이미지 입니다.</span>
+                        <input type="text" th:value="${ltProductDTO.detail}" readonly>
                         <input type="file" name="fileDetail"/>
                     </td>
                 </tr>
@@ -135,23 +139,23 @@
             <table>
                 <tr>
                     <td>상품상태</td>
-                    <td><input type="text" name="status" value="새상품"/></td>
+                    <td><input type="text" name="status" th:value="${ltProductDTO.status}"/></td>
                 </tr>
                 <tr>
                     <td>부가세 면세여부</td>
-                    <td><input type="text" name="duty" value="과세상품"/></td>
+                    <td><input type="text" name="duty" th:value="${ltProductDTO.duty}"/></td>
                 </tr>
                 <tr>
                     <td>영수증발행</td>
-                    <td><input type="text" name="receipt" value="발행가능 - 신용카드 전표, 온라인 현금영수증"/></td>
+                    <td><input type="text" name="receipt" th:value="${ltProductDTO.receipt}"/></td>
                 </tr>
                 <tr>
                     <td>사업자구분</td>
-                    <td><input type="text" name="bizType" value="사업자 판매자"/></td>
+                    <td><input type="text" name="bizType" th:value="${ltProductDTO.bizType}"/></td>
                 </tr>
                 <tr>
                     <td>원산지</td>
-                    <td><input type="text" name="origin" value="국내산"/></td>
+                    <td><input type="text" name="origin" th:value="${ltProductDTO.origin}"/></td>
                 </tr>
             </table>
         </section>
