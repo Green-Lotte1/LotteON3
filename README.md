@@ -41,9 +41,8 @@
 -cs qna write 파일 업로드 다운로드 구현, faq list&view 구현 index 사용자 인증구현
 
 
--admin 상품목록 기능 2차 완료(상품검색, 삭제/수정)
 -admin cs notice 삭제,수정 완료, 글쓰기 작업 진행중
--admin 상품목록 기능 2차 완료(상품검색), 상품등록 기능 3차 완료(thumb 상품 카테별 이미지 저장)
+-admin 상품목록 기능 2차 완료(상품검색)
 
 -product cart, order 구현
 
@@ -51,6 +50,6 @@
 
 -cs 
 
--admin 
+-admin 상품등록 기능 3차 완료(thumb 상품 카테별 이미지 저장)
 
 -product 
