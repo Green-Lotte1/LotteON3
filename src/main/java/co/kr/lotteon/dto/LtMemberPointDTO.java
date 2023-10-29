@@ -15,6 +15,7 @@ public class LtMemberPointDTO {
     private int pointNo;
     private String uid;
     private int ordNo;
+    private int revNo;
     private int point;
     private LocalDateTime pointDate;
     private String subPointDate;

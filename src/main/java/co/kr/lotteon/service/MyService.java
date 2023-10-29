@@ -7,6 +7,7 @@ import co.kr.lotteon.dto.mypage.MyPageResponseDTO;
 import co.kr.lotteon.entity.LtMemberPointEntity;
 import co.kr.lotteon.entity.LtProductOrderEntity;
 import co.kr.lotteon.entity.LtProductOrderItemEntity;
+import co.kr.lotteon.entity.LtProductReviewEntity;
 import co.kr.lotteon.mapper.my.LtMyMapper;
 import co.kr.lotteon.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,7 @@ public class MyService {
     private final LtProductOrderItemRepository ltProductOrderItemRepository;
     private final LtMemberRepository ltMemberRepository;
     private final LtMemberPointRepository ltMemberPointRepository;
+    private final LtProductReviewRepository ltProductReviewRepository;
     private final ModelMapper modelMapper;
 
 
@@ -86,4 +88,38 @@ public class MyService {
         return 1;
     }
 
+    public void writeReview(LtProductReviewDTO dto, String uid){
+        int revNo = ltProductReviewRepository.save(modelMapper.map(dto, LtProductReviewEntity.class)).getRevNo();
+        //productItem - hasReview 업데이트
+        ltProductOrderItemRepository.updateOrdComplete(dto.getOrdNo(), dto.getProdNo(), revNo );
+        // point 추가 - 2000
+        int point = 2000;
+        ltMemberRepository.updateMemberPointPlus(uid, point);
+        LtMemberPointEntity savedPointEntity = LtMemberPointEntity.builder()
+                .uid(uid)
+                .revNo(revNo)
+                .point(point)
+                .build();
+        ltMemberPointRepository.save(savedPointEntity);
+        //수취확인
+        ltProductOrderRepository.updateOrdComplete(dto.getOrdNo(), 5);
+    }
+
+    public MyPageResponseDTO showReview(MyPageRequestDTO pageRequestDTO, String uid){
+        Pageable pageable = pageRequestDTO.getPageable("revNo", 10);
+        Page<LtProductReviewEntity> result = null;
+        result = ltProductReviewRepository.findAllByUid(uid, pageable);
+        List<LtProductReviewDTO> dtoList = result.getContent()
+                .stream().
+                map(
+                       LtProductReviewEntity::toDTO
+                )
+                .toList();
+        int totalElement = (int) result.getTotalElements();
+        return MyPageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .reviewList(dtoList)
+                .total(totalElement)
+                .build();
+    }
 }

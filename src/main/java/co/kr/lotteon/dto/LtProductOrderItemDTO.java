@@ -20,6 +20,7 @@ public class LtProductOrderItemDTO {
     private int point;
     private int delivery;
     private int total;
+    private int hasReview;
 
     private String thumb1;
 

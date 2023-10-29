@@ -33,7 +33,7 @@
             <tr>
                 <th>날짜</th>
                 <th>구분</th>
-                <th>주문번호</th>
+                <th>번호</th>
                 <th>적립금액</th>
                 <th>비고</th>
                 <th>유효기간</th>
@@ -41,20 +41,33 @@
             <tr th:each="item : ${pageResponseDTO.pointList}">
                 <td class="date">[[${item.subPointDate}]]</td>
                 <td class="type">
-                    <span th:if="${item.point ge 0}">
-                        적립
+                    <span th:if="${item.revNo > 0}">
+                        리뷰 작성 적립
                     </span>
-                    <span th:if="${item.point le 0}">
-                        사용
+                    <span th:if="${item.ordNo > 0 && item.point > 0}">
+                        상품 구매 적립
+                    </span>
+                    <span th:if="${item.point < 0}">
+                        포인트 사용
                     </span>
                 </td>
-                <td class="ordNo">[[${item.ordNo}]]</td>
+                <td class="ordNo">
+                    <span th:if="${item.revNo > 0}">
+                    리뷰번호 [[${item.revNo}]]
+                    </span>
+                    <span th:if="${item.ordNo > 0}">
+                    주문번호 [[${item.ordNo}]]
+                    </span>
+                </td>
                 <td class="point">[[${item.point}]]</td>
                 <td class="desc">
-                    <span th:if="${item.point ge 0}">
+                    <span th:if="${item.ordNo > 0 && item.point > 0}">
                         상품 구매
                     </span>
-                    <span th:if="${item.point le 0}">
+                    <span th:if="${item.revNo > 0 && item.point > 0}">
+                        리뷰 작성
+                    </span>
+                    <span th:if="${item.point < 0}">
                         소진
                     </span>
                 </td>

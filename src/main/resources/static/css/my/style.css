@@ -547,11 +547,11 @@ footer p > strong {
 }
 
 /* my - ordered(전체주문내역) */
-#my > .ordered .ordCompelete-t1 { color : #0e9d05; }
-#my > .ordered .ordCompelete-t2 { color : #01c1c4; }
-#my > .ordered .ordCompelete-t3 { color : #888888; }
-#my > .ordered .ordCompelete-t4 { color : #01c1c4; }
-#my > .ordered .ordCompelete-t5 { color : #9e1212; font-weight: bold;}
+#my > .ordered .ordComplete-t1 { color : #0e9d05; }
+#my > .ordered .ordComplete-t2 { color : #01c1c4; }
+#my > .ordered .ordComplete-t3 { color : #888888; }
+#my > .ordered .ordComplete-t4 { color : #01c1c4; }
+#my > .ordered .ordComplete-t5 { color : #9e1212; font-weight: bold;}
 #my > .ordered {}
 #my > .ordered > section > article > .byDate {
     width: 100%;
