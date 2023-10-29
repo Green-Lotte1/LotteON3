@@ -5,53 +5,81 @@
 <!-- qna -->
 <section layout:fragment="content">
     <script>
-        function sendQnaNo(event) {
+        document.addEventListener('DOMContentLoaded', function() {
+             // 해당 <a> 요소를 선택합니다.
+             var sexLiA = document.querySelector("#my > div > ul > li:nth-child(6)");
+             console.log(sexLiA);
 
-        $('.answerRow').hide();
+             // 첫 번째 <li> 요소의 <a>에 대한 참조를 선택합니다.
+             var firstLiA = document.querySelector("#my > div > ul > li:nth-child(2)");
+             console.log(firstLiA);
+             // 첫 번째 <li>의 <a>에서 "on" 클래스를 제거합니다.
+             firstLiA.classList.remove('on');
 
-         event.preventDefault(); // 기본 링크 동작 방지
-         var qnaNo = event.target.getAttribute('data-qnaNo'); // data-qnaNo 값을 가져옴
-         // 클릭된 title 요소의 부모 tr을 찾습니다.
-        var row = $(event.target).closest('tr');
+             // <a> 요소에 'on' 클래스를 추가합니다.
+             sexLiA.classList.add('on');
+        });
 
-        // 클릭된 title 요소의 부모 tr 내에서 .answerRow를 찾아 토글합니다.
+         function sendQnaNo(event) {
 
+             event.preventDefault(); // 기본 링크 동작 방지
+             var qnaNo = event.target.getAttribute('data-qnaNo'); // data-qnaNo 값을 가져옴
 
+             // 클릭된 title 요소의 부모 tr을 찾습니다.
+             var row = $(event.target).closest('tr');
 
-        //답변
-        const answerRow = $(event.target).parent().parent().next();
-        answerRow.show();
+             // 클릭된 title 요소의 부모 tr 내에서 .answerRow를 찾아 토글합니다.
+             var answerRow = row.next('.answerRow');
 
+             // 현재 answerRow가 보이는지 확인
+             var isAnswerRowVisible = answerRow.is(":visible");
 
-        alert(answerRow.text());
-         // qnaNo를 서버로 전송하는 AJAX 요청을 수행
+             // 모든 .answerRow 요소 숨기기
+             $('.answerRow').hide();
+
+             // 만약 answerRow가 보이지 않는 경우 (숨겨져 있는 경우)
+             if (!isAnswerRowVisible) {
+                 answerRow.show(); // 보이기
+
+                 // AJAX 요청을 수행
                  $.ajax({
                      type: "GET",
                      url: "/LotteON/my/qna/comment?qnaNo=" + qnaNo,
                      success: function(data) {
-                        // 서버에서 반환한 데이터를 처리
-                        var response = data[0];
-                        var title = response.title; // JSON 데이터에서 title 가져오기
-                        var content = response.content; // JSON 데이터에서 content 가져오기
-                        var date = response.rdate;
+                         // 서버에서 반환한 데이터를 처리
+                         console.log(data);
+                         var response = data[0];
+                         if(response){
+                             var content = response.content; // JSON 데이터에서 answer 가져오기
 
-                        // HTML 요소에 데이터 추가
-                        var answerDiv = $(this).find(".answer");
-                        var dateSpan = answerDiv.find(".date");
-                        var contentP = answerDiv.find(".content");
+                             var title = response.title;
+                             var rdate = response.rdate;
+                             var formattedDate = rdate.replace("T", " ");
+                             console.log(content);
+                             console.log(title);
+                             console.log(formattedDate);
+                             // HTML 요소에 데이터 추가
+                             var contentElement = answerRow.find('.answer .content');
+                             var titleElement = answerRow.find('.answer .tit');
+                             contentElement.text(content);
+                             titleElement.text(title);
+                             var dateSpan = $('<span class="date"></span>').text(formattedDate);
+                             titleElement.append(dateSpan);
+                         } else {
+                         var contentElement = answerRow.find('.answer .content');
+                         var titleElement = answerRow.find('.answer .tit');
+                         contentElement.text("빠른 시일 내에 답변드리겠습니다.");
+                         titleElement.text("답변 검토중입니다!.");
+                             console.error("데이터를 찾을 수 없습니다.");
+                         }
 
-                        dateSpan.text(date);
-                        contentP.text(content);
-
-                       // 필요에 따라 title 정보를 다른 곳에 추가
-                       $(".your-title-container").text(title);
-                       },
-                     error: function(error){
-                            console.error(error)
-                    }
-
-				});
-        };
+                     },
+                     error: function(error) {
+                         console.error(error);
+                     }
+                 });
+             }
+         }
     </script>
     <a href="#"><img th:src="@{/images/my/my_banner2.png}" alt="패션, 타운 하나로 끝" class="banner"></a>
     <article>
@@ -90,7 +118,7 @@
                         </div>
                         <div class="answer">
                             <p class="tit">
-                                <span class="date"></span>
+                                <span class="rdate"></span>
                             </p>
                             <p class="content"></p>
                         </div>
