@@ -9,9 +9,13 @@
 		SELECT * FROM `lt_product`
 	</select>
 
-	<!--admin 상품 조회-->
+	<!--admin 상품 조회 + 카테고리 조인-->
 	<select id="selectLtProduct" resultType="co.kr.lotteon.dto.LtProductDTO">
-		SELECT * FROM `lt_product` WHERE `prodNo` = #{prodNo}
+		SELECT *
+		FROM lt_product AS p
+		JOIN lt_product_cate1 AS c1 ON p.prodCate1 = c1.cate1
+		JOIN lt_product_cate2 AS c2 ON p.prodCate1 = c2.cate1
+		WHERE p.prodNo = #{prodNo}
 	</select>
 
 	<!--admin 상품 등록-->

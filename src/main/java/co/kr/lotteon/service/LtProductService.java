@@ -140,7 +140,7 @@ public class LtProductService {
         return saveNames;
     }
 
-// admin - 상품 조회 1개
+// admin - 상품 조회 + 카테 조인
     public LtProductDTO selectProduct(int prodNo){
         return ltProductMapper.selectLtProduct(prodNo);
     }
@@ -180,9 +180,6 @@ public class LtProductService {
         ltProductMapper.updateLtProductDeleteColumn(ltProductDTO.getProdNo());
 
     }
-// admin - 상품 다중 삭제
-
-
 
 // admin - 상품 리스트
 
