@@ -22,7 +22,7 @@ public class ProdPageRequestDTO {
     private String how = "DESC";
 
     @Builder.Default
-    private String sort = "regDate";
+    private String sort = "rdate";
 
     // cate Default 없으면 오류 발생 - Default 값을 지정해줘야함.
     @Builder.Default
