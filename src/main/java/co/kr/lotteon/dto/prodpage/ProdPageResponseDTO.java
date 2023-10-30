@@ -3,10 +3,12 @@ package co.kr.lotteon.dto.prodpage;
 import co.kr.lotteon.dto.LtProductDTO;
 import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 
 @Data
+@ToString
 public class ProdPageResponseDTO {
 
     private List<LtProductDTO> dtoList;
@@ -23,6 +25,8 @@ public class ProdPageResponseDTO {
     private String searchKeyword;
     private int searchProdNo;
 
+    private String isCategory;
+    private String search;
 
     @Builder
     public ProdPageResponseDTO(ProdPageRequestDTO pageRequestDTO, List<LtProductDTO> dtoList, int total) {
@@ -35,6 +39,8 @@ public class ProdPageResponseDTO {
         this.sort = pageRequestDTO.getSort();
         this.how = pageRequestDTO.getHow();
         this.dtoList = dtoList;
+        this.isCategory = pageRequestDTO.getIsCategory();
+        this.search = pageRequestDTO.getSearch();
 
         this.end = (int) (Math.ceil(this.pg / 10.0)) * 10;
         this.start = this.end - 9;

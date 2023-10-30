@@ -85,7 +85,7 @@ public class MyService {
     }
 
     public void writeReview(LtProductReviewDTO dto, String uid){
-        int revNo = ltProductReviewRepository.save(modelMapper.map(dto, LtProductReviewEntity.class)).getRevNo();
+        int revNo = ltProductReviewRepository.save(dto.toEntity()).getRevNo();
         //productItem - hasReview 업데이트
         ltProductOrderItemRepository.updateOrdComplete(dto.getOrdNo(), dto.getProdNo(), revNo );
         // point 추가 - 2000
@@ -97,6 +97,11 @@ public class MyService {
                 .point(point)
                 .build();
         ltMemberPointRepository.save(savedPointEntity);
+        //평점 업데이트
+        int avgScore = ltProductReviewRepository.findAVG(dto.getProdNo());
+        log.info("avgScore : " + avgScore + "/prodNo : " + dto.getProdNo());
+        ltProductRepository.updateScore(dto.getProdNo(), avgScore);
+
         //수취확인
         ltProductOrderRepository.updateOrdComplete(dto.getOrdNo(), 5);
     }

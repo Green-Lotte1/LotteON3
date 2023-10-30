@@ -36,6 +36,7 @@ public class ProductService {
     // 카테고리별 리스트
     public ProdPageResponseDTO getProductListByCates(ProdPageRequestDTO pageRequestDTO) {
         Pageable pageable = pageRequestDTO.getPageable("prodNo");
+
         Page<LtProductEntity> result = ltProductRepository.findAllByProdCate1AndProdCate2(pageRequestDTO.getCate1(), pageRequestDTO.getCate2(), pageable);
         List<LtProductDTO> dtoList = result.getContent()
                 .stream()
@@ -51,6 +52,50 @@ public class ProductService {
                 .build();
     }
 
+    public ProdPageResponseDTO getProductList(ProdPageRequestDTO pageRequestDTO) {
+
+        // 정렬기준, 정렬
+        Pageable pageable = null;
+        Page<LtProductEntity> result = null;
+        if(pageRequestDTO.getIsCategory().equals("Y")){
+            //카테고리별
+            pageable=pageRequestDTO.getPageable(pageRequestDTO.getSort(), pageRequestDTO.getHow());
+            result = ltProductRepository.findAllByProdCate1AndProdCate2(pageRequestDTO.getCate1(), pageRequestDTO.getCate2(), pageable);
+        } else if (pageRequestDTO.getIsCategory().equals("sold")){
+            pageable = pageRequestDTO.getPageable("sold", "DESC");
+            result = ltProductRepository.findAllByOrderBySoldDesc(pageable);
+        }else if(pageRequestDTO.getIsCategory().equals("price_low")){
+            pageable = pageRequestDTO.getPageable("price", "ASC");
+            result = ltProductRepository.findAllByOrderByPriceAsc(pageable);
+        }else if(pageRequestDTO.getIsCategory().equals("price_high")){
+            pageable = pageRequestDTO.getPageable("price", "DESC");
+            result = ltProductRepository.findAllByOrderByPriceDesc(pageable);
+        }else if(pageRequestDTO.getIsCategory().equals("review_high")){
+            pageable = pageRequestDTO.getPageable("review", "DESC");
+            result = ltProductRepository.findAllByOrderByReviewDesc(pageable);
+        }else if(pageRequestDTO.getIsCategory().equals("score_high")){
+            pageable = pageRequestDTO.getPageable("score", "DESC");
+            result = ltProductRepository.findAllByOrderByScoreDesc(pageable);
+        }else if(pageRequestDTO.getIsCategory().equals("recent")){
+            pageable = pageRequestDTO.getPageable("prodNo", "DESC");
+            result = ltProductRepository.findAllByOrderByProdNoDesc(pageable);
+        }else if(pageRequestDTO.getIsCategory().equals("search")){
+            pageable = pageRequestDTO.getPageable("prodNo", "DESC");
+            result = ltProductRepository.findAllByProdNameContainsOrderByProdNoDesc(pageRequestDTO.getSearch() ,pageable);
+        }
+        List<LtProductDTO> dtoList = result.getContent()
+                .stream()
+                .map(
+                        LtProductEntity::toDTO
+                )
+                .toList();
+        int totalElement = (int) result.getTotalElements();
+        return ProdPageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total(totalElement)
+                .build();
+    }
     public MyPageResponseDTO getReviews(int prodNo, MyPageRequestDTO pageRequestDTO) {
         Pageable pageable = pageRequestDTO.getPageable("rdate", 10);
 

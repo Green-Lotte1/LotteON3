@@ -36,20 +36,13 @@ public class ProductController {
     @GetMapping("/list")
     public String list(Model model, ProdPageRequestDTO pageRequestDTO) {
 
-        ProdPageResponseDTO pageResponseDTO = productService.getProductListByCates(pageRequestDTO);
+        //ProdPageResponseDTO pageResponseDTO = productService.getProductListByCates(pageRequestDTO);
+        ProdPageResponseDTO pageResponseDTO = productService.getProductList(pageRequestDTO);
         if(pageResponseDTO.getTotal()/10 < pageRequestDTO.getPg()){
             //return "redirect:/article/list?success=100";
         }
 
-        log.info("pageResponseDTO cate1 : " + pageResponseDTO.getCate1());
-        log.info("pageResponseDTO cate2 : " + pageResponseDTO.getCate2());
-        log.info("pageResponseDTO pg : " + pageResponseDTO.getPg());
-        log.info("pageResponseDTO size : " + pageResponseDTO.getSize());
-        log.info("pageResponseDTO total : " + pageResponseDTO.getTotal());
-        log.info("pageResponseDTO start : " + pageResponseDTO.getStart());
-        log.info("pageResponseDTO end : " + pageResponseDTO.getEnd());
-        log.info("pageResponseDTO prev : " + pageResponseDTO.isPrev());
-        log.info("pageResponseDTO next : " + pageResponseDTO.isNext());
+        log.info("pageResponseDTO : " + pageResponseDTO );
 
         model.addAttribute("pageResponseDTO", pageResponseDTO);
         return "/product/list";
