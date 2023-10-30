@@ -13,8 +13,8 @@
 	<select id="selectLtProduct" resultType="co.kr.lotteon.dto.LtProductDTO">
 		SELECT *
 		FROM lt_product AS p
-		JOIN lt_product_cate1 AS c1 ON p.prodCate1 = c1.cate1
-		JOIN lt_product_cate2 AS c2 ON p.prodCate1 = c2.cate1
+		JOIN lt_product_cate2 AS c2 ON p.prodCate2 = c2.cate2 AND p.prodCate1 = c2.cate1
+		JOIN lt_product_cate1 AS c1 ON c1.cate1 = p.prodCate1 AND c2.cate1 = c1.cate1
 		WHERE p.prodNo = #{prodNo}
 	</select>
 

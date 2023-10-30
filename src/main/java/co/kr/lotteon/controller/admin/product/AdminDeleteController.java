@@ -28,12 +28,13 @@ public class AdminDeleteController {
     @GetMapping("/admin/product/delete")
     public String deleteLtProduct(LtProductDTO ltProductDTO){
 
-        ltProductDTO = ltProductService.selectProduct(ltProductDTO.getProdNo());
-        ltProductService.deleteLtProduct(ltProductDTO);
+        log.info("product : " + ltProductDTO );
+        LtProductDTO  ltProductDTO_delete = ltProductService.selectProduct(ltProductDTO.getProdNo());
+        ltProductService.deleteLtProduct(ltProductDTO_delete);
 
         return "redirect:/admin/product/list";
     }
-    
+
     //다중 삭제
     @PostMapping("/admin/product/delete")
     public String deleteLtProduct(@RequestParam(value = "chk") List<String> chks){

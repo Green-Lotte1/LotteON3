@@ -82,7 +82,7 @@ public class LtProductService {
         return prodNewDTO;
     }
 
-// admin - 상품 등록
+    // admin - 상품 등록
     public void insertLtProduct(LtProductDTO ltProductDTO){
 
         System.out.println("ltProductDTO : " + ltProductDTO);
@@ -140,12 +140,12 @@ public class LtProductService {
         return saveNames;
     }
 
-// admin - 상품 조회 + 카테 조인
+    // admin - 상품 조회 + 카테 조인
     public LtProductDTO selectProduct(int prodNo){
         return ltProductMapper.selectLtProduct(prodNo);
     }
 
-// admin - 상품 삭제
+    // admin - 상품 삭제
     public void deleteLtProduct(LtProductDTO ltProductDTO){
 
         log.info("삭제할 ltProductDTO : " + ltProductDTO);
