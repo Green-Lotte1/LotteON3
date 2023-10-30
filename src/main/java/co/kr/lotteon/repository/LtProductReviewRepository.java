@@ -24,7 +24,7 @@ public interface LtProductReviewRepository extends JpaRepository<LtProductReview
      List<LtProductReviewEntity> findTop5ByUidOrderByRdateDesc(String uid);
 
 
-    @Query(value = "SELECT AVG(m.rating) FROM lt_product_review m where m.prodNo = :prodNo", nativeQuery = true)
+    @Query(value = "SELECT FLOOR(AVG(m.rating)) FROM lt_product_review m where m.prodNo = :prodNo", nativeQuery = true)
      int findAVG(@Param("prodNo") int prodNo);
 
 }

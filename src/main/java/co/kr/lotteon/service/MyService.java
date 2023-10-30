@@ -135,7 +135,7 @@ public class MyService {
     }
 
     public MyHomeDTO getMyHomeInfo(String uid){
-        LtProductOrderDTO order = modelMapper.map(ltProductOrderRepository.findTop1ByOrdUidOrderByOrdDateDesc(uid), LtProductOrderDTO.class);
+        LtProductOrderDTO order = ltProductOrderRepository.findTop1ByOrdUidOrderByOrdDateDesc(uid).toDTO();
         List<LtProductOrderItemDTO> orderList = ltProductOrderItemRepository.findAllByLtProductOrderItemPK_OrdNo(order.getOrdNo()).stream().map(LtProductOrderItemEntity::toDTO).toList();
         LtMemberPointDTO point = ltMemberPointRepository.findTop1ByUidOrderByPointDateDesc(uid).toDTO();
         List<LtProductReviewDTO> reviewList = ltProductReviewRepository.findTop5ByUidOrderByRdateDesc(uid).stream().map(LtProductReviewEntity::toDTO).toList();
