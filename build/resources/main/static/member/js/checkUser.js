@@ -19,7 +19,7 @@ $(function(){
         }
 
         $.ajax({
-            url:'/member/check/uid/' + uid,
+            url:'/LotteON/member/check/uid/' + uid,
             type:'GET',
             dataType:'json',
             success:function(data){
@@ -55,7 +55,7 @@ $(function(){
 
         // 데이터 전송
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', '/member/check/email/'+email);
+        xhr.open('GET', '/LotteON/member/check/email/'+email);
         xhr.send();
 
         // 응답 결과
@@ -94,7 +94,7 @@ $(function(){
             return;
         }
 
-        const url = '/member/check/hp/'+hp;
+        const url = '/LotteON/member/check/hp/'+hp;
 
         fetch(url)
             .then(response => response.json())

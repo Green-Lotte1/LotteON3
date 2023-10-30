@@ -39,7 +39,7 @@ $(function(){
         setTimeout(function(){
 
             $.ajax({
-                url:'/member/find/authEmail',
+                url:'/LotteON/member/find/authEmail',
                 type: 'GET',
                 data: jsonData,
                 dataType: 'json',
@@ -85,7 +85,7 @@ $(function(){
         };
 
         $.ajax({
-            url: '/member/find/authEmailCode',
+            url: '/LotteON/member/find/authEmailCode',
             type: 'POST',
             data: jsonData,
             dataType: 'json',
