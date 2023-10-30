@@ -36,8 +36,26 @@ public class LtProductOrderEntity {
 
 
 
-    /*public LtProductOrderDTO toDTO(){
-        return LtProductOrderDTO.builder().build();
+    public LtProductOrderDTO toDTO(){
+        return LtProductOrderDTO.builder()
+                .ordNo(ordNo)
+                .ordUid(ordUid)
+                .ordCount(ordCount)
+                .ordPrice(ordPrice)
+                .ordDiscount(ordDiscount)
+                .ordDelivery(ordDelivery)
+                .savePoint(savePoint)
+                .usedPoint(usedPoint)
+                 .recipName(recipName)
+                .recipHp(recipHp)
+                .recipZip(recipZip)
+                .recipAddr1(recipAddr1)
+                .recipAddr2(recipAddr2)
+                .ordPayment(ordPayment)
+                .ordComplete(ordComplete)
+                .ordTotPrice(ordTotPrice)
+                .ordDate(ordDate)
+                .build();
     }
-*/
+
 }
