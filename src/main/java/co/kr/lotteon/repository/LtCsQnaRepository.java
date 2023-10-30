@@ -21,4 +21,7 @@ public interface LtCsQnaRepository extends JpaRepository<LtCsQnaEntity, Integer>
 
     public List<LtCsQnaEntity> findByParent(int parent);
 
+    int countByWriter(String writer);
+
+    List<LtCsQnaEntity> findTop3ByWriterOrderByRdate(String writer);
 }

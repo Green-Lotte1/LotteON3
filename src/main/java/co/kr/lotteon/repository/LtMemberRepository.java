@@ -25,6 +25,8 @@ public interface LtMemberRepository extends JpaRepository<LtMemberEntity, String
 
     MemberPointInterface findPointByUid(String uid);
 
+    LtMemberEntity findByUid(String uid);
+
     @Modifying
     @Transactional
     @Query(value = "UPDATE lt_member m SET m.point = m.point + :point where m.uid = :uid", nativeQuery = true)

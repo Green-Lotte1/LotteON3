@@ -8,7 +8,7 @@
 
                     <article class="latest">
                         <h3>최근주문내역</h3>
-                        <a href="#" class="more">더보기</a>
+                        <a th:href="@{/my/ordered}" class="more">더보기</a>
                         <table border="0">
                             <tr>
                                 <th>날짜</th>
@@ -16,23 +16,42 @@
                                 <th>상태</th>
                                 <th>확인/신청</th>
                             </tr>
-                            <tr>
-                                <td class="date">2022-12-13</td>
+                            <tr th:if="${myHomeDTO.order eq null}">
+                                <td colspan="4">주문 내역이 없습니다.</td>
+                            </tr>
+                            <tr th:each="item : ${myHomeDTO.orderList}">
+                                <td class="date">
+                                    <span th:text="${myHomeDTO.order.ordDate}"></span>
+                                </td>
                                 <td class="info">
-                                    <a href="#" class="thumb"><img src="https://via.placeholder.com/80x80" alt=""></a>
+                                    <a th:href="@{/product/view(prodNo=${item.prodNo})}" class="thumb1"><img class="thumb1" th:src="@{'/thumbs/' + ${item.thumb1}}" alt="상품이미지"></a>
                                     <ul>
-                                        <li class="company"><a href="#">상호명</a></li>
-                                        <li class="prodName"><a href="#">상품명</a></li>
-                                        <li class="orderNo">수량 : <span class="prodCount">1</span>개 / 주문번호 : <a href="#">1012211341</a></li>
-                                        <li class="prodPrice">34,000</li>
+                                        <li class="company"><span th:text="${item.company}"></span> </li>
+                                        <li class="prodName"><span th:text="${item.prodName}"></span></li>
+                                        <li class="orderNo">수량 : <span class="prodCount" th:text="${item.count}"></span>개 / 주문번호 : <a th:href="@{/my/ordered}"><span th:text="${myHomeDTO.order.ordNo}"></span></a></li>
+                                        <li class="prodPrice"><span th:text="${item.priceWithComma}"></span></li>
                                     </ul>
                                 </td>
-                                <td class="status">배송완료</td>
+                                <td class="status">
+                                    <th:block th:switch="${myHomeDTO.order.ordComplete}">
+                                        <span th:case="1" class="ordComplete-t1">결제완료</span>
+                                        <span th:case="2" class="ordComplete-t2">결제중</span>
+                                        <span th:case="3" class="ordComplete-t3">주문취소</span>
+                                        <span th:case="4" class="ordComplete-t4">배송완료</span>
+                                        <span th:case="5" class="ordComplete-t5">수취확인</span>
+                                    </th:block>
+                                </td>
+
                                 <td class="confirm">
-                                    <a href="#" class="receive">수취확인</a>
-                                    <a href="#" class="review">상품평</a>
+                                    <span class="hidden ordNo">[[${myHomeDTO.order.ordNo}]]</span>
+                                    <span class="hidden prodNo">[[${item.prodNo}]]</span>
+                                    <span class="hidden prodName">[[${item.prodName}]]</span>
+                                    <a  th:href="@{/my/ordered}" class="receive" th:if="${myHomeDTO.order.ordComplete != 2 && myHomeDTO.order.ordComplete != 3 && myHomeDTO.order.ordComplete !=5}">수취확인</a>
+                                    <a  th:href="@{/my/ordered}" class="review" th:if="${item.hasReview eq 0}">상품평</a>
+                                    <!--
                                     <a href="#" class="refund">반품신청</a>
                                     <a href="#" class="exchange">교환신청</a>
+                                    -->
                                 </td>
                             </tr>
                         </table>
@@ -40,7 +59,7 @@
 
                     <article class="point">
                         <h3>포인트적립내역</h3>
-                        <a href="#" class="more">더보기</a>
+                        <a th:href="@{/my/point}" class="more">더보기</a>
                         <table border="0">
                             <tr>
                                 <th>날짜</th>
@@ -50,19 +69,48 @@
                                 <th>비고</th>
                                 <th>유효기간</th>
                             </tr>
-                            <tr>
-                                <td>2022-12-10</td>
-                                <td>적립</td>
-                                <td>2022121001</td>
-                                <td>340</td>
-                                <td>상품 구매확정</td>
-                                <td>2024-12-10</td>
+                            <tr th:if="${myHomeDTO.point eq null}">
+                                <td colspan="6">적립된 포인트 내역이 없습니다.</td>
+                            </tr>
+                            <tr th:if="${myHomeDTO.point ne null}">
+                                <td>
+                                    <span th:text="${myHomeDTO.point.subPointDate}"></span>
+                                </td>
+                                <td>
+                                    <span th:if="${myHomeDTO.point.revNo > 0}">
+                                        리뷰 작성 적립
+                                    </span>
+                                    <span th:if="${myHomeDTO.point.ordNo > 0 && myHomeDTO.point.point > 0}">
+                                        상품 구매 적립
+                                    </span>
+                                    <span th:if="${myHomeDTO.point.point < 0}">
+                                        포인트 사용
+                                    </span>
+                                </td>
+                                <td>
+                                    <span th:text="${myHomeDTO.point.pointNo}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${myHomeDTO.point.point}"></span>
+                                </td>
+                                <td>
+                                    <span th:if="${myHomeDTO.point.ordNo > 0 && myHomeDTO.point.point > 0}">
+                                        상품 구매
+                                    </span>
+                                    <span th:if="${myHomeDTO.point.revNo > 0 && myHomeDTO.point.point > 0}">
+                                        리뷰 작성
+                                    </span>
+                                    <span th:if="${myHomeDTO.point.point < 0}">
+                                        소진
+                                    </span>
+                                </td>
+                                <td><span th:text="${myHomeDTO.point.subExpiredDate}"></span></td>
                             </tr>
                         </table>
                     </article>
                     <article class="review">
                         <h3>상품평</h3>
-                        <a href="#" class="more">더보기</a>
+                        <a th:href="@{/my/review}" class="more">더보기</a>
                         <table border="0">
                             <tr>
                                 <th>번호</th>
@@ -71,40 +119,25 @@
                                 <th>평점</th>
                                 <th>작성일</th>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>상품명</td>
-                                <td>배송이 빠릅니다. 잘 사용하겠습니다.</td>
-                                <td><span class="rating star1">상품평</span></td>
-                                <td>2022-12-10</td>
+                            <tr th:if="${myHomeDTO.reviewList.size() eq 0}">
+                                <td colspan="5">작성된 리뷰가 없습니다.</td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>상품명</td>
-                                <td>배송이 빠릅니다. 잘 사용하겠습니다.</td>
-                                <td><span class="rating star2">상품평</span></td>
-                                <td>2022-12-10</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>상품명</td>
-                                <td>배송이 빠릅니다. 잘 사용하겠습니다.</td>
-                                <td><span class="rating star3">상품평</span></td>
-                                <td>2022-12-10</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>상품명</td>
-                                <td>배송이 빠릅니다. 잘 사용하겠습니다.</td>
-                                <td><span class="rating star4">상품평</span></td>
-                                <td>2022-12-10</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>상품명</td>
-                                <td>배송이 빠릅니다. 잘 사용하겠습니다.</td>
-                                <td><span class="rating star5">상품평</span></td>
-                                <td>2022-12-10</td>
+                            <tr th:each="item: ${myHomeDTO.reviewList}">
+                                <td>
+                                    <span th:text="${item.revNo}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${item.prodName}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${item.content}"></span>
+                                </td>
+                                <td>
+                                    <span class="rating" th:classappend="${'star' + item.rating}">
+                                        [[${item.rating}]]
+                                    </span>
+                                </td>
+                                <td><span th:text="${item.subRDate}"></span></span></td>
                             </tr>
                         </table>
                     </article>
@@ -115,35 +148,37 @@
                         <table border="0">
                             <tr>
                                 <th>번호</th>
-                                <th>문의채널</th>
-                                <th>문의유형</th>                                
+                                <th>문의유형</th>
                                 <th>제목</th>
                                 <th>작성일</th>
                                 <th>상태</th>
                             </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>고객센터</td>
-                                <td>주문/결제</td>                                
-                                <td>신용카드 결제 중 오류가 난 경우 어떻게 하나요?</td>
-                                <td>2024-12-12</td>
-                                <td><span class="notAnswerYet">검토중</span></td>
+                            <tr th:if="${myHomeDTO.qnaList.size() eq 0}">
+                                <td colspan="6">
+                                    작성된 문의글이 없습니다.
+                                </td>
                             </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>고객센터</td>
-                                <td>주문/결제</td>                                
-                                <td>신용카드 결제 중 오류가 난 경우 어떻게 하나요?</td>
-                                <td>2024-12-12</td>
-                                <td><span class="answered">답변완료</span></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>판매자게시판</td>
-                                <td>배송</td>                                
-                                <td>배송기간이 보통 얼마나 걸리나요?</td>
-                                <td>2024-12-12</td>
-                                <td><span class="answered">답변완료</span></td>
+                            <tr th:each="item : ${myHomeDTO.qnaList}">
+                                <td>
+                                    <span th:text="${item.qnaNo}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${item.c1Name + '::' +item.c2Name}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${item.title}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${item.rdateSub}"></span>
+                                </td>
+                                <td><span class="answered">
+                                    <span th:if="${item.answerComplete eq 1}">
+                                        검토중
+                                    </span>
+                                    <span th:if="${item.answerComplete eq 2}">
+                                        답변완료
+                                    </span>
+                                </span></td>
                             </tr>
                         </table>
                     </article>
@@ -160,16 +195,16 @@
                                 <span>email 설정</span>
                                 <a href="#" class="setting">변경</a>
                                 <p>
-                                    <span>abc123@gmail.com</span><br/>
-                                    (최종수정일 <span>2021-12-10</span>)
+                                    <span th:text="${myHomeDTO.member.email}"></span><br/>
+                                    <!-- (최종수정일 <span>2021-12-10</span>)-->
                                 </p>
                             </div>
                             <div class="hp">
                                 <span>휴대폰 설정</span>
                                 <a href="#" class="setting">변경</a>
                                 <p>
-                                    <span>abc123@gmail.com</span><br/>
-                                    (최종수정일 <span>2021-12-10</span>)
+                                    <span th:text="${myHomeDTO.member.hp}"></span><br/>
+                                   <!-- (최종수정일 <span>2021-12-10</span>)-->
                                 </p>
                             </div>
                         </div>

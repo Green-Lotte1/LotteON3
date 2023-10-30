@@ -2,6 +2,8 @@ package co.kr.lotteon.controller.my;
 
 import co.kr.lotteon.dto.LtCsQnaDTO;
 import co.kr.lotteon.dto.LtProductReviewDTO;
+import co.kr.lotteon.dto.mypage.MyHomeDTO;
+import co.kr.lotteon.dto.mypage.MyMenuDTO;
 import co.kr.lotteon.dto.mypage.MyPageRequestDTO;
 import co.kr.lotteon.dto.mypage.MyPageResponseDTO;
 import co.kr.lotteon.security.MyUserDetails;
@@ -13,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,8 +31,19 @@ public class MypageController {
     @Autowired
     private LtCsService ltCsService;
 
+    @ModelAttribute("myTopMenu")
+    public MyMenuDTO menu(@AuthenticationPrincipal MyUserDetails myUserDetails){
+        MyMenuDTO myTopMenu = myService.getMyMenu(myUserDetails.getUser().getUid());
+        log.info("myTopMenu : " + myTopMenu);
+        return myTopMenu;
+    }
+
     @GetMapping(value = "/home")
-    public String myIndex(Model model) {
+    public String myIndex(Model model, @AuthenticationPrincipal MyUserDetails myUserDetails) {
+
+        MyHomeDTO myHomeDTO = myService.getMyHomeInfo(myUserDetails.getUser().getUid());
+
+        model.addAttribute("myHomeDTO", myHomeDTO);
 
         return "/my/home";
     }
@@ -54,6 +64,7 @@ public class MypageController {
     public String order(Model model, MyPageRequestDTO pageRequestDTO, @AuthenticationPrincipal MyUserDetails myUserDetails) {
         if(myUserDetails == null) return "redirect:/index";
         MyPageResponseDTO pageResponseDTO = myService.showOrder(pageRequestDTO, myUserDetails.getUser().getUid());
+        log.info("pageResponseDTO : " + pageResponseDTO);
         model.addAttribute("pageResponseDTO", pageResponseDTO);
         return "/my/ordered";
     }

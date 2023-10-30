@@ -1,13 +1,8 @@
 package co.kr.lotteon.service;
 
 import co.kr.lotteon.dto.*;
-import co.kr.lotteon.dto.mypage.MyOrdersDTO;
-import co.kr.lotteon.dto.mypage.MyPageRequestDTO;
-import co.kr.lotteon.dto.mypage.MyPageResponseDTO;
-import co.kr.lotteon.entity.LtMemberPointEntity;
-import co.kr.lotteon.entity.LtProductOrderEntity;
-import co.kr.lotteon.entity.LtProductOrderItemEntity;
-import co.kr.lotteon.entity.LtProductReviewEntity;
+import co.kr.lotteon.dto.mypage.*;
+import co.kr.lotteon.entity.*;
 import co.kr.lotteon.mapper.my.LtMyMapper;
 import co.kr.lotteon.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +29,7 @@ public class MyService {
     private final LtMemberPointRepository ltMemberPointRepository;
     private final LtProductReviewRepository ltProductReviewRepository;
     private final ModelMapper modelMapper;
+    private final LtCsQnaRepository ltCsQnaRepository;
 
 
     public MyPageResponseDTO showPoint(MyPageRequestDTO pageRequestDTO, String uid){
@@ -120,6 +116,33 @@ public class MyService {
                 .pageRequestDTO(pageRequestDTO)
                 .reviewList(dtoList)
                 .total(totalElement)
+                .build();
+    }
+    public MyMenuDTO getMyMenu(String uid){
+        int point = ltMemberRepository.findPointByUid(uid).getPoint();
+        int myQnaCount = ltCsQnaRepository.countByWriter(uid);
+        int orderNowCount = ltProductOrderRepository.countByOrdUidAndOrdComplete(uid, 1);
+        return MyMenuDTO.builder()
+                .point(point)
+                .myQnaCount(myQnaCount)
+                .orderNowCount(orderNowCount)
+                .build();
+    }
+
+    public MyHomeDTO getMyHomeInfo(String uid){
+        LtProductOrderDTO order = modelMapper.map(ltProductOrderRepository.findTop1ByOrdUidOrderByOrdDateDesc(uid), LtProductOrderDTO.class);
+        List<LtProductOrderItemDTO> orderList = ltProductOrderItemRepository.findAllByLtProductOrderItemPK_OrdNo(order.getOrdNo()).stream().map(LtProductOrderItemEntity::toDTO).toList();
+        LtMemberPointDTO point = ltMemberPointRepository.findTop1ByUidOrderByPointDateDesc(uid).toDTO();
+        List<LtProductReviewDTO> reviewList = ltProductReviewRepository.findTop5ByUidOrderByRdateDesc(uid).stream().map(LtProductReviewEntity::toDTO).toList();
+        List<LtCsQnaDTO> qnaList = ltCsQnaRepository.findTop3ByWriterOrderByRdate(uid).stream().map(entity -> modelMapper.map(entity, LtCsQnaDTO.class)).toList();
+        LtMemberDTO member = ltMemberRepository.findByUid(uid).toDTO();
+        return MyHomeDTO.builder()
+                .order(order)
+                .orderList(orderList)
+                .point(point)
+                .reviewList(reviewList)
+                .qnaList(qnaList)
+                .member(member)
                 .build();
     }
 }
