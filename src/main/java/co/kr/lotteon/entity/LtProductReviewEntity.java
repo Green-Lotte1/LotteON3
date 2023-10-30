@@ -25,6 +25,8 @@ public class LtProductReviewEntity {
     @JoinColumn(name="prodNo", insertable=false, updatable=false)
     private LtProductEntity ltProductEntity;
 
+    private int prodNo;
+
     private String content;
     private String uid;
     private int rating;

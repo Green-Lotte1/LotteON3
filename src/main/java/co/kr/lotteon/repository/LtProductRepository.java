@@ -5,8 +5,11 @@ import co.kr.lotteon.entity.LtProductEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +22,13 @@ public interface LtProductRepository extends JpaRepository<LtProductEntity, Inte
     public Page<LtProductEntity> findAllByIsRemoved(int isRemoved, Pageable pageable);
 
     public Page<LtProductEntity> findAllByProdCate1AndProdCate2(int prodCate1, int prodCate2, Pageable pageable);
+    public Page<LtProductEntity> findAllByOrderBySoldDesc(Pageable pageable);
+    public Page<LtProductEntity> findAllByOrderByPriceAsc(Pageable pageable);
+    public Page<LtProductEntity> findAllByOrderByPriceDesc(Pageable pageable);
+    public Page<LtProductEntity> findAllByOrderByReviewDesc(Pageable pageable);
+    public Page<LtProductEntity> findAllByOrderByScoreDesc(Pageable pageable);
+    public Page<LtProductEntity> findAllByOrderByProdNoDesc(Pageable pageable);
+    public Page<LtProductEntity> findAllByProdNameContainsOrderByProdNoDesc(String prodName, Pageable pageable);
 
     //조건 검색(제품명, 제품코드, 제조사)
     public Page<LtProductEntity> findALLByIsRemovedAndProdNameContains(int isRemoved, String prodName, Pageable pageable);
@@ -49,4 +59,9 @@ public interface LtProductRepository extends JpaRepository<LtProductEntity, Inte
     // Best_prod(sold)
     public  List<LtProductEntity> findTop5ByOrderBySoldDesc();
 
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE lt_product m SET m.review = m.review + 1 , m.score = :score WHERE m.prodNo = :prodNo", nativeQuery = true)
+    public void updateScore(@Param("prodNo") int prodNo, @Param("score") int score);
 }

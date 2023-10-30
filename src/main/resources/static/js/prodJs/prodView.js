@@ -26,4 +26,12 @@ $(function() {
 
     const de = arrivalDate + '(' + nextThreeDaysDayOfWeek + ') ' + (nextThreeDays.getMonth() + 1) + '/' + nextThreeDays.getDate() + ' 도착예정';
     $('.arrival').text(de);
+
+    $('#goToReview').click(function(e){
+        e.preventDefault();
+
+        var offset = $("#reviewDiv").offset();
+        $('html, body').animate({scrollTop : offset.top}, 400);
+
+    });
 });

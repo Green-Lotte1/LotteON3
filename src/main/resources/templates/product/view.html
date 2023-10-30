@@ -79,7 +79,10 @@
             <nav>
                 <h3>[[${prod.prodName}]]</h3>
                 <p>[[${prod.descript}]]</p>
-                <h5 class="rating star4"><a href="#">상품평보기</a></h5>
+                <h5 class="rating" th:classappend="${'star' + #numbers.formatDecimal(prod.score,1,0) }">
+                    <a id="goToReview" href="#">상품평보기</a>
+                </h5>
+
             </nav>
             <nav>
                 <div class="org_price">
@@ -242,7 +245,7 @@
     </article>
 
     <!-- 상품 리뷰 내용 -->
-    <article class="review">
+    <article class="review" id="reviewDiv">
         <nav>
             <h1>상품리뷰</h1>
         </nav>
