@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface LtProductReviewRepository extends JpaRepository<LtProductReviewEntity, Integer> {
 
@@ -15,4 +17,7 @@ public interface LtProductReviewRepository extends JpaRepository<LtProductReview
 
 
     public Page<LtProductReviewEntity> findAllByLtProductEntity(LtProductEntity ltProductEntity, Pageable pageable);
+
+     List<LtProductReviewEntity> findTop5ByUidOrderByRdateDesc(String uid);
+
 }

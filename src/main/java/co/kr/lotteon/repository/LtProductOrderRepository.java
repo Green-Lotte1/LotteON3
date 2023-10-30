@@ -14,9 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 public interface LtProductOrderRepository extends JpaRepository<LtProductOrderEntity, Integer> {
 
     public Page<LtProductOrderEntity> findAllByOrdUid(String  ordUid, Pageable pageable);
+
+    public LtProductOrderEntity findTop1ByOrdUidOrderByOrdDateDesc(String uid);
     @Modifying @Transactional
     @Query(value = "UPDATE  lt_product_order a " +
             " SET a.ordComplete = :ordComplete " +
             " WHERE a.ordNo= :ordNo ", nativeQuery = true)
     public void updateOrdComplete(@Param("ordNo") int ordNo, @Param("ordComplete") int ordComplete);
+
+    public int countByOrdUidAndOrdComplete(String uid, int ordComplete);
 }

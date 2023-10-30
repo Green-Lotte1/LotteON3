@@ -52,7 +52,7 @@ public class ProductService {
     }
 
     public MyPageResponseDTO getReviews(int prodNo, MyPageRequestDTO pageRequestDTO) {
-        Pageable pageable = pageRequestDTO.getPageable("rDate", 10);
+        Pageable pageable = pageRequestDTO.getPageable("rdate", 10);
 
 
 

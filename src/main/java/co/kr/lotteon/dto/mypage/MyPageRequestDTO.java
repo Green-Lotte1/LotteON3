@@ -22,7 +22,7 @@ public class MyPageRequestDTO {
     private int pg=1;
 
     @Builder.Default
-    private int size=10;
+    private int size=5;
 
     @Builder.Default
     private String how = "DESC";

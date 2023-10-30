@@ -30,7 +30,8 @@ public class LtProductReviewEntity {
     private int rating;
     private String regIp;
     @CreationTimestamp
-    private LocalDateTime rDate;
+    @Column(name="rDate")
+    private LocalDateTime rdate;
 
     public LtProductReviewDTO toDTO(){
         return LtProductReviewDTO
@@ -42,8 +43,8 @@ public class LtProductReviewEntity {
                 .uid(uid)
                 .rating(rating)
                 .regIp(regIp)
-                .rDate(rDate)
-                .subRDate(rDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+                .rDate(rdate)
+                .subRDate(rdate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
                 .prodName(ltProductEntity.getProdName())
                 .uidMasking(uid.substring(0, 3)+"****")
                 .build();

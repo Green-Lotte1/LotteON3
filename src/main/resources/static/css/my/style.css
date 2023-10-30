@@ -456,6 +456,13 @@ footer p > strong {
 #my > .ordered > section > article .hidden {
     display: none !important;
 }
+#my  .hidden{
+    display: none !important;
+}
+#my .thumb1{
+    width:100px !important;
+    height: 100px !important;
+}
 .popup .hidden {
     display: none !important;
 }
