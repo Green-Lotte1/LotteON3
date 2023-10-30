@@ -283,6 +283,7 @@ public class CsController {
     }
     @PostMapping("/cs/qna/modify")
     public String updateQnaBoard(@ModelAttribute LtCsQnaDTO dto){
+        dto.setRdate(LocalDateTime.now());
         ltCsService.updateQnaBoard(dto);
         log.info("updateQnaBoardDTO------"+dto.toString());
         int qnaNo= dto.getQnaNo();
