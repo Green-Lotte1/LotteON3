@@ -3,7 +3,7 @@
        xmlns:layout="http://www.thymeleaf.org"
        layout:decorate="/admin/admin_layout">
 
-<section id="admin-cs-notice-list" class="admin-cs-list" layout:fragment="content">
+<section id="admin-cs-notice-list" class="admin-cs-qna-list" layout:fragment="content">
     <script>
 
         $(document).ready(function(){
@@ -100,8 +100,8 @@
                 <td><a th:href="@{/admin/cs/qna/view(qnaNo=${article.qnaNo})}">[[${article.title}]]</a></td>
                 <td>[[${article.writer}]]</td>
                 <td>[[${article.getRdateSub}]]</td>
-                <td th:if="${article.parent} eq 0">검토중입니당</td>
-                <td th:if="${article.parent} ne 0" style="color: red">답변완료</td>
+                <td th:if="${article.answerComplete} eq 1" style="color: blue">검토중</td>
+                <td th:if="${article.answerComplete} ne 1" style="color: red">답변완료</td>
                 </th:block>
             </tr>
             <tr th:if="${pageResponseDTO.getQnaList().size() eq 0}">

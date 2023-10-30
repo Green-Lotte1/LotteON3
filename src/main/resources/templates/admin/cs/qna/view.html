@@ -56,8 +56,8 @@
 <section>
   <article>
     <form action="#" method="">
-      <input type="text" name="writer" th:value="${qnaDTO.writer}">
-      <input type="text" name="qnaNo" th:value="${qnaDTO.qnaNo}">
+      <input type="hidden" name="writer" th:value="${qnaDTO.writer}">
+      <input type="hidden" name="qnaNo" th:value="${qnaDTO.qnaNo}">
       <table>
         <tr>
           <td>문의유형</td>
@@ -75,22 +75,24 @@
             <textarea name="content" readonly >[[${qnaDTO.content}]]</textarea>
           </td>
         </tr>
-        <tr>
-          <th:block th:if="${qnaDTO.qnaNo == comment.parent}">
+        <th:block th:if="${qnaDTO.answerComplete eq 2}">
+        <tr th:each="comment : ${commentList}">
           <td>답변</td>
           <td>
             <textarea name="reply" readonly >[[${comment.content}]]</textarea>
           </td>
           </th:block>
-          <th:block>
-
+          <th:block th:if="${qnaDTO.answerComplete eq 1}">
+            <td>답변</td>
+            <td>
+              <textarea id="reply" name="reply"></textarea>
+            </td>
           </th:block>
         </tr>
       </table>
       <div>
-        <a th:href="@{/admin/cs/qna/}" class="btnList">삭제</a>
         <input id="btnmodify" type="submit" class="btnSubmit" value="답변등록"/>
-        <a th:href="@{/admin/cs/qna/}" class="btnSubmit">목록</a>
+        <a th:href="@{/admin/cs/qna/}" class="btnList">목록</a>
       </div>
     </form>
   </article>
