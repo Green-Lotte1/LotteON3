@@ -10,19 +10,20 @@ import co.kr.lotteon.service.LtCsService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
 @Controller
 public class AdminCsController {
-
 
     @Autowired
     private LtCsService csService;
@@ -116,13 +117,15 @@ public class AdminCsController {
 
         LtCsQnaDTO qnaDTO = csService.selectCsAdminQnaView(qnaNo);
 
+        List<LtCsQnaEntity> commentList = new ArrayList<>();
         if(qnaDTO.getAnswerComplete() == 2){
-            List<LtCsQnaEntity> comment = csService.selectComments(qnaDTO.getParent());
+            commentList = csService.selectComments(qnaDTO.getQnaNo());
 
-            log.info("댓글  : " + comment);
+            log.info("댓글  : " + commentList);
 
-            model.addAttribute("comment",comment);
         }
+
+        model.addAttribute("commentList",commentList);
 
         model.addAttribute("qnaDTO", qnaDTO) ;
 

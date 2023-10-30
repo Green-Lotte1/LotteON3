@@ -32,18 +32,18 @@
 
         <p class="page">
             <th:block th:if="${pageResponseDTO.prev}">
-                <a class="prev" th:href="@{/my/ordered(pg=${pageResponseDTO.start - 1})}">이전</a>
+                <a class="prev" th:href="@{/my/review(pg=${pageResponseDTO.start - 1})}">이전</a>
             </th:block>
             <th:block th:unless="${pageResponseDTO.prev}">
                 <a class="prev" href="#">이전</a>
             </th:block>
 
             <th:block  th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}">
-                <a th:href="@{/my/ordered(pg=${num} )}" th:classappend="${num == pageResponseDTO.pg?'on':''}">[[${num}]]</a>
+                <a th:href="@{/my/review(pg=${num} )}" th:classappend="${num == pageResponseDTO.pg?'on':''}">[[${num}]]</a>
             </th:block>
 
             <th:block  th:if="${pageResponseDTO.next}">
-                <a class="next" th:href="@{/my/ordered(pg=${pageResponseDTO.end + 1})}">다음</a>
+                <a class="next" th:href="@{/my/review(pg=${pageResponseDTO.end + 1})}">다음</a>
             </th:block>
             <th:block  th:unless="${pageResponseDTO.next}">
                 <a class="next" href="#">다음&nbsp;></a>

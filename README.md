@@ -48,9 +48,9 @@
 
 ## 0.0.7 -SNAPSHOT
 
--cs 
+-Myqna 구현 
 
--admin 상품등록 기능 3차 완료(thumb 상품 카테별 이미지 저장)
+-admin 상품등록 기능 3차 완료(thumb 상품 카테별 이미지 저장), 상품 삭제/선택 삭제 완료
 
 -product reviw 구현
 

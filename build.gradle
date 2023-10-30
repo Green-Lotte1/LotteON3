@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'co.kr.lotteon'
-version = '0.0.6-SNAPSHOT'
+version = '0.0.7-SNAPSHOT'
 
 
 
@@ -52,6 +52,8 @@ dependencies {
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     // https://mvnrepository.com/artifact/commons-io/commons-io
     implementation group: 'commons-io', name: 'commons-io', version: '2.14.0'
+    //AOP
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
 
 
 }

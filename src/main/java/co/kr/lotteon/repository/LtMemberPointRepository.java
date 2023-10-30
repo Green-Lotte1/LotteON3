@@ -13,4 +13,5 @@ public interface LtMemberPointRepository extends JpaRepository<LtMemberPointEnti
 
 
     Page<LtMemberPointEntity> findAllByUid(String uid, Pageable pageable);
+    LtMemberPointEntity findTop1ByUidOrderByPointDateDesc(String uid);
 }
